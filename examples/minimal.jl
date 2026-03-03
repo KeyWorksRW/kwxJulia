@@ -2,14 +2,14 @@
 # Demonstrates basic app lifecycle with an empty window
 
 # Add parent directory to load path to find WxWidgets module
-push!(LOAD_PATH, joinpath(@__DIR__, "..", "src"))
+push!(LOAD_PATH, joinpath(@__DIR__, ".."))
 
 using WxWidgets
 
 # Run the application
 run_app(app_name="Minimal Julia App") do
     # Create a frame (top-level window)
-    frame = WxFrame(nothing, "Minimal Julia wxWidgets", size=(400, 300))
+    frame = wxFrame(nothing, "Minimal Julia wxWidgets", size=(400, 300))
 
     # Set this frame as the top window
     set_top_window(frame)

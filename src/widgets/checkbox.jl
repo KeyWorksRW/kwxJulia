@@ -1,7 +1,7 @@
-# High-level WxCheckBox wrapper
+# High-level wxCheckBox wrapper
 
 """
-    WxCheckBox
+    wxCheckBox
 
 A checkbox control that can be toggled on and off.
 
@@ -9,83 +9,83 @@ A checkbox control that can be toggled on and off.
 - `ptr::Ptr{Cvoid}` - Pointer to the underlying wxCheckBox C++ object
 - `closures::Vector{Any}` - Keeps event handler closures alive (prevents GC)
 """
-mutable struct WxCheckBox <: WxControl
+mutable struct wxCheckBox <: wxControl
     ptr::Ptr{Cvoid}
     closures::Vector{Any}
 end
 
 """
-    WxCheckBox(parent::WxWindow, label::String; kwargs...) -> WxCheckBox
+    wxCheckBox(parent::wxWindow, label::String; kwargs...) -> wxCheckBox
 
 Create a new checkbox.
 
 # Arguments
-- `parent::WxWindow` - Parent window (required)
+- `parent::wxWindow` - Parent window (required)
 - `label::String` - Checkbox label text
 
 # Keyword Arguments
-- `id::Int = wxID_ANY[]` - Window identifier
+- `id::Int = KwxFFI.ID_ANY()` - Window identifier
 - `pos::Tuple{Int,Int} = (-1, -1)` - Initial position (x, y); -1 means default
 - `size::Tuple{Int,Int} = (-1, -1)` - Initial size (width, height); -1 means default
 - `style::Int = 0` - Style flags
 
 # Example
 ```julia
-cb = WxCheckBox(frame, "Enable logging")
+cb = wxCheckBox(frame, "Enable logging")
 on_checkbox!(cb) do event
     println("Checked: ", is_checked(cb))
 end
 ```
 """
-function WxCheckBox(parent::WxWindow, label::String;
-                    id::Integer = wxID_ANY[],
+function wxCheckBox(parent::wxWindow, label::String;
+                    id::Integer = KwxFFI.ID_ANY(),
                     pos::Tuple{Int,Int} = (-1, -1),
                     size::Tuple{Int,Int} = (-1, -1),
                     style::Integer = 0)
-    label_ws = WxString(label)
+    label_ws = wxString(label)
 
-    ptr = wxcheckbox_create(
+    ptr = KwxFFI.wxCheckBox_Create(
         parent.ptr,
-        id,
+        Cint(id),
         label_ws.ptr,
-        pos[1], pos[2],
-        size[1], size[2],
-        style
+        Cint(pos[1]), Cint(pos[2]),
+        Cint(size[1]), Cint(size[2]),
+        Cint(style)
     )
 
     delete!(label_ws)
 
     if ptr == C_NULL
-        error("Failed to create WxCheckBox")
+        error("Failed to create wxCheckBox")
     end
 
-    cb = WxCheckBox(ptr, Any[])
+    cb = wxCheckBox(ptr, Any[])
     push!(parent.children, cb)
     cb
 end
 
 """
-    is_checked(cb::WxCheckBox) -> Bool
+    is_checked(cb::wxCheckBox) -> Bool
 
 Returns true if the checkbox is checked.
 """
-function is_checked(cb::WxCheckBox)
-    wxcheckbox_getvalue(cb.ptr) != 0
+function is_checked(cb::wxCheckBox)
+    KwxFFI.wxCheckBox_GetValue(cb.ptr) != 0
 end
 
 """
-    set_checked!(cb::WxCheckBox, checked::Bool)
+    set_checked!(cb::wxCheckBox, checked::Bool)
 
 Set the checkbox state.
 """
-function set_checked!(cb::WxCheckBox, checked::Bool)
-    wxcheckbox_setvalue(cb.ptr, checked)
+function set_checked!(cb::wxCheckBox, checked::Bool)
+    KwxFFI.wxCheckBox_SetValue(cb.ptr, Cint(checked))
     nothing
 end
 
 """
-    on_checkbox!(handler::Function, cb::WxCheckBox)
-    on_checkbox!(cb::WxCheckBox, handler::Function)
+    on_checkbox!(handler::Function, cb::wxCheckBox)
+    on_checkbox!(cb::wxCheckBox, handler::Function)
 
 Connect a handler for checkbox toggle events.
 
@@ -96,10 +96,10 @@ on_checkbox!(checkbox) do event
 end
 ```
 """
-function on_checkbox!(cb::WxCheckBox, handler::Function)
-    wx_connect!(cb, wxEVT_CHECKBOX[], handler)
+function on_checkbox!(cb::wxCheckBox, handler::Function)
+    wx_connect!(cb, KwxFFI.wxEVT_CHECKBOX(), handler)
 end
 
-function on_checkbox!(handler::Function, cb::WxCheckBox)
+function on_checkbox!(handler::Function, cb::wxCheckBox)
     on_checkbox!(cb, handler)
 end

@@ -22,7 +22,7 @@ event_counts = Dict{String, Int}(
 )
 
 WxWidgets.run_app(app_name="AdvancedEventDemo") do
-    frame = WxFrame(nothing, "Advanced Event Demo",
+    frame = wxFrame(nothing, "Advanced Event Demo",
                     size=(700, 500),
                     pos=(100, 100))
 
@@ -44,7 +44,7 @@ WxWidgets.run_app(app_name="AdvancedEventDemo") do
     end
 
     # Size event with detailed logging
-    wx_connect!(frame, wxEVT_SIZE[]) do event
+    wx_connect!(frame, KwxFFI.wxEVT_SIZE()) do event
         event_counts["size"] += 1
         size = get_size(frame)
         pos = get_position(frame)
@@ -59,7 +59,7 @@ WxWidgets.run_app(app_name="AdvancedEventDemo") do
     end
 
     # Paint event (may fire frequently)
-    wx_connect!(frame, wxEVT_PAINT[]) do event
+    wx_connect!(frame, KwxFFI.wxEVT_PAINT()) do event
         event_counts["paint"] += 1
         # Don't log every paint - too noisy
         if event_counts["paint"] % 10 == 0
@@ -68,7 +68,7 @@ WxWidgets.run_app(app_name="AdvancedEventDemo") do
     end
 
     # Demonstrate error handling - this won't crash the app
-    wx_connect!(frame, wxEVT_LEFT_DOWN[]) do event
+    wx_connect!(frame, KwxFFI.wxEVT_LEFT_DOWN()) do event
         println("\n⚠️  Testing exception handling...")
         # This error will be caught and logged
         error("Intentional error to demonstrate error handling")

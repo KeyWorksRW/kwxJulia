@@ -2,21 +2,21 @@
 # Demonstrates frame, button, and event handling
 
 # Add parent directory to load path to find WxWidgets module
-push!(LOAD_PATH, joinpath(@__DIR__, "..", "src"))
+push!(LOAD_PATH, joinpath(@__DIR__, ".."))
 
 using WxWidgets
 
 # Run the application
 run_app(app_name="Hello World") do
     # Create main frame
-    frame = WxFrame(nothing, "Hello World - kwxJulia", size=(400, 300))
+    frame = wxFrame(nothing, "Hello World - kwxJulia", size=(400, 300))
 
     # Create status bar
     create_status_bar(frame)
     set_status_text(frame, "Click the button!")
 
     # Create button
-    button = WxButton(frame, "Say Hello", size=(120, 40))
+    button = wxButton(frame, "Say Hello", size=(120, 40))
 
     # Connect button click event
     click_count = Ref(0)
@@ -32,11 +32,11 @@ run_app(app_name="Hello World") do
     end
 
     # Create a sizer for layout
-    sizer = WxBoxSizer(:vertical)
+    sizer = wxBoxSizer(:vertical)
     add!(sizer, button,
          proportion=0,
-         flags=wxALL[] | wxALIGN_CENTER[],
-         border=20)
+         flags=KwxFFI.ALL() | KwxFFI.ALIGN_CENTER(),
+         border=5)
 
     set_sizer(frame, sizer)
 

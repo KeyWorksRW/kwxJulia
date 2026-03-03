@@ -29,7 +29,7 @@ WxWidgets.run_app(app_name="Phase5Test") do
     frame = WxFrame(nothing, "Event Test", size=(400, 300))
 
     # Connect close event handler
-    wx_connect!(frame, wxEVT_CLOSE_WINDOW[]) do event
+    wx_connect!(frame, KwxFFI.wxEVT_CLOSE_WINDOW()) do event
         println("    Close event received!")
         event_fired[] = true
         # Allow the window to close
@@ -60,12 +60,12 @@ WxWidgets.run_app(app_name="MultiEventTest") do
     # Connect multiple handlers to same window
     handler_count = Ref{Int}(0)
 
-    wx_connect!(frame, wxEVT_CLOSE_WINDOW[]) do event
+    wx_connect!(frame, KwxFFI.wxEVT_CLOSE_WINDOW()) do event
         handler_count[] += 1
         println("    Handler 1 fired")
     end
 
-    wx_connect!(frame, wxEVT_SIZE[]) do event
+    wx_connect!(frame, KwxFFI.wxEVT_SIZE()) do event
         println("    Size event handler")
     end
 

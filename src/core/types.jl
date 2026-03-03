@@ -1,34 +1,38 @@
 # Base type definitions for wxWidgets objects
+#
+# NOTE: In a break from Julia conventions, we use the 'wx' prefix (lowercase)
+# for type names to match the wxWidgets C++ naming convention. This makes it
+# easier for wxWidgets developers to find the corresponding C++ class.
 
 """
 Abstract base type for all wxWidgets objects.
 """
-abstract type WxObject end
+abstract type wxObject end
 
 """
 Abstract base type for event handlers (objects that can receive events).
 """
-abstract type WxEvtHandler <: WxObject end
+abstract type wxEvtHandler <: wxObject end
 
 """
 Abstract base type for windows (visual objects that can be displayed).
 """
-abstract type WxWindow <: WxEvtHandler end
+abstract type wxWindow <: wxEvtHandler end
 
 """
 Abstract base type for controls (interactive UI elements).
 """
-abstract type WxControl <: WxWindow end
+abstract type wxControl <: wxWindow end
 
 """
 Abstract base type for top-level windows (frames, dialogs).
 """
-abstract type WxTopLevelWindow <: WxWindow end
+abstract type wxTopLevelWindow <: wxWindow end
 
 """
 Abstract base type for sizers (layout managers).
 """
-abstract type WxSizer <: WxObject end
+abstract type wxSizer <: wxObject end
 
 """
 Wrapper for wxEvent pointers passed to event handlers.
@@ -37,6 +41,6 @@ Event handlers receive this type which wraps the C++ wxEvent* pointer.
 The ptr field should not be stored beyond the handler's scope as the
 underlying C++ object may be deleted.
 """
-struct WxEvent
+struct wxEvent
     ptr::Ptr{Cvoid}
 end

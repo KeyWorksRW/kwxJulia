@@ -10,7 +10,7 @@ println("=" ^ 50)
 # Run the application
 WxWidgets.run_app(app_name="Phase4Test") do
     # Create a frame
-    frame = WxFrame(nothing, "Phase 4 - Window & Frame Demo",
+    frame = wxFrame(nothing, "Phase 4 - Window & Frame Demo",
                     size=(600, 400))
 
     # Create a status bar

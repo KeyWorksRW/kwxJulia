@@ -9,14 +9,10 @@ Before running the examples, ensure:
 2. The shared libraries exist in `bin/Release/` (or `bin/Debug/`)
 3. Julia 1.10+ is installed
 
-## Setting Library Path
+## Library Path
 
-By default, examples load libraries from `bin/Release/`. To use a different location:
-
-```powershell
-$env:KWXJULIA_LIB_PATH = "C:\path\to\bin\Release"
-julia examples\minimal.jl
-```
+The `WxWidgets` module automatically adds `bin/Release/` to Julia's DLL search path
+in its `__init__()` function. No manual path configuration is needed.
 
 ## Examples
 
@@ -64,8 +60,7 @@ Demonstrates:
 ## Troubleshooting
 
 ### "Failed to initialize wxWidgets"
-- Check that `kwxffi.dll` and `kwxjulia.dll` exist in the library path
-- Verify the DLLs were built for the correct architecture (x64)
+- Check that `kwxFFI.dll` exists in `bin/Release/`
 - Ensure all dependencies are present
 
 ### Window hangs or crashes
@@ -74,9 +69,8 @@ Demonstrates:
 - Or run via VS Code debugger with proper launch configuration
 
 ### Library not found
-- Set `KWXJULIA_LIB_PATH` environment variable
-- Or copy DLLs to a location in your system PATH
-- Check that you're pointing to the correct build config (Debug vs Release)
+- The module automatically adds `bin/Release/` to the DLL search path
+- Verify the DLL was built: `ninja -C build -f build-Release.ninja`
 
 ## Running from REPL
 
@@ -86,8 +80,8 @@ You can also run examples from the Julia REPL:
 # Navigate to project directory
 cd("C:/rwCode/wxLanguages/kwxJulia-dev")
 
-# Add src to load path
-push!(LOAD_PATH, "src")
+# Add project root to load path
+push!(LOAD_PATH, ".")
 
 # Run example
 include("examples/minimal.jl")

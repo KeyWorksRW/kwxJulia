@@ -1,7 +1,7 @@
-# High-level WxComboBox wrapper
+# High-level wxComboBox wrapper
 
 """
-    WxComboBox
+    wxComboBox
 
 A drop-down selection control with an optional text entry field.
 
@@ -9,65 +9,65 @@ A drop-down selection control with an optional text entry field.
 - `ptr::Ptr{Cvoid}` - Pointer to the underlying wxComboBox C++ object
 - `closures::Vector{Any}` - Keeps event handler closures alive (prevents GC)
 """
-mutable struct WxComboBox <: WxControl
+mutable struct wxComboBox <: wxControl
     ptr::Ptr{Cvoid}
     closures::Vector{Any}
 end
 
 """
-    WxComboBox(parent::WxWindow; kwargs...) -> WxComboBox
+    wxComboBox(parent::wxWindow; kwargs...) -> wxComboBox
 
 Create a new combo box.
 
 # Keyword Arguments
 - `value::String = ""` - Initial text in the text field
 - `choices::Vector{String} = String[]` - Initial list of choices
-- `id::Int = wxID_ANY[]` - Window identifier
+- `id::Int = KwxFFI.ID_ANY()` - Window identifier
 - `pos::Tuple{Int,Int} = (-1, -1)` - Initial position (x, y); -1 means default
 - `size::Tuple{Int,Int} = (-1, -1)` - Initial size (width, height); -1 means default
-- `style::Int = 0` - Style flags (e.g., wxCB_READONLY[], wxCB_DROPDOWN[], wxCB_SORT[])
+- `style::Int = 0` - Style flags (e.g., KwxFFI.CB_READONLY(), KwxFFI.CB_DROPDOWN(), KwxFFI.CB_SORT())
 
 # Example
 ```julia
-combo = WxComboBox(frame, choices=["Red", "Green", "Blue"])
+combo = wxComboBox(frame, choices=["Red", "Green", "Blue"])
 on_combobox!(combo) do event
     println("Selected: ", get_string_selection(combo))
 end
 ```
 """
-function WxComboBox(parent::WxWindow;
+function wxComboBox(parent::wxWindow;
                     value::String = "",
                     choices::Vector{String} = String[],
-                    id::Integer = wxID_ANY[],
+                    id::Integer = KwxFFI.ID_ANY(),
                     pos::Tuple{Int,Int} = (-1, -1),
                     size::Tuple{Int,Int} = (-1, -1),
                     style::Integer = 0)
-    value_ws = WxString(value)
+    value_ws = wxString(value)
 
     # Convert Julia strings to array of C strings for TArrayString
     c_choices = [Base.unsafe_convert(Cstring, s) for s in choices]
     choices_ptr = isempty(c_choices) ? Ptr{Ptr{UInt8}}(C_NULL) : pointer(c_choices)
 
     ptr = GC.@preserve choices c_choices begin
-        wxcombobox_create(
+        KwxFFI.wxComboBox_Create(
             parent.ptr,
-            id,
+            Cint(id),
             value_ws.ptr,
-            pos[1], pos[2],
-            size[1], size[2],
-            length(choices),
+            Cint(pos[1]), Cint(pos[2]),
+            Cint(size[1]), Cint(size[2]),
+            Cint(length(choices)),
             choices_ptr,
-            style
+            Cint(style)
         )
     end
 
     delete!(value_ws)
 
     if ptr == C_NULL
-        error("Failed to create WxComboBox")
+        error("Failed to create wxComboBox")
     end
 
-    cb = WxComboBox(ptr, Any[])
+    cb = wxComboBox(ptr, Any[])
     push!(parent.children, cb)
     cb
 end
@@ -75,110 +75,110 @@ end
 # --- Item management ---
 
 """
-    append!(combo::WxComboBox, item::String)
+    append!(combo::wxComboBox, item::String)
 
 Append an item to the end of the list.
 """
-function append!(combo::WxComboBox, item::String)
-    ws = WxString(item)
-    wxcombobox_append(combo.ptr, ws.ptr)
+function append!(combo::wxComboBox, item::String)
+    ws = wxString(item)
+    KwxFFI.wxComboBox_Append(combo.ptr, ws.ptr)
     delete!(ws)
     nothing
 end
 
 """
-    clear!(combo::WxComboBox)
+    clear!(combo::wxComboBox)
 
 Remove all items from the combo box.
 """
-function clear!(combo::WxComboBox)
-    wxcombobox_clear(combo.ptr)
+function clear!(combo::wxComboBox)
+    KwxFFI.wxComboBox_Clear(combo.ptr)
     nothing
 end
 
 """
-    delete_item!(combo::WxComboBox, index::Int)
+    delete_item!(combo::wxComboBox, index::Int)
 
 Delete the item at the given index (0-based).
 """
-function delete_item!(combo::WxComboBox, index::Integer)
-    wxcombobox_delete(combo.ptr, index)
+function delete_item!(combo::wxComboBox, index::Integer)
+    KwxFFI.wxComboBox_Delete(combo.ptr, Cint(index))
     nothing
 end
 
 """
-    get_count(combo::WxComboBox) -> Int
+    get_count(combo::wxComboBox) -> Int
 
 Get the number of items in the combo box.
 """
-function get_count(combo::WxComboBox)
-    Int(wxcombobox_getcount(combo.ptr))
+function get_count(combo::wxComboBox)
+    Int(KwxFFI.wxComboBox_GetCount(combo.ptr))
 end
 
 # --- Selection ---
 
 """
-    get_selection(combo::WxComboBox) -> Int
+    get_selection(combo::wxComboBox) -> Int
 
 Get the index of the selected item (-1 if none). 0-based.
 """
-function get_selection(combo::WxComboBox)
-    Int(wxcombobox_getselection(combo.ptr))
+function get_selection(combo::wxComboBox)
+    Int(KwxFFI.wxComboBox_GetSelection(combo.ptr))
 end
 
 """
-    set_selection!(combo::WxComboBox, index::Int)
+    set_selection!(combo::wxComboBox, index::Int)
 
 Select an item by index (0-based).
 """
-function set_selection!(combo::WxComboBox, index::Integer)
-    wxcombobox_setselection(combo.ptr, index)
+function set_selection!(combo::wxComboBox, index::Integer)
+    KwxFFI.wxComboBox_SetSelection(combo.ptr, Cint(index))
     nothing
 end
 
 """
-    get_string(combo::WxComboBox, index::Int) -> String
+    get_string(combo::wxComboBox, index::Int) -> String
 
 Get the string at the given index (0-based).
 """
-function get_string(combo::WxComboBox, index::Integer)
-    ws_ptr = wxcombobox_getstring(combo.ptr, index)
-    ws = WxString(ws_ptr, true)
-    String(ws)
+function get_string(combo::wxComboBox, index::Integer)
+    ws_ptr = KwxFFI.wxComboBox_GetString(combo.ptr, Cint(index))
+    result = _wx_get_string(ws_ptr)
+    result
 end
 
 """
-    get_string_selection(combo::WxComboBox) -> String
+    get_string_selection(combo::wxComboBox) -> String
 
 Get the currently selected string.
 """
-function get_string_selection(combo::WxComboBox)
-    ws_ptr = wxcombobox_getstringselection(combo.ptr)
-    ws = WxString(ws_ptr, true)
-    String(ws)
+function get_string_selection(combo::wxComboBox)
+    ws_ptr = KwxFFI.wxComboBox_GetStringSelection(combo.ptr)
+    result = _wx_get_string(ws_ptr)
+    result
 end
 
 # --- Value (text field) ---
 
 """
-    get_value(combo::WxComboBox) -> String
+    get_value(combo::wxComboBox) -> String
 
 Get the current text in the text field.
 """
-function get_value(combo::WxComboBox)
-    ws_ptr = wxcombobox_getvalue(combo.ptr)
-    ws = WxString(ws_ptr, true)
-    String(ws)
+function get_value(combo::wxComboBox)
+    ws_ptr = KwxFFI.wxComboBox_GetValue(combo.ptr)
+    result = _wx_get_string(ws_ptr)
+    result
 end
 
 """
-    set_value!(combo::WxComboBox, text::String)
+    set_value!(combo::wxComboBox, text::String)
 
 Set the text in the text field.
 """
-function set_value!(combo::WxComboBox, text::String)
-    ws = WxString(text)
-    wxcombobox_setvalue(combo.ptr, ws.ptr)
+function set_value!(combo::wxComboBox, text::String)
+    ws = wxString(text)
+    KwxFFI.wxComboBox_SetValue(combo.ptr, ws.ptr)
     delete!(ws)
     nothing
 end
@@ -186,13 +186,13 @@ end
 # --- Search ---
 
 """
-    find_string(combo::WxComboBox, s::String) -> Int
+    find_string(combo::wxComboBox, s::String) -> Int
 
 Find an item by string. Returns 0-based index or -1 if not found.
 """
-function find_string(combo::WxComboBox, s::String)
-    ws = WxString(s)
-    result = Int(wxcombobox_findstring(combo.ptr, ws.ptr))
+function find_string(combo::wxComboBox, s::String)
+    ws = wxString(s)
+    result = Int(KwxFFI.wxComboBox_FindString(combo.ptr, ws.ptr))
     delete!(ws)
     result
 end
@@ -200,8 +200,8 @@ end
 # --- Events ---
 
 """
-    on_combobox!(handler::Function, combo::WxComboBox)
-    on_combobox!(combo::WxComboBox, handler::Function)
+    on_combobox!(handler::Function, combo::wxComboBox)
+    on_combobox!(combo::wxComboBox, handler::Function)
 
 Connect a handler for combobox selection change events.
 
@@ -212,24 +212,24 @@ on_combobox!(combo) do event
 end
 ```
 """
-function on_combobox!(combo::WxComboBox, handler::Function)
-    wx_connect!(combo, wxEVT_COMBOBOX[], handler)
+function on_combobox!(combo::wxComboBox, handler::Function)
+    wx_connect!(combo, KwxFFI.wxEVT_COMBOBOX(), handler)
 end
 
-function on_combobox!(handler::Function, combo::WxComboBox)
+function on_combobox!(handler::Function, combo::wxComboBox)
     on_combobox!(combo, handler)
 end
 
 """
-    on_text_changed!(handler::Function, combo::WxComboBox)
-    on_text_changed!(combo::WxComboBox, handler::Function)
+    on_text_changed!(handler::Function, combo::wxComboBox)
+    on_text_changed!(combo::wxComboBox, handler::Function)
 
 Connect a handler for text change events in the combo box text field.
 """
-function on_text_changed!(combo::WxComboBox, handler::Function)
-    wx_connect!(combo, wxEVT_TEXT[], handler)
+function on_text_changed!(combo::wxComboBox, handler::Function)
+    wx_connect!(combo, KwxFFI.wxEVT_TEXT(), handler)
 end
 
-function on_text_changed!(handler::Function, combo::WxComboBox)
+function on_text_changed!(handler::Function, combo::wxComboBox)
     on_text_changed!(combo, handler)
 end

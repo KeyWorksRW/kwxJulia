@@ -1,23 +1,23 @@
 # wxString <-> Julia String conversion utilities
 
 """
-    WxString
+    wxString
 
 Wrapper for wxString* pointer. Used for passing strings to wxWidgets functions.
 Automatically converted to/from Julia String.
 """
-mutable struct WxString
+mutable struct wxString
     ptr::Ptr{Cvoid}
 
-    function WxString(s::AbstractString)
-        ptr = @ccall $(ffi(:wxString_CreateUTF8))(s::Cstring)::Ptr{Cvoid}
+    function wxString(s::AbstractString)
+        ptr = GC.@preserve s KwxFFI.wxString_CreateUTF8(Base.unsafe_convert(Cstring, s))
         obj = new(ptr)
         finalizer(delete!, obj)
         return obj
     end
 
     # Constructor from existing pointer (no finalizer)
-    function WxString(ptr::Ptr{Cvoid}, own::Bool)
+    function wxString(ptr::Ptr{Cvoid}, own::Bool)
         obj = new(ptr)
         if own
             finalizer(delete!, obj)
@@ -27,53 +27,64 @@ mutable struct WxString
 end
 
 """
-    delete!(ws::WxString)
+    delete!(ws::wxString)
 
 Explicitly delete a wxString object. Called automatically by finalizer.
 """
-function delete!(ws::WxString)
+function delete!(ws::wxString)
     if ws.ptr != C_NULL
-        @ccall $(ffi(:wxString_Delete))(ws.ptr::Ptr{Cvoid})::Cvoid
+        KwxFFI.wxString_Delete(ws.ptr)
         ws.ptr = C_NULL
     end
 end
 
 """
-    Base.String(ws::WxString) -> String
+    Base.String(ws::wxString) -> String
 
-Convert wxString to Julia String via wxCharBuffer.
+Convert wxString to Julia String via kwxUtf8Buffer.
 """
-function Base.String(ws::WxString)
+function Base.String(ws::wxString)
     if ws.ptr == C_NULL
         return ""
     end
 
-    # wxString_GetUtf8 returns wxCharBuffer* (heap-allocated)
-    cb = @ccall $(ffi(:wxString_GetUtf8))(ws.ptr::Ptr{Cvoid})::Ptr{Cvoid}
-    if cb == C_NULL
+    buf = KwxFFI.kwxUtf8Buffer_Create(ws.ptr)
+    if buf == C_NULL
         return ""
     end
 
-    # wxCharBuffer_DataUtf8 returns pointer to internal UTF-8 data
-    cstr = @ccall $(ffi(:wxCharBuffer_DataUtf8))(cb::Ptr{Cvoid})::Cstring
+    cstr = KwxFFI.kwxUtf8Buffer_Data(buf)
     result = unsafe_string(cstr)
-
-    # Free the wxCharBuffer
-    @ccall $(ffi(:wxCharBuffer_Delete))(cb::Ptr{Cvoid})::Cvoid
+    KwxFFI.kwxUtf8Buffer_Delete(buf)
 
     return result
 end
 
 """
-    Base.convert(::Type{WxString}, s::AbstractString) -> WxString
+    Base.convert(::Type{wxString}, s::AbstractString) -> wxString
 
-Convert Julia String to WxString.
+Convert Julia String to wxString.
 """
-Base.convert(::Type{WxString}, s::AbstractString) = WxString(s)
+Base.convert(::Type{wxString}, s::AbstractString) = wxString(s)
 
 """
-    Base.convert(::Type{String}, ws::WxString) -> String
+    Base.convert(::Type{String}, ws::wxString) -> String
 
-Convert WxString to Julia String.
+Convert wxString to Julia String.
 """
-Base.convert(::Type{String}, ws::WxString) = String(ws)
+Base.convert(::Type{String}, ws::wxString) = String(ws)
+
+"""
+    _wx_get_string(ws_ptr::Ptr{Cvoid}) -> String
+
+Internal helper: convert a wxString pointer returned by a KwxFFI function to a
+Julia String, then delete the wxString.
+"""
+function _wx_get_string(ws_ptr::Ptr{Cvoid})
+    if ws_ptr == C_NULL
+        return ""
+    end
+    result = String(wxString(ws_ptr, false))
+    KwxFFI.wxString_Delete(ws_ptr)
+    result
+end

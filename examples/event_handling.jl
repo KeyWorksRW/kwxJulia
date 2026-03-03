@@ -14,7 +14,7 @@ println()
 
 WxWidgets.run_app(app_name="EventDemo") do
     # Create main frame
-    frame = WxFrame(nothing, "Event Handling Demo",
+    frame = wxFrame(nothing, "Event Handling Demo",
                     size=(600, 400))
 
     # Create status bar for event feedback
@@ -22,7 +22,7 @@ WxWidgets.run_app(app_name="EventDemo") do
     set_status_text(frame, "Ready - try resizing or closing the window")
 
     # Connect close event handler
-    wx_connect!(frame, wxEVT_CLOSE_WINDOW[]) do event
+    wx_connect!(frame, KwxFFI.wxEVT_CLOSE_WINDOW()) do event
         println("✓ Close event fired!")
         println("  Event pointer: ", event.ptr)
         set_status_text(frame, "Window is closing...")
@@ -30,7 +30,7 @@ WxWidgets.run_app(app_name="EventDemo") do
     end
 
     # Connect size event handler
-    wx_connect!(frame, wxEVT_SIZE[]) do event
+    wx_connect!(frame, KwxFFI.wxEVT_SIZE()) do event
         println("✓ Size event fired!")
         size = get_size(frame)
         set_status_text(frame, "Window resized to $(size[1]) x $(size[2])")

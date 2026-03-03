@@ -9,7 +9,7 @@ println("=" ^ 50)
 
 WxWidgets.run_app(app_name="StatusBarDemo") do
     # Create main frame
-    frame = WxFrame(nothing, "Status Bar Demo",
+    frame = wxFrame(nothing, "Status Bar Demo",
                     size=(700, 500),
                     pos=(100, 100))
 
@@ -29,7 +29,7 @@ WxWidgets.run_app(app_name="StatusBarDemo") do
 
     # Demonstrate status bar push/pop
     println("\nDemonstrating status text push/pop...")
-    push_status_text(frame, "Temporary message", 0)
+    set_status_text(frame, "Temporary message", 0)
     set_status_text(frame, "Pushed temporary text", 1)
 
     # Update frame label

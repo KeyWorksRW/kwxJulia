@@ -1,196 +1,224 @@
 # High-level Window wrapper functions
-# These operate on any WxWindow subtype
+# These operate on any wxWindow subtype
 
-# Custom REPL display for WxWindow types
-function Base.show(io::IO, ::MIME"text/plain", window::WxWindow)
+# Custom REPL display for wxWindow types
+function Base.show(io::IO, ::MIME"text/plain", window::wxWindow)
     print(io, "$(typeof(window))(ptr=$(window.ptr))")
 end
 
 """
-    show_window(window::WxWindow, show_flag::Bool = true)
+    show_window(window::wxWindow)
 
-Show or hide the window.
+Show the window. Use hide() to hide.
 """
-function show_window(window::WxWindow, show_flag::Bool = true)
-    wxwindow_show(window.ptr, show_flag)
+function show_window(window::wxWindow)
+    KwxFFI.wxWindow_Show(window.ptr)
     nothing
 end
 
 """
-    hide(window::WxWindow)
+    hide(window::wxWindow)
 
 Hide the window.
 """
-function hide(window::WxWindow)
-    wxwindow_hide(window.ptr)
+function hide(window::wxWindow)
+    KwxFFI.wxWindow_Hide(window.ptr)
     nothing
 end
 
 """
-    close(window::WxWindow, force::Bool = false) -> Bool
+    close(window::wxWindow, force::Bool = false) -> Bool
 
 Close the window. Returns true if the window was closed.
 """
-function Base.close(window::WxWindow, force::Bool = false)
-    wxwindow_close(window.ptr, force) != 0
+function Base.close(window::wxWindow, force::Bool = false)
+    KwxFFI.wxWindow_Close(window.ptr, Cint(force)) != 0
 end
 
 """
-    destroy!(window::WxWindow)
+    destroy!(window::wxWindow)
 
 Destroy the window immediately. Use with caution - window should not be used after this.
 """
-function destroy!(window::WxWindow)
-    wxwindow_destroy(window.ptr)
+function destroy!(window::wxWindow)
+    KwxFFI.wxWindow_Destroy(window.ptr)
     nothing
 end
 
 """
-    set_size(window::WxWindow, x::Int, y::Int, width::Int, height::Int)
+    set_size(window::wxWindow, x::Int, y::Int, width::Int, height::Int; size_flags::Int=0)
 
 Set the window position and size.
 """
-function set_size(window::WxWindow, x::Integer, y::Integer, width::Integer, height::Integer)
-    wxwindow_setsize(window.ptr, x, y, width, height)
+function set_size(window::wxWindow, x::Integer, y::Integer,
+                  width::Integer, height::Integer; size_flags::Integer = 0)
+    KwxFFI.wxWindow_SetSize(window.ptr, Cint(x), Cint(y), Cint(width), Cint(height), Cint(size_flags))
     nothing
 end
 
 """
-    get_size(window::WxWindow) -> Tuple{Int, Int}
+    get_size(window::wxWindow) -> Tuple{Int, Int}
 
 Get the window size as (width, height).
 """
-function get_size(window::WxWindow)
-    wxwindow_getsize(window.ptr)
+function get_size(window::wxWindow)
+    sz = KwxFFI.wxWindow_GetSize(window.ptr)
+    if sz == C_NULL
+        return (0, 0)
+    end
+    w = Int(KwxFFI.wxSize_GetWidth(sz))
+    h = Int(KwxFFI.wxSize_GetHeight(sz))
+    KwxFFI.wxSize_Delete(sz)
+    return (w, h)
 end
 
 """
-    set_position(window::WxWindow, x::Int, y::Int)
+    set_position(window::wxWindow, x::Int, y::Int; flags::Int=0)
 
 Set the window position.
 """
-function set_position(window::WxWindow, x::Integer, y::Integer)
-    wxwindow_setposition(window.ptr, x, y)
+function set_position(window::wxWindow, x::Integer, y::Integer; flags::Integer = 0)
+    KwxFFI.wxWindow_Move(window.ptr, Cint(x), Cint(y), Cint(flags))
     nothing
 end
 
 """
-    get_position(window::WxWindow) -> Tuple{Int, Int}
+    get_position(window::wxWindow) -> Tuple{Int, Int}
 
 Get the window position as (x, y).
 """
-function get_position(window::WxWindow)
-    wxwindow_getposition(window.ptr)
+function get_position(window::wxWindow)
+    pt = KwxFFI.wxWindow_GetPosition(window.ptr)
+    if pt == C_NULL
+        return (0, 0)
+    end
+    x = Int(KwxFFI.wxPoint_GetX(pt))
+    y = Int(KwxFFI.wxPoint_GetY(pt))
+    KwxFFI.wxPoint_Destroy(pt)
+    return (x, y)
 end
 
 """
-    set_label(window::WxWindow, label::String)
+    set_label(window::wxWindow, label::String)
 
 Set the window label/title.
 """
-function set_label(window::WxWindow, label::String)
-    wxwindow_setlabel(window.ptr, label)
+function set_label(window::wxWindow, label::String)
+    ws = wxString(label)
+    KwxFFI.wxWindow_SetLabel(window.ptr, ws.ptr)
+    delete!(ws)
     nothing
 end
 
 """
-    get_label(window::WxWindow) -> String
+    get_label(window::wxWindow) -> String
 
 Get the window label/title.
 """
-function get_label(window::WxWindow)
-    wxwindow_getlabel(window.ptr)
+function get_label(window::wxWindow)
+    ws_ptr = KwxFFI.wxWindow_GetLabel(window.ptr)
+    _wx_get_string(ws_ptr)
 end
 
 """
-    set_sizer(window::WxWindow, sizer, delete_old::Bool = true)
+    set_sizer(window::wxWindow, sizer, delete_old::Bool = true)
 
 Set the window's sizer for layout management.
 """
-function set_sizer(window::WxWindow, sizer, delete_old::Bool = true)
+function set_sizer(window::wxWindow, sizer, delete_old::Bool = true)
     sizer_ptr = hasproperty(sizer, :ptr) ? sizer.ptr : sizer
-    wxwindow_setsizer(window.ptr, sizer_ptr, delete_old)
+    KwxFFI.wxWindow_SetSizer(window.ptr, sizer_ptr, Cint(delete_old))
     nothing
 end
 
 """
-    layout(window::WxWindow)
+    layout(window::wxWindow)
 
 Layout the window (recalculates sizer layout).
 """
-function layout(window::WxWindow)
-    wxwindow_layout(window.ptr)
+function layout(window::wxWindow)
+    KwxFFI.wxWindow_Layout(window.ptr)
     nothing
 end
 
 """
-    refresh(window::WxWindow, erase_background::Bool = true)
+    refresh(window::wxWindow, erase_background::Bool = true)
 
 Force the window to redraw.
 """
-function refresh(window::WxWindow, erase_background::Bool = true)
-    wxwindow_refresh(window.ptr, erase_background)
+function refresh(window::wxWindow, erase_background::Bool = true)
+    KwxFFI.wxWindow_Refresh(window.ptr, Cint(erase_background))
     nothing
 end
 
 """
-    update(window::WxWindow)
+    update(window::wxWindow)
 
 Process pending paint events immediately.
 """
-function update(window::WxWindow)
-    wxwindow_update(window.ptr)
+function update(window::wxWindow)
+    KwxFFI.wxWindow_Update(window.ptr)
     nothing
 end
 
 """
-    enable(window::WxWindow, enable::Bool = true)
+    enable(window::wxWindow)
 
-Enable or disable the window.
+Enable the window. Use disable() to disable.
 """
-function enable(window::WxWindow, enable::Bool = true)
-    wxwindow_enable(window.ptr, enable)
+function enable(window::wxWindow)
+    KwxFFI.wxWindow_Enable(window.ptr)
     nothing
 end
 
 """
-    is_enabled(window::WxWindow) -> Bool
+    disable(window::wxWindow)
+
+Disable the window.
+"""
+function disable(window::wxWindow)
+    KwxFFI.wxWindow_Disable(window.ptr)
+    nothing
+end
+
+"""
+    is_enabled(window::wxWindow) -> Bool
 
 Check if the window is enabled.
 """
-function is_enabled(window::WxWindow)
-    wxwindow_isenabled(window.ptr)
+function is_enabled(window::wxWindow)
+    KwxFFI.wxWindow_IsEnabled(window.ptr) != 0
 end
 
 """
-    is_shown(window::WxWindow) -> Bool
+    is_shown(window::wxWindow) -> Bool
 
 Check if the window is shown.
 """
-function is_shown(window::WxWindow)
-    wxwindow_isshown(window.ptr)
+function is_shown(window::wxWindow)
+    KwxFFI.wxWindow_IsShown(window.ptr) != 0
 end
 
 """
-    set_focus(window::WxWindow)
+    set_focus(window::wxWindow)
 
 Set keyboard focus to this window.
 """
-function set_focus(window::WxWindow)
-    wxwindow_setfocus(window.ptr)
+function set_focus(window::wxWindow)
+    KwxFFI.wxWindow_SetFocus(window.ptr)
     nothing
 end
 
 """
-    centre(window::WxWindow; horizontal::Bool = true, vertical::Bool = true)
+    center(window::wxWindow; horizontal::Bool = true, vertical::Bool = true)
 
 Center the window on screen or within its parent.
 """
-function centre(window::WxWindow; horizontal::Bool = true, vertical::Bool = true)
+function center(window::wxWindow; horizontal::Bool = true, vertical::Bool = true)
     direction = (horizontal ? 1 : 0) | (vertical ? 2 : 0)
-    wxwindow_centre(window.ptr, direction)
+    KwxFFI.wxWindow_Center(window.ptr, Cint(direction))
     nothing
 end
 
-# Alias for American spelling
-center = centre
+# Alias for British spelling
+const centre = center

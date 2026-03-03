@@ -1,7 +1,7 @@
-# High-level WxApp wrapper
+# High-level wxApp wrapper
 
 """
-    run_app(setup::Function; app_name::String="WxApp")
+    run_app(setup::Function; app_name::String="wxApp")
 
 Initialize wxWidgets, run the setup function (where user creates windows),
 then enter the event loop.
@@ -11,12 +11,12 @@ then enter the event loop.
 using WxWidgets
 
 WxWidgets.run_app() do
-    frame = WxFrame(nothing, "Hello World", size=(400, 300))
+    frame = wxFrame(nothing, "Hello World", size=(400, 300))
     show(frame)
 end
 ```
 """
-function run_app(setup::Function; app_name::String="WxApp")
+function run_app(setup::Function; app_name::String="wxApp")
     # Initialize wxWidgets
     result = kwxapp_initialize()
     result == 0 && error("Failed to initialize wxWidgets")

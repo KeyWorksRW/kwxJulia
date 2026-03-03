@@ -1,7 +1,7 @@
-# High-level WxFrame wrapper
+# High-level wxFrame wrapper
 
 """
-    WxFrame
+    wxFrame
 
 A top-level window that can contain other controls and has optional
 menu bar, status bar, and toolbar.
@@ -11,61 +11,61 @@ menu bar, status bar, and toolbar.
 - `children::Vector{Any}` - Keeps child widgets alive (prevents GC)
 - `closures::Vector{Any}` - Keeps event handler closures alive (prevents GC)
 """
-mutable struct WxFrame <: WxTopLevelWindow
+mutable struct wxFrame <: wxTopLevelWindow
     ptr::Ptr{Cvoid}
     children::Vector{Any}
     closures::Vector{Any}
 end
 
 """
-    WxFrame(parent, title::String; kwargs...) -> WxFrame
+    wxFrame(parent, title::String; kwargs...) -> wxFrame
 
 Create a new frame (top-level window).
 
 # Arguments
-- `parent::Union{WxWindow,Nothing}` - Parent window (usually nothing for top-level frames)
+- `parent::Union{wxWindow,Nothing}` - Parent window (usually nothing for top-level frames)
 - `title::String` - Frame title displayed in title bar
 
 # Keyword Arguments
-- `id::Int = wxID_ANY[]` - Window identifier
+- `id::Int = KwxFFI.ID_ANY()` - Window identifier
 - `pos::Tuple{Int,Int} = (-1, -1)` - Initial position (x, y); -1 means default
 - `size::Tuple{Int,Int} = (-1, -1)` - Initial size (width, height); -1 means default
-- `style::Int = wxDEFAULT_FRAME_STYLE[]` - Window style flags
+- `style::Int = KwxFFI.DEFAULT_FRAME_STYLE()` - Window style flags
 
 # Example
 ```julia
-frame = WxFrame(nothing, "My Application", size=(800, 600))
-show(frame)
+frame = wxFrame(nothing, "My Application", size=(800, 600))
+show_window(frame)
 ```
 """
-function WxFrame(parent::Union{WxWindow,Nothing}, title::String;
-                 id::Integer = wxID_ANY[],
+function wxFrame(parent::Union{wxWindow,Nothing}, title::String;
+                 id::Integer = KwxFFI.ID_ANY(),
                  pos::Tuple{Int,Int} = (-1, -1),
                  size::Tuple{Int,Int} = (-1, -1),
-                 style::Integer = wxDEFAULT_FRAME_STYLE[])
+                 style::Integer = KwxFFI.DEFAULT_FRAME_STYLE())
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
-    title_ws = WxString(title)
+    title_ws = wxString(title)
 
-    ptr = wxframe_create(
+    ptr = KwxFFI.wxFrame_Create(
         parent_ptr,
-        id,
+        Cint(id),
         title_ws.ptr,
-        pos[1], pos[2],
-        size[1], size[2],
-        style
+        Cint(pos[1]), Cint(pos[2]),
+        Cint(size[1]), Cint(size[2]),
+        Cint(style)
     )
 
     delete!(title_ws)
 
     if ptr == C_NULL
-        error("Failed to create WxFrame")
+        error("Failed to create wxFrame")
     end
 
-    WxFrame(ptr, Any[], Any[])
+    wxFrame(ptr, Any[], Any[])
 end
 
 """
-    create_status_bar(frame::WxFrame, fields::Int = 1, style::Int = 0)
+    create_status_bar(frame::wxFrame, fields::Int = 1, style::Int = 0)
 
 Create a status bar at the bottom of the frame.
 
@@ -76,13 +76,13 @@ Create a status bar at the bottom of the frame.
 # Returns
 The status bar pointer (stored internally by wxWidgets).
 """
-function create_status_bar(frame::WxFrame, fields::Integer = 1, style::Integer = 0)
-    wxframe_createstatusbar(frame.ptr, fields, style)
+function create_status_bar(frame::wxFrame, fields::Integer = 1, style::Integer = 0)
+    KwxFFI.wxFrame_CreateStatusBar(frame.ptr, Cint(fields), Cint(style))
     nothing
 end
 
 """
-    set_status_text(frame::WxFrame, text::String, field::Int = 0)
+    set_status_text(frame::wxFrame, text::String, field::Int = 0)
 
 Set text in the status bar.
 
@@ -90,67 +90,49 @@ Set text in the status bar.
 - `text::String` - Text to display
 - `field::Int = 0` - Status bar field index (0-based)
 """
-function set_status_text(frame::WxFrame, text::String, field::Integer = 0)
-    wxframe_setstatustext(frame.ptr, text, field)
+function set_status_text(frame::wxFrame, text::String, field::Integer = 0)
+    ws = wxString(text)
+    KwxFFI.wxFrame_SetStatusText(frame.ptr, ws.ptr, Cint(field))
+    delete!(ws)
     nothing
 end
 
 """
-    push_status_text(frame::WxFrame, text::String, field::Int = 0)
-
-Push text to the status bar (can be restored with pop_status_text).
-"""
-function push_status_text(frame::WxFrame, text::String, field::Integer = 0)
-    wxframe_pushstatustext(frame.ptr, text, field)
-    nothing
-end
-
-"""
-    pop_status_text(frame::WxFrame, field::Int = 0)
-
-Restore the previous status bar text.
-"""
-function pop_status_text(frame::WxFrame, field::Integer = 0)
-    wxframe_popstatustext(frame.ptr, field)
-    nothing
-end
-
-"""
-    set_menu_bar(frame::WxFrame, menubar)
+    set_menu_bar(frame::wxFrame, menubar)
 
 Set the menu bar for the frame.
 """
-function set_menu_bar(frame::WxFrame, menubar)
+function set_menu_bar(frame::wxFrame, menubar)
     menubar_ptr = hasproperty(menubar, :ptr) ? menubar.ptr : menubar
-    wxframe_setmenubar(frame.ptr, menubar_ptr)
+    KwxFFI.wxFrame_SetMenuBar(frame.ptr, menubar_ptr)
     nothing
 end
 
 """
-    get_menu_bar(frame::WxFrame) -> Ptr{Cvoid}
+    get_menu_bar(frame::wxFrame) -> Ptr{Cvoid}
 
 Get the frame's menu bar pointer.
 """
-function get_menu_bar(frame::WxFrame)
-    wxframe_getmenubar(frame.ptr)
+function get_menu_bar(frame::wxFrame)
+    KwxFFI.wxFrame_GetMenuBar(frame.ptr)
 end
 
 """
-    set_tool_bar(frame::WxFrame, toolbar)
+    set_tool_bar(frame::wxFrame, toolbar)
 
 Set the frame's toolbar.
 """
-function set_tool_bar(frame::WxFrame, toolbar)
+function set_tool_bar(frame::wxFrame, toolbar)
     toolbar_ptr = hasproperty(toolbar, :ptr) ? toolbar.ptr : toolbar
-    wxframe_settoolbar(frame.ptr, toolbar_ptr)
+    KwxFFI.wxFrame_SetToolBar(frame.ptr, toolbar_ptr)
     nothing
 end
 
 """
-    get_tool_bar(frame::WxFrame) -> Ptr{Cvoid}
+    get_tool_bar(frame::wxFrame) -> Ptr{Cvoid}
 
 Get the frame's toolbar pointer.
 """
-function get_tool_bar(frame::WxFrame)
-    wxframe_gettoolbar(frame.ptr)
+function get_tool_bar(frame::wxFrame)
+    KwxFFI.wxFrame_GetToolBar(frame.ptr)
 end

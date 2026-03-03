@@ -2,33 +2,33 @@
 # Demonstrates multiple controls with sizer layout
 
 # Add parent directory to load path to find WxWidgets module
-push!(LOAD_PATH, joinpath(@__DIR__, "..", "src"))
+push!(LOAD_PATH, joinpath(@__DIR__, ".."))
 
 using WxWidgets
 
 # Run the application
 run_app(app_name="Controls Demo") do
         # Create main frame
-        frame = WxFrame(nothing, "Controls Demo - kwxJulia", size=(500, 400))
+        frame = wxFrame(nothing, "Controls Demo - kwxJulia", size=(500, 400))
 
         # Create status bar
         create_status_bar(frame)
         set_status_text(frame, "Ready")
 
         # Create controls
-        label1 = WxStaticText(frame, "Enter your name:")
-        text_input = WxTextCtrl(frame, value="", size=(200, -1))
+        label1 = wxStaticText(frame, "Enter your name:")
+        text_input = wxTextCtrl(frame, value="", size=(200, -1))
 
-        label2 = WxStaticText(frame, "Comments:")
-        text_multiline = WxTextCtrl(frame,
+        label2 = wxStaticText(frame, "Comments:")
+        text_multiline = wxTextCtrl(frame,
                                      value="",
                                      size=(200, 100),
-                                     style=wxTE_MULTILINE[])
+                                     style=KwxFFI.TE_MULTILINE())
 
-        checkbox = WxCheckBox(frame, "Enable notifications")
+        checkbox = wxCheckBox(frame, "Enable notifications")
 
-        button_submit = WxButton(frame, "Submit")
-        button_clear = WxButton(frame, "Clear")
+        button_submit = wxButton(frame, "Submit")
+        button_clear = wxButton(frame, "Clear")
 
         # Event handlers
         on_click!(button_submit) do event
@@ -71,48 +71,48 @@ run_app(app_name="Controls Demo") do
 
         # Create layout with sizers
         # Main vertical sizer
-        main_sizer = WxBoxSizer(:vertical)
+        main_sizer = wxBoxSizer(:vertical)
 
         # Name field
         add!(main_sizer, label1,
              proportion=0,
-             flags=wxALL[],
+             flags=KwxFFI.ALL(),
              border=10)
         add!(main_sizer, text_input,
              proportion=0,
-             flags=wxALL[] | wxEXPAND[],
+             flags=KwxFFI.ALL() | KwxFFI.EXPAND(),
              border=10)
 
         # Comments field
         add!(main_sizer, label2,
              proportion=0,
-             flags=wxALL[],
+             flags=KwxFFI.ALL(),
              border=10)
         add!(main_sizer, text_multiline,
              proportion=1,
-             flags=wxALL[] | wxEXPAND[],
+             flags=KwxFFI.ALL() | KwxFFI.EXPAND(),
              border=10)
 
         # Checkbox
         add!(main_sizer, checkbox,
              proportion=0,
-             flags=wxALL[],
+             flags=KwxFFI.ALL(),
              border=10)
 
         # Buttons in horizontal sizer
-        button_sizer = WxBoxSizer(:horizontal)
+        button_sizer = wxBoxSizer(:horizontal)
         add!(button_sizer, button_submit,
              proportion=0,
-             flags=wxALL[],
+             flags=KwxFFI.ALL(),
              border=5)
         add!(button_sizer, button_clear,
              proportion=0,
-             flags=wxALL[],
+             flags=KwxFFI.ALL(),
              border=5)
 
         add!(main_sizer, button_sizer,
              proportion=0,
-             flags=wxALL[] | wxALIGN_CENTER[],
+             flags=KwxFFI.ALL() | KwxFFI.ALIGN_CENTER(),
              border=10)
 
         # Set the sizer and layout

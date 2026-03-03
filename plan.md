@@ -512,7 +512,7 @@ end
 
 # Convenience: on_click! uses the button-clicked event type
 function on_click!(button::WxButton, handler::Function)
-    wx_connect!(button, wxEVT_BUTTON[], handler)
+    wx_connect!(button, KwxFFI.wxEVT_BUTTON(), handler)
 end
 ```
 

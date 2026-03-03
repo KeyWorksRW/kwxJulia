@@ -1,92 +1,92 @@
 # High-level Sizer wrappers for layout management
 
 # Custom REPL display for all sizer types
-function Base.show(io::IO, ::MIME"text/plain", sizer::WxSizer)
+function Base.show(io::IO, ::MIME"text/plain", sizer::wxSizer)
     print(io, "$(typeof(sizer))(ptr=$(sizer.ptr))")
 end
 
 # =============================================================================
-# WxBoxSizer
+# wxBoxSizer
 # =============================================================================
 
 """
-    WxBoxSizer
+    wxBoxSizer
 
 A sizer that lays out its children in a single row or column.
 
 # Fields
 - `ptr::Ptr{Cvoid}` - Pointer to the underlying wxBoxSizer C++ object
 """
-mutable struct WxBoxSizer <: WxSizer
+mutable struct wxBoxSizer <: wxSizer
     ptr::Ptr{Cvoid}
 end
 
 """
-    WxBoxSizer(orientation::Symbol) -> WxBoxSizer
-    WxBoxSizer(orientation::Integer) -> WxBoxSizer
+    wxBoxSizer(orientation::Symbol) -> wxBoxSizer
+    wxBoxSizer(orientation::Integer) -> wxBoxSizer
 
 Create a new box sizer with the given orientation.
 
 # Arguments
-- `orientation` - Either `:horizontal`/`:vertical` (Symbol) or `wxHORIZONTAL[]`/`wxVERTICAL[]` (Integer)
+- `orientation` - Either `:horizontal`/`:vertical` (Symbol) or `KwxFFI.HORIZONTAL()`/`KwxFFI.VERTICAL()` (Integer)
 
 # Example
 ```julia
-sizer = WxBoxSizer(:vertical)
-add!(sizer, button, proportion=0, flags=wxALL[] | wxEXPAND[], border=5)
+sizer = wxBoxSizer(:vertical)
+add!(sizer, button, proportion=0, flags=KwxFFI.ALL() | KwxFFI.EXPAND(), border=5)
 set_sizer(frame, sizer)
 ```
 """
-function WxBoxSizer(orientation::Symbol)
+function wxBoxSizer(orientation::Symbol)
     orient = if orientation == :horizontal
-        wxHORIZONTAL[]
+        KwxFFI.HORIZONTAL()
     elseif orientation == :vertical
-        wxVERTICAL[]
+        KwxFFI.VERTICAL()
     else
         error("Invalid orientation: $orientation (expected :horizontal or :vertical)")
     end
-    ptr = wxboxsizer_create(orient)
+    ptr = KwxFFI.wxBoxSizer_Create(Cint(orient))
     if ptr == C_NULL
-        error("Failed to create WxBoxSizer")
+        error("Failed to create wxBoxSizer")
     end
-    WxBoxSizer(ptr)
+    wxBoxSizer(ptr)
 end
 
-function WxBoxSizer(orientation::Integer)
-    ptr = wxboxsizer_create(Int(orientation))
+function wxBoxSizer(orientation::Integer)
+    ptr = KwxFFI.wxBoxSizer_Create(Cint(orientation))
     if ptr == C_NULL
-        error("Failed to create WxBoxSizer")
+        error("Failed to create wxBoxSizer")
     end
-    WxBoxSizer(ptr)
+    wxBoxSizer(ptr)
 end
 
 """
-    get_orientation(sizer::WxBoxSizer) -> Int
+    get_orientation(sizer::wxBoxSizer) -> Int
 
-Get the sizer orientation (wxHORIZONTAL or wxVERTICAL).
+Get the sizer orientation (HORIZONTAL or VERTICAL).
 """
-function get_orientation(sizer::WxBoxSizer)
-    wxboxsizer_getorientation(sizer.ptr)
+function get_orientation(sizer::wxBoxSizer)
+    Int(KwxFFI.wxBoxSizer_GetOrientation(sizer.ptr))
 end
 
 # =============================================================================
-# WxGridSizer
+# wxGridSizer
 # =============================================================================
 
 """
-    WxGridSizer
+    wxGridSizer
 
 A sizer that lays out its children in a regular grid where all cells have the same size.
 
 # Fields
 - `ptr::Ptr{Cvoid}` - Pointer to the underlying wxGridSizer C++ object
 """
-mutable struct WxGridSizer <: WxSizer
+mutable struct wxGridSizer <: wxSizer
     ptr::Ptr{Cvoid}
 end
 
 """
-    WxGridSizer(rows::Int, cols::Int; vgap::Int=0, hgap::Int=0) -> WxGridSizer
+    wxGridSizer(rows::Int, cols::Int; vgap::Int=0, hgap::Int=0) -> wxGridSizer
 
 Create a new grid sizer.
 
@@ -100,101 +100,101 @@ Create a new grid sizer.
 
 # Example
 ```julia
-sizer = WxGridSizer(2, 3, vgap=5, hgap=5)
+sizer = wxGridSizer(2, 3, vgap=5, hgap=5)
 add!(sizer, button1)
 add!(sizer, button2)
 ```
 """
-function WxGridSizer(rows::Integer, cols::Integer; vgap::Integer = 0, hgap::Integer = 0)
-    ptr = wxgridsizer_create(rows, cols, vgap, hgap)
+function wxGridSizer(rows::Integer, cols::Integer; vgap::Integer = 0, hgap::Integer = 0)
+    ptr = KwxFFI.wxGridSizer_Create(Cint(rows), Cint(cols), Cint(vgap), Cint(hgap))
     if ptr == C_NULL
-        error("Failed to create WxGridSizer")
+        error("Failed to create wxGridSizer")
     end
-    WxGridSizer(ptr)
+    wxGridSizer(ptr)
 end
 
 """
-    get_cols(sizer::WxGridSizer) -> Int
+    get_cols(sizer::wxGridSizer) -> Int
 
 Get the number of columns.
 """
-function get_cols(sizer::WxGridSizer)
-    wxgridsizer_getcols(sizer.ptr)
+function get_cols(sizer::wxGridSizer)
+    Int(KwxFFI.wxGridSizer_GetCols(sizer.ptr))
 end
 
 """
-    get_rows(sizer::WxGridSizer) -> Int
+    get_rows(sizer::wxGridSizer) -> Int
 
 Get the number of rows.
 """
-function get_rows(sizer::WxGridSizer)
-    wxgridsizer_getrows(sizer.ptr)
+function get_rows(sizer::wxGridSizer)
+    Int(KwxFFI.wxGridSizer_GetRows(sizer.ptr))
 end
 
 """
-    get_hgap(sizer::WxGridSizer) -> Int
+    get_hgap(sizer::wxGridSizer) -> Int
 
 Get the horizontal gap between cells.
 """
-function get_hgap(sizer::WxGridSizer)
-    wxgridsizer_gethgap(sizer.ptr)
+function get_hgap(sizer::wxGridSizer)
+    Int(KwxFFI.wxGridSizer_GetHGap(sizer.ptr))
 end
 
 """
-    get_vgap(sizer::WxGridSizer) -> Int
+    get_vgap(sizer::wxGridSizer) -> Int
 
 Get the vertical gap between cells.
 """
-function get_vgap(sizer::WxGridSizer)
-    wxgridsizer_getvgap(sizer.ptr)
+function get_vgap(sizer::wxGridSizer)
+    Int(KwxFFI.wxGridSizer_GetVGap(sizer.ptr))
 end
 
 """
-    set_cols!(sizer::WxGridSizer, cols::Int)
+    set_cols!(sizer::wxGridSizer, cols::Int)
 
 Set the number of columns.
 """
-function set_cols!(sizer::WxGridSizer, cols::Integer)
-    wxgridsizer_setcols(sizer.ptr, cols)
+function set_cols!(sizer::wxGridSizer, cols::Integer)
+    KwxFFI.wxGridSizer_SetCols(sizer.ptr, Cint(cols))
     nothing
 end
 
 """
-    set_rows!(sizer::WxGridSizer, rows::Int)
+    set_rows!(sizer::wxGridSizer, rows::Int)
 
 Set the number of rows.
 """
-function set_rows!(sizer::WxGridSizer, rows::Integer)
-    wxgridsizer_setrows(sizer.ptr, rows)
+function set_rows!(sizer::wxGridSizer, rows::Integer)
+    KwxFFI.wxGridSizer_SetRows(sizer.ptr, Cint(rows))
     nothing
 end
 
 """
-    set_hgap!(sizer::WxGridSizer, gap::Int)
+    set_hgap!(sizer::wxGridSizer, gap::Int)
 
 Set the horizontal gap between cells.
 """
-function set_hgap!(sizer::WxGridSizer, gap::Integer)
-    wxgridsizer_sethgap(sizer.ptr, gap)
+function set_hgap!(sizer::wxGridSizer, gap::Integer)
+    KwxFFI.wxGridSizer_SetHGap(sizer.ptr, Cint(gap))
     nothing
 end
 
 """
-    set_vgap!(sizer::WxGridSizer, gap::Int)
+    set_vgap!(sizer::wxGridSizer, gap::Int)
 
 Set the vertical gap between cells.
 """
-function set_vgap!(sizer::WxGridSizer, gap::Integer)
-    wxgridsizer_setvgap(sizer.ptr, gap)
+function set_vgap!(sizer::wxGridSizer, gap::Integer)
+    KwxFFI.wxGridSizer_SetVGap(sizer.ptr, Cint(gap))
     nothing
 end
 
 # =============================================================================
-# WxFlexGridSizer
+# wxFlexGridSizer
 # =============================================================================
 
 """
-    WxFlexGridSizer
+    wxFlexGridSizer
 
 A grid sizer where individual rows and columns can be marked as growable,
 allowing them to expand when the sizer is resized.
@@ -202,14 +202,14 @@ allowing them to expand when the sizer is resized.
 # Fields
 - `ptr::Ptr{Cvoid}` - Pointer to the underlying wxFlexGridSizer C++ object
 """
-mutable struct WxFlexGridSizer <: WxSizer
+mutable struct wxFlexGridSizer <: wxSizer
     ptr::Ptr{Cvoid}
 end
 
 """
-    WxFlexGridSizer(rows::Int, cols::Int; vgap::Int=0, hgap::Int=0) -> WxFlexGridSizer
+    wxFlexGridSizer(rows::Int, cols::Int; vgap::Int=0, hgap::Int=0) -> wxFlexGridSizer
 
-Create a new flex grid sizer. Unlike WxGridSizer, individual rows/columns
+Create a new flex grid sizer. Unlike wxGridSizer, individual rows/columns
 can grow when the sizer is resized.
 
 # Arguments
@@ -222,98 +222,98 @@ can grow when the sizer is resized.
 
 # Example
 ```julia
-sizer = WxFlexGridSizer(0, 2, vgap=5, hgap=10)
+sizer = wxFlexGridSizer(0, 2, vgap=5, hgap=10)
 add_growable_col!(sizer, 1)  # Second column grows
 add!(sizer, label)
-add!(sizer, textctrl, flags=wxEXPAND[])
+add!(sizer, textctrl, flags=KwxFFI.EXPAND())
 ```
 """
-function WxFlexGridSizer(rows::Integer, cols::Integer; vgap::Integer = 0, hgap::Integer = 0)
-    ptr = wxflexgridsizer_create(rows, cols, vgap, hgap)
+function wxFlexGridSizer(rows::Integer, cols::Integer; vgap::Integer = 0, hgap::Integer = 0)
+    ptr = KwxFFI.wxFlexGridSizer_Create(Cint(rows), Cint(cols), Cint(vgap), Cint(hgap))
     if ptr == C_NULL
-        error("Failed to create WxFlexGridSizer")
+        error("Failed to create wxFlexGridSizer")
     end
-    WxFlexGridSizer(ptr)
+    wxFlexGridSizer(ptr)
 end
 
 """
-    add_growable_col!(sizer::WxFlexGridSizer, idx::Int)
+    add_growable_col!(sizer::wxFlexGridSizer, idx::Int; proportion::Int=0)
 
 Mark a column as growable (0-based index). Growable columns expand
 proportionally when the sizer is resized.
 """
-function add_growable_col!(sizer::WxFlexGridSizer, idx::Integer)
-    wxflexgridsizer_addgrowablecol(sizer.ptr, idx)
+function add_growable_col!(sizer::wxFlexGridSizer, idx::Integer; proportion::Integer = 0)
+    KwxFFI.wxFlexGridSizer_AddGrowableCol(sizer.ptr, Csize_t(idx), Cint(proportion))
     nothing
 end
 
 """
-    add_growable_row!(sizer::WxFlexGridSizer, idx::Int)
+    add_growable_row!(sizer::wxFlexGridSizer, idx::Int; proportion::Int=0)
 
 Mark a row as growable (0-based index). Growable rows expand
 proportionally when the sizer is resized.
 """
-function add_growable_row!(sizer::WxFlexGridSizer, idx::Integer)
-    wxflexgridsizer_addgrowablerow(sizer.ptr, idx)
+function add_growable_row!(sizer::wxFlexGridSizer, idx::Integer; proportion::Integer = 0)
+    KwxFFI.wxFlexGridSizer_AddGrowableRow(sizer.ptr, Csize_t(idx), Cint(proportion))
     nothing
 end
 
 """
-    remove_growable_col!(sizer::WxFlexGridSizer, idx::Int)
+    remove_growable_col!(sizer::wxFlexGridSizer, idx::Int)
 
 Remove a column from the list of growable columns (0-based index).
 """
-function remove_growable_col!(sizer::WxFlexGridSizer, idx::Integer)
-    wxflexgridsizer_removegrowablecol(sizer.ptr, idx)
+function remove_growable_col!(sizer::wxFlexGridSizer, idx::Integer)
+    KwxFFI.wxFlexGridSizer_RemoveGrowableCol(sizer.ptr, Csize_t(idx))
     nothing
 end
 
 """
-    remove_growable_row!(sizer::WxFlexGridSizer, idx::Int)
+    remove_growable_row!(sizer::wxFlexGridSizer, idx::Int)
 
 Remove a row from the list of growable rows (0-based index).
 """
-function remove_growable_row!(sizer::WxFlexGridSizer, idx::Integer)
-    wxflexgridsizer_removegrowablerow(sizer.ptr, idx)
+function remove_growable_row!(sizer::wxFlexGridSizer, idx::Integer)
+    KwxFFI.wxFlexGridSizer_RemoveGrowableRow(sizer.ptr, Csize_t(idx))
     nothing
 end
 
-# WxFlexGridSizer inherits grid properties from WxGridSizer — provide the same accessors
+# wxFlexGridSizer inherits grid properties from wxGridSizer — provide the same accessors
 
 """
-    get_cols(sizer::WxFlexGridSizer) -> Int
+    get_cols(sizer::wxFlexGridSizer) -> Int
 
 Get the number of columns.
 """
-get_cols(sizer::WxFlexGridSizer) = wxgridsizer_getcols(sizer.ptr)
+get_cols(sizer::wxFlexGridSizer) = Int(KwxFFI.wxGridSizer_GetCols(sizer.ptr))
 
 """
-    get_rows(sizer::WxFlexGridSizer) -> Int
+    get_rows(sizer::wxFlexGridSizer) -> Int
 
 Get the number of rows.
 """
-get_rows(sizer::WxFlexGridSizer) = wxgridsizer_getrows(sizer.ptr)
+get_rows(sizer::wxFlexGridSizer) = Int(KwxFFI.wxGridSizer_GetRows(sizer.ptr))
 
 """
-    get_hgap(sizer::WxFlexGridSizer) -> Int
+    get_hgap(sizer::wxFlexGridSizer) -> Int
 
 Get the horizontal gap between cells.
 """
-get_hgap(sizer::WxFlexGridSizer) = wxgridsizer_gethgap(sizer.ptr)
+get_hgap(sizer::wxFlexGridSizer) = Int(KwxFFI.wxGridSizer_GetHGap(sizer.ptr))
 
 """
-    get_vgap(sizer::WxFlexGridSizer) -> Int
+    get_vgap(sizer::wxFlexGridSizer) -> Int
 
 Get the vertical gap between cells.
 """
-get_vgap(sizer::WxFlexGridSizer) = wxgridsizer_getvgap(sizer.ptr)
+get_vgap(sizer::wxFlexGridSizer) = Int(KwxFFI.wxGridSizer_GetVGap(sizer.ptr))
 
 # =============================================================================
-# WxGridBagSizer
+# wxGridBagSizer
 # =============================================================================
 
 """
-    WxGridBagSizer
+    wxGridBagSizer
 
 A sizer that can lay out items in a grid with items optionally spanning
 multiple rows and/or columns.
@@ -321,14 +321,14 @@ multiple rows and/or columns.
 # Fields
 - `ptr::Ptr{Cvoid}` - Pointer to the underlying wxGridBagSizer C++ object
 """
-mutable struct WxGridBagSizer <: WxSizer
+mutable struct wxGridBagSizer <: wxSizer
     ptr::Ptr{Cvoid}
 end
 
 """
-    WxGridBagSizer(; vgap::Int=0, hgap::Int=0) -> WxGridBagSizer
+    wxGridBagSizer(; vgap::Int=0, hgap::Int=0) -> wxGridBagSizer
 
-Create a new grid bag sizer. Unlike WxGridSizer, items specify their
+Create a new grid bag sizer. Unlike wxGridSizer, items specify their
 position and can span multiple cells.
 
 # Keyword Arguments
@@ -337,45 +337,48 @@ position and can span multiple cells.
 
 # Example
 ```julia
-sizer = WxGridBagSizer(vgap=5, hgap=5)
+sizer = wxGridBagSizer(vgap=5, hgap=5)
 add!(sizer, label, row=0, col=0)
-add!(sizer, textctrl, row=0, col=1, flags=wxEXPAND[])
-add!(sizer, button, row=1, col=0, colspan=2, flags=wxALIGN_CENTER[])
+add!(sizer, textctrl, row=0, col=1, flags=KwxFFI.EXPAND())
+add!(sizer, button, row=1, col=0, colspan=2, flags=KwxFFI.ALIGN_CENTER())
 ```
 """
-function WxGridBagSizer(; vgap::Integer = 0, hgap::Integer = 0)
-    ptr = wxgridbagsizer_create(vgap, hgap)
+function wxGridBagSizer(; vgap::Integer = 0, hgap::Integer = 0)
+    ptr = KwxFFI.wxGridBagSizer_Create(Cint(vgap), Cint(hgap))
     if ptr == C_NULL
-        error("Failed to create WxGridBagSizer")
+        error("Failed to create wxGridBagSizer")
     end
-    WxGridBagSizer(ptr)
+    wxGridBagSizer(ptr)
 end
 
 """
-    set_empty_cell_size!(sizer::WxGridBagSizer, width::Int, height::Int)
+    set_empty_cell_size!(sizer::wxGridBagSizer, width::Int, height::Int)
 
 Set the size used for cells with no item.
 """
-function set_empty_cell_size!(sizer::WxGridBagSizer, width::Integer, height::Integer)
-    wxgridbagsizer_setemptycellsize(sizer.ptr, width, height)
+function set_empty_cell_size!(sizer::wxGridBagSizer, width::Integer, height::Integer)
+    KwxFFI.wxGridBagSizer_SetEmptyCellSize(sizer.ptr, Cint(width), Cint(height))
     nothing
 end
 
 """
-    get_empty_cell_size(sizer::WxGridBagSizer) -> Tuple{Int, Int}
+    get_empty_cell_size(sizer::wxGridBagSizer) -> Tuple{Int, Int}
 
 Get the size used for cells with no item as (width, height).
 """
-function get_empty_cell_size(sizer::WxGridBagSizer)
-    wxgridbagsizer_getemptycellsize(sizer.ptr)
+function get_empty_cell_size(sizer::wxGridBagSizer)
+    w = Ref{Cint}(0)
+    h = Ref{Cint}(0)
+    KwxFFI.wxGridBagSizer_GetEmptyCellSize(sizer.ptr, w, h)
+    (Int(w[]), Int(h[]))
 end
 
 # =============================================================================
-# WxWrapSizer
+# wxWrapSizer
 # =============================================================================
 
 """
-    WxWrapSizer
+    wxWrapSizer
 
 A sizer that wraps its items to the next line when the available space
 in the current direction is exhausted.
@@ -383,393 +386,401 @@ in the current direction is exhausted.
 # Fields
 - `ptr::Ptr{Cvoid}` - Pointer to the underlying wxWrapSizer C++ object
 """
-mutable struct WxWrapSizer <: WxSizer
+mutable struct wxWrapSizer <: wxSizer
     ptr::Ptr{Cvoid}
 end
 
 """
-    WxWrapSizer(orientation::Symbol; flags::Int=0) -> WxWrapSizer
-    WxWrapSizer(orientation::Integer; flags::Int=0) -> WxWrapSizer
+    wxWrapSizer(orientation::Symbol; flags::Int=0) -> wxWrapSizer
+    wxWrapSizer(orientation::Integer; flags::Int=0) -> wxWrapSizer
 
 Create a new wrap sizer that wraps items when space runs out.
 
 # Arguments
-- `orientation` - Either `:horizontal`/`:vertical` (Symbol) or `wxHORIZONTAL[]`/`wxVERTICAL[]` (Integer)
+- `orientation` - Either `:horizontal`/`:vertical` (Symbol) or `KwxFFI.HORIZONTAL()`/`KwxFFI.VERTICAL()` (Integer)
 
 # Keyword Arguments
 - `flags::Int = 0` - Additional flags
 
 # Example
 ```julia
-sizer = WxWrapSizer(:horizontal)
+sizer = wxWrapSizer(:horizontal)
 add!(sizer, button1)
 add!(sizer, button2)
 ```
 """
-function WxWrapSizer(orientation::Symbol; flags::Integer = 0)
+function wxWrapSizer(orientation::Symbol; flags::Integer = 0)
     orient = if orientation == :horizontal
-        wxHORIZONTAL[]
+        KwxFFI.HORIZONTAL()
     elseif orientation == :vertical
-        wxVERTICAL[]
+        KwxFFI.VERTICAL()
     else
         error("Invalid orientation: $orientation (expected :horizontal or :vertical)")
     end
-    ptr = wxwrapsizer_create(orient, flags)
+    ptr = KwxFFI.wxWrapSizer_Create(Cint(orient), Cint(flags))
     if ptr == C_NULL
-        error("Failed to create WxWrapSizer")
+        error("Failed to create wxWrapSizer")
     end
-    WxWrapSizer(ptr)
+    wxWrapSizer(ptr)
 end
 
-function WxWrapSizer(orientation::Integer; flags::Integer = 0)
-    ptr = wxwrapsizer_create(orientation, flags)
+function wxWrapSizer(orientation::Integer; flags::Integer = 0)
+    ptr = KwxFFI.wxWrapSizer_Create(Cint(orientation), Cint(flags))
     if ptr == C_NULL
-        error("Failed to create WxWrapSizer")
+        error("Failed to create wxWrapSizer")
     end
-    WxWrapSizer(ptr)
+    wxWrapSizer(ptr)
 end
 
 """
-    get_orientation(sizer::WxWrapSizer) -> Int
+    get_orientation(sizer::wxWrapSizer) -> Int
 
 Get the sizer orientation.
 """
-function get_orientation(sizer::WxWrapSizer)
-    wxwrapsizer_getorientation(sizer.ptr)
+function get_orientation(sizer::wxWrapSizer)
+    Int(KwxFFI.wxWrapSizer_GetOrientation(sizer.ptr))
 end
 
 """
-    set_orientation!(sizer::WxWrapSizer, orientation::Symbol)
+    set_orientation!(sizer::wxWrapSizer, orientation::Symbol)
 
 Set the sizer orientation.
 """
-function set_orientation!(sizer::WxWrapSizer, orientation::Symbol)
+function set_orientation!(sizer::wxWrapSizer, orientation::Symbol)
     orient = if orientation == :horizontal
-        wxHORIZONTAL[]
+        KwxFFI.HORIZONTAL()
     elseif orientation == :vertical
-        wxVERTICAL[]
+        KwxFFI.VERTICAL()
     else
         error("Invalid orientation: $orientation (expected :horizontal or :vertical)")
     end
-    wxwrapsizer_setorientation(sizer.ptr, orient)
+    KwxFFI.wxWrapSizer_SetOrientation(sizer.ptr, Cint(orient))
     nothing
 end
 
 # =============================================================================
-# Common sizer operations (work on any WxSizer subtype)
+# Common sizer operations (work on any wxSizer subtype)
 # =============================================================================
 
 """
-    add!(sizer::WxSizer, window::WxWindow; proportion::Int=0, flags::Int=0, border::Int=0)
+    add!(sizer::wxSizer, window::wxWindow; proportion::Int=0, flags::Int=0, border::Int=0)
 
 Add a window to the sizer.
 
 # Arguments
-- `sizer::WxSizer` - The sizer to add to
-- `window::WxWindow` - The window to add
+- `sizer::wxSizer` - The sizer to add to
+- `window::wxWindow` - The window to add
 
 # Keyword Arguments
 - `proportion::Int = 0` - How much this item should grow relative to others (0 = fixed size)
-- `flags::Int = 0` - Combination of alignment and border flags (e.g., `wxALL[] | wxEXPAND[]`)
+- `flags::Int = 0` - Combination of alignment and border flags (e.g., `KwxFFI.ALL() | KwxFFI.EXPAND()`)
 - `border::Int = 0` - Border width in pixels (applied to sides specified by flags)
 
 # Example
 ```julia
-sizer = WxBoxSizer(:vertical)
-add!(sizer, button, proportion=0, flags=wxALL[] | wxEXPAND[], border=5)
-add!(sizer, textctrl, proportion=1, flags=wxALL[] | wxEXPAND[], border=5)
+sizer = wxBoxSizer(:vertical)
+add!(sizer, button, proportion=0, flags=KwxFFI.ALL() | KwxFFI.EXPAND(), border=5)
+add!(sizer, textctrl, proportion=1, flags=KwxFFI.ALL() | KwxFFI.EXPAND(), border=5)
 ```
 """
-function add!(sizer::WxSizer, window::WxWindow;
+function add!(sizer::wxSizer, window::wxWindow;
               proportion::Integer = 0, flags::Integer = 0, border::Integer = 0)
-    wxsizer_addwindow(sizer.ptr, window.ptr, proportion, flags, border)
+    KwxFFI.wxSizer_AddWindow(sizer.ptr, window.ptr, Cint(proportion), Cint(flags), Cint(border), C_NULL)
     nothing
 end
 
 """
-    add!(sizer::WxSizer, child::WxSizer; proportion::Int=0, flags::Int=0, border::Int=0)
+    add!(sizer::wxSizer, child::wxSizer; proportion::Int=0, flags::Int=0, border::Int=0)
 
 Add a child sizer to the sizer. Use this for nested layouts.
 
 # Example
 ```julia
-outer = WxBoxSizer(:vertical)
-inner = WxBoxSizer(:horizontal)
+outer = wxBoxSizer(:vertical)
+inner = wxBoxSizer(:horizontal)
 add!(inner, button1)
 add!(inner, button2)
-add!(outer, inner, proportion=0, flags=wxEXPAND[])
+add!(outer, inner, proportion=0, flags=KwxFFI.EXPAND())
 ```
 """
-function add!(sizer::WxSizer, child::WxSizer;
+function add!(sizer::wxSizer, child::wxSizer;
               proportion::Integer = 0, flags::Integer = 0, border::Integer = 0)
-    wxsizer_addsizer(sizer.ptr, child.ptr, proportion, flags, border)
+    KwxFFI.wxSizer_AddSizer(sizer.ptr, child.ptr, Cint(proportion), Cint(flags), Cint(border), C_NULL)
     nothing
 end
 
 """
-    add!(sizer::WxGridBagSizer, window::WxWindow; row::Int, col::Int,
+    add!(sizer::wxGridBagSizer, window::wxWindow; row::Int, col::Int,
          rowspan::Int=1, colspan::Int=1, flags::Int=0, border::Int=0)
 
 Add a window to a grid bag sizer at the specified position.
 
 # Example
 ```julia
-sizer = WxGridBagSizer(vgap=5, hgap=5)
+sizer = wxGridBagSizer(vgap=5, hgap=5)
 add!(sizer, label, row=0, col=0)
-add!(sizer, textctrl, row=0, col=1, flags=wxEXPAND[])
+add!(sizer, textctrl, row=0, col=1, flags=KwxFFI.EXPAND())
 ```
 """
-function add!(sizer::WxGridBagSizer, window::WxWindow;
+function add!(sizer::wxGridBagSizer, window::wxWindow;
               row::Integer, col::Integer,
               rowspan::Integer = 1, colspan::Integer = 1,
               flags::Integer = 0, border::Integer = 0)
-    wxgridbagsizer_addwindow(sizer.ptr, window.ptr, row, col,
-                             rowspan, colspan, flags, border)
+    KwxFFI.wxGridBagSizer_AddWindow(sizer.ptr, window.ptr,
+        Cint(row), Cint(col), Cint(rowspan), Cint(colspan),
+        Cint(flags), Cint(border), C_NULL)
     nothing
 end
 
 """
-    add!(sizer::WxGridBagSizer, child::WxSizer; row::Int, col::Int,
+    add!(sizer::wxGridBagSizer, child::wxSizer; row::Int, col::Int,
          rowspan::Int=1, colspan::Int=1, flags::Int=0, border::Int=0)
 
 Add a child sizer to a grid bag sizer at the specified position.
 """
-function add!(sizer::WxGridBagSizer, child::WxSizer;
+function add!(sizer::wxGridBagSizer, child::wxSizer;
               row::Integer, col::Integer,
               rowspan::Integer = 1, colspan::Integer = 1,
               flags::Integer = 0, border::Integer = 0)
-    wxgridbagsizer_addsizer(sizer.ptr, child.ptr, row, col,
-                            rowspan, colspan, flags, border)
+    KwxFFI.wxGridBagSizer_AddSizer(sizer.ptr, child.ptr,
+        Cint(row), Cint(col), Cint(rowspan), Cint(colspan),
+        Cint(flags), Cint(border), C_NULL)
     nothing
 end
 
 """
-    add_spacer!(sizer::WxSizer, size::Int)
+    add_spacer!(sizer::wxSizer, size::Int)
 
 Add a non-stretchable spacer of the given size (pixels).
 """
-function add_spacer!(sizer::WxSizer, size::Integer)
-    wxsizer_addspacer(sizer.ptr, size)
+function add_spacer!(sizer::wxSizer, size::Integer)
+    KwxFFI.wxSizer_AddSpacer(sizer.ptr, Cint(size))
     nothing
 end
 
 """
-    add_stretch_spacer!(sizer::WxSizer, proportion::Int=1)
+    add_stretch_spacer!(sizer::wxSizer, proportion::Int=1)
 
 Add a stretchable spacer that grows proportionally to fill available space.
 """
-function add_stretch_spacer!(sizer::WxSizer, proportion::Integer = 1)
-    wxsizer_addstretchspacer(sizer.ptr, proportion)
+function add_stretch_spacer!(sizer::wxSizer, proportion::Integer = 1)
+    KwxFFI.wxSizer_AddStretchSpacer(sizer.ptr, Cint(proportion))
     nothing
 end
 
 """
-    add_spacer!(sizer::WxGridBagSizer, width::Int, height::Int;
+    add_spacer!(sizer::wxGridBagSizer, width::Int, height::Int;
                 row::Int, col::Int, rowspan::Int=1, colspan::Int=1,
                 flags::Int=0, border::Int=0)
 
 Add a spacer to a grid bag sizer at the specified position.
 """
-function add_spacer!(sizer::WxGridBagSizer, width::Integer, height::Integer;
+function add_spacer!(sizer::wxGridBagSizer, width::Integer, height::Integer;
                      row::Integer, col::Integer,
                      rowspan::Integer = 1, colspan::Integer = 1,
                      flags::Integer = 0, border::Integer = 0)
-    wxgridbagsizer_addspacer(sizer.ptr, width, height, row, col,
-                             rowspan, colspan, flags, border)
+    KwxFFI.wxGridBagSizer_AddSpacer(sizer.ptr,
+        Cint(width), Cint(height),
+        Cint(row), Cint(col), Cint(rowspan), Cint(colspan),
+        Cint(flags), Cint(border), C_NULL)
     nothing
 end
 
 """
-    insert!(sizer::WxSizer, index::Int, window::WxWindow;
+    insert!(sizer::wxSizer, index::Int, window::wxWindow;
             proportion::Int=0, flags::Int=0, border::Int=0)
 
 Insert a window at the given position (0-based index).
 """
-function insert!(sizer::WxSizer, index::Integer, window::WxWindow;
+function insert!(sizer::wxSizer, index::Integer, window::wxWindow;
                  proportion::Integer = 0, flags::Integer = 0, border::Integer = 0)
-    wxsizer_insertwindow(sizer.ptr, index, window.ptr, proportion, flags, border)
+    KwxFFI.wxSizer_InsertWindow(sizer.ptr, Cint(index), window.ptr,
+        Cint(proportion), Cint(flags), Cint(border), C_NULL)
     nothing
 end
 
 """
-    insert!(sizer::WxSizer, index::Int, child::WxSizer;
+    insert!(sizer::wxSizer, index::Int, child::wxSizer;
             proportion::Int=0, flags::Int=0, border::Int=0)
 
 Insert a child sizer at the given position (0-based index).
 """
-function insert!(sizer::WxSizer, index::Integer, child::WxSizer;
+function insert!(sizer::wxSizer, index::Integer, child::wxSizer;
                  proportion::Integer = 0, flags::Integer = 0, border::Integer = 0)
-    wxsizer_insertsizer(sizer.ptr, index, child.ptr, proportion, flags, border)
+    KwxFFI.wxSizer_InsertSizer(sizer.ptr, Cint(index), child.ptr,
+        Cint(proportion), Cint(flags), Cint(border), C_NULL)
     nothing
 end
 
 """
-    prepend!(sizer::WxSizer, window::WxWindow;
+    prepend!(sizer::wxSizer, window::wxWindow;
              proportion::Int=0, flags::Int=0, border::Int=0)
 
 Add a window at the beginning of the sizer.
 """
-function prepend!(sizer::WxSizer, window::WxWindow;
+function prepend!(sizer::wxSizer, window::wxWindow;
                   proportion::Integer = 0, flags::Integer = 0, border::Integer = 0)
-    wxsizer_prependwindow(sizer.ptr, window.ptr, proportion, flags, border)
+    KwxFFI.wxSizer_PrependWindow(sizer.ptr, window.ptr,
+        Cint(proportion), Cint(flags), Cint(border), C_NULL)
     nothing
 end
 
 """
-    prepend!(sizer::WxSizer, child::WxSizer;
+    prepend!(sizer::wxSizer, child::wxSizer;
              proportion::Int=0, flags::Int=0, border::Int=0)
 
 Add a child sizer at the beginning of the sizer.
 """
-function prepend!(sizer::WxSizer, child::WxSizer;
+function prepend!(sizer::wxSizer, child::wxSizer;
                   proportion::Integer = 0, flags::Integer = 0, border::Integer = 0)
-    wxsizer_prependsizer(sizer.ptr, child.ptr, proportion, flags, border)
+    KwxFFI.wxSizer_PrependSizer(sizer.ptr, child.ptr,
+        Cint(proportion), Cint(flags), Cint(border), C_NULL)
     nothing
 end
 
 """
-    fit!(sizer::WxSizer, window::WxWindow)
+    fit!(sizer::wxSizer, window::wxWindow)
 
 Size the window to fit its content based on the sizer's minimum size.
 """
-function fit!(sizer::WxSizer, window::WxWindow)
-    wxsizer_fit(sizer.ptr, window.ptr)
+function fit!(sizer::wxSizer, window::wxWindow)
+    KwxFFI.wxSizer_Fit(sizer.ptr, window.ptr)
     nothing
 end
 
 """
-    fit_inside!(sizer::WxSizer, window::WxWindow)
+    fit_inside!(sizer::wxSizer, window::wxWindow)
 
 Similar to fit!, but for windows with virtual/scrollable size.
 """
-function fit_inside!(sizer::WxSizer, window::WxWindow)
-    wxsizer_fitinside(sizer.ptr, window.ptr)
+function fit_inside!(sizer::wxSizer, window::wxWindow)
+    KwxFFI.wxSizer_FitInside(sizer.ptr, window.ptr)
     nothing
 end
 
 """
-    set_size_hints!(sizer::WxSizer, window::WxWindow)
+    set_size_hints!(sizer::wxSizer, window::wxWindow)
 
 Set the minimum size of the window based on the sizer and prevent the
 window from being resized smaller than the sizer's minimum.
 """
-function set_size_hints!(sizer::WxSizer, window::WxWindow)
-    wxsizer_setsizehints(sizer.ptr, window.ptr)
+function set_size_hints!(sizer::wxSizer, window::wxWindow)
+    KwxFFI.wxSizer_SetSizeHints(sizer.ptr, window.ptr)
     nothing
 end
 
 """
-    set_min_size!(sizer::WxSizer, width::Int, height::Int)
+    set_min_size!(sizer::wxSizer, width::Int, height::Int)
 
 Set the minimum size of the sizer.
 """
-function set_min_size!(sizer::WxSizer, width::Integer, height::Integer)
-    wxsizer_setminsize(sizer.ptr, width, height)
+function set_min_size!(sizer::wxSizer, width::Integer, height::Integer)
+    KwxFFI.wxSizer_SetMinSize(sizer.ptr, Cint(width), Cint(height))
     nothing
 end
 
 """
-    sizer_layout!(sizer::WxSizer)
+    sizer_layout!(sizer::wxSizer)
 
 Force the sizer to recalculate sizes and reposition its children.
 """
-function sizer_layout!(sizer::WxSizer)
-    wxsizer_layout(sizer.ptr)
+function sizer_layout!(sizer::wxSizer)
+    KwxFFI.wxSizer_Layout(sizer.ptr)
     nothing
 end
 
 """
-    sizer_clear!(sizer::WxSizer; delete_windows::Bool=false)
+    sizer_clear!(sizer::wxSizer; delete_windows::Bool=false)
 
 Remove all items from the sizer. If delete_windows is true, also destroy
 the managed windows.
 """
-function sizer_clear!(sizer::WxSizer; delete_windows::Bool = false)
-    wxsizer_clear(sizer.ptr, delete_windows)
+function sizer_clear!(sizer::wxSizer; delete_windows::Bool = false)
+    KwxFFI.wxSizer_Clear(sizer.ptr, Cint(delete_windows))
     nothing
 end
 
 """
-    detach!(sizer::WxSizer, window::WxWindow) -> Bool
+    detach!(sizer::wxSizer, window::wxWindow) -> Bool
 
 Detach a window from the sizer without destroying it.
 """
-function detach!(sizer::WxSizer, window::WxWindow)
-    wxsizer_detachwindow(sizer.ptr, window.ptr)
+function detach!(sizer::wxSizer, window::wxWindow)
+    KwxFFI.wxSizer_DetachWindow(sizer.ptr, window.ptr) != 0
 end
 
 """
-    detach!(sizer::WxSizer, child::WxSizer) -> Bool
+    detach!(sizer::wxSizer, child::wxSizer) -> Bool
 
 Detach a child sizer from the sizer without destroying it.
 """
-function detach!(sizer::WxSizer, child::WxSizer)
-    wxsizer_detachsizer(sizer.ptr, child.ptr)
+function detach!(sizer::wxSizer, child::wxSizer)
+    KwxFFI.wxSizer_DetachSizer(sizer.ptr, child.ptr) != 0
 end
 
 """
-    detach!(sizer::WxSizer, index::Int) -> Bool
+    detach!(sizer::wxSizer, index::Int) -> Bool
 
 Detach the item at the given index (0-based).
 """
-function detach!(sizer::WxSizer, index::Integer)
-    wxsizer_detach(sizer.ptr, index)
+function detach!(sizer::wxSizer, index::Integer)
+    KwxFFI.wxSizer_Detach(sizer.ptr, Cint(index)) != 0
 end
 
 """
-    sizer_hide!(sizer::WxSizer, window::WxWindow) -> Bool
+    sizer_hide!(sizer::wxSizer, window::wxWindow) -> Bool
 
 Hide a window managed by this sizer (the space it occupies is freed).
 """
-function sizer_hide!(sizer::WxSizer, window::WxWindow)
-    wxsizer_hidewindow(sizer.ptr, window.ptr)
+function sizer_hide!(sizer::wxSizer, window::wxWindow)
+    KwxFFI.wxSizer_HideWindow(sizer.ptr, window.ptr) != 0
 end
 
 """
-    sizer_hide!(sizer::WxSizer, child::WxSizer) -> Bool
+    sizer_hide!(sizer::wxSizer, child::wxSizer) -> Bool
 
 Hide a child sizer managed by this sizer.
 """
-function sizer_hide!(sizer::WxSizer, child::WxSizer)
-    wxsizer_hidesizer(sizer.ptr, child.ptr)
+function sizer_hide!(sizer::wxSizer, child::wxSizer)
+    KwxFFI.wxSizer_HideSizer(sizer.ptr, child.ptr) != 0
 end
 
 """
-    sizer_show!(sizer::WxSizer, window::WxWindow; show::Bool=true, recursive::Bool=false) -> Bool
+    sizer_show!(sizer::wxSizer, window::wxWindow; show::Bool=true, recursive::Bool=false) -> Bool
 
 Show or hide a window managed by this sizer.
 """
-function sizer_show!(sizer::WxSizer, window::WxWindow;
+function sizer_show!(sizer::wxSizer, window::wxWindow;
                      show::Bool = true, recursive::Bool = false)
-    wxsizer_showwindow(sizer.ptr, window.ptr, show, recursive)
+    KwxFFI.wxSizer_ShowWindow(sizer.ptr, window.ptr, Cint(show), Cint(recursive)) != 0
 end
 
 """
-    sizer_show!(sizer::WxSizer, child::WxSizer; show::Bool=true, recursive::Bool=false) -> Bool
+    sizer_show!(sizer::wxSizer, child::wxSizer; show::Bool=true, recursive::Bool=false) -> Bool
 
 Show or hide a child sizer.
 """
-function sizer_show!(sizer::WxSizer, child::WxSizer;
+function sizer_show!(sizer::wxSizer, child::wxSizer;
                      show::Bool = true, recursive::Bool = false)
-    wxsizer_showsizer(sizer.ptr, child.ptr, show, recursive)
+    KwxFFI.wxSizer_ShowSizer(sizer.ptr, child.ptr, Cint(show), Cint(recursive)) != 0
 end
 
 """
-    set_item_min_size!(sizer::WxSizer, index::Int, width::Int, height::Int)
+    set_item_min_size!(sizer::wxSizer, index::Int, width::Int, height::Int)
 
 Set the minimum size for the item at the given position (0-based).
 """
-function set_item_min_size!(sizer::WxSizer, index::Integer, width::Integer, height::Integer)
-    wxsizer_setitemminsize(sizer.ptr, index, width, height)
+function set_item_min_size!(sizer::wxSizer, index::Integer, width::Integer, height::Integer)
+    KwxFFI.wxSizer_SetItemMinSize(sizer.ptr, Cint(index), Cint(width), Cint(height))
     nothing
 end
 
 """
-    set_item_min_size!(sizer::WxSizer, window::WxWindow, width::Int, height::Int)
+    set_item_min_size!(sizer::wxSizer, window::wxWindow, width::Int, height::Int)
 
 Set the minimum size for the given window in this sizer.
 """
-function set_item_min_size!(sizer::WxSizer, window::WxWindow, width::Integer, height::Integer)
-    wxsizer_setitemminsizewindow(sizer.ptr, window.ptr, width, height)
+function set_item_min_size!(sizer::wxSizer, window::wxWindow, width::Integer, height::Integer)
+    KwxFFI.wxSizer_SetItemMinSizeWindow(sizer.ptr, window.ptr, Cint(width), Cint(height))
     nothing
 end

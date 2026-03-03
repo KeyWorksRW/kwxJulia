@@ -10,7 +10,7 @@ wx_connect!(window, event_type, handler; id=-1, last_id=id)
 
 **Parameters:**
 - `window::WxWindow` — Window to connect handler to
-- `event_type::Integer` — Event type constant (e.g., `wxEVT_BUTTON[]`)
+- `event_type::Integer` — Event type constant (e.g., `KwxFFI.wxEVT_BUTTON()`)
 - `handler::Function` — Function with signature `handler(event::WxEvent)`
 - `id::Int = -1` — Window ID filter (-1 = any ID)
 - `last_id::Int = id` — Last ID in range (for ID ranges)
@@ -31,15 +31,15 @@ Available event type constants (from Phase 2):
 
 | Constant | Event |
 |----------|-------|
-| `wxEVT_BUTTON[]` | Button clicked |
-| `wxEVT_CLOSE_WINDOW[]` | Window close requested |
-| `wxEVT_MENU[]` | Menu item selected |
-| `wxEVT_LEFT_DOWN[]` | Left mouse button down |
-| `wxEVT_LEFT_UP[]` | Left mouse button up |
-| `wxEVT_PAINT[]` | Window needs repainting |
-| `wxEVT_SIZE[]` | Window resized |
+| `KwxFFI.wxEVT_BUTTON()` | Button clicked |
+| `KwxFFI.wxEVT_CLOSE_WINDOW()` | Window close requested |
+| `KwxFFI.wxEVT_MENU()` | Menu item selected |
+| `KwxFFI.wxEVT_LEFT_DOWN()` | Left mouse button down |
+| `KwxFFI.wxEVT_LEFT_UP()` | Left mouse button up |
+| `KwxFFI.wxEVT_PAINT()` | Window needs repainting |
+| `KwxFFI.wxEVT_SIZE()` | Window resized |
 
-**Note**: Use `[]` to dereference the Ref (e.g., `wxEVT_BUTTON[]`)
+**Note**: Event constants are accessed via `KwxFFI.wxEVT_*()` function calls (e.g., `KwxFFI.wxEVT_BUTTON()`)
 
 ## Examples
 
@@ -48,7 +48,7 @@ Available event type constants (from Phase 2):
 ```julia
 frame = WxFrame(nothing, "My App")
 
-wx_connect!(frame, wxEVT_CLOSE_WINDOW[]) do event
+wx_connect!(frame, KwxFFI.wxEVT_CLOSE_WINDOW()) do event
     println("Window is closing!")
     # Cleanup code here
 end
@@ -57,7 +57,7 @@ end
 ### Size Event
 
 ```julia
-wx_connect!(frame, wxEVT_SIZE[]) do event
+wx_connect!(frame, KwxFFI.wxEVT_SIZE()) do event
     size = get_size(frame)
     println("Resized to: $(size[1]) x $(size[2])")
 end
@@ -66,7 +66,7 @@ end
 ### Mouse Event
 
 ```julia
-wx_connect!(frame, wxEVT_LEFT_DOWN[]) do event
+wx_connect!(frame, KwxFFI.wxEVT_LEFT_DOWN()) do event
     pos = get_position(frame)
     println("Clicked at window position: $pos")
 end
@@ -78,12 +78,12 @@ end
 frame = WxFrame(nothing, "Multi-Event")
 
 # First handler
-wx_connect!(frame, wxEVT_SIZE[]) do event
+wx_connect!(frame, KwxFFI.wxEVT_SIZE()) do event
     println("Size handler 1")
 end
 
 # Second handler (different event)
-wx_connect!(frame, wxEVT_PAINT[]) do event
+wx_connect!(frame, KwxFFI.wxEVT_PAINT()) do event
     println("Paint handler")
 end
 
@@ -103,7 +103,7 @@ on_close!(frame) do event
 end
 
 # Equivalent to:
-wx_connect!(frame, wxEVT_CLOSE_WINDOW[]) do event
+wx_connect!(frame, KwxFFI.wxEVT_CLOSE_WINDOW()) do event
     println("Goodbye!")
 end
 ```
@@ -114,10 +114,10 @@ Rarely needed (handlers auto-cleanup with window):
 
 ```julia
 # Disconnect all handlers of this type
-wx_disconnect!(window, wxEVT_BUTTON[])
+wx_disconnect!(window, KwxFFI.wxEVT_BUTTON())
 
 # Disconnect specific ID
-wx_disconnect!(window, wxEVT_BUTTON[], id=1001)
+wx_disconnect!(window, KwxFFI.wxEVT_BUTTON(), id=1001)
 ```
 
 Returns `true` if disconnected, `false` if not found.
@@ -127,7 +127,7 @@ Returns `true` if disconnected, `false` if not found.
 Exceptions in handlers are caught automatically:
 
 ```julia
-wx_connect!(window, wxEVT_LEFT_DOWN[]) do event
+wx_connect!(window, KwxFFI.wxEVT_LEFT_DOWN()) do event
     error("This won't crash the app!")
     # Error logged to stderr, app continues normally
 end
@@ -143,7 +143,7 @@ Event handlers are **automatically kept alive** by storing function pointers in 
 frame = WxFrame(...)
 
 # This closure won't be garbage collected
-wx_connect!(frame, wxEVT_SIZE[]) do event
+wx_connect!(frame, KwxFFI.wxEVT_SIZE()) do event
     println("Safe from GC!")
 end
 
@@ -171,13 +171,13 @@ WxWidgets.run_app() do
     end
 
     # Size handler
-    wx_connect!(frame, wxEVT_SIZE[]) do event
+    wx_connect!(frame, KwxFFI.wxEVT_SIZE()) do event
         size = get_size(frame)
         set_status_text(frame, "Size: $(size[1])x$(size[2])")
     end
 
     # Paint handler
-    wx_connect!(frame, wxEVT_PAINT[]) do event
+    wx_connect!(frame, KwxFFI.wxEVT_PAINT()) do event
         println("Repaint requested")
     end
 
@@ -217,12 +217,12 @@ Connect handler for specific window ID:
 
 ```julia
 # Only handle events from ID 1001
-wx_connect!(frame, wxEVT_BUTTON[], id=1001) do event
+wx_connect!(frame, KwxFFI.wxEVT_BUTTON(), id=1001) do event
     println("Button 1001 clicked!")
 end
 
 # Handle range of IDs (1000-1010)
-wx_connect!(frame, wxEVT_BUTTON[], id=1000, last_id=1010) do event
+wx_connect!(frame, KwxFFI.wxEVT_BUTTON(), id=1000, last_id=1010) do event
     println("Button in range 1000-1010 clicked!")
 end
 ```
@@ -233,8 +233,8 @@ Print closure count to verify handlers are registered:
 
 ```julia
 frame = WxFrame(...)
-wx_connect!(frame, wxEVT_SIZE[]) do event; end
-wx_connect!(frame, wxEVT_CLOSE_WINDOW[]) do event; end
+wx_connect!(frame, KwxFFI.wxEVT_SIZE()) do event; end
+wx_connect!(frame, KwxFFI.wxEVT_CLOSE_WINDOW()) do event; end
 
 println("Active handlers: ", length(frame.closures))  # → 2
 ```
@@ -245,7 +245,7 @@ With event handling complete, Phase 6 will add controls like buttons:
 
 ```julia
 button = WxButton(frame, "Click Me!")
-wx_connect!(button, wxEVT_BUTTON[]) do event
+wx_connect!(button, KwxFFI.wxEVT_BUTTON()) do event
     println("Button clicked!")
 end
 ```

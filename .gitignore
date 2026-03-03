@@ -3,3 +3,4 @@ wxFFI/
 .vscode/
 
 build/
+.shared/

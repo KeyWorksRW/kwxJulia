@@ -170,7 +170,7 @@ To connect event handlers:
 
 ```julia
 # Coming in Phase 5
-wx_connect!(frame, wxEVT_CLOSE_WINDOW[]) do event
+wx_connect!(frame, KwxFFI.wxEVT_CLOSE_WINDOW()) do event
     println("Window is closing!")
 end
 ```

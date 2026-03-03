@@ -1,25 +1,25 @@
 # High-level event handling functions
 
 """
-    wx_connect!(window::WxWindow, event_type::Integer, handler::Function;
+    wx_connect!(window::wxWindow, event_type::Integer, handler::Function;
                 id::Int = -1, last_id::Int = id)
 
 Connect an event handler to a window.
 
-The handler function receives a WxEvent object when the event fires.
-The handler should have the signature: `handler(event::WxEvent)`.
+The handler function receives a wxEvent object when the event fires.
+The handler should have the signature: `handler(event::wxEvent)`.
 
 # Arguments
 - `window`: The window to connect the handler to
-- `event_type`: Event type constant (e.g., `wxEVT_BUTTON[]`, `wxEVT_CLOSE_WINDOW[]`)
+- `event_type`: Event type constant (e.g., `KwxFFI.wxEVT_BUTTON()`, `KwxFFI.wxEVT_CLOSE_WINDOW()`)
 - `handler`: Julia function to call when event occurs
 - `id`: Window ID to filter events (-1 for any ID)
 - `last_id`: Last ID in range (defaults to `id` for single ID)
 
 # Example
 ```julia
-frame = WxFrame(nothing, "My App")
-wx_connect!(frame, wxEVT_CLOSE_WINDOW[]) do event
+frame = wxFrame(nothing, "My App")
+wx_connect!(frame, KwxFFI.wxEVT_CLOSE_WINDOW()) do event
     println("Frame is closing!")
 end
 ```
@@ -27,9 +27,9 @@ end
 # Important Notes
 - The function pointer is stored in `window.closures` to prevent garbage collection
 - Exceptions in the handler are caught and logged to prevent crashes
-- Do not store the WxEvent object beyond the handler's scope
+- Do not store the wxEvent object beyond the handler's scope
 """
-function wx_connect!(window::WxWindow, event_type::Integer, handler::Function;
+function wx_connect!(window::wxWindow, event_type::Integer, handler::Function;
                      id::Integer = -1, last_id::Integer = id)
     # Create a C-callable wrapper around the Julia closure
     # The ClosureFun signature is: void(void* fun, void* data, void* evt)
@@ -39,7 +39,7 @@ function wx_connect!(window::WxWindow, event_type::Integer, handler::Function;
             # In this case, do nothing - Julia's GC will handle cleanup
             if evt != C_NULL
                 # Wrap the event pointer and call the user's handler
-                handler(WxEvent(evt))
+                handler(wxEvent(evt))
             end
         catch e
             # Never let Julia exceptions propagate to C++ - that would crash
@@ -75,7 +75,7 @@ function wx_connect!(window::WxWindow, event_type::Integer, handler::Function;
 end
 
 """
-    wx_disconnect!(window::WxWindow, event_type::Integer;
+    wx_disconnect!(window::wxWindow, event_type::Integer;
                    id::Int = -1, last_id::Int = id) -> Bool
 
 Disconnect an event handler from a window.
@@ -86,19 +86,19 @@ Returns `true` if a handler was found and disconnected, `false` otherwise.
 This disconnects the event handler but does NOT remove the function pointer
 from `window.closures`. The closure will be GC'd when the window is destroyed.
 """
-function wx_disconnect!(window::WxWindow, event_type::Integer;
+function wx_disconnect!(window::wxWindow, event_type::Integer;
                         id::Integer = -1, last_id::Integer = id)
     result = kwxapp_disconnect(window.ptr, id, last_id, event_type)
     result != 0
 end
 
 """
-    on_close!(window::WxWindow, handler::Function)
+    on_close!(window::wxWindow, handler::Function)
 
 Convenience function to connect a close event handler.
 
-Equivalent to: `wx_connect!(window, wxEVT_CLOSE_WINDOW[], handler)`
+Equivalent to: `wx_connect!(window, KwxFFI.wxEVT_CLOSE_WINDOW(), handler)`
 """
-function on_close!(window::WxWindow, handler::Function)
-    wx_connect!(window, wxEVT_CLOSE_WINDOW[], handler)
+function on_close!(window::wxWindow, handler::Function)
+    wx_connect!(window, KwxFFI.wxEVT_CLOSE_WINDOW(), handler)
 end

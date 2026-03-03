@@ -1,21 +1,17 @@
-# Main module for kwxJulia - Julia bindings for wxWidgets
+# Main module for kwxJulia - Julia bindings for wxWidgets via kwxFFI
 
 module WxWidgets
 
-# Core infrastructure
-include("core/library.jl")
-include("core/types.jl")
-include("core/strings.jl")
-include("core/constants.jl")
-include("core/events.jl")
+using Libdl
 
-# FFI declarations (raw @ccall wrappers)
-include("ffi/app.jl")
-include("ffi/window.jl")
-include("ffi/frame.jl")
-include("ffi/events.jl")
-include("ffi/controls.jl")
-include("ffi/sizers.jl")
+# Generated FFI module — must come first so core files can `using ..KwxFFI`
+include(joinpath(@__DIR__, "..", "wx", "KwxFFI_gen.jl"))
+using .KwxFFI
+
+# Core infrastructure (order matters: kwxapp needs KwxFFI, strings needs kwxapp)
+include("core/types.jl")
+include("core/kwxapp.jl")
+include("core/strings.jl")
 
 # High-level API (idiomatic Julia wrappers)
 include("widgets/app.jl")
@@ -30,10 +26,17 @@ include("widgets/combobox.jl")
 include("widgets/listbox.jl")
 include("widgets/sizers.jl")
 
-# Exports
-export WxString, WxFrame, WxEvent
-export WxButton, WxStaticText, WxTextCtrl, WxCheckBox, WxComboBox, WxListBox
-export WxBoxSizer, WxGridSizer, WxFlexGridSizer, WxGridBagSizer, WxWrapSizer
+# --- Exports ---
+
+# KwxFFI submodule (for constants, events, and raw FFI access)
+export KwxFFI
+
+# Types
+export wxString, wxFrame, wxEvent
+export wxButton, wxStaticText, wxTextCtrl, wxCheckBox, wxComboBox, wxListBox
+export wxBoxSizer, wxGridSizer, wxFlexGridSizer, wxGridBagSizer, wxWrapSizer
+
+# Application lifecycle
 export run_app, exit_app, set_top_window, set_exit_on_frame_delete
 
 # Window functions
@@ -41,11 +44,11 @@ export show_window, hide, close, destroy!
 export set_size, get_size, set_position, get_position
 export set_label, get_label
 export set_sizer, layout, refresh, update
-export enable, is_enabled, is_shown, set_focus
+export enable, disable, is_enabled, is_shown, set_focus
 export centre, center
 
 # Frame functions
-export create_status_bar, set_status_text, push_status_text, pop_status_text
+export create_status_bar, set_status_text
 export set_menu_bar, get_menu_bar, set_tool_bar, get_tool_bar
 
 # Event handling
@@ -88,47 +91,15 @@ export add_growable_col!, add_growable_row!, remove_growable_col!, remove_growab
 export set_empty_cell_size!, get_empty_cell_size
 export set_orientation!
 
-# Constants (exported as Refs)
-export wxDEFAULT_FRAME_STYLE
-export wxID_ANY, wxID_OK, wxID_CANCEL
-# TextCtrl styles
-export wxTE_MULTILINE, wxTE_READONLY, wxTE_PROCESS_TAB, wxTE_PROCESS_ENTER
-export wxTE_RICH, wxTE_RICH2, wxTE_PASSWORD, wxTE_NO_VSCROLL
-export wxTE_AUTO_URL, wxTE_NOHIDESEL, wxTE_LEFT, wxTE_RIGHT, wxTE_CENTRE, wxTE_WORDWRAP
-# ComboBox styles
-export wxCB_SIMPLE, wxCB_SORT, wxCB_READONLY, wxCB_DROPDOWN
-# ListBox styles
-export wxLB_SORT, wxLB_SINGLE, wxLB_MULTIPLE, wxLB_EXTENDED, wxLB_NEEDED_SB, wxLB_ALWAYS_SB
-# Button styles
-export wxBU_EXACTFIT, wxBU_LEFT, wxBU_TOP, wxBU_RIGHT, wxBU_BOTTOM
-# StaticText styles
-export wxST_NO_AUTORESIZE
-# Layout/alignment flags
-export wxHORIZONTAL, wxVERTICAL, wxALL, wxEXPAND, wxGROW
-export wxALIGN_CENTER, wxALIGN_LEFT, wxALIGN_RIGHT, wxALIGN_TOP, wxALIGN_BOTTOM
-export wxALIGN_CENTER_HORIZONTAL, wxALIGN_CENTER_VERTICAL
-export wxLEFT, wxRIGHT, wxTOP, wxBOTTOM, wxBOTH
-export wxSHAPED, wxSTRETCH_NOT
-
-# Event types (exported as Refs)
-export wxEVT_BUTTON, wxEVT_CLOSE_WINDOW, wxEVT_MENU
-export wxEVT_LEFT_DOWN, wxEVT_LEFT_UP, wxEVT_PAINT, wxEVT_SIZE
-export wxEVT_CHECKBOX, wxEVT_COMBOBOX
-export wxEVT_LISTBOX, wxEVT_LISTBOX_DCLICK
-export wxEVT_TEXT, wxEVT_TEXT_ENTER
-
 """
-Module initialization - loads libraries and constants.
+Module initialization - adds kwxFFI DLL directory to the library search path.
 Called automatically when the module is first loaded.
 """
 function __init__()
-    try
-        load_libraries!()
-        load_constants!()
-        load_events!()
-    catch e
-        @error "Failed to initialize WxWidgets module" exception=(e, catch_backtrace())
-        rethrow(e)
+    # Add kwxFFI DLL directory to Julia's library search path
+    dlldir = joinpath(@__DIR__, "..", "bin", "Release")
+    if isdir(dlldir) && !(dlldir in Libdl.DL_LOAD_PATH)
+        pushfirst!(Libdl.DL_LOAD_PATH, dlldir)
     end
 end
 
