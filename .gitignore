@@ -1,6 +1,5 @@
-wxFFI/
+build/
+
 .private/
 .vscode/
-
-build/
 .shared/
