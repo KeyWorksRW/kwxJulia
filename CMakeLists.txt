@@ -126,11 +126,6 @@ add_custom_command(
             ${CMAKE_SOURCE_DIR}/wx/freefuncs_gen.jl
             ${CMAKE_SOURCE_DIR}/wx/KwxFFI_gen.jl
     COMMAND kwxgen generate
-                --headers ${kwxFFI_SOURCE_DIR}/include
-                --defs    ${kwxFFI_SOURCE_DIR}/src/kwx_defs.cpp
-                --lang    julia
-                --libname kwxJuliaFFI
-                --out     ${CMAKE_SOURCE_DIR}/wx/
     DEPENDS kwxgen ${KWXFFI_HEADERS}
     COMMENT "Generating Julia bindings via kwxgen"
 )
