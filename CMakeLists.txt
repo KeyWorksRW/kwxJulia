@@ -16,7 +16,7 @@ project( kwxJuliaFFI
     LANGUAGES C CXX
     VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}.${PROJECT_VERSION_BUILD}
     DESCRIPTION "kwxJuliaFFI - Julia bindings for wxWidgets via kwxFFI"
-    HOMEPAGE_URL "https://github.com/Randalphwa/kwxJulia-dev" )
+    HOMEPAGE_URL "https://github.com/KeyWorksRW/kwxJulia" )
 
 # ###################### General Settings #######################
 set( CMAKE_CXX_STANDARD 23 )
