@@ -1,5 +1,5 @@
 # Minimal Frame Example for Phase 4
-# Demonstrates creating and displaying a wxFrame
+# Demonstrates creating and displaying a wxFrame using the generated wx/ API.
 
 push!(LOAD_PATH, joinpath(@__DIR__, ".."))
 using WxWidgets
@@ -7,29 +7,21 @@ using WxWidgets
 println("Phase 4 Example: Minimal Frame")
 println("=" ^ 50)
 
-# Run the application
 WxWidgets.run_app(app_name="Phase4Test") do
-    # Create a frame
-    frame = wxFrame(nothing, "Phase 4 - Window & Frame Demo",
-                    size=(600, 400))
+    frame = wxFrame(nothing, KwxFFI.ID_ANY(), "Phase 4 - Window & Frame Demo",
+                    -1, -1, 600, 400, KwxFFI.DEFAULT_FRAME_STYLE())
 
-    # Create a status bar
-    create_status_bar(frame, 1)
-    set_status_text(frame, "Phase 4 implementation is working!")
+    create_status_bar(frame, 1, 0, KwxFFI.ID_ANY())
+    set_status_text!(frame, "Phase 4 implementation is working!", 0)
 
-    # Set the frame as the top window
     set_top_window(frame)
-
-    # Center the frame on screen
-    centre(frame)
-
-    # Show the frame
-    show_window(frame)
+    centre!(frame, KwxFFI.CENTRE())
+    show(frame)
 
     println("Frame created and displayed!")
     println("  Title: ", get_label(frame))
-    println("  Size: ", get_size(frame))
-    println("  Position: ", get_position(frame))
+    println("  Size: ", get_width(get_size(frame)), " x ", get_height(get_size(frame)))
+    println("  Position: ", get_x(get_position(frame)), ", ", get_y(get_position(frame)))
     println("\nClose the window to exit.")
 end
 

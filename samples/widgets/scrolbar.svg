@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="full" width="32" height="32" viewBox="0 0 32 32" shape-rendering="crispEdges">
+<!-- source: scrolbar.xpm -->
+<rect x="2" y="8" width="27" height="1" fill="#000000"/>
+<rect x="2" y="9" width="1" height="15" fill="#000000"/>
+<rect x="15" y="9" width="1" height="15" fill="#000000"/>
+<rect x="28" y="9" width="1" height="15" fill="#000000"/>
+<rect x="10" y="12" width="1" height="1" fill="#000000"/>
+<rect x="20" y="12" width="1" height="1" fill="#000000"/>
+<rect x="9" y="13" width="2" height="1" fill="#000000"/>
+<rect x="20" y="13" width="2" height="1" fill="#000000"/>
+<rect x="8" y="14" width="3" height="1" fill="#000000"/>
+<rect x="20" y="14" width="3" height="1" fill="#000000"/>
+<rect x="7" y="15" width="4" height="1" fill="#000000"/>
+<rect x="20" y="15" width="4" height="1" fill="#000000"/>
+<rect x="6" y="16" width="5" height="1" fill="#000000"/>
+<rect x="20" y="16" width="5" height="1" fill="#000000"/>
+<rect x="7" y="17" width="4" height="1" fill="#000000"/>
+<rect x="20" y="17" width="4" height="1" fill="#000000"/>
+<rect x="8" y="18" width="3" height="1" fill="#000000"/>
+<rect x="20" y="18" width="3" height="1" fill="#000000"/>
+<rect x="9" y="19" width="2" height="1" fill="#000000"/>
+<rect x="20" y="19" width="2" height="1" fill="#000000"/>
+<rect x="10" y="20" width="1" height="1" fill="#000000"/>
+<rect x="20" y="20" width="1" height="1" fill="#000000"/>
+<rect x="2" y="24" width="27" height="1" fill="#000000"/>
+</svg>

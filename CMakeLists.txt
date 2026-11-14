@@ -28,6 +28,16 @@ if(NOT DEFINED ENV{CI})
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 endif()
 
+# ###################### sccache #######################
+find_program(SCCACHE_PROGRAM sccache)
+if(SCCACHE_PROGRAM)
+    message(STATUS "sccache found: ${SCCACHE_PROGRAM}")
+    set(CMAKE_C_COMPILER_LAUNCHER "${SCCACHE_PROGRAM}")
+    set(CMAKE_CXX_COMPILER_LAUNCHER "${SCCACHE_PROGRAM}")
+else()
+    message(STATUS "sccache not found; building without a compiler cache")
+endif()
+
 # ###################### Options #######################
 # Force Release build (Julia FFI requires release runtime, not debug)
 if(NOT CMAKE_BUILD_TYPE)
@@ -82,7 +92,10 @@ message( STATUS "Fetching kwxFFI and wxWidgets (this may take awhile) ..." )
 
 FetchContent_Declare(
     kwxFFI
-    GIT_REPOSITORY https://github.com/KeyWorksRW/kwxFFI.git
+    # TEMPORARY: use the local sibling checkout so source changes show up immediately.
+    # Restore the GIT_REPOSITORY line below to fetch from GitHub again.
+    # GIT_REPOSITORY https://github.com/KeyWorksRW/kwxFFI.git
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../kwxFFI
     GIT_TAG origin/main
     GIT_SHALLOW TRUE
     UPDATE_DISCONNECTED FALSE  # Explicitly enable updates
@@ -109,14 +122,12 @@ message( STATUS "kwxFFI sources: " ${kwxFFI_SOURCE_DIR} )
 
 # ###################### kwxgen — Julia binding generator #######################
 
-add_subdirectory( ${kwxFFI_SOURCE_DIR}/tools/kwxgen kwxgen-build )
+# add_subdirectory( ${kwxFFI_SOURCE_DIR}/kwxgen kwxgen-build )
 
-set( KWXFFI_HEADERS
-    ${kwxFFI_SOURCE_DIR}/include/kwx_classes.h
-    ${kwxFFI_SOURCE_DIR}/include/kwx_events.h
-    ${kwxFFI_SOURCE_DIR}/include/kwx_keys.h
-    ${kwxFFI_SOURCE_DIR}/include/kwx_constants.h
-)
+# Every kwxFFI include participates in the parsed surface (kwx_classes.h pulls
+# in the per-area headers), so glob them to keep the dependency list honest.
+file( GLOB KWXFFI_HEADERS CONFIGURE_DEPENDS ${kwxFFI_SOURCE_DIR}/include/*.h )
+set( KWXFFI_DEFS ${kwxFFI_SOURCE_DIR}/src/kwx_defs.cpp )
 
 add_custom_command(
     OUTPUT  ${CMAKE_SOURCE_DIR}/wx/events_gen.jl
@@ -125,9 +136,20 @@ add_custom_command(
             ${CMAKE_SOURCE_DIR}/wx/classes_gen.jl
             ${CMAKE_SOURCE_DIR}/wx/freefuncs_gen.jl
             ${CMAKE_SOURCE_DIR}/wx/KwxFFI_gen.jl
+    # kwxgen no longer falls back to the config file for the input paths, so the
+    # headers/defs/output must be explicit. Run from the source root so the
+    # remaining config-file settings stay resolvable.
     COMMAND kwxgen generate
-    DEPENDS kwxgen ${KWXFFI_HEADERS}
+                --headers ${kwxFFI_SOURCE_DIR}/include
+                --defs    ${KWXFFI_DEFS}
+                --lang    julia
+                --out     ${CMAKE_SOURCE_DIR}/wx
+                --libname kwxJuliaFFI
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    DEPENDS kwxgen ${KWXFFI_HEADERS} ${KWXFFI_DEFS}
+            ${CMAKE_SOURCE_DIR}/kwxgen.config.json
     COMMENT "Generating Julia bindings via kwxgen"
+    VERBATIM
 )
 
 add_custom_target( generate_julia_bindings ALL

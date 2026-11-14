@@ -1,23 +1,21 @@
 # Minimal Julia wxWidgets Example
-# Demonstrates basic app lifecycle with an empty window
+# Demonstrates basic app lifecycle with an empty window.
+#
+# Every widget call below comes from the generated wx/ tree (kwxgen); the only
+# hand-written API used is the application layer in src/core/kwxapp.jl.
 
-# Add parent directory to load path to find WxWidgets module
 push!(LOAD_PATH, joinpath(@__DIR__, ".."))
 
 using WxWidgets
 
-# Run the application
 run_app(app_name="Minimal Julia App") do
-    # Create a frame (top-level window)
-    frame = wxFrame(nothing, "Minimal Julia wxWidgets", size=(400, 300))
+    frame = wxFrame(nothing, KwxFFI.ID_ANY(), "Minimal Julia wxWidgets",
+                    -1, -1, 400, 300, KwxFFI.DEFAULT_FRAME_STYLE())
 
-    # Set this frame as the top window
     set_top_window(frame)
 
-    # Create a status bar
-    create_status_bar(frame)
-    set_status_text(frame, "Welcome to kwxJulia!")
+    create_status_bar(frame, 1, 0, KwxFFI.ID_ANY())
+    set_status_text!(frame, "Welcome to kwxJulia!", 0)
 
-    # Show the frame
-    show_window(frame)
+    show(frame)
 end

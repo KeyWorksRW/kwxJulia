@@ -3,3 +3,5 @@ build/
 .private/
 .vscode/
 .shared/
+
+*.dll

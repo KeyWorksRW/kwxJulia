@@ -97,7 +97,7 @@ All examples use `push!(LOAD_PATH, ...)` to find the `WxWidgets` module. When cr
 ## Next Steps
 
 After exploring these examples:
-- Review `src/widgets/` for available high-level APIs
+- Review `wx/wx_exports_gen.jl` for the generated public surface
 - Check `test/` for unit tests demonstrating specific features
 - Refer to wxWidgets documentation for control capabilities
 - Create your own GUI applications!

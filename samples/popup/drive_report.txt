@@ -1,0 +1,120 @@
+FRAME hwnd=199278 pid=29360
+IDS simple=264678 scrolled=264676 log=133764 status=199282
+STATUS='Welcome to wxWidgets!'
+LOG0='In activate...|'
+  FRAME[0] hwnd=199282 id=-31993 class= text='Welcome to wxWidgets!'
+  FRAME[1] hwnd=199280 id=-31992 class= text='panel'
+  FRAME[2] hwnd=264678 id=5016 class= text='Show simple popup'
+  FRAME[3] hwnd=264676 id=5017 class= text='Show scrolled popup'
+  FRAME[4] hwnd=133764 id=-31991 class= text='In activate...|'
+ITER1 popup=199182 frame-alive=True
+  P1[0] hwnd=199184 id=-31989 class= text='panel'
+  P1[1] hwnd=199186 id=-31988 class= text='wxPopupTransientWindow is a
+wxPopupWindow which disappears
+automatically when the user
+clicks the mouse outside it or if it
+(or its first child) loses focus in 
+any other way.'
+  P1[2] hwnd=199188 id=5019 class= text='Press Me'
+  P1[3] hwnd=199192 id=-1 class= text='Hello'
+  P1[4] hwnd=199204 id=5020 class= text=''
+  P1[5] hwnd=592232 id=-31987 class= text='<- Test Mouse ->'
+  P1[6] hwnd=199194 id=-31986 class= text='Try to type here'
+ITER1 press-label='Press Me'
+ITER1 press-after='Pressed'
+ITER1 log='In activate...|================================================|000001E70343A2F0 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343A2F0 SimpleTransientPopup::Popup|000001E70343A2F0 SimpleTransientPopup::OnButton ID 5019|'
+ITER2 popup=199200 frame-alive=True
+  P2[0] hwnd=199202 id=-31984 class= text='panel'
+  P2[1] hwnd=199208 id=-31983 class= text='wxPopupTransientWindow is a
+wxPopupWindow which disappears
+automatically when the user
+clicks the mouse outside it or if it
+(or its first child) loses focus in 
+any other way.'
+  P2[2] hwnd=199220 id=5019 class= text='Press Me'
+  P2[3] hwnd=330094 id=-1 class= text='Hello'
+  P2[4] hwnd=199210 id=5020 class= text=''
+  P2[5] hwnd=199212 id=-31982 class= text='<- Test Mouse ->'
+  P2[6] hwnd=199214 id=-31981 class= text='Try to type here'
+ITER2 press-label='Press Me'
+ITER2 log='In activate...|================================================|000001E70343A2F0 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343A2F0 SimpleTransientPopup::Popup|000001E70343A2F0 SimpleTransientPopup::OnButton ID 5019|================================================|000001E70343C3F0 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343C3F0 SimpleTransientPopup::Popup|'
+ITER3 popup=264794 frame-alive=True
+  P3[0] hwnd=264778 id=-31979 class= text='panel'
+  P3[1] hwnd=199268 id=-31978 class= text='wxPopupTransientWindow is a
+wxPopupWindow which disappears
+automatically when the user
+clicks the mouse outside it or if it
+(or its first child) loses focus in 
+any other way.'
+  P3[2] hwnd=199270 id=5019 class= text='Press Me'
+  P3[3] hwnd=199276 id=-1 class= text='Hello'
+  P3[4] hwnd=133792 id=5020 class= text=''
+  P3[5] hwnd=133790 id=-31977 class= text='<- Test Mouse ->'
+  P3[6] hwnd=133788 id=-31976 class= text='Try to type here'
+ITER3 press-label='Press Me'
+ITER3 log='In activate...|================================================|000001E70343A2F0 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343A2F0 SimpleTransientPopup::Popup|000001E70343A2F0 SimpleTransientPopup::OnButton ID 5019|================================================|000001E70343C3F0 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343C3F0 SimpleTransientPopup::Popup|================================================|000001E70343C170 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343C170 SimpleTransientPopup::Popup|'
+ITER4 popup=133786 frame-alive=True
+  P4[0] hwnd=133784 id=-31974 class= text='panel'
+  P4[1] hwnd=133772 id=-31973 class= text='wxPopupTransientWindow is a
+wxPopupWindow which disappears
+automatically when the user
+clicks the mouse outside it or if it
+(or its first child) loses focus in 
+any other way.'
+  P4[2] hwnd=133778 id=5019 class= text='Press Me'
+  P4[3] hwnd=133776 id=-1 class= text='Hello'
+  P4[4] hwnd=133774 id=5020 class= text=''
+  P4[5] hwnd=68260 id=-31972 class= text='<- Test Mouse ->'
+  P4[6] hwnd=68262 id=-31971 class= text='Try to type here'
+ITER4 press-label='Press Me'
+ITER4 log='In activate...|================================================|000001E70343A2F0 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343A2F0 SimpleTransientPopup::Popup|000001E70343A2F0 SimpleTransientPopup::OnButton ID 5019|================================================|000001E70343C3F0 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343C3F0 SimpleTransientPopup::Popup|================================================|000001E70343C170 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343C170 SimpleTransientPopup::Popup|================================================|000001E70343E270 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343E270 SimpleTransientPopup::Popup|'
+ITER5 popup=68264 frame-alive=True
+  P5[0] hwnd=68266 id=-31969 class= text='panel'
+  P5[1] hwnd=68268 id=-31968 class= text='wxPopupTransientWindow is a
+wxPopupWindow which disappears
+automatically when the user
+clicks the mouse outside it or if it
+(or its first child) loses focus in 
+any other way.'
+  P5[2] hwnd=68270 id=5019 class= text='Press Me'
+  P5[3] hwnd=68272 id=-1 class= text='Hello'
+  P5[4] hwnd=68274 id=5020 class= text=''
+  P5[5] hwnd=68276 id=-31967 class= text='<- Test Mouse ->'
+  P5[6] hwnd=68278 id=-31966 class= text='Try to type here'
+ITER5 press-label='Press Me'
+ITER5 log='In activate...|================================================|000001E70343A2F0 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343A2F0 SimpleTransientPopup::Popup|000001E70343A2F0 SimpleTransientPopup::OnButton ID 5019|================================================|000001E70343C3F0 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343C3F0 SimpleTransientPopup::Popup|================================================|000001E70343C170 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343C170 SimpleTransientPopup::Popup|================================================|000001E70343E270 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343E270 SimpleTransientPopup::Popup|================================================|000001E703440470 Simple Popup Shown pos(65, 138) size(126, 23)|000001E703440470 SimpleTransientPopup::Popup|'
+ITER6 popup=68280 frame-alive=True
+  P6[0] hwnd=68282 id=-31964 class= text='panel'
+  P6[1] hwnd=68284 id=-31963 class= text='wxPopupTransientWindow is a
+wxPopupWindow which disappears
+automatically when the user
+clicks the mouse outside it or if it
+(or its first child) loses focus in 
+any other way.'
+  P6[2] hwnd=68286 id=5019 class= text='Press Me'
+  P6[3] hwnd=68288 id=-1 class= text='Hello'
+  P6[4] hwnd=68290 id=5020 class= text=''
+  P6[5] hwnd=68292 id=-31962 class= text='<- Test Mouse ->'
+  P6[6] hwnd=68294 id=-31961 class= text='Try to type here'
+ITER6 press-label='Press Me'
+ITER6 log='In activate...|================================================|000001E70343A2F0 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343A2F0 SimpleTransientPopup::Popup|000001E70343A2F0 SimpleTransientPopup::OnButton ID 5019|================================================|000001E70343C3F0 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343C3F0 SimpleTransientPopup::Popup|================================================|000001E70343C170 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343C170 SimpleTransientPopup::Popup|================================================|000001E70343E270 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343E270 SimpleTransientPopup::Popup|================================================|000001E703440470 Simple Popup Shown pos(65, 138) size(126, 23)|000001E703440470 SimpleTransientPopup::Popup|================================================|000001E703443770 Simple Popup Shown pos(65, 138) size(126, 23)|000001E703443770 SimpleTransientPopup::Popup|'
+DIALOG=68296 frame-enabled=False
+  DLG[0] hwnd=68298 id=-31959 class= text='panel'
+  DLG[1] hwnd=68300 id=5016 class= text='Show simple popup'
+  DLG[2] hwnd=68302 id=5017 class= text='Show scrolled popup'
+  DLG[3] hwnd=68304 id=5100 class= text='OK'
+DIALOG-POPUP=68306
+  DP[0] hwnd=68308 id=-31957 class= text='panel'
+  DP[1] hwnd=68310 id=-31956 class= text='wxPopupTransientWindow is a
+wxPopupWindow which disappears
+automatically when the user
+clicks the mouse outside it or if it
+(or its first child) loses focus in 
+any other way.'
+  DP[2] hwnd=68312 id=5019 class= text='Press Me'
+  DP[3] hwnd=68314 id=-1 class= text='Hello'
+  DP[4] hwnd=68316 id=5020 class= text=''
+  DP[5] hwnd=68318 id=-31955 class= text='<- Test Mouse ->'
+  DP[6] hwnd=68320 id=-31954 class= text='Try to type here'
+DIALOG-AFTER-OK open=False frame-enabled=True
+LOG-DIALOG='In activate...|================================================|000001E70343A2F0 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343A2F0 SimpleTransientPopup::Popup|000001E70343A2F0 SimpleTransientPopup::OnButton ID 5019|================================================|000001E70343C3F0 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343C3F0 SimpleTransientPopup::Popup|================================================|000001E70343C170 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343C170 SimpleTransientPopup::Popup|================================================|000001E70343E270 Simple Popup Shown pos(65, 138) size(126, 23)|000001E70343E270 SimpleTransientPopup::Popup|================================================|000001E703440470 Simple Popup Shown pos(65, 138) size(126, 23)|000001E703440470 SimpleTransientPopup::Popup|================================================|000001E703443770 Simple Popup Shown pos(65, 138) size(126, 23)|000001E703443770 SimpleTransientPopup::Popup|In activate...|================================================|000001E70344B920 Dialog Simple Popup Shown pos(58, 81) size(126, 23)|000001E70344B920 SimpleTransientPopup::Popup|In activate...|'

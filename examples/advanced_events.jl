@@ -1,5 +1,5 @@
 # Advanced Event Handling Example
-# Demonstrates multiple event types and error handling
+# Demonstrates multiple event types and error handling.
 
 push!(LOAD_PATH, joinpath(@__DIR__, ".."))
 using WxWidgets
@@ -7,14 +7,12 @@ using WxWidgets
 println("Advanced Event Handling Example")
 println("=" ^ 50)
 println("\nDemonstrates:")
-println("  - on_close! convenience function")
 println("  - Multiple event handlers on same window")
 println("  - Exception handling in event handlers")
 println("  - Event state tracking")
 println("\nInteract with the window, then close to exit.")
 println()
 
-# Global state to track events
 event_counts = Dict{String, Int}(
     "close" => 0,
     "size" => 0,
@@ -22,16 +20,14 @@ event_counts = Dict{String, Int}(
 )
 
 WxWidgets.run_app(app_name="AdvancedEventDemo") do
-    frame = wxFrame(nothing, "Advanced Event Demo",
-                    size=(700, 500),
-                    pos=(100, 100))
+    frame = wxFrame(nothing, KwxFFI.ID_ANY(), "Advanced Event Demo",
+                    100, 100, 700, 500, KwxFFI.DEFAULT_FRAME_STYLE())
 
-    create_status_bar(frame, 2)
-    set_status_text(frame, "Event Demo Active", 0)
-    set_status_text(frame, "Events: 0", 1)
+    create_status_bar(frame, 2, 0, KwxFFI.ID_ANY())
+    set_status_text!(frame, "Event Demo Active", 0)
+    set_status_text!(frame, "Events: 0", 1)
 
-    # Use convenience function for close event
-    on_close!(frame) do event
+    wx_connect!(frame, KwxFFI.EVT_CLOSE_WINDOW()) do event
         event_counts["close"] += 1
         total = sum(values(event_counts))
 
@@ -41,41 +37,38 @@ WxWidgets.run_app(app_name="AdvancedEventDemo") do
         println("  Paint events:  ", event_counts["paint"])
         println("  Total events:  ", total)
         println("\n👋 Goodbye!")
+        # Let the frame's default close handling destroy the window.
+        skip!(event, true)
     end
 
-    # Size event with detailed logging
-    wx_connect!(frame, KwxFFI.wxEVT_SIZE()) do event
+    wx_connect!(frame, KwxFFI.EVT_SIZE()) do event
         event_counts["size"] += 1
         size = get_size(frame)
         pos = get_position(frame)
 
         println("📏 Size Event #$(event_counts["size"]):")
-        println("  New size: $(size[1]) x $(size[2])")
-        println("  Position: $(pos[1]), $(pos[2])")
+        println("  New size: $(get_width(size)) x $(get_height(size))")
+        println("  Position: $(get_x(pos)), $(get_y(pos))")
 
         total = sum(values(event_counts))
-        set_status_text(frame, "Resized to $(size[1])x$(size[2])", 0)
-        set_status_text(frame, "Events: $total", 1)
+        set_status_text!(frame, "Resized to $(get_width(size))x$(get_height(size))", 0)
+        set_status_text!(frame, "Events: $total", 1)
     end
 
-    # Paint event (may fire frequently)
-    wx_connect!(frame, KwxFFI.wxEVT_PAINT()) do event
+    wx_connect!(frame, KwxFFI.EVT_PAINT()) do event
         event_counts["paint"] += 1
-        # Don't log every paint - too noisy
         if event_counts["paint"] % 10 == 0
             println("🎨 Paint Event ($(event_counts["paint"]) total)")
         end
     end
 
-    # Demonstrate error handling - this won't crash the app
-    wx_connect!(frame, KwxFFI.wxEVT_LEFT_DOWN()) do event
+    wx_connect!(frame, KwxFFI.EVT_LEFT_DOWN()) do event
         println("\n⚠️  Testing exception handling...")
-        # This error will be caught and logged
         error("Intentional error to demonstrate error handling")
     end
 
     println("Event handlers registered:")
-    println("  ✓ Close event (via on_close!)")
+    println("  ✓ Close event")
     println("  ✓ Size event")
     println("  ✓ Paint event")
     println("  ✓ Left mouse down (with intentional error)")
@@ -87,9 +80,9 @@ WxWidgets.run_app(app_name="AdvancedEventDemo") do
     println("  3. Close the window → see event statistics")
     println()
 
-    centre(frame)
+    centre!(frame, KwxFFI.CENTRE())
     set_top_window(frame)
-    show_window(frame)
+    show(frame)
 end
 
 println("\nApplication finished successfully!")
