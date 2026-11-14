@@ -1,149 +1,106 @@
 # demo/demo.jl - Interactive demo of kwxJulia GUI features
 # Part of kwxJulia — Julia bindings for wxWidgets via kwxFFI
 #
-# Demonstrates:
-#   - Main frame with File/Edit/Help menus
-#   - Status bar showing "Ready"
-#   - wxPanel with vertical box sizer layout
-#   - Horizontal child sizer with "Text:" label + text control with hint
-#   - "Click Me" button that shows the text in a message box
+# Shows the generated wx/ API: menus, status bar, panel, sizers and events.
 
 push!(LOAD_PATH, joinpath(@__DIR__, ".."))
 using WxWidgets
-import WxWidgets: wxWindow  # abstract type — not re-exported by default
-
-# Thin panel wrapper — no Julia wrapper exists for wxPanel yet
-mutable struct wxPanel <: wxWindow
-    ptr::Ptr{Cvoid}
-    closures::Vector{Any}
-    children::Vector{Any}
-end
-
-# Helper: append a menu item; keeps wxStrings alive across the ccall
-function _menu_append(menu_ptr, id::Integer, label::String, help::String = "")
-    l = wxString(label)
-    h = wxString(help)
-    KwxFFI.wxMenu_Append(menu_ptr, Cint(id), l.ptr, h.ptr, Cint(0))
-end
 
 run_app(app_name = "kwxJulia Demo") do
+    frame = wxFrame(nothing, KwxFFI.ID_ANY(), "kwxJulia Demo",
+                    -1, -1, 480, 320, KwxFFI.DEFAULT_FRAME_STYLE())
 
-    #=================================================================
-      Main frame
-    =#
-    frame = wxFrame(nothing, "kwxJulia Demo"; size = (480, 320))
+    # ------------------------------------------------------------- menus
+    file_menu = wxMenu("", 0)
+    Base.append!(file_menu, KwxFFI.ID_NEW(), "&New", "Create new", false)
+    Base.append!(file_menu, KwxFFI.ID_OPEN(), "&Open", "Open file", false)
+    Base.append!(file_menu, KwxFFI.ID_SAVE(), "&Save", "Save file", false)
+    append_separator!(file_menu)
+    Base.append!(file_menu, KwxFFI.ID_EXIT(), "E&xit", "Exit application", false)
 
-    #=================================================================
-      Menu bar: File / Edit / Help
-    =#
+    edit_menu = wxMenu("", 0)
+    Base.append!(edit_menu, KwxFFI.ID_UNDO(), "&Undo", "", false)
+    Base.append!(edit_menu, KwxFFI.ID_REDO(), "&Redo", "", false)
+    append_separator!(edit_menu)
+    Base.append!(edit_menu, KwxFFI.ID_CUT(), "Cu&t", "", false)
+    Base.append!(edit_menu, KwxFFI.ID_COPY(), "&Copy", "", false)
+    Base.append!(edit_menu, KwxFFI.ID_PASTE(), "&Paste", "", false)
 
-    empty = wxString("")
+    help_menu = wxMenu("", 0)
+    Base.append!(help_menu, KwxFFI.ID_ABOUT(), "&About", "About this demo", false)
 
-    file_menu = KwxFFI.wxMenu_Create(empty.ptr, Clong(0))
-    _menu_append(file_menu, KwxFFI.ID_NEW(),  "&New",  "Create new")
-    _menu_append(file_menu, KwxFFI.ID_OPEN(), "&Open", "Open file")
-    _menu_append(file_menu, KwxFFI.ID_SAVE(), "&Save", "Save file")
-    KwxFFI.wxMenu_AppendSeparator(file_menu)
-    _menu_append(file_menu, KwxFFI.ID_EXIT(), "E&xit", "Exit application")
+    menu_bar = wxMenuBar(0)
+    append(menu_bar, file_menu, "&File")
+    append(menu_bar, edit_menu, "&Edit")
+    append(menu_bar, help_menu, "&Help")
+    set_menu_bar!(frame, menu_bar)
 
-    edit_menu = KwxFFI.wxMenu_Create(empty.ptr, Clong(0))
-    _menu_append(edit_menu, KwxFFI.ID_UNDO(),  "&Undo")
-    _menu_append(edit_menu, KwxFFI.ID_REDO(),  "&Redo")
-    KwxFFI.wxMenu_AppendSeparator(edit_menu)
-    _menu_append(edit_menu, KwxFFI.ID_CUT(),   "Cu&t")
-    _menu_append(edit_menu, KwxFFI.ID_COPY(),  "&Copy")
-    _menu_append(edit_menu, KwxFFI.ID_PASTE(), "&Paste")
-
-    help_menu = KwxFFI.wxMenu_Create(empty.ptr, Clong(0))
-    _menu_append(help_menu, KwxFFI.ID_ABOUT(), "&About", "About this demo")
-
-    mb = KwxFFI.wxMenuBar_Create(Cint(0))
-    let s = wxString("&File");  KwxFFI.wxMenuBar_Append(mb, file_menu, s.ptr) end
-    let s = wxString("&Edit");  KwxFFI.wxMenuBar_Append(mb, edit_menu, s.ptr) end
-    let s = wxString("&Help");  KwxFFI.wxMenuBar_Append(mb, help_menu, s.ptr) end
-    set_menu_bar(frame, mb)
-
-    # File > Exit: close the frame (generates wxEVT_CLOSE_WINDOW)
-    wx_connect!(frame, KwxFFI.wxEVT_MENU(), evt -> close(frame, true);
+    # File > Exit
+    wx_connect!(frame, KwxFFI.EVT_MENU(), evt -> close(frame, true);
                 id = KwxFFI.ID_EXIT())
 
     # Help > About
-    wx_connect!(frame, KwxFFI.wxEVT_MENU(),
+    wx_connect!(frame, KwxFFI.EVT_MENU(),
                 evt -> begin
-                    msg   = wxString("kwxJulia Demo\nJulia bindings for wxWidgets via kwxFFI")
+                    msg = wxString("kwxJulia Demo\nJulia bindings for wxWidgets via kwxFFI")
                     title = wxString("About Demo")
-                    KwxFFI.kwxMessageBox(msg.ptr, title.ptr,
-                        Cint(KwxFFI.OK() | KwxFFI.ICON_INFORMATION()),
-                        C_NULL, Cint(-1), Cint(-1))
+                    try
+                        KwxFFI.kwxMessageBox(msg.ptr, title.ptr,
+                                             Cint(KwxFFI.OK() | KwxFFI.ICON_INFORMATION()),
+                                             C_NULL, Cint(-1), Cint(-1))
+                    finally
+                        Base.delete!(msg)
+                        Base.delete!(title)
+                    end
                 end;
                 id = KwxFFI.ID_ABOUT())
 
-    # Window close (X button and programmatic close)
-    on_close!(frame, evt -> exit_app())
+    wx_connect!(frame, KwxFFI.EVT_CLOSE_WINDOW(), evt -> exit_app())
 
-    #=================================================================
-      Status bar
-    =#
-    create_status_bar(frame)
-    set_status_text(frame, "Ready")
+    # --------------------------------------------------------- status bar
+    create_status_bar(frame, 1, 0, KwxFFI.ID_ANY())
+    set_status_text!(frame, "Ready", 0)
 
-    #=================================================================
-      Panel + sizer layout
-    =#
-    panel_ptr = KwxFFI.wxPanel_Create(
-        frame.ptr, Cint(KwxFFI.ID_ANY()),
-        Cint(-1), Cint(-1), Cint(-1), Cint(-1), Cint(0))
-    panel = wxPanel(panel_ptr, [], [])
+    # ------------------------------------------------------ panel + sizers
+    panel = wxPanel(frame, KwxFFI.ID_ANY(), -1, -1, -1, -1, 0)
 
-    # Vertical box sizer (main layout)
-    vbox = wxBoxSizer(:vertical)
+    vbox = wxBoxSizer(KwxFFI.VERTICAL())
+    hbox = wxBoxSizer(KwxFFI.HORIZONTAL())
 
-    # Horizontal child sizer: "Text:" label + text control
-    hbox = wxBoxSizer(:horizontal)
+    label = wxStaticText(panel, KwxFFI.ID_ANY(), "Text:", -1, -1, -1, -1, 0)
+    add_window!(hbox, label, 0, KwxFFI.ALL() | KwxFFI.ALIGN_CENTER_VERTICAL(), 5, C_NULL)
 
-    label = wxStaticText(panel, "Text:")
-    add!(hbox, label;
-         proportion = 0,
-         flags      = KwxFFI.ALL() | KwxFFI.ALIGN_CENTER_VERTICAL(),
-         border     = 5)
-
-    text_ctrl = wxTextCtrl(panel)
+    text_ctrl = wxTextCtrl(panel, KwxFFI.ID_ANY(), "", -1, -1, -1, -1, 0)
     hint = wxString("hint text")
-    KwxFFI.wxTextEntry_SetHint(text_ctrl.ptr, hint.ptr)
-    add!(hbox, text_ctrl;
-         proportion = 1,
-         flags      = KwxFFI.ALL() | KwxFFI.EXPAND(),
-         border     = 5)
+    try
+        KwxFFI.wxTextEntry_SetHint(text_ctrl.ptr, hint.ptr)
+    finally
+        Base.delete!(hint)
+    end
+    add_window!(hbox, text_ctrl, 1, KwxFFI.ALL() | KwxFFI.EXPAND(), 5, C_NULL)
 
-    add!(vbox, hbox;
-         proportion = 0,
-         flags      = KwxFFI.EXPAND() | KwxFFI.ALL(),
-         border     = 5)
+    add_sizer!(vbox, hbox, 0, KwxFFI.EXPAND() | KwxFFI.ALL(), 5, C_NULL)
 
-    # "Click Me" button
-    button = wxButton(panel, "Click Me")
-    add!(vbox, button;
-         proportion = 0,
-         flags      = KwxFFI.ALL(),
-         border     = 10)
+    button = wxButton(panel, KwxFFI.ID_ANY(), "Click Me", -1, -1, -1, -1, 0)
+    add_window!(vbox, button, 0, KwxFFI.ALL(), 10, C_NULL)
 
-    KwxFFI.wxWindow_SetSizer(panel_ptr, vbox.ptr, Cint(1))
+    set_sizer!(panel, vbox, true)
 
-    #=================================================================
-      Button event — show text in a message box
-    =#
-    on_click!(button) do evt
+    # -------------------------------------------------------------- button
+    wx_connect!(button, KwxFFI.EVT_BUTTON()) do evt
         text = get_value(text_ctrl)
-        msg_s   = wxString(isempty(text) ? "(no text entered)" : text)
+        msg_s = wxString(isempty(text) ? "(no text entered)" : text)
         title_s = wxString(isempty(text) ? "Demo" : "You typed")
-        KwxFFI.kwxMessageBox(msg_s.ptr, title_s.ptr,
-            Cint(KwxFFI.OK() | KwxFFI.ICON_INFORMATION()),
-            C_NULL, Cint(-1), Cint(-1))
+        try
+            KwxFFI.kwxMessageBox(msg_s.ptr, title_s.ptr,
+                                 Cint(KwxFFI.OK() | KwxFFI.ICON_INFORMATION()),
+                                 C_NULL, Cint(-1), Cint(-1))
+        finally
+            Base.delete!(msg_s)
+            Base.delete!(title_s)
+        end
     end
 
-    #=================================================================
-      Show
-    =#
-    center(frame)
-    show_window(frame)
+    centre!(frame, KwxFFI.CENTRE())
+    show(frame)
 end

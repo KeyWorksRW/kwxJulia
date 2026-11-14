@@ -1,5 +1,5 @@
 # Frame with Status Bar Example
-# Demonstrates frame with status bar and window manipulation
+# Demonstrates frame with status bar and window manipulation.
 
 push!(LOAD_PATH, joinpath(@__DIR__, ".."))
 using WxWidgets
@@ -8,41 +8,32 @@ println("Phase 4 Example: Frame with Status Bar")
 println("=" ^ 50)
 
 WxWidgets.run_app(app_name="StatusBarDemo") do
-    # Create main frame
-    frame = wxFrame(nothing, "Status Bar Demo",
-                    size=(700, 500),
-                    pos=(100, 100))
+    frame = wxFrame(nothing, KwxFFI.ID_ANY(), "Status Bar Demo",
+                    100, 100, 700, 500, KwxFFI.DEFAULT_FRAME_STYLE())
 
-    # Create status bar with 2 fields
-    create_status_bar(frame, 2)
-    set_status_text(frame, "Ready", 0)
-    set_status_text(frame, "Phase 4 Active", 1)
+    create_status_bar(frame, 2, 0, KwxFFI.ID_ANY())
+    set_status_text!(frame, "Ready", 0)
+    set_status_text!(frame, "Phase 4 Active", 1)
 
-    # Get frame details
     size = get_size(frame)
     pos = get_position(frame)
 
     println("\nFrame created:")
     println("  Title: ", get_label(frame))
-    println("  Size: $(size[1]) x $(size[2])")
-    println("  Position: $(pos[1]), $(pos[2])")
+    println("  Size: $(get_width(size)) x $(get_height(size))")
+    println("  Position: $(get_x(pos)), $(get_y(pos))")
 
-    # Demonstrate status bar push/pop
     println("\nDemonstrating status text push/pop...")
-    set_status_text(frame, "Temporary message", 0)
-    set_status_text(frame, "Pushed temporary text", 1)
+    set_status_text!(frame, "Temporary message", 0)
+    set_status_text!(frame, "Pushed temporary text", 1)
 
-    # Update frame label
-    set_label(frame, "Status Bar Demo - Updated Title")
+    set_label!(frame, "Status Bar Demo - Updated Title")
 
-    # Center the frame
-    centre(frame)
+    centre!(frame, KwxFFI.CENTRE())
 
-    # Set as top window and show
     set_top_window(frame)
-    show_window(frame)
+    show(frame)
 
-    # Verify window state
     println("\nWindow state:")
     println("  Shown: ", is_shown(frame))
     println("  Enabled: ", is_enabled(frame))

@@ -14,12 +14,15 @@ The Julia package name is `WxWidgets` — use `using WxWidgets` to load it.
 
 ## Overview
 
-kwxJulia provides a two-layer binding architecture:
+kwxJulia is generated code plus a small application layer.  `kwxgen` emits the
+entire wxWidgets surface into `wx/`; there is no hand-written widget wrapper
+layer.
 
-1. **FFI Layer** (`wx/KwxFFI_gen.jl`) — Auto-generated raw `ccall` declarations mapping directly to the kwxFFI C DLL exports. All pointers are `Ptr{Cvoid}`.
-2. **Widget Layer** (`src/widgets/*.jl`) — Idiomatic Julia wrappers with proper types, keyword arguments, multiple dispatch, and automatic string conversion.
+1. **Raw FFI** (`wx/KwxFFI_gen.jl`) — auto-generated `ccall` declarations mapping directly to the kwxFFI C DLL exports. All pointers are `Ptr{Cvoid}`.
+2. **Generated runtime** (`wx/types_gen.jl`, `wx/wxstring_gen.jl`, `wx/wx_structs_gen.jl`, `wx/wx_idiomatic_gen.jl`) — the abstract type hierarchy, `wxString` lifecycle, `_wx_wrap`, and the per-class structs with their full constructor and method set. `wx/wx_exports_gen.jl` exports the whole public surface.
+3. **Application layer** (`src/core/kwxapp.jl`) — the only hand-written Julia: the GUI lifecycle (`run_app`, `exit_app`, `set_top_window`), backed by `src/cpp/kwxApp.cpp`, and the event bridge that turns a Julia handler into a generated `wxClosure`.
 
-Users should work with the widget layer. The FFI layer (`KwxFFI` submodule) is exported for direct access to constants and event types.
+Users work with the generated class API.  The FFI layer (`KwxFFI` submodule) is exported for direct access to constants and event types.
 
 ## Quick Example
 
@@ -28,26 +31,24 @@ push!(LOAD_PATH, joinpath(@__DIR__, ".."))
 using WxWidgets
 
 run_app(app_name="Hello World") do
-    frame = wxFrame(nothing, "Hello World - kwxJulia", size=(400, 300))
+    frame = wxFrame(nothing, KwxFFI.ID_ANY(), "Hello World - kwxJulia",
+                    -1, -1, 400, 300, KwxFFI.DEFAULT_FRAME_STYLE())
 
-    create_status_bar(frame)
-    set_status_text(frame, "Click the button!")
+    create_status_bar(frame, 1, 0, KwxFFI.ID_ANY())
+    set_status_text!(frame, "Click the button!", 0)
 
-    button = wxButton(frame, "Say Hello", size=(120, 40))
+    button = wxButton(frame, KwxFFI.ID_ANY(), "Say Hello", -1, -1, 120, 40, 0)
 
-    on_click!(button) do event
-        set_status_text(frame, "Hello from Julia!")
+    wx_connect!(button, KwxFFI.EVT_BUTTON()) do event
+        set_status_text!(frame, "Hello from Julia!", 0)
     end
 
-    sizer = wxBoxSizer(:vertical)
-    add!(sizer, button,
-         proportion=0,
-         flags=KwxFFI.ALL() | KwxFFI.ALIGN_CENTER(),
-         border=5)
-    set_sizer(frame, sizer)
+    sizer = wxBoxSizer(KwxFFI.VERTICAL())
+    add_window!(sizer, button, 0, KwxFFI.ALL() | KwxFFI.ALIGN_CENTER(), 5, C_NULL)
+    set_sizer!(frame, sizer, true)
 
     set_top_window(frame)
-    show_window(frame)
+    show(frame)
 end
 ```
 
@@ -66,19 +67,19 @@ wxObject
 └── wxSizer (wxBoxSizer, wxGridSizer, wxFlexGridSizer, wxGridBagSizer, wxWrapSizer)
 ```
 
-This enables idiomatic multiple dispatch — e.g., `show_window` works on any `wxWindow` subtype.
+This enables idiomatic multiple dispatch — e.g., `show` and `set_label!` work on any `wxWindow` subtype.
 
 ## Naming Conventions
 
 Types use the `wx` lowercase prefix (matching C++ wxWidgets) rather than Julia's conventional `Wx` PascalCase. This makes it straightforward for wxWidgets developers to map between the Julia and C++ APIs.
 
-| Entity             | Convention   | Example                                    |
-| ------------------ | ------------ | ------------------------------------------ |
-| Types              | `wx` prefix  | `wxFrame`, `wxButton`                      |
-| Constructors       | Type name    | `wxFrame(nothing, "title")`                |
-| Methods            | `snake_case` | `set_status_text(frame, "text")`           |
-| Mutating functions | trailing `!` | `set_value!(ctrl, "text")`, `clear!(ctrl)` |
-| Constants / events | Via `KwxFFI` | `KwxFFI.ALL()`, `KwxFFI.ID_ANY()`          |
+| Entity             | Convention   | Example                                                |
+| ------------------ | ------------ | ------------------------------------------------------ |
+| Types              | `wx` prefix  | `wxFrame`, `wxButton`                                  |
+| Constructors       | C++ argument order | `wxFrame(parent, id, text, x, y, w, h, style)`  |
+| Methods            | `snake_case` | `set_status_text!(frame, "text", 0)`                   |
+| Mutating functions | trailing `!` | `set_value!(ctrl, "text")`, `clear!(ctrl)`            |
+| Constants / events | Via `KwxFFI` | `KwxFFI.ALL()`, `KwxFFI.ID_ANY()`, `KwxFFI.EVT_BUTTON()` |
 
 ## Requirements
 

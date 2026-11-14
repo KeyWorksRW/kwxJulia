@@ -1,46 +1,36 @@
 # Hello World Julia wxWidgets Example
-# Demonstrates frame, button, and event handling
+# Demonstrates frame, button, and event handling with the generated wx/ API.
 
-# Add parent directory to load path to find WxWidgets module
 push!(LOAD_PATH, joinpath(@__DIR__, ".."))
 
 using WxWidgets
 
-# Run the application
 run_app(app_name="Hello World") do
-    # Create main frame
-    frame = wxFrame(nothing, "Hello World - kwxJulia", size=(400, 300))
+    frame = wxFrame(nothing, KwxFFI.ID_ANY(), "Hello World - kwxJulia",
+                    -1, -1, 400, 300, KwxFFI.DEFAULT_FRAME_STYLE())
 
-    # Create status bar
-    create_status_bar(frame)
-    set_status_text(frame, "Click the button!")
+    create_status_bar(frame, 1, 0, KwxFFI.ID_ANY())
+    set_status_text!(frame, "Click the button!", 0)
 
-    # Create button
-    button = wxButton(frame, "Say Hello", size=(120, 40))
+    button = wxButton(frame, KwxFFI.ID_ANY(), "Say Hello", -1, -1, 120, 40, 0)
 
-    # Connect button click event
     click_count = Ref(0)
-    on_click!(button) do event
+    wx_connect!(button, KwxFFI.EVT_BUTTON()) do event
         click_count[] += 1
         msg = if click_count[] == 1
             "Hello from Julia! (clicked 1 time)"
         else
             "Hello from Julia! (clicked $(click_count[]) times)"
         end
-        set_status_text(frame, msg)
+        set_status_text!(frame, msg, 0)
         println(msg)
     end
 
-    # Create a sizer for layout
-    sizer = wxBoxSizer(:vertical)
-    add!(sizer, button,
-         proportion=0,
-         flags=KwxFFI.ALL() | KwxFFI.ALIGN_CENTER(),
-         border=5)
+    sizer = wxBoxSizer(KwxFFI.VERTICAL())
+    add_window!(sizer, button, 0, KwxFFI.ALL() | KwxFFI.ALIGN_CENTER(), 5, C_NULL)
 
-    set_sizer(frame, sizer)
+    set_sizer!(frame, sizer, true)
 
-    # Set as top window and show
     set_top_window(frame)
-    show_window(frame)
+    show(frame)
 end
