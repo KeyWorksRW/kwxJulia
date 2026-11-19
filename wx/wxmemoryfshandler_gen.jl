@@ -66,7 +66,7 @@ function wxMemoryFSHandler_AddFileImage(filename::AbstractString, image::Union{w
     nothing
 end
 
-function wxMemoryFSHandler_AddFileBitmap(filename::AbstractString, bitmap::Union{wxBitmap, Nothing}, type_::Integer)
+function wxMemoryFSHandler_AddFileBitmap(filename::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, type_::Integer)
     filename_ws = wxString(filename)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     try

@@ -105,11 +105,11 @@ function traverse(obj::wxDir, sink::Union{wxDirTraverser, Nothing}, spec::Abstra
     return _result
 end
 
-function wxDir_GetAllFiles(dir_name::AbstractString, files::Integer, spec::AbstractString, flags::Integer, capacity::Integer)
+function wxDir_GetAllFiles(dir_name::AbstractString, files::Ptr{Cvoid}, spec::AbstractString, flags::Integer, capacity::Integer)
     dir_name_ws = wxString(dir_name)
     spec_ws = wxString(spec)
     _result = try
-        KwxFFI.wxDir_GetAllFiles(dir_name_ws.ptr, Cint(files), spec_ws.ptr, Cint(flags), Cint(capacity))
+        KwxFFI.wxDir_GetAllFiles(dir_name_ws.ptr, files, spec_ws.ptr, Cint(flags), Cint(capacity))
     finally
         Base.delete!(dir_name_ws)
         Base.delete!(spec_ws)

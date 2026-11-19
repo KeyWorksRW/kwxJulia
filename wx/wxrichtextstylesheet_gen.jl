@@ -37,7 +37,7 @@ function add_character_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextCha
     return KwxFFI.wxRichTextStyleSheet_AddCharacterStyle(obj.ptr, def_ptr) != 0
 end
 
-function add_paragraph_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextParagraphStyleDefinition, Nothing})
+function add_paragraph_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextParagraphStyleDefinitionBase, Nothing})
     def_ptr = isnothing(def) ? C_NULL : def.ptr
     return KwxFFI.wxRichTextStyleSheet_AddParagraphStyle(obj.ptr, def_ptr) != 0
 end
@@ -52,32 +52,32 @@ function add_box_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextBoxStyleD
     return KwxFFI.wxRichTextStyleSheet_AddBoxStyle(obj.ptr, def_ptr) != 0
 end
 
-function add_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextStyleDefinition, Nothing})
+function add_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextStyleDefinitionBase, Nothing})
     def_ptr = isnothing(def) ? C_NULL : def.ptr
     return KwxFFI.wxRichTextStyleSheet_AddStyle(obj.ptr, def_ptr) != 0
 end
 
-function remove_character_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextStyleDefinition, Nothing}, deleteStyle::Bool)
+function remove_character_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextStyleDefinitionBase, Nothing}, deleteStyle::Bool)
     def_ptr = isnothing(def) ? C_NULL : def.ptr
     return KwxFFI.wxRichTextStyleSheet_RemoveCharacterStyle(obj.ptr, def_ptr, Cint(deleteStyle)) != 0
 end
 
-function remove_paragraph_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextStyleDefinition, Nothing}, deleteStyle::Bool)
+function remove_paragraph_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextStyleDefinitionBase, Nothing}, deleteStyle::Bool)
     def_ptr = isnothing(def) ? C_NULL : def.ptr
     return KwxFFI.wxRichTextStyleSheet_RemoveParagraphStyle(obj.ptr, def_ptr, Cint(deleteStyle)) != 0
 end
 
-function remove_list_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextStyleDefinition, Nothing}, deleteStyle::Bool)
+function remove_list_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextStyleDefinitionBase, Nothing}, deleteStyle::Bool)
     def_ptr = isnothing(def) ? C_NULL : def.ptr
     return KwxFFI.wxRichTextStyleSheet_RemoveListStyle(obj.ptr, def_ptr, Cint(deleteStyle)) != 0
 end
 
-function remove_box_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextStyleDefinition, Nothing}, deleteStyle::Bool)
+function remove_box_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextStyleDefinitionBase, Nothing}, deleteStyle::Bool)
     def_ptr = isnothing(def) ? C_NULL : def.ptr
     return KwxFFI.wxRichTextStyleSheet_RemoveBoxStyle(obj.ptr, def_ptr, Cint(deleteStyle)) != 0
 end
 
-function remove_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextStyleDefinition, Nothing}, deleteStyle::Bool)
+function remove_style(obj::wxRichTextStyleSheet, def::Union{wxRichTextStyleDefinitionBase, Nothing}, deleteStyle::Bool)
     def_ptr = isnothing(def) ? C_NULL : def.ptr
     return KwxFFI.wxRichTextStyleSheet_RemoveStyle(obj.ptr, def_ptr, Cint(deleteStyle)) != 0
 end

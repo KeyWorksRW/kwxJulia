@@ -18,7 +18,7 @@ function Base.delete!(obj::wxValidatorBase)
 end
 
 function get_window(obj::wxValidatorBase)
-    return KwxFFI.wxValidator_GetWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxValidator_GetWindow(obj.ptr))
 end
 
 function wxValidator_SuppressBellOnError(doIt::Bool)

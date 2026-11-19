@@ -55,7 +55,7 @@ function get_flags(obj::wxAuiManager)
 end
 
 function get_managed_window(obj::wxAuiManager)
-    return KwxFFI.wxAuiManager_GetManagedWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxAuiManager_GetManagedWindow(obj.ptr))
 end
 
 function hide_hint!(obj::wxAuiManager)
@@ -190,5 +190,76 @@ end
 function wxAuiManager_GetManager(window::Union{wxWindow, Nothing})
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     return _wx_wrap(wxAuiManager, KwxFFI.wxAuiManager_GetManager(window_ptr))
+end
+
+function can_dock_panel(obj::wxAuiManager, pane::Union{wxAuiPaneInfo, Nothing})
+    pane_ptr = isnothing(pane) ? C_NULL : pane.ptr
+    return KwxFFI.wxAuiManager_CanDockPanel(obj.ptr, pane_ptr) != 0
+end
+
+function calculate_new_split_size(obj::wxAuiManager)
+    return _wx_wrap(wxSize, KwxFFI.wxAuiManager_CalculateNewSplitSize(obj.ptr); owned = true)
+end
+
+function calculate_hint_rect(obj::wxAuiManager, paneWindow::Union{wxWindow, Nothing}, x::Integer, y::Integer, offsetX::Integer, offsetY::Integer)
+    paneWindow_ptr = isnothing(paneWindow) ? C_NULL : paneWindow.ptr
+    return _wx_wrap(wxRect, KwxFFI.wxAuiManager_CalculateHintRect(obj.ptr, paneWindow_ptr, Cint(x), Cint(y), Cint(offsetX), Cint(offsetY)); owned = true)
+end
+
+function close_pane!(obj::wxAuiManager, paneInfo::Union{wxAuiPaneInfo, Nothing})
+    paneInfo_ptr = isnothing(paneInfo) ? C_NULL : paneInfo.ptr
+    KwxFFI.wxAuiManager_ClosePane(obj.ptr, paneInfo_ptr)
+    nothing
+end
+
+function draw_hint_rect!(obj::wxAuiManager, paneWindow::Union{wxWindow, Nothing}, x::Integer, y::Integer, offsetX::Integer, offsetY::Integer)
+    paneWindow_ptr = isnothing(paneWindow) ? C_NULL : paneWindow.ptr
+    KwxFFI.wxAuiManager_DrawHintRect(obj.ptr, paneWindow_ptr, Cint(x), Cint(y), Cint(offsetX), Cint(offsetY))
+    nothing
+end
+
+function has_live_resize(obj::wxAuiManager)
+    return KwxFFI.wxAuiManager_HasLiveResize(obj.ptr) != 0
+end
+
+function maximize_pane!(obj::wxAuiManager, paneInfo::Union{wxAuiPaneInfo, Nothing})
+    paneInfo_ptr = isnothing(paneInfo) ? C_NULL : paneInfo.ptr
+    KwxFFI.wxAuiManager_MaximizePane(obj.ptr, paneInfo_ptr)
+    nothing
+end
+
+function minimize_pane!(obj::wxAuiManager, paneInfo::Union{wxAuiPaneInfo, Nothing})
+    paneInfo_ptr = isnothing(paneInfo) ? C_NULL : paneInfo.ptr
+    KwxFFI.wxAuiManager_MinimizePane(obj.ptr, paneInfo_ptr)
+    nothing
+end
+
+function restore_maximized_pane!(obj::wxAuiManager)
+    KwxFFI.wxAuiManager_RestoreMaximizedPane(obj.ptr)
+    nothing
+end
+
+function restore_pane!(obj::wxAuiManager, paneInfo::Union{wxAuiPaneInfo, Nothing})
+    paneInfo_ptr = isnothing(paneInfo) ? C_NULL : paneInfo.ptr
+    KwxFFI.wxAuiManager_RestorePane(obj.ptr, paneInfo_ptr)
+    nothing
+end
+
+function split_pane(obj::wxAuiManager, window::Union{wxWindow, Nothing}, newWindow::Union{wxWindow, Nothing}, direction::Integer, dropX::Integer, dropY::Integer)
+    window_ptr = isnothing(window) ? C_NULL : window.ptr
+    newWindow_ptr = isnothing(newWindow) ? C_NULL : newWindow.ptr
+    return KwxFFI.wxAuiManager_SplitPane(obj.ptr, window_ptr, newWindow_ptr, Cint(direction), Cint(dropX), Cint(dropY)) != 0
+end
+
+function start_pane_drag!(obj::wxAuiManager, paneWindow::Union{wxWindow, Nothing}, offsetX::Integer, offsetY::Integer)
+    paneWindow_ptr = isnothing(paneWindow) ? C_NULL : paneWindow.ptr
+    KwxFFI.wxAuiManager_StartPaneDrag(obj.ptr, paneWindow_ptr, Cint(offsetX), Cint(offsetY))
+    nothing
+end
+
+function update_hint!(obj::wxAuiManager, rect::Union{wxRect, Nothing})
+    rect_ptr = isnothing(rect) ? C_NULL : rect.ptr
+    KwxFFI.wxAuiManager_UpdateHint(obj.ptr, rect_ptr)
+    nothing
 end
 

@@ -25,7 +25,7 @@ function get_animation!(obj::wxAnimationCtrl, anim::Union{wxAnimation, Nothing})
     nothing
 end
 
-function get_inactive_bitmap!(obj::wxAnimationCtrl, bmp::Union{wxBitmap, Nothing})
+function get_inactive_bitmap!(obj::wxAnimationCtrl, bmp::Union{wxBitmapBase, Nothing})
     bmp_ptr = isnothing(bmp) ? C_NULL : bmp.ptr
     KwxFFI.wxAnimationCtrl_GetInactiveBitmap(obj.ptr, bmp_ptr)
     nothing
@@ -45,7 +45,7 @@ function load_file(obj::wxAnimationCtrl, filename::AbstractString, type_::Intege
     return _result
 end
 
-function load(obj::wxAnimationCtrl, stream::Union{wxInputStream, Nothing}, type_::Integer)
+function load(obj::wxAnimationCtrl, stream::Union{wxInputStreamBase, Nothing}, type_::Integer)
     stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
     return KwxFFI.wxAnimationCtrl_Load(obj.ptr, stream_ptr, Cint(type_)) != 0
 end
@@ -60,7 +60,7 @@ function set_animation!(obj::wxAnimationCtrl, anim::Union{wxAnimation, Nothing})
     nothing
 end
 
-function set_inactive_bitmap!(obj::wxAnimationCtrl, bmp::Union{wxBitmap, Nothing})
+function set_inactive_bitmap!(obj::wxAnimationCtrl, bmp::Union{wxBitmapBase, Nothing})
     bmp_ptr = isnothing(bmp) ? C_NULL : bmp.ptr
     KwxFFI.wxAnimationCtrl_SetInactiveBitmap(obj.ptr, bmp_ptr)
     nothing

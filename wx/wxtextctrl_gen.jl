@@ -180,7 +180,7 @@ function select_none!(obj::wxTextCtrl)
 end
 
 function get_selection!(obj::wxTextCtrl, from::Ref{Clong}, to::Ref{Clong})
-    KwxFFI.wxTextEntry_GetSelection(obj.ptr, from, to)
+    GC.@preserve from to KwxFFI.wxTextEntry_GetSelection(obj.ptr, Base.unsafe_convert(Ptr{Clong}, from), Base.unsafe_convert(Ptr{Clong}, to))
     nothing
 end
 
@@ -230,12 +230,17 @@ function set_margins(obj::wxTextCtrl, left::Integer, top::Integer)
 end
 
 function get_margins!(obj::wxTextCtrl, left::Ref{Int32}, top::Ref{Int32})
-    KwxFFI.wxTextEntry_GetMargins(obj.ptr, left, top)
+    GC.@preserve left top KwxFFI.wxTextEntry_GetMargins(obj.ptr, Base.unsafe_convert(Ptr{Int32}, left), Base.unsafe_convert(Ptr{Int32}, top))
     nothing
 end
 
 function auto_complete(obj::wxTextCtrl, count::Integer, items::Ptr{Cvoid})
     return KwxFFI.wxTextEntry_AutoComplete(obj.ptr, Cint(count), items) != 0
+end
+
+function auto_complete_strings(obj::wxTextCtrl, items::Union{wxArrayString, Nothing})
+    items_ptr = isnothing(items) ? C_NULL : items.ptr
+    return KwxFFI.wxTextEntry_AutoCompleteStrings(obj.ptr, items_ptr) != 0
 end
 
 function auto_complete_file_names(obj::wxTextCtrl)
@@ -246,21 +251,26 @@ function auto_complete_directories(obj::wxTextCtrl)
     return KwxFFI.wxTextEntry_AutoCompleteDirectories(obj.ptr) != 0
 end
 
+function auto_complete_completer(obj::wxTextCtrl, completer::Union{wxTextCompleterSimpleBase, Nothing})
+    completer_ptr = isnothing(completer) ? C_NULL : completer.ptr
+    return KwxFFI.wxTextEntry_AutoCompleteCompleter(obj.ptr, completer_ptr) != 0
+end
+
 function emulate_key_press(obj::wxTextCtrl, keyevent::Union{wxKeyEvent, Nothing})
     keyevent_ptr = isnothing(keyevent) ? C_NULL : keyevent.ptr
     return Int(KwxFFI.wxTextCtrl_EmulateKeyPress(obj.ptr, keyevent_ptr))
 end
 
 function position_to_coords(obj::wxTextCtrl, pos::Integer)
-    return _wx_wrap(wxPoint, KwxFFI.wxTextCtrl_PositionToCoords(obj.ptr, Clong(pos)))
+    return _wx_wrap(wxPoint, KwxFFI.wxTextCtrl_PositionToCoords(obj.ptr, Clong(pos)); owned = true)
 end
 
 function hit_test(obj::wxTextCtrl, x::Integer, y::Integer, pos::Ref{Clong})
-    return Int(KwxFFI.wxTextCtrl_HitTest(obj.ptr, Cint(x), Cint(y), pos))
+    return Int(GC.@preserve pos KwxFFI.wxTextCtrl_HitTest(obj.ptr, Cint(x), Cint(y), Base.unsafe_convert(Ptr{Clong}, pos)))
 end
 
 function hit_test_column_row(obj::wxTextCtrl, x::Integer, y::Integer, column::Ref{Clong}, row::Ref{Clong})
-    return Int(KwxFFI.wxTextCtrl_HitTestColumnRow(obj.ptr, Cint(x), Cint(y), column, row))
+    return Int(GC.@preserve column row KwxFFI.wxTextCtrl_HitTestColumnRow(obj.ptr, Cint(x), Cint(y), Base.unsafe_convert(Ptr{Clong}, column), Base.unsafe_convert(Ptr{Clong}, row)))
 end
 
 function is_rtf_supported(obj::wxTextCtrl)
@@ -322,7 +332,7 @@ function load_file(obj::wxTextCtrl, file::AbstractString, fileType::Integer)
 end
 
 function position_to_xy(obj::wxTextCtrl, pos::Integer, x::Ref{Clong}, y::Ref{Clong})
-    return Int(KwxFFI.wxTextCtrl_PositionToXY(obj.ptr, Clong(pos), x, y))
+    return Int(GC.@preserve x y KwxFFI.wxTextCtrl_PositionToXY(obj.ptr, Clong(pos), Base.unsafe_convert(Ptr{Clong}, x), Base.unsafe_convert(Ptr{Clong}, y)))
 end
 
 function save_file(obj::wxTextCtrl, file::AbstractString, fileType::Integer)
@@ -362,17 +372,17 @@ function get_default_style(obj::wxTextCtrl)
     return _wx_wrap(wxTextAttr, KwxFFI.wxTextCtrl_GetDefaultStyle(obj.ptr))
 end
 
-function get_style(obj::wxTextCtrl, position::Integer, style::Union{wxTextAttr, Nothing})
+function get_style(obj::wxTextCtrl, position::Integer, style::Union{wxTextAttrBase, Nothing})
     style_ptr = isnothing(style) ? C_NULL : style.ptr
     return KwxFFI.wxTextCtrl_GetStyle(obj.ptr, Clong(position), style_ptr) != 0
 end
 
-function set_default_style(obj::wxTextCtrl, style::Union{wxTextAttr, Nothing})
+function set_default_style(obj::wxTextCtrl, style::Union{wxTextAttrBase, Nothing})
     style_ptr = isnothing(style) ? C_NULL : style.ptr
     return KwxFFI.wxTextCtrl_SetDefaultStyle(obj.ptr, style_ptr) != 0
 end
 
-function set_style(obj::wxTextCtrl, start::Integer, end_::Integer, style::Union{wxTextAttr, Nothing})
+function set_style(obj::wxTextCtrl, start::Integer, end_::Integer, style::Union{wxTextAttrBase, Nothing})
     style_ptr = isnothing(style) ? C_NULL : style.ptr
     return KwxFFI.wxTextCtrl_SetStyle(obj.ptr, Clong(start), Clong(end_), style_ptr) != 0
 end

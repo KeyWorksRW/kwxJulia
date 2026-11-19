@@ -8,20 +8,26 @@ function wxCaret(window::Union{wxWindow, Nothing}, width::Integer, height::Integ
     return obj
 end
 
+function Base.delete!(obj::wxCaret)
+    KwxFFI.wxCaret_Delete(obj.ptr)
+    obj.ptr = C_NULL
+    nothing
+end
+
 function wxCaret_GetBlinkTime()
     return Int(KwxFFI.wxCaret_GetBlinkTime())
 end
 
 function get_position(obj::wxCaret)
-    return _wx_wrap(wxPoint, KwxFFI.wxCaret_GetPosition(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxCaret_GetPosition(obj.ptr); owned = true)
 end
 
 function get_size(obj::wxCaret)
-    return _wx_wrap(wxSize, KwxFFI.wxCaret_GetSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxCaret_GetSize(obj.ptr); owned = true)
 end
 
 function get_window(obj::wxCaret)
-    return KwxFFI.wxCaret_GetWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxCaret_GetWindow(obj.ptr))
 end
 
 function hide!(obj::wxCaret)

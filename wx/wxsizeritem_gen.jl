@@ -23,7 +23,7 @@ function wxSizerItem(window::Ptr{Cvoid}, option::Integer, flag::Integer, border:
 end
 
 function calc_min(obj::wxSizerItemBase)
-    return _wx_wrap(wxSize, KwxFFI.wxSizerItem_CalcMin(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxSizerItem_CalcMin(obj.ptr); owned = true)
 end
 
 function set_min_size!(obj::wxSizerItemBase, size::Union{wxSize, Nothing})
@@ -41,11 +41,11 @@ function get_flag(obj::wxSizerItemBase)
 end
 
 function get_min_size(obj::wxSizerItemBase)
-    return _wx_wrap(wxSize, KwxFFI.wxSizerItem_GetMinSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxSizerItem_GetMinSize(obj.ptr); owned = true)
 end
 
 function get_position(obj::wxSizerItemBase)
-    return _wx_wrap(wxPoint, KwxFFI.wxSizerItem_GetPosition(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxSizerItem_GetPosition(obj.ptr); owned = true)
 end
 
 function get_ratio(obj::wxSizerItemBase)
@@ -53,11 +53,11 @@ function get_ratio(obj::wxSizerItemBase)
 end
 
 function get_size(obj::wxSizerItemBase)
-    return _wx_wrap(wxSize, KwxFFI.wxSizerItem_GetSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxSizerItem_GetSize(obj.ptr); owned = true)
 end
 
 function get_sizer(obj::wxSizerItemBase)
-    return KwxFFI.wxSizerItem_GetSizer(obj.ptr)
+    return _wx_ref(wxSizer, KwxFFI.wxSizerItem_GetSizer(obj.ptr))
 end
 
 function get_user_data(obj::wxSizerItemBase)
@@ -65,7 +65,7 @@ function get_user_data(obj::wxSizerItemBase)
 end
 
 function get_window(obj::wxSizerItemBase)
-    return KwxFFI.wxSizerItem_GetWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxSizerItem_GetWindow(obj.ptr))
 end
 
 function is_sizer(obj::wxSizerItemBase)
@@ -143,11 +143,11 @@ function get_proportion(obj::wxSizerItemBase)
 end
 
 function get_rect(obj::wxSizerItemBase)
-    return _wx_wrap(wxRect, KwxFFI.wxSizerItem_GetRect(obj.ptr))
+    return _wx_wrap(wxRect, KwxFFI.wxSizerItem_GetRect(obj.ptr); owned = true)
 end
 
 function get_spacer(obj::wxSizerItemBase)
-    return _wx_wrap(wxSize, KwxFFI.wxSizerItem_GetSpacer(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxSizerItem_GetSpacer(obj.ptr); owned = true)
 end
 
 function is_shown(obj::wxSizerItemBase)

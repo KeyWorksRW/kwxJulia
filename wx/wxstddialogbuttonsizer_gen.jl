@@ -7,25 +7,25 @@ function wxStdDialogButtonSizer()
     return obj
 end
 
-function add_button!(obj::wxStdDialogButtonSizer, button::Union{wxButton, Nothing})
+function add_button!(obj::wxStdDialogButtonSizer, button::Union{wxButtonBase, Nothing})
     button_ptr = isnothing(button) ? C_NULL : button.ptr
     KwxFFI.wxStdDialogButtonSizer_AddButton(obj.ptr, button_ptr)
     nothing
 end
 
-function set_affirmative_button!(obj::wxStdDialogButtonSizer, button::Union{wxButton, Nothing})
+function set_affirmative_button!(obj::wxStdDialogButtonSizer, button::Union{wxButtonBase, Nothing})
     button_ptr = isnothing(button) ? C_NULL : button.ptr
     KwxFFI.wxStdDialogButtonSizer_SetAffirmativeButton(obj.ptr, button_ptr)
     nothing
 end
 
-function set_negative_button!(obj::wxStdDialogButtonSizer, button::Union{wxButton, Nothing})
+function set_negative_button!(obj::wxStdDialogButtonSizer, button::Union{wxButtonBase, Nothing})
     button_ptr = isnothing(button) ? C_NULL : button.ptr
     KwxFFI.wxStdDialogButtonSizer_SetNegativeButton(obj.ptr, button_ptr)
     nothing
 end
 
-function set_cancel_button!(obj::wxStdDialogButtonSizer, button::Union{wxButton, Nothing})
+function set_cancel_button!(obj::wxStdDialogButtonSizer, button::Union{wxButtonBase, Nothing})
     button_ptr = isnothing(button) ? C_NULL : button.ptr
     KwxFFI.wxStdDialogButtonSizer_SetCancelButton(obj.ptr, button_ptr)
     nothing

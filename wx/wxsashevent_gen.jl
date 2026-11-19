@@ -8,7 +8,7 @@ function wxSashEvent(id::Integer, edge::Integer)
 end
 
 function get_drag_rect(obj::wxSashEvent)
-    return _wx_wrap(wxRect, KwxFFI.wxSashEvent_GetDragRect(obj.ptr))
+    return _wx_wrap(wxRect, KwxFFI.wxSashEvent_GetDragRect(obj.ptr); owned = true)
 end
 
 function get_drag_status(obj::wxSashEvent)

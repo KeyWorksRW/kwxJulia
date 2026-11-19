@@ -17,7 +17,7 @@ function set_orientation!(obj::wxBoxSizerBase, orient::Integer)
 end
 
 function calc_min(obj::wxBoxSizerBase)
-    return _wx_wrap(wxSize, KwxFFI.wxBoxSizer_CalcMin(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxBoxSizer_CalcMin(obj.ptr); owned = true)
 end
 
 function add_spacer(obj::wxBoxSizerBase, size::Integer)

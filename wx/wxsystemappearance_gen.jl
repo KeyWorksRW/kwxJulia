@@ -4,6 +4,14 @@ function is_dark(obj::wxSystemAppearance)
     return KwxFFI.wxSystemAppearance_IsDark(obj.ptr) != 0
 end
 
+function is_system_dark(obj::wxSystemAppearance)
+    return KwxFFI.wxSystemAppearance_IsSystemDark(obj.ptr) != 0
+end
+
+function are_apps_dark(obj::wxSystemAppearance)
+    return KwxFFI.wxSystemAppearance_AreAppsDark(obj.ptr) != 0
+end
+
 function is_using_dark_background(obj::wxSystemAppearance)
     return KwxFFI.wxSystemAppearance_IsUsingDarkBackground(obj.ptr) != 0
 end

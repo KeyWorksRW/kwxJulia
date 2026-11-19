@@ -8,7 +8,7 @@ function wxGridBagSizer(vgap::Integer, hgap::Integer)
 end
 
 function get_cell_size(obj::wxGridBagSizer, row::Integer, col::Integer)
-    return _wx_wrap(wxSize, KwxFFI.wxGridBagSizer_GetCellSize(obj.ptr, Cint(row), Cint(col)))
+    return _wx_wrap(wxSize, KwxFFI.wxGridBagSizer_GetCellSize(obj.ptr, Cint(row), Cint(col)); owned = true)
 end
 
 function find_item(obj::wxGridBagSizer, window::Union{wxWindow, Nothing})
@@ -45,18 +45,18 @@ end
 
 function get_item_position!(obj::wxGridBagSizer, window::Union{wxWindow, Nothing}, row::Ref{Int32}, col::Ref{Int32})
     window_ptr = isnothing(window) ? C_NULL : window.ptr
-    KwxFFI.wxGridBagSizer_GetItemPosition(obj.ptr, window_ptr, row, col)
+    GC.@preserve row col KwxFFI.wxGridBagSizer_GetItemPosition(obj.ptr, window_ptr, Base.unsafe_convert(Ptr{Int32}, row), Base.unsafe_convert(Ptr{Int32}, col))
     nothing
 end
 
 function get_item_position_sizer!(obj::wxGridBagSizer, sizer::Union{wxSizer, Nothing}, row::Ref{Int32}, col::Ref{Int32})
     sizer_ptr = isnothing(sizer) ? C_NULL : sizer.ptr
-    KwxFFI.wxGridBagSizer_GetItemPositionSizer(obj.ptr, sizer_ptr, row, col)
+    GC.@preserve row col KwxFFI.wxGridBagSizer_GetItemPositionSizer(obj.ptr, sizer_ptr, Base.unsafe_convert(Ptr{Int32}, row), Base.unsafe_convert(Ptr{Int32}, col))
     nothing
 end
 
 function get_item_position_index!(obj::wxGridBagSizer, index::Integer, row::Ref{Int32}, col::Ref{Int32})
-    KwxFFI.wxGridBagSizer_GetItemPositionIndex(obj.ptr, Csize_t(index), row, col)
+    GC.@preserve row col KwxFFI.wxGridBagSizer_GetItemPositionIndex(obj.ptr, Csize_t(index), Base.unsafe_convert(Ptr{Int32}, row), Base.unsafe_convert(Ptr{Int32}, col))
     nothing
 end
 
@@ -76,18 +76,18 @@ end
 
 function get_item_span!(obj::wxGridBagSizer, window::Union{wxWindow, Nothing}, rowspan::Ref{Int32}, colspan::Ref{Int32})
     window_ptr = isnothing(window) ? C_NULL : window.ptr
-    KwxFFI.wxGridBagSizer_GetItemSpan(obj.ptr, window_ptr, rowspan, colspan)
+    GC.@preserve rowspan colspan KwxFFI.wxGridBagSizer_GetItemSpan(obj.ptr, window_ptr, Base.unsafe_convert(Ptr{Int32}, rowspan), Base.unsafe_convert(Ptr{Int32}, colspan))
     nothing
 end
 
 function get_item_span_sizer!(obj::wxGridBagSizer, sizer::Union{wxSizer, Nothing}, rowspan::Ref{Int32}, colspan::Ref{Int32})
     sizer_ptr = isnothing(sizer) ? C_NULL : sizer.ptr
-    KwxFFI.wxGridBagSizer_GetItemSpanSizer(obj.ptr, sizer_ptr, rowspan, colspan)
+    GC.@preserve rowspan colspan KwxFFI.wxGridBagSizer_GetItemSpanSizer(obj.ptr, sizer_ptr, Base.unsafe_convert(Ptr{Int32}, rowspan), Base.unsafe_convert(Ptr{Int32}, colspan))
     nothing
 end
 
 function get_item_span_index!(obj::wxGridBagSizer, index::Integer, rowspan::Ref{Int32}, colspan::Ref{Int32})
-    KwxFFI.wxGridBagSizer_GetItemSpanIndex(obj.ptr, Csize_t(index), rowspan, colspan)
+    GC.@preserve rowspan colspan KwxFFI.wxGridBagSizer_GetItemSpanIndex(obj.ptr, Csize_t(index), Base.unsafe_convert(Ptr{Int32}, rowspan), Base.unsafe_convert(Ptr{Int32}, colspan))
     nothing
 end
 
@@ -121,7 +121,7 @@ function check_for_intersection_pos(obj::wxGridBagSizer, row::Integer, col::Inte
 end
 
 function get_empty_cell_size!(obj::wxGridBagSizer, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxGridBagSizer_GetEmptyCellSize(obj.ptr, width, height)
+    GC.@preserve width height KwxFFI.wxGridBagSizer_GetEmptyCellSize(obj.ptr, Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 

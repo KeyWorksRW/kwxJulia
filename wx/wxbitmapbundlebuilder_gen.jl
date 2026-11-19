@@ -7,13 +7,13 @@ function wxBitmapBundleBuilder()
     return obj
 end
 
-function add_data!(obj::wxBitmapBundleBuilder, data::Integer, size::Integer, bitmap_type::Integer)
-    KwxFFI.wxBitmapBundleBuilder_AddData(obj.ptr, Cint(data), Csize_t(size), Cint(bitmap_type))
+function add_data!(obj::wxBitmapBundleBuilder, data::Ptr{Cvoid}, size::Integer, bitmap_type::Integer)
+    KwxFFI.wxBitmapBundleBuilder_AddData(obj.ptr, data, Csize_t(size), Cint(bitmap_type))
     nothing
 end
 
-function add_base64!(obj::wxBitmapBundleBuilder, base64::Integer, len::Integer, bitmap_type::Integer)
-    KwxFFI.wxBitmapBundleBuilder_AddBase64(obj.ptr, Cint(base64), Csize_t(len), Cint(bitmap_type))
+function add_base64!(obj::wxBitmapBundleBuilder, base64::Ptr{Cvoid}, len::Integer, bitmap_type::Integer)
+    KwxFFI.wxBitmapBundleBuilder_AddBase64(obj.ptr, base64, Csize_t(len), Cint(bitmap_type))
     nothing
 end
 

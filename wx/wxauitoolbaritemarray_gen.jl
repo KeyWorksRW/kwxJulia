@@ -24,6 +24,6 @@ function add!(obj::wxAuiToolBarItemArray, item::Union{wxAuiToolBarItem, Nothing}
 end
 
 function item(obj::wxAuiToolBarItemArray, index::Integer)
-    return _wx_wrap(wxAuiToolBarItem, KwxFFI.wxAuiToolBarItemArray_Item(obj.ptr, Cint(index)))
+    return _wx_wrap(wxAuiToolBarItem, KwxFFI.wxAuiToolBarItemArray_Item(obj.ptr, Cint(index)); owned = true)
 end
 

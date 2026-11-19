@@ -31,6 +31,36 @@ function wxXmlDocument_CreateFromString(text::AbstractString, flags::Integer)
     return obj
 end
 
+function load_file(obj::wxXmlDocument, filename::AbstractString, flags::Integer)
+    filename_ws = wxString(filename)
+    _result = try
+        KwxFFI.wxXmlDocument_LoadFile(obj.ptr, filename_ws.ptr, Cint(flags)) != 0
+    finally
+        Base.delete!(filename_ws)
+    end
+    return _result
+end
+
+function load_stream(obj::wxXmlDocument, stream::Union{wxInputStreamBase, Nothing}, flags::Integer)
+    stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
+    return KwxFFI.wxXmlDocument_LoadStream(obj.ptr, stream_ptr, Cint(flags)) != 0
+end
+
+function save_file(obj::wxXmlDocument, filename::AbstractString, indentstep::Integer)
+    filename_ws = wxString(filename)
+    _result = try
+        KwxFFI.wxXmlDocument_SaveFile(obj.ptr, filename_ws.ptr, Cint(indentstep)) != 0
+    finally
+        Base.delete!(filename_ws)
+    end
+    return _result
+end
+
+function save_stream(obj::wxXmlDocument, stream::Union{wxOutputStreamBase, Nothing}, indentstep::Integer)
+    stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
+    return KwxFFI.wxXmlDocument_SaveStream(obj.ptr, stream_ptr, Cint(indentstep)) != 0
+end
+
 function get_document_node(obj::wxXmlDocument)
     return _wx_wrap(wxXmlNode, KwxFFI.wxXmlDocument_GetDocumentNode(obj.ptr))
 end

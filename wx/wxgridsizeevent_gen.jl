@@ -5,7 +5,7 @@ function get_row_or_col(obj::wxGridSizeEvent)
 end
 
 function get_position(obj::wxGridSizeEvent)
-    return _wx_wrap(wxPoint, KwxFFI.wxGridSizeEvent_GetPosition(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxGridSizeEvent_GetPosition(obj.ptr); owned = true)
 end
 
 function control_down(obj::wxGridSizeEvent)

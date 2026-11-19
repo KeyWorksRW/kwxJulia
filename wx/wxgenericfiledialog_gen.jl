@@ -34,16 +34,40 @@ function set_path!(obj::wxGenericFileDialog, path::AbstractString)
     nothing
 end
 
-function get_paths(obj::wxGenericFileDialog, paths::Integer, capacity::Integer)
-    return Int(KwxFFI.wxGenericFileDialog_GetPaths(obj.ptr, Cint(paths), Cint(capacity)))
+function get_paths(obj::wxGenericFileDialog, paths::Ptr{Cvoid}, capacity::Integer)
+    return Int(KwxFFI.wxGenericFileDialog_GetPaths(obj.ptr, paths, Cint(capacity)))
 end
 
-function get_filenames(obj::wxGenericFileDialog, paths::Integer, capacity::Integer)
-    return Int(KwxFFI.wxGenericFileDialog_GetFilenames(obj.ptr, Cint(paths), Cint(capacity)))
+function get_filenames(obj::wxGenericFileDialog, paths::Ptr{Cvoid}, capacity::Integer)
+    return Int(KwxFFI.wxGenericFileDialog_GetFilenames(obj.ptr, paths, Cint(capacity)))
 end
 
 function get_directory(obj::wxGenericFileDialog)
     return _wx_take_wxstring(KwxFFI.wxGenericFileDialog_GetDirectory(obj.ptr))
+end
+
+function set_directory!(obj::wxGenericFileDialog, dir::AbstractString)
+    dir_ws = wxString(dir)
+    try
+        KwxFFI.wxGenericFileDialog_SetDirectory(obj.ptr, dir_ws.ptr)
+    finally
+        Base.delete!(dir_ws)
+    end
+    nothing
+end
+
+function get_message(obj::wxGenericFileDialog)
+    return _wx_take_wxstring(KwxFFI.wxGenericFileDialog_GetMessage(obj.ptr))
+end
+
+function set_message!(obj::wxGenericFileDialog, message::AbstractString)
+    message_ws = wxString(message)
+    try
+        KwxFFI.wxGenericFileDialog_SetMessage(obj.ptr, message_ws.ptr)
+    finally
+        Base.delete!(message_ws)
+    end
+    nothing
 end
 
 function get_filename(obj::wxGenericFileDialog)
@@ -86,6 +110,10 @@ end
 function set_customize_hook(obj::wxGenericFileDialog, customizeHook::Union{wxFileDialogCustomizeHook, Nothing})
     customizeHook_ptr = isnothing(customizeHook) ? C_NULL : customizeHook.ptr
     return KwxFFI.wxGenericFileDialog_SetCustomizeHook(obj.ptr, customizeHook_ptr) != 0
+end
+
+function get_currently_selected_filename(obj::wxGenericFileDialog)
+    return _wx_take_wxstring(KwxFFI.wxGenericFileDialog_GetCurrentlySelectedFilename(obj.ptr))
 end
 
 function Base.delete!(obj::wxGenericFileDialog)

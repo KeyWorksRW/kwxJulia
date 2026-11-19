@@ -4,12 +4,12 @@ function new_entry(obj::wxArchiveClassFactory)
     return _wx_wrap(wxArchiveEntry, KwxFFI.wxArchiveClassFactory_NewEntry(obj.ptr); owned = true)
 end
 
-function new_stream_input(obj::wxArchiveClassFactory, stream::Union{wxInputStream, Nothing})
+function new_stream_input(obj::wxArchiveClassFactory, stream::Union{wxInputStreamBase, Nothing})
     stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
     return _wx_wrap(wxArchiveInputStream, KwxFFI.wxArchiveClassFactory_NewStreamInput(obj.ptr, stream_ptr); owned = true)
 end
 
-function new_stream_output(obj::wxArchiveClassFactory, stream::Union{wxOutputStream, Nothing})
+function new_stream_output(obj::wxArchiveClassFactory, stream::Union{wxOutputStreamBase, Nothing})
     stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
     return _wx_wrap(wxArchiveOutputStream, KwxFFI.wxArchiveClassFactory_NewStreamOutput(obj.ptr, stream_ptr); owned = true)
 end

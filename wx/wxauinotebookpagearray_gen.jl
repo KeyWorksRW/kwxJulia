@@ -18,6 +18,6 @@ function get_count(obj::wxAuiNotebookPageArray)
 end
 
 function item(obj::wxAuiNotebookPageArray, index::Integer)
-    return _wx_wrap(wxAuiNotebookPage, KwxFFI.wxAuiNotebookPageArray_Item(obj.ptr, Cint(index)))
+    return _wx_wrap(wxAuiNotebookPage, KwxFFI.wxAuiNotebookPageArray_Item(obj.ptr, Cint(index)); owned = true)
 end
 

@@ -18,12 +18,12 @@ function get_count(obj::wxGridBlockCoordsArray)
 end
 
 function item_top_left!(obj::wxGridBlockCoordsArray, index::Integer, row::Ref{Int32}, col::Ref{Int32})
-    KwxFFI.wxGridBlockCoordsArray_ItemTopLeft(obj.ptr, Cint(index), row, col)
+    GC.@preserve row col KwxFFI.wxGridBlockCoordsArray_ItemTopLeft(obj.ptr, Cint(index), Base.unsafe_convert(Ptr{Int32}, row), Base.unsafe_convert(Ptr{Int32}, col))
     nothing
 end
 
 function item_bottom_right!(obj::wxGridBlockCoordsArray, index::Integer, row::Ref{Int32}, col::Ref{Int32})
-    KwxFFI.wxGridBlockCoordsArray_ItemBottomRight(obj.ptr, Cint(index), row, col)
+    GC.@preserve row col KwxFFI.wxGridBlockCoordsArray_ItemBottomRight(obj.ptr, Cint(index), Base.unsafe_convert(Ptr{Int32}, row), Base.unsafe_convert(Ptr{Int32}, col))
     nothing
 end
 

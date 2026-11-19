@@ -22,12 +22,24 @@ function is_ok(obj::wxMetafile)
     return KwxFFI.wxMetafile_IsOk(obj.ptr) != 0
 end
 
-function play(obj::wxMetafile, dc::Union{wxDC, Nothing})
+function play(obj::wxMetafile, dc::Union{wxDCBase, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     return KwxFFI.wxMetafile_Play(obj.ptr, dc_ptr) != 0
 end
 
 function set_clipboard(obj::wxMetafile, width::Integer, height::Integer)
     return KwxFFI.wxMetafile_SetClipboard(obj.ptr, Cint(width), Cint(height)) != 0
+end
+
+function get_width(obj::wxMetafile)
+    return Int(KwxFFI.wxMetafile_GetWidth(obj.ptr))
+end
+
+function get_height(obj::wxMetafile)
+    return Int(KwxFFI.wxMetafile_GetHeight(obj.ptr))
+end
+
+function get_size(obj::wxMetafile)
+    return _wx_wrap(wxSize, KwxFFI.wxMetafile_GetSize(obj.ptr); owned = true)
 end
 

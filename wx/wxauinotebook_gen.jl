@@ -56,7 +56,7 @@ function create_from_default(obj::wxAuiNotebookBase, parent::Union{wxWindow, Not
     return KwxFFI.wxAuiNotebook_CreateFromDefault(obj.ptr, parent_ptr, Cint(id), Cint(x), Cint(y), Cint(width), Cint(height), Clong(style)) != 0
 end
 
-function add_page_with_bitmap(obj::wxAuiNotebookBase, page::Union{wxWindow, Nothing}, caption::AbstractString, select::Bool, bitmap::Union{wxBitmap, Nothing})
+function add_page_with_bitmap(obj::wxAuiNotebookBase, page::Union{wxWindow, Nothing}, caption::AbstractString, select::Bool, bitmap::Union{wxBitmapBase, Nothing})
     page_ptr = isnothing(page) ? C_NULL : page.ptr
     caption_ws = wxString(caption)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
@@ -101,7 +101,7 @@ function get_art_provider(obj::wxAuiNotebookBase)
 end
 
 function get_current_page(obj::wxAuiNotebookBase)
-    return KwxFFI.wxAuiNotebook_GetCurrentPage(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxAuiNotebook_GetCurrentPage(obj.ptr))
 end
 
 function get_height_for_page_height(obj::wxAuiNotebookBase, pageHeight::Integer)
@@ -109,10 +109,10 @@ function get_height_for_page_height(obj::wxAuiNotebookBase, pageHeight::Integer)
 end
 
 function get_page(obj::wxAuiNotebookBase, page_idx::Integer)
-    return KwxFFI.wxAuiNotebook_GetPage(obj.ptr, Cint(page_idx))
+    return _wx_ref(wxWindow, KwxFFI.wxAuiNotebook_GetPage(obj.ptr, Cint(page_idx)))
 end
 
-function get_page_bitmap!(obj::wxAuiNotebookBase, page::Integer, bmp::Union{wxBitmap, Nothing})
+function get_page_bitmap!(obj::wxAuiNotebookBase, page::Integer, bmp::Union{wxBitmapBase, Nothing})
     bmp_ptr = isnothing(bmp) ? C_NULL : bmp.ptr
     KwxFFI.wxAuiNotebook_GetPageBitmap(obj.ptr, Cint(page), bmp_ptr)
     nothing
@@ -143,7 +143,7 @@ function get_tab_ctrl_height(obj::wxAuiNotebookBase)
     return Int(KwxFFI.wxAuiNotebook_GetTabCtrlHeight(obj.ptr))
 end
 
-function insert_page_with_bitmap(obj::wxAuiNotebookBase, page_idx::Integer, page::Union{wxWindow, Nothing}, caption::AbstractString, select::Bool, bitmap::Union{wxBitmap, Nothing})
+function insert_page_with_bitmap(obj::wxAuiNotebookBase, page_idx::Integer, page::Union{wxWindow, Nothing}, caption::AbstractString, select::Bool, bitmap::Union{wxBitmapBase, Nothing})
     page_ptr = isnothing(page) ? C_NULL : page.ptr
     caption_ws = wxString(caption)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
@@ -170,7 +170,7 @@ function remove_page(obj::wxAuiNotebookBase, page::Integer)
     return KwxFFI.wxAuiNotebook_RemovePage(obj.ptr, Cint(page)) != 0
 end
 
-function set_art_provider!(obj::wxAuiNotebookBase, artId::Union{wxAuiTabArt, Nothing})
+function set_art_provider!(obj::wxAuiNotebookBase, artId::Union{wxAuiTabArtBase, Nothing})
     artId_ptr = isnothing(artId) ? C_NULL : artId.ptr
     KwxFFI.wxAuiNotebook_SetArtProvider(obj.ptr, artId_ptr)
     nothing
@@ -193,7 +193,7 @@ function set_normal_font!(obj::wxAuiNotebookBase, font::Union{wxFont, Nothing})
     nothing
 end
 
-function set_page_bitmap(obj::wxAuiNotebookBase, page::Integer, bitmap::Union{wxBitmap, Nothing})
+function set_page_bitmap(obj::wxAuiNotebookBase, page::Integer, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     return KwxFFI.wxAuiNotebook_SetPageBitmap(obj.ptr, Cint(page), bitmap_ptr) != 0
 end
@@ -252,7 +252,7 @@ function split!(obj::wxAuiNotebookBase, page::Integer, direction::Integer)
 end
 
 function hit_test(obj::wxAuiNotebookBase, point_x::Integer, point_y::Integer, flags::Ref{Clong})
-    return Int(KwxFFI.wxAuiNotebook_HitTest(obj.ptr, Cint(point_x), Cint(point_y), flags))
+    return Int(GC.@preserve flags KwxFFI.wxAuiNotebook_HitTest(obj.ptr, Cint(point_x), Cint(point_y), Base.unsafe_convert(Ptr{Clong}, flags)))
 end
 
 function get_all_tab_ctrls(obj::wxAuiNotebookBase)
@@ -284,5 +284,52 @@ function load_layout!(obj::wxAuiNotebookBase, name::AbstractString, deserializer
         Base.delete!(name_ws)
     end
     nothing
+end
+
+function add_page_with_bundle(obj::wxAuiNotebookBase, page::Union{wxWindow, Nothing}, caption::AbstractString, select::Bool, bitmap::Union{wxBitmapBundle, Nothing})
+    page_ptr = isnothing(page) ? C_NULL : page.ptr
+    caption_ws = wxString(caption)
+    bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
+    _result = try
+        KwxFFI.wxAuiNotebook_AddPageWithBundle(obj.ptr, page_ptr, caption_ws.ptr, Cint(select), bitmap_ptr) != 0
+    finally
+        Base.delete!(caption_ws)
+    end
+    return _result
+end
+
+function insert_page_with_bundle(obj::wxAuiNotebookBase, page_idx::Integer, page::Union{wxWindow, Nothing}, caption::AbstractString, select::Bool, bitmap::Union{wxBitmapBundle, Nothing})
+    page_ptr = isnothing(page) ? C_NULL : page.ptr
+    caption_ws = wxString(caption)
+    bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
+    _result = try
+        KwxFFI.wxAuiNotebook_InsertPageWithBundle(obj.ptr, Cint(page_idx), page_ptr, caption_ws.ptr, Cint(select), bitmap_ptr) != 0
+    finally
+        Base.delete!(caption_ws)
+    end
+    return _result
+end
+
+function set_page_bitmap_bundle(obj::wxAuiNotebookBase, page::Integer, bitmap::Union{wxBitmapBundle, Nothing})
+    bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
+    return KwxFFI.wxAuiNotebook_SetPageBitmapBundle(obj.ptr, Cint(page), bitmap_ptr) != 0
+end
+
+function calculate_new_split_size(obj::wxAuiNotebookBase)
+    return _wx_wrap(wxSize, KwxFFI.wxAuiNotebook_CalculateNewSplitSize(obj.ptr); owned = true)
+end
+
+function get_tab_ctrl_from_point(obj::wxAuiNotebookBase, x::Integer, y::Integer)
+    return _wx_wrap(wxAuiTabCtrl, KwxFFI.wxAuiNotebook_GetTabCtrlFromPoint(obj.ptr, Cint(x), Cint(y)))
+end
+
+function find_tab_ctrl(obj::wxAuiNotebookBase, page::Union{wxWindow, Nothing})
+    page_ptr = isnothing(page) ? C_NULL : page.ptr
+    return _wx_wrap(wxAuiTabCtrl, KwxFFI.wxAuiNotebook_FindTabCtrl(obj.ptr, page_ptr))
+end
+
+function find_tab_index(obj::wxAuiNotebookBase, page::Union{wxWindow, Nothing})
+    page_ptr = isnothing(page) ? C_NULL : page.ptr
+    return Int(KwxFFI.wxAuiNotebook_FindTabIndex(obj.ptr, page_ptr))
 end
 

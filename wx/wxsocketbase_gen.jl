@@ -30,12 +30,12 @@ function get_flags(obj::wxSocketBaseBase)
     return Int(KwxFFI.wxSocketBase_GetFlags(obj.ptr))
 end
 
-function get_local(obj::wxSocketBaseBase, addr::Union{wxSockAddress, Nothing})
+function get_local(obj::wxSocketBaseBase, addr::Union{wxSockAddressBase, Nothing})
     addr_ptr = isnothing(addr) ? C_NULL : addr.ptr
     return KwxFFI.wxSocketBase_GetLocal(obj.ptr, addr_ptr) != 0
 end
 
-function get_peer(obj::wxSocketBaseBase, addr::Union{wxSockAddress, Nothing})
+function get_peer(obj::wxSocketBaseBase, addr::Union{wxSockAddressBase, Nothing})
     addr_ptr = isnothing(addr) ? C_NULL : addr.ptr
     return KwxFFI.wxSocketBase_GetPeer(obj.ptr, addr_ptr) != 0
 end
@@ -189,7 +189,7 @@ function shutdown_output!(obj::wxSocketBaseBase)
 end
 
 function get_option(obj::wxSocketBaseBase, level::Integer, option_name::Integer, option_value::Ptr{Cvoid}, option_length::Ref{Int32})
-    return KwxFFI.wxSocketBase_GetOption(obj.ptr, Cint(level), Cint(option_name), option_value, option_length) != 0
+    return GC.@preserve option_length KwxFFI.wxSocketBase_GetOption(obj.ptr, Cint(level), Cint(option_name), option_value, Base.unsafe_convert(Ptr{Cint}, option_length)) != 0
 end
 
 function set_option(obj::wxSocketBaseBase, level::Integer, option_name::Integer, option_value::Ptr{Cvoid}, option_length::Integer)
@@ -197,7 +197,7 @@ function set_option(obj::wxSocketBaseBase, level::Integer, option_name::Integer,
 end
 
 function get_event_handler(obj::wxSocketBaseBase)
-    return KwxFFI.wxSocketBase_GetEventHandler(obj.ptr)
+    return _wx_ref(wxEvtHandler, KwxFFI.wxSocketBase_GetEventHandler(obj.ptr))
 end
 
 function wxSocketBase_Initialize()

@@ -62,7 +62,7 @@ function get_polling_min(obj::wxJoystick)
 end
 
 function get_position(obj::wxJoystick)
-    return _wx_wrap(wxPoint, KwxFFI.wxJoystick_GetPosition(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxJoystick_GetPosition(obj.ptr); owned = true)
 end
 
 function get_product_id(obj::wxJoystick)

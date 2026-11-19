@@ -4,7 +4,7 @@ function clone(obj::wxAuiTabArtBase)
     return _wx_wrap(wxAuiTabArt, KwxFFI.wxAuiTabArt_Clone(obj.ptr))
 end
 
-function draw_background!(obj::wxAuiTabArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, rect::Union{wxRect, Nothing})
+function draw_background!(obj::wxAuiTabArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, rect::Union{wxRect, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     rect_ptr = isnothing(rect) ? C_NULL : rect.ptr
@@ -12,7 +12,7 @@ function draw_background!(obj::wxAuiTabArtBase, dc::Union{wxDC, Nothing}, window
     nothing
 end
 
-function draw_button!(obj::wxAuiTabArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, inRect::Union{wxRect, Nothing}, bitmap_id::Integer, button_state::Integer, orientation::Integer, outRect::Union{wxRect, Nothing})
+function draw_button!(obj::wxAuiTabArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, inRect::Union{wxRect, Nothing}, bitmap_id::Integer, button_state::Integer, orientation::Integer, outRect::Union{wxRect, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     inRect_ptr = isnothing(inRect) ? C_NULL : inRect.ptr
@@ -21,14 +21,14 @@ function draw_button!(obj::wxAuiTabArtBase, dc::Union{wxDC, Nothing}, window::Un
     nothing
 end
 
-function draw_tab!(obj::wxAuiTabArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, page::Union{wxAuiNotebookPage, Nothing}, rect::Union{wxRect, Nothing}, close_button_state::Integer, outTabRect::Union{wxRect, Nothing}, outButtonRect::Union{wxRect, Nothing}, x_extent::Ref{Int32})
+function draw_tab!(obj::wxAuiTabArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, page::Union{wxAuiNotebookPage, Nothing}, rect::Union{wxRect, Nothing}, close_button_state::Integer, outTabRect::Union{wxRect, Nothing}, outButtonRect::Union{wxRect, Nothing}, x_extent::Ref{Int32})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     page_ptr = isnothing(page) ? C_NULL : page.ptr
     rect_ptr = isnothing(rect) ? C_NULL : rect.ptr
     outTabRect_ptr = isnothing(outTabRect) ? C_NULL : outTabRect.ptr
     outButtonRect_ptr = isnothing(outButtonRect) ? C_NULL : outButtonRect.ptr
-    KwxFFI.wxAuiTabArt_DrawTab(obj.ptr, dc_ptr, window_ptr, page_ptr, rect_ptr, Cint(close_button_state), outTabRect_ptr, outButtonRect_ptr, x_extent)
+    GC.@preserve x_extent KwxFFI.wxAuiTabArt_DrawTab(obj.ptr, dc_ptr, window_ptr, page_ptr, rect_ptr, Cint(close_button_state), outTabRect_ptr, outButtonRect_ptr, Base.unsafe_convert(Ptr{Cint}, x_extent))
     nothing
 end
 
@@ -42,13 +42,13 @@ function get_indent_size(obj::wxAuiTabArtBase)
     return Int(KwxFFI.wxAuiTabArt_GetIndentSize(obj.ptr))
 end
 
-function get_tab_size(obj::wxAuiTabArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, caption::AbstractString, bitmap::Union{wxBitmap, Nothing}, active::Bool, close_button_state::Integer, x_extent::Ref{Int32})
+function get_tab_size(obj::wxAuiTabArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, caption::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, active::Bool, close_button_state::Integer, x_extent::Ref{Int32})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     caption_ws = wxString(caption)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     _result = try
-        _wx_wrap(wxSize, KwxFFI.wxAuiTabArt_GetTabSize(obj.ptr, dc_ptr, window_ptr, caption_ws.ptr, bitmap_ptr, Cint(active), Cint(close_button_state), x_extent))
+        _wx_wrap(wxSize, GC.@preserve x_extent KwxFFI.wxAuiTabArt_GetTabSize(obj.ptr, dc_ptr, window_ptr, caption_ws.ptr, bitmap_ptr, Cint(active), Cint(close_button_state), Base.unsafe_convert(Ptr{Cint}, x_extent)); owned = true)
     finally
         Base.delete!(caption_ws)
     end

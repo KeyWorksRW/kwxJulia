@@ -180,7 +180,7 @@ function select_none!(obj::wxBitmapComboBox)
 end
 
 function get_selection!(obj::wxBitmapComboBox, from::Ref{Clong}, to::Ref{Clong})
-    KwxFFI.wxTextEntry_GetSelection(obj.ptr, from, to)
+    GC.@preserve from to KwxFFI.wxTextEntry_GetSelection(obj.ptr, Base.unsafe_convert(Ptr{Clong}, from), Base.unsafe_convert(Ptr{Clong}, to))
     nothing
 end
 
@@ -230,12 +230,17 @@ function set_margins(obj::wxBitmapComboBox, left::Integer, top::Integer)
 end
 
 function get_margins!(obj::wxBitmapComboBox, left::Ref{Int32}, top::Ref{Int32})
-    KwxFFI.wxTextEntry_GetMargins(obj.ptr, left, top)
+    GC.@preserve left top KwxFFI.wxTextEntry_GetMargins(obj.ptr, Base.unsafe_convert(Ptr{Int32}, left), Base.unsafe_convert(Ptr{Int32}, top))
     nothing
 end
 
 function auto_complete(obj::wxBitmapComboBox, count::Integer, items::Ptr{Cvoid})
     return KwxFFI.wxTextEntry_AutoComplete(obj.ptr, Cint(count), items) != 0
+end
+
+function auto_complete_strings(obj::wxBitmapComboBox, items::Union{wxArrayString, Nothing})
+    items_ptr = isnothing(items) ? C_NULL : items.ptr
+    return KwxFFI.wxTextEntry_AutoCompleteStrings(obj.ptr, items_ptr) != 0
 end
 
 function auto_complete_file_names(obj::wxBitmapComboBox)
@@ -244,6 +249,11 @@ end
 
 function auto_complete_directories(obj::wxBitmapComboBox)
     return KwxFFI.wxTextEntry_AutoCompleteDirectories(obj.ptr) != 0
+end
+
+function auto_complete_completer(obj::wxBitmapComboBox, completer::Union{wxTextCompleterSimpleBase, Nothing})
+    completer_ptr = isnothing(completer) ? C_NULL : completer.ptr
+    return KwxFFI.wxTextEntry_AutoCompleteCompleter(obj.ptr, completer_ptr) != 0
 end
 
 function append_string!(obj::wxBitmapComboBox, item::AbstractString)
@@ -256,7 +266,7 @@ function append_string!(obj::wxBitmapComboBox, item::AbstractString)
     nothing
 end
 
-function set_client_object!(obj::wxBitmapComboBox, n::Integer, clientData::Union{wxClientData, Nothing})
+function set_client_object!(obj::wxBitmapComboBox, n::Integer, clientData::Union{wxClientDataBase, Nothing})
     clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
     KwxFFI.wxItemContainer_SetClientObject(obj.ptr, Cuint(n), clientData_ptr)
     nothing
@@ -389,7 +399,7 @@ function has_client_data(obj::wxBitmapComboBox)
     return KwxFFI.wxItemContainer_HasClientData(obj.ptr) != 0
 end
 
-function Base.append!(obj::wxBitmapComboBox, item::AbstractString, bitmap::Union{wxBitmap, Nothing})
+function Base.append!(obj::wxBitmapComboBox, item::AbstractString, bitmap::Union{wxBitmapBase, Nothing})
     item_ws = wxString(item)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     try
@@ -400,7 +410,7 @@ function Base.append!(obj::wxBitmapComboBox, item::AbstractString, bitmap::Union
     nothing
 end
 
-function append_with_client_data!(obj::wxBitmapComboBox, item::AbstractString, bitmap::Union{wxBitmap, Nothing}, data::Ptr{Cvoid})
+function append_with_client_data!(obj::wxBitmapComboBox, item::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, data::Ptr{Cvoid})
     item_ws = wxString(item)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     try
@@ -411,7 +421,7 @@ function append_with_client_data!(obj::wxBitmapComboBox, item::AbstractString, b
     nothing
 end
 
-function Base.insert!(obj::wxBitmapComboBox, item::AbstractString, bitmap::Union{wxBitmap, Nothing}, pos::Integer)
+function Base.insert!(obj::wxBitmapComboBox, item::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, pos::Integer)
     item_ws = wxString(item)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     try
@@ -422,7 +432,7 @@ function Base.insert!(obj::wxBitmapComboBox, item::AbstractString, bitmap::Union
     nothing
 end
 
-function insert_with_client_data!(obj::wxBitmapComboBox, item::AbstractString, bitmap::Union{wxBitmap, Nothing}, pos::Integer, data::Ptr{Cvoid})
+function insert_with_client_data!(obj::wxBitmapComboBox, item::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, pos::Integer, data::Ptr{Cvoid})
     item_ws = wxString(item)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     try
@@ -437,13 +447,13 @@ function get_item_bitmap(obj::wxBitmapComboBox, index::Integer)
     return _wx_wrap(wxBitmap, KwxFFI.wxBitmapComboBox_GetItemBitmap(obj.ptr, Cint(index)))
 end
 
-function set_item_bitmap!(obj::wxBitmapComboBox, index::Integer, bitmap::Union{wxBitmap, Nothing})
+function set_item_bitmap!(obj::wxBitmapComboBox, index::Integer, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxBitmapComboBox_SetItemBitmap(obj.ptr, Cint(index), bitmap_ptr)
     nothing
 end
 
 function get_bitmap_size(obj::wxBitmapComboBox)
-    return _wx_wrap(wxSize, KwxFFI.wxBitmapComboBox_GetBitmapSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxBitmapComboBox_GetBitmapSize(obj.ptr); owned = true)
 end
 

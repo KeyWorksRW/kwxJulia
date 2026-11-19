@@ -23,7 +23,7 @@ function set_on_create_renderer!(obj::kwxAppTraits, pFunction::Ptr{Cvoid})
     nothing
 end
 
-function set_log_target(obj::kwxAppTraits, target::Union{wxLog, Nothing})
+function set_log_target(obj::kwxAppTraits, target::Union{wxLogBase, Nothing})
     target_ptr = isnothing(target) ? C_NULL : target.ptr
     return _wx_wrap(wxLog, KwxFFI.kwxAppTraits_SetLogTarget(obj.ptr, target_ptr))
 end

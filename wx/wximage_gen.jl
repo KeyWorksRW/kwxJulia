@@ -14,7 +14,7 @@ function wxImage()
     return obj
 end
 
-function wxImage(bitmap::Union{wxBitmap, Nothing})
+function wxImage(bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     ptr = KwxFFI.wxImage_CreateFromBitmap(bitmap_ptr)
     ptr == C_NULL && error("Failed to create wxImage")
@@ -22,21 +22,21 @@ function wxImage(bitmap::Union{wxBitmap, Nothing})
     return obj
 end
 
-function wxImage(width::Integer, height::Integer, data::Integer)
-    ptr = KwxFFI.wxImage_CreateFromByteString(Cint(width), Cint(height), Cint(data))
-    ptr == C_NULL && error("Failed to create wxImage")
-    obj = wxImage(ptr)
-    return obj
-end
-
-function wxImage_CreateFromLazyByteString(width::Integer, height::Integer, data::Integer)
-    ptr = KwxFFI.wxImage_CreateFromLazyByteString(Cint(width), Cint(height), Cint(data))
-    ptr == C_NULL && error("Failed to create wxImage")
-    obj = wxImage(ptr)
-    return obj
-end
-
 function wxImage(width::Integer, height::Integer, data::Ptr{Cvoid})
+    ptr = KwxFFI.wxImage_CreateFromByteString(Cint(width), Cint(height), data)
+    ptr == C_NULL && error("Failed to create wxImage")
+    obj = wxImage(ptr)
+    return obj
+end
+
+function wxImage_CreateFromLazyByteString(width::Integer, height::Integer, data::Ptr{Cvoid})
+    ptr = KwxFFI.wxImage_CreateFromLazyByteString(Cint(width), Cint(height), data)
+    ptr == C_NULL && error("Failed to create wxImage")
+    obj = wxImage(ptr)
+    return obj
+end
+
+function wxImage_CreateFromData(width::Integer, height::Integer, data::Ptr{Cvoid})
     ptr = KwxFFI.wxImage_CreateFromData(Cint(width), Cint(height), data)
     ptr == C_NULL && error("Failed to create wxImage")
     obj = wxImage(ptr)
@@ -55,15 +55,15 @@ function wxImage(name::AbstractString)
     return obj
 end
 
-function wxImage_CreateFromDataEncoded(data::Integer, size::Integer, bitmap_type::Integer)
-    ptr = KwxFFI.wxImage_CreateFromDataEncoded(Cint(data), Csize_t(size), Cint(bitmap_type))
+function wxImage(data::Ptr{Cvoid}, size::Integer, bitmap_type::Integer)
+    ptr = KwxFFI.wxImage_CreateFromDataEncoded(data, Csize_t(size), Cint(bitmap_type))
     ptr == C_NULL && error("Failed to create wxImage")
     obj = wxImage(ptr)
     return obj
 end
 
-function wxImage_CreateFromBase64(base64::Integer, len::Integer, bitmap_type::Integer)
-    ptr = KwxFFI.wxImage_CreateFromBase64(Cint(base64), Csize_t(len), Cint(bitmap_type))
+function wxImage_CreateFromBase64(base64::Ptr{Cvoid}, len::Integer, bitmap_type::Integer)
+    ptr = KwxFFI.wxImage_CreateFromBase64(base64, Csize_t(len), Cint(bitmap_type))
     ptr == C_NULL && error("Failed to create wxImage")
     obj = wxImage(ptr)
     return obj
@@ -174,8 +174,8 @@ function get_alpha_pixel(obj::wxImage, x::Integer, y::Integer)
     return KwxFFI.wxImage_GetAlphaPixel(obj.ptr, Cint(x), Cint(y))
 end
 
-function find_first_unused_colour(obj::wxImage, r::Integer, g::Integer, b::Integer, startR::Integer, startG::Integer, startB::Integer)
-    return KwxFFI.wxImage_FindFirstUnusedColour(obj.ptr, Cint(r), Cint(g), Cint(b), Cchar(startR), Cchar(startG), Cchar(startB)) != 0
+function find_first_unused_colour(obj::wxImage, r::Ptr{Cvoid}, g::Ptr{Cvoid}, b::Ptr{Cvoid}, startR::Integer, startG::Integer, startB::Integer)
+    return KwxFFI.wxImage_FindFirstUnusedColour(obj.ptr, r, g, b, Cchar(startR), Cchar(startG), Cchar(startB)) != 0
 end
 
 function set_mask_from_image(obj::wxImage, mask::Union{wxImage, Nothing}, mr::Integer, mg::Integer, mb::Integer)
@@ -247,7 +247,7 @@ function load_file_mime(obj::wxImage, name::AbstractString, mimetype::AbstractSt
     return _result
 end
 
-function load_stream_mime(obj::wxImage, stream::Union{wxInputStream, Nothing}, mimetype::AbstractString, index::Integer)
+function load_stream_mime(obj::wxImage, stream::Union{wxInputStreamBase, Nothing}, mimetype::AbstractString, index::Integer)
     stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
     mimetype_ws = wxString(mimetype)
     _result = try
@@ -258,7 +258,7 @@ function load_stream_mime(obj::wxImage, stream::Union{wxInputStream, Nothing}, m
     return _result
 end
 
-function save_stream_mime(obj::wxImage, stream::Union{wxOutputStream, Nothing}, mimetype::AbstractString)
+function save_stream_mime(obj::wxImage, stream::Union{wxOutputStreamBase, Nothing}, mimetype::AbstractString)
     stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
     mimetype_ws = wxString(mimetype)
     _result = try
@@ -270,7 +270,7 @@ function save_stream_mime(obj::wxImage, stream::Union{wxOutputStream, Nothing}, 
 end
 
 function get_size(obj::wxImage)
-    return _wx_wrap(wxSize, KwxFFI.wxImage_GetSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxImage_GetSize(obj.ptr); owned = true)
 end
 
 function set_data_rgba!(obj::wxImage, data::Ptr{Cvoid})
@@ -305,8 +305,8 @@ function is_transparent(obj::wxImage, x::Integer, y::Integer, threshold::Integer
     return KwxFFI.wxImage_IsTransparent(obj.ptr, Cint(x), Cint(y), Cchar(threshold)) != 0
 end
 
-function get_or_find_mask_colour(obj::wxImage, r::Integer, g::Integer, b::Integer)
-    return KwxFFI.wxImage_GetOrFindMaskColour(obj.ptr, Cint(r), Cint(g), Cint(b)) != 0
+function get_or_find_mask_colour(obj::wxImage, r::Ptr{Cvoid}, g::Ptr{Cvoid}, b::Ptr{Cvoid})
+    return KwxFFI.wxImage_GetOrFindMaskColour(obj.ptr, r, g, b) != 0
 end
 
 function has_palette(obj::wxImage)
@@ -343,13 +343,13 @@ function change_hsv!(obj::wxImage, angleH::Float64, factorS::Float64, factorV::F
     nothing
 end
 
-function wxImage_AddHandler(handler::Union{wxImageHandler, Nothing})
+function wxImage_AddHandler(handler::Union{wxImageHandlerBase, Nothing})
     handler_ptr = isnothing(handler) ? C_NULL : handler.ptr
     KwxFFI.wxImage_AddHandler(handler_ptr)
     nothing
 end
 
-function wxImage_InsertHandler(handler::Union{wxImageHandler, Nothing})
+function wxImage_InsertHandler(handler::Union{wxImageHandlerBase, Nothing})
     handler_ptr = isnothing(handler) ? C_NULL : handler.ptr
     KwxFFI.wxImage_InsertHandler(handler_ptr)
     nothing
@@ -423,18 +423,18 @@ function wxImage_CanRead(name::AbstractString)
     return _result
 end
 
-function convert_to_bitmap!(obj::wxImage, bitmap::Union{wxBitmap, Nothing})
+function convert_to_bitmap!(obj::wxImage, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxImage_ConvertToBitmap(obj.ptr, bitmap_ptr)
     nothing
 end
 
-function convert_to_byte_string(obj::wxImage, type_::Integer, data::Integer)
-    return Int(KwxFFI.wxImage_ConvertToByteString(obj.ptr, Cint(type_), Cint(data)))
+function convert_to_byte_string(obj::wxImage, type_::Integer, data::Ptr{Cvoid})
+    return Int(KwxFFI.wxImage_ConvertToByteString(obj.ptr, Cint(type_), data))
 end
 
-function convert_to_lazy_byte_string(obj::wxImage, type_::Integer, data::Integer)
-    return Int(KwxFFI.wxImage_ConvertToLazyByteString(obj.ptr, Cint(type_), Cint(data)))
+function convert_to_lazy_byte_string(obj::wxImage, type_::Integer, data::Ptr{Cvoid})
+    return Int(KwxFFI.wxImage_ConvertToLazyByteString(obj.ptr, Cint(type_), data))
 end
 
 function count_colours(obj::wxImage, stopafter::Integer)
@@ -557,7 +557,7 @@ function load_file(obj::wxImage, name::AbstractString, type_::Integer, index::In
     return _result
 end
 
-function load_stream(obj::wxImage, name::Union{wxInputStream, Nothing}, type_::Integer, index::Integer)
+function load_stream(obj::wxImage, name::Union{wxInputStreamBase, Nothing}, type_::Integer, index::Integer)
     name_ptr = isnothing(name) ? C_NULL : name.ptr
     return KwxFFI.wxImage_LoadStream(obj.ptr, name_ptr, Cint(type_), Cint(index)) != 0
 end
@@ -615,7 +615,7 @@ function save_file(obj::wxImage, name::AbstractString, type_::Integer)
     return _result
 end
 
-function save_stream(obj::wxImage, stream::Union{wxOutputStream, Nothing}, type_::Integer)
+function save_stream(obj::wxImage, stream::Union{wxOutputStreamBase, Nothing}, type_::Integer)
     stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
     return KwxFFI.wxImage_SaveStream(obj.ptr, stream_ptr, Cint(type_)) != 0
 end

@@ -32,7 +32,7 @@ function end_edit(obj::wxGridCellEditorBase, row::Integer, col::Integer, grid::U
 end
 
 function get_control(obj::wxGridCellEditorBase)
-    return KwxFFI.wxGridCellEditor_GetControl(obj.ptr)
+    return _wx_ref(wxControl, KwxFFI.wxGridCellEditor_GetControl(obj.ptr))
 end
 
 function handle_return!(obj::wxGridCellEditorBase, event::Union{wxEvent, Nothing})
@@ -50,7 +50,7 @@ function is_created(obj::wxGridCellEditorBase)
     return KwxFFI.wxGridCellEditor_IsCreated(obj.ptr) != 0
 end
 
-function paint_background!(obj::wxGridCellEditorBase, dc::Union{wxDC, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer, attr::Union{wxGridCellAttr, Nothing})
+function paint_background!(obj::wxGridCellEditorBase, dc::Union{wxDCBase, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer, attr::Union{wxGridCellAttr, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     attr_ptr = isnothing(attr) ? C_NULL : attr.ptr
     KwxFFI.wxGridCellEditor_PaintBackground(obj.ptr, dc_ptr, Cint(x), Cint(y), Cint(width), Cint(height), attr_ptr)

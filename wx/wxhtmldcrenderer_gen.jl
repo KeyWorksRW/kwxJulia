@@ -13,7 +13,7 @@ function Base.delete!(obj::wxHtmlDCRenderer)
     nothing
 end
 
-function set_dc!(obj::wxHtmlDCRenderer, dc::Union{wxDC, Nothing}, pixelScale::Float64, fontScale::Float64)
+function set_dc!(obj::wxHtmlDCRenderer, dc::Union{wxDCBase, Nothing}, pixelScale::Float64, fontScale::Float64)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxHtmlDCRenderer_SetDC(obj.ptr, dc_ptr, Cdouble(pixelScale), Cdouble(fontScale))
     nothing

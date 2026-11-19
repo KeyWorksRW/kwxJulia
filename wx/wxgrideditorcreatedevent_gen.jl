@@ -5,7 +5,7 @@ function get_col(obj::wxGridEditorCreatedEvent)
 end
 
 function get_control(obj::wxGridEditorCreatedEvent)
-    return KwxFFI.wxGridEditorCreatedEvent_GetControl(obj.ptr)
+    return _wx_ref(wxControl, KwxFFI.wxGridEditorCreatedEvent_GetControl(obj.ptr))
 end
 
 function get_row(obj::wxGridEditorCreatedEvent)

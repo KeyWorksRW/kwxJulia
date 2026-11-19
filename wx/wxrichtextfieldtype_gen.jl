@@ -14,7 +14,7 @@ function get_name(obj::wxRichTextFieldTypeBase)
     return _wx_take_wxstring(KwxFFI.wxRichTextFieldType_GetName(obj.ptr))
 end
 
-function Base.copy!(obj::wxRichTextFieldTypeBase, fieldType::Union{wxRichTextFieldType, Nothing})
+function Base.copy!(obj::wxRichTextFieldTypeBase, fieldType::Union{wxRichTextFieldTypeBase, Nothing})
     fieldType_ptr = isnothing(fieldType) ? C_NULL : fieldType.ptr
     KwxFFI.wxRichTextFieldType_Copy(obj.ptr, fieldType_ptr)
     nothing

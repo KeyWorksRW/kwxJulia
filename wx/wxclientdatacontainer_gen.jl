@@ -13,7 +13,7 @@ function Base.delete!(obj::wxClientDataContainerBase)
     nothing
 end
 
-function set_client_object!(obj::wxClientDataContainerBase, data::Union{wxClientData, Nothing})
+function set_client_object!(obj::wxClientDataContainerBase, data::Union{wxClientDataBase, Nothing})
     data_ptr = isnothing(data) ? C_NULL : data.ptr
     KwxFFI.wxClientDataContainer_SetClientObject(obj.ptr, data_ptr)
     nothing

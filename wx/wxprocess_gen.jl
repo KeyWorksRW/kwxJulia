@@ -41,7 +41,7 @@ function get_priority(obj::wxProcessBase)
 end
 
 function wxProcess_Kill(pid::Integer, sig::Integer, flags::Integer, rc::Ref{Int32})
-    return Int(KwxFFI.wxProcess_Kill(Cint(pid), Cint(sig), Cint(flags), rc))
+    return Int(GC.@preserve rc KwxFFI.wxProcess_Kill(Cint(pid), Cint(sig), Cint(flags), Base.unsafe_convert(Ptr{Cint}, rc)))
 end
 
 function wxProcess_Exists(pid::Integer)

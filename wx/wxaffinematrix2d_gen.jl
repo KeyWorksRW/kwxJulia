@@ -19,7 +19,7 @@ function set!(obj::wxAffineMatrix2D, m11::Float64, m12::Float64, m21::Float64, m
 end
 
 function Base.get!(obj::wxAffineMatrix2D, m11::Ref{Cdouble}, m12::Ref{Cdouble}, m21::Ref{Cdouble}, m22::Ref{Cdouble}, tr_x::Ref{Cdouble}, tr_y::Ref{Cdouble})
-    KwxFFI.wxAffineMatrix2D_Get(obj.ptr, m11, m12, m21, m22, tr_x, tr_y)
+    GC.@preserve m11 m12 m21 m22 tr_x tr_y KwxFFI.wxAffineMatrix2D_Get(obj.ptr, Base.unsafe_convert(Ptr{Cdouble}, m11), Base.unsafe_convert(Ptr{Cdouble}, m12), Base.unsafe_convert(Ptr{Cdouble}, m21), Base.unsafe_convert(Ptr{Cdouble}, m22), Base.unsafe_convert(Ptr{Cdouble}, tr_x), Base.unsafe_convert(Ptr{Cdouble}, tr_y))
     nothing
 end
 
@@ -63,12 +63,12 @@ function mirror!(obj::wxAffineMatrix2D, direction::Integer)
 end
 
 function transform_point!(obj::wxAffineMatrix2D, x::Ref{Cdouble}, y::Ref{Cdouble})
-    KwxFFI.wxAffineMatrix2D_TransformPoint(obj.ptr, x, y)
+    GC.@preserve x y KwxFFI.wxAffineMatrix2D_TransformPoint(obj.ptr, Base.unsafe_convert(Ptr{Cdouble}, x), Base.unsafe_convert(Ptr{Cdouble}, y))
     nothing
 end
 
 function transform_distance!(obj::wxAffineMatrix2D, x::Ref{Cdouble}, y::Ref{Cdouble})
-    KwxFFI.wxAffineMatrix2D_TransformDistance(obj.ptr, x, y)
+    GC.@preserve x y KwxFFI.wxAffineMatrix2D_TransformDistance(obj.ptr, Base.unsafe_convert(Ptr{Cdouble}, x), Base.unsafe_convert(Ptr{Cdouble}, y))
     nothing
 end
 

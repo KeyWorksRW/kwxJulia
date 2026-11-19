@@ -46,7 +46,7 @@ function get_fractional_point_size(obj::wxFont)
 end
 
 function get_pixel_size(obj::wxFont)
-    return _wx_wrap(wxSize, KwxFFI.wxFont_GetPixelSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxFont_GetPixelSize(obj.ptr); owned = true)
 end
 
 function is_using_size_in_pixels(obj::wxFont)

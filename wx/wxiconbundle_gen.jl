@@ -27,15 +27,15 @@ function wxIconBundle(icon::Union{wxIcon, Nothing})
     return obj
 end
 
-function wxIconBundle(data::Integer, size::Integer, bitmap_type::Integer)
-    ptr = KwxFFI.wxIconBundle_CreateFromData(Cint(data), Csize_t(size), Cint(bitmap_type))
+function wxIconBundle(data::Ptr{Cvoid}, size::Integer, bitmap_type::Integer)
+    ptr = KwxFFI.wxIconBundle_CreateFromData(data, Csize_t(size), Cint(bitmap_type))
     ptr == C_NULL && error("Failed to create wxIconBundle")
     obj = wxIconBundle(ptr)
     return obj
 end
 
-function wxIconBundle_CreateFromBase64(base64::Integer, len::Integer, bitmap_type::Integer)
-    ptr = KwxFFI.wxIconBundle_CreateFromBase64(Cint(base64), Csize_t(len), Cint(bitmap_type))
+function wxIconBundle_CreateFromBase64(base64::Ptr{Cvoid}, len::Integer, bitmap_type::Integer)
+    ptr = KwxFFI.wxIconBundle_CreateFromBase64(base64, Csize_t(len), Cint(bitmap_type))
     ptr == C_NULL && error("Failed to create wxIconBundle")
     obj = wxIconBundle(ptr)
     return obj
@@ -75,13 +75,13 @@ function get_icon!(obj::wxIconBundle, width::Integer, height::Integer, flags::In
     nothing
 end
 
-function add_icon_from_data!(obj::wxIconBundle, data::Integer, size::Integer, bitmap_type::Integer)
-    KwxFFI.wxIconBundle_AddIconFromData(obj.ptr, Cint(data), Csize_t(size), Cint(bitmap_type))
+function add_icon_from_data!(obj::wxIconBundle, data::Ptr{Cvoid}, size::Integer, bitmap_type::Integer)
+    KwxFFI.wxIconBundle_AddIconFromData(obj.ptr, data, Csize_t(size), Cint(bitmap_type))
     nothing
 end
 
-function add_icon_from_base64!(obj::wxIconBundle, base64::Integer, len::Integer, bitmap_type::Integer)
-    KwxFFI.wxIconBundle_AddIconFromBase64(obj.ptr, Cint(base64), Csize_t(len), Cint(bitmap_type))
+function add_icon_from_base64!(obj::wxIconBundle, base64::Ptr{Cvoid}, len::Integer, bitmap_type::Integer)
+    KwxFFI.wxIconBundle_AddIconFromBase64(obj.ptr, base64, Csize_t(len), Cint(bitmap_type))
     nothing
 end
 

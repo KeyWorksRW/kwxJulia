@@ -25,7 +25,7 @@ function wxStaticBox(parent::Union{wxWindow, Nothing}, id::Integer, label::Union
 end
 
 function get_borders_for_sizer!(obj::wxStaticBox, borderTop::Ref{Int32}, borderOther::Ref{Int32})
-    KwxFFI.wxStaticBox_GetBordersForSizer(obj.ptr, borderTop, borderOther)
+    GC.@preserve borderTop borderOther KwxFFI.wxStaticBox_GetBordersForSizer(obj.ptr, Base.unsafe_convert(Ptr{Cint}, borderTop), Base.unsafe_convert(Ptr{Cint}, borderOther))
     nothing
 end
 

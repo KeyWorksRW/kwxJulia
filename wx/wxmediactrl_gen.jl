@@ -31,7 +31,7 @@ function Base.delete!(obj::wxMediaCtrl)
 end
 
 function get_best_size(obj::wxMediaCtrl)
-    return _wx_wrap(wxSize, KwxFFI.wxMediaCtrl_GetBestSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxMediaCtrl_GetBestSize(obj.ptr); owned = true)
 end
 
 function get_playback_rate(obj::wxMediaCtrl)

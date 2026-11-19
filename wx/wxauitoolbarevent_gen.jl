@@ -5,11 +5,11 @@ function is_drop_down_clicked(obj::wxAuiToolBarEvent)
 end
 
 function get_click_point(obj::wxAuiToolBarEvent)
-    return _wx_wrap(wxPoint, KwxFFI.wxAuiToolBarEvent_GetClickPoint(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxAuiToolBarEvent_GetClickPoint(obj.ptr); owned = true)
 end
 
 function get_item_rect(obj::wxAuiToolBarEvent)
-    return _wx_wrap(wxRect, KwxFFI.wxAuiToolBarEvent_GetItemRect(obj.ptr))
+    return _wx_wrap(wxRect, KwxFFI.wxAuiToolBarEvent_GetItemRect(obj.ptr); owned = true)
 end
 
 function get_tool_id(obj::wxAuiToolBarEvent)

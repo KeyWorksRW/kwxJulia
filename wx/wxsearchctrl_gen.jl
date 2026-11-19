@@ -180,7 +180,7 @@ function select_none!(obj::wxSearchCtrl)
 end
 
 function get_selection!(obj::wxSearchCtrl, from::Ref{Clong}, to::Ref{Clong})
-    KwxFFI.wxTextEntry_GetSelection(obj.ptr, from, to)
+    GC.@preserve from to KwxFFI.wxTextEntry_GetSelection(obj.ptr, Base.unsafe_convert(Ptr{Clong}, from), Base.unsafe_convert(Ptr{Clong}, to))
     nothing
 end
 
@@ -230,12 +230,17 @@ function set_margins(obj::wxSearchCtrl, left::Integer, top::Integer)
 end
 
 function get_margins!(obj::wxSearchCtrl, left::Ref{Int32}, top::Ref{Int32})
-    KwxFFI.wxTextEntry_GetMargins(obj.ptr, left, top)
+    GC.@preserve left top KwxFFI.wxTextEntry_GetMargins(obj.ptr, Base.unsafe_convert(Ptr{Int32}, left), Base.unsafe_convert(Ptr{Int32}, top))
     nothing
 end
 
 function auto_complete(obj::wxSearchCtrl, count::Integer, items::Ptr{Cvoid})
     return KwxFFI.wxTextEntry_AutoComplete(obj.ptr, Cint(count), items) != 0
+end
+
+function auto_complete_strings(obj::wxSearchCtrl, items::Union{wxArrayString, Nothing})
+    items_ptr = isnothing(items) ? C_NULL : items.ptr
+    return KwxFFI.wxTextEntry_AutoCompleteStrings(obj.ptr, items_ptr) != 0
 end
 
 function auto_complete_file_names(obj::wxSearchCtrl)
@@ -244,6 +249,11 @@ end
 
 function auto_complete_directories(obj::wxSearchCtrl)
     return KwxFFI.wxTextEntry_AutoCompleteDirectories(obj.ptr) != 0
+end
+
+function auto_complete_completer(obj::wxSearchCtrl, completer::Union{wxTextCompleterSimpleBase, Nothing})
+    completer_ptr = isnothing(completer) ? C_NULL : completer.ptr
+    return KwxFFI.wxTextEntry_AutoCompleteCompleter(obj.ptr, completer_ptr) != 0
 end
 
 function set_menu!(obj::wxSearchCtrl, menu::Union{wxMenu, Nothing})

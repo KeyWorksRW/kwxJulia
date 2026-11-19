@@ -16,7 +16,7 @@ function wxRegionIterator(region::Union{wxRegion, Nothing})
 end
 
 function get_rect(obj::wxRegionIterator)
-    return _wx_wrap(wxRect, KwxFFI.wxRegionIterator_GetRect(obj.ptr))
+    return _wx_wrap(wxRect, KwxFFI.wxRegionIterator_GetRect(obj.ptr); owned = true)
 end
 
 function Base.delete!(obj::wxRegionIterator)

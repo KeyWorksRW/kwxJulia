@@ -48,7 +48,7 @@ function flush_active!(obj::kwxLog)
 end
 
 function kwxLog_GetActiveTarget()
-    return KwxFFI.kwxLog_GetActiveTarget()
+    return _wx_wrap(wxLog, KwxFFI.kwxLog_GetActiveTarget())
 end
 
 function get_timestamp(obj::kwxLog)

@@ -20,7 +20,7 @@ function Base.delete!(obj::wxGraphicsMatrix)
 end
 
 function Base.get!(obj::wxGraphicsMatrix, a::Ref{Cdouble}, b::Ref{Cdouble}, c::Ref{Cdouble}, d::Ref{Cdouble}, tx::Ref{Cdouble}, ty::Ref{Cdouble})
-    KwxFFI.wxGraphicsMatrix_Get(obj.ptr, a, b, c, d, tx, ty)
+    GC.@preserve a b c d tx ty KwxFFI.wxGraphicsMatrix_Get(obj.ptr, Base.unsafe_convert(Ptr{Cdouble}, a), Base.unsafe_convert(Ptr{Cdouble}, b), Base.unsafe_convert(Ptr{Cdouble}, c), Base.unsafe_convert(Ptr{Cdouble}, d), Base.unsafe_convert(Ptr{Cdouble}, tx), Base.unsafe_convert(Ptr{Cdouble}, ty))
     nothing
 end
 
@@ -58,12 +58,12 @@ function set!(obj::wxGraphicsMatrix, a::Float64, b::Float64, c::Float64, d::Floa
 end
 
 function transform_distance!(obj::wxGraphicsMatrix, dx::Ref{Cdouble}, dy::Ref{Cdouble})
-    KwxFFI.wxGraphicsMatrix_TransformDistance(obj.ptr, dx, dy)
+    GC.@preserve dx dy KwxFFI.wxGraphicsMatrix_TransformDistance(obj.ptr, Base.unsafe_convert(Ptr{Cdouble}, dx), Base.unsafe_convert(Ptr{Cdouble}, dy))
     nothing
 end
 
 function transform_point!(obj::wxGraphicsMatrix, x::Ref{Cdouble}, y::Ref{Cdouble})
-    KwxFFI.wxGraphicsMatrix_TransformPoint(obj.ptr, x, y)
+    GC.@preserve x y KwxFFI.wxGraphicsMatrix_TransformPoint(obj.ptr, Base.unsafe_convert(Ptr{Cdouble}, x), Base.unsafe_convert(Ptr{Cdouble}, y))
     nothing
 end
 

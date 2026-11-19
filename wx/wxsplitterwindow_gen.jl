@@ -39,11 +39,11 @@ function get_split_mode(obj::wxSplitterWindow)
 end
 
 function get_window1(obj::wxSplitterWindow)
-    return KwxFFI.wxSplitterWindow_GetWindow1(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxSplitterWindow_GetWindow1(obj.ptr))
 end
 
 function get_window2(obj::wxSplitterWindow)
-    return KwxFFI.wxSplitterWindow_GetWindow2(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxSplitterWindow_GetWindow2(obj.ptr))
 end
 
 function initialize!(obj::wxSplitterWindow, window::Union{wxWindow, Nothing})

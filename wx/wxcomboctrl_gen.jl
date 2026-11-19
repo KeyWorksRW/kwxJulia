@@ -180,7 +180,7 @@ function select_none!(obj::wxComboCtrl)
 end
 
 function get_selection!(obj::wxComboCtrl, from::Ref{Clong}, to::Ref{Clong})
-    KwxFFI.wxTextEntry_GetSelection(obj.ptr, from, to)
+    GC.@preserve from to KwxFFI.wxTextEntry_GetSelection(obj.ptr, Base.unsafe_convert(Ptr{Clong}, from), Base.unsafe_convert(Ptr{Clong}, to))
     nothing
 end
 
@@ -230,12 +230,17 @@ function set_margins(obj::wxComboCtrl, left::Integer, top::Integer)
 end
 
 function get_margins!(obj::wxComboCtrl, left::Ref{Int32}, top::Ref{Int32})
-    KwxFFI.wxTextEntry_GetMargins(obj.ptr, left, top)
+    GC.@preserve left top KwxFFI.wxTextEntry_GetMargins(obj.ptr, Base.unsafe_convert(Ptr{Int32}, left), Base.unsafe_convert(Ptr{Int32}, top))
     nothing
 end
 
 function auto_complete(obj::wxComboCtrl, count::Integer, items::Ptr{Cvoid})
     return KwxFFI.wxTextEntry_AutoComplete(obj.ptr, Cint(count), items) != 0
+end
+
+function auto_complete_strings(obj::wxComboCtrl, items::Union{wxArrayString, Nothing})
+    items_ptr = isnothing(items) ? C_NULL : items.ptr
+    return KwxFFI.wxTextEntry_AutoCompleteStrings(obj.ptr, items_ptr) != 0
 end
 
 function auto_complete_file_names(obj::wxComboCtrl)
@@ -244,6 +249,11 @@ end
 
 function auto_complete_directories(obj::wxComboCtrl)
     return KwxFFI.wxTextEntry_AutoCompleteDirectories(obj.ptr) != 0
+end
+
+function auto_complete_completer(obj::wxComboCtrl, completer::Union{wxTextCompleterSimpleBase, Nothing})
+    completer_ptr = isnothing(completer) ? C_NULL : completer.ptr
+    return KwxFFI.wxTextEntry_AutoCompleteCompleter(obj.ptr, completer_ptr) != 0
 end
 
 function Base.copy!(obj::wxComboCtrlBase)
@@ -283,7 +293,7 @@ function get_bitmap_pressed(obj::wxComboCtrlBase)
 end
 
 function get_button_size(obj::wxComboCtrlBase)
-    return _wx_wrap(wxSize, KwxFFI.wxComboCtrl_GetButtonSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxComboCtrl_GetButtonSize(obj.ptr); owned = true)
 end
 
 function get_custom_paint_width(obj::wxComboCtrlBase)
@@ -307,7 +317,7 @@ function get_last_position(obj::wxComboCtrlBase)
 end
 
 function get_margins!(obj::wxComboCtrlBase, left::Ref{Int32}, top::Ref{Int32})
-    KwxFFI.wxComboCtrl_GetMargins(obj.ptr, left, top)
+    GC.@preserve left top KwxFFI.wxComboCtrl_GetMargins(obj.ptr, Base.unsafe_convert(Ptr{Int32}, left), Base.unsafe_convert(Ptr{Int32}, top))
     nothing
 end
 
@@ -328,7 +338,7 @@ function get_text_ctrl(obj::wxComboCtrlBase)
 end
 
 function get_text_rect(obj::wxComboCtrlBase)
-    return _wx_wrap(wxRect, KwxFFI.wxComboCtrl_GetTextRect(obj.ptr))
+    return _wx_wrap(wxRect, KwxFFI.wxComboCtrl_GetTextRect(obj.ptr); owned = true)
 end
 
 function get_value(obj::wxComboCtrlBase)
@@ -367,7 +377,7 @@ function popup!(obj::wxComboCtrlBase)
     nothing
 end
 
-function prepare_background!(obj::wxComboCtrlBase, dc::Union{wxDC, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer, flags::Integer)
+function prepare_background!(obj::wxComboCtrlBase, dc::Union{wxDCBase, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer, flags::Integer)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxComboCtrl_PrepareBackground(obj.ptr, dc_ptr, Cint(x), Cint(y), Cint(width), Cint(height), Cint(flags))
     nothing

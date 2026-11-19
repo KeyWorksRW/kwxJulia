@@ -4,7 +4,7 @@ function get_active_child(obj::wxAuiMDIClientWindow)
     return _wx_wrap(wxAuiMDIChildFrame, KwxFFI.wxAuiMDIClientWindow_GetActiveChild(obj.ptr))
 end
 
-function create_client(obj::wxAuiMDIClientWindow, parent::Union{wxAuiMDIParentFrame, Nothing}, style::Integer)
+function create_client(obj::wxAuiMDIClientWindow, parent::Union{wxAuiMDIParentFrameBase, Nothing}, style::Integer)
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     return KwxFFI.wxAuiMDIClientWindow_CreateClient(obj.ptr, parent_ptr, Cint(style)) != 0
 end
@@ -15,7 +15,7 @@ function Base.delete!(obj::wxAuiMDIClientWindow)
     nothing
 end
 
-function set_active_child!(obj::wxAuiMDIClientWindow, child::Union{wxAuiMDIChildFrame, Nothing})
+function set_active_child!(obj::wxAuiMDIClientWindow, child::Union{wxAuiMDIChildFrameBase, Nothing})
     child_ptr = isnothing(child) ? C_NULL : child.ptr
     KwxFFI.wxAuiMDIClientWindow_SetActiveChild(obj.ptr, child_ptr)
     nothing

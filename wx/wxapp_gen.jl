@@ -73,7 +73,7 @@ function get_exit_on_frame_delete(obj::wxAppBase)
 end
 
 function get_top_window(obj::wxAppBase)
-    return KwxFFI.wxApp_GetTopWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxApp_GetTopWindow(obj.ptr))
 end
 
 function get_traits(obj::wxAppBase)
@@ -117,6 +117,31 @@ end
 
 function set_on_create_traits!(obj::wxAppBase, pFunction::Ptr{Cvoid})
     KwxFFI.wxApp_SetOnCreateTraits(obj.ptr, pFunction)
+    nothing
+end
+
+function set_on_on_fatal_exception!(obj::wxAppBase, pFunction::Ptr{Cvoid})
+    KwxFFI.wxApp_SetOnOnFatalException(obj.ptr, pFunction)
+    nothing
+end
+
+function set_on_on_unhandled_exception!(obj::wxAppBase, pFunction::Ptr{Cvoid})
+    KwxFFI.wxApp_SetOnOnUnhandledException(obj.ptr, pFunction)
+    nothing
+end
+
+function set_on_store_current_exception!(obj::wxAppBase, pFunction::Ptr{Cvoid})
+    KwxFFI.wxApp_SetOnStoreCurrentException(obj.ptr, pFunction)
+    nothing
+end
+
+function set_on_on_exception_in_main_loop!(obj::wxAppBase, pFunction::Ptr{Cvoid})
+    KwxFFI.wxApp_SetOnOnExceptionInMainLoop(obj.ptr, pFunction)
+    nothing
+end
+
+function set_on_rethrow_stored_exception!(obj::wxAppBase, pFunction::Ptr{Cvoid})
+    KwxFFI.wxApp_SetOnRethrowStoredException(obj.ptr, pFunction)
     nothing
 end
 

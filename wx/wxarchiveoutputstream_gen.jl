@@ -6,7 +6,7 @@ function Base.delete!(obj::wxArchiveOutputStreamBase)
     nothing
 end
 
-function put_next_entry(obj::wxArchiveOutputStreamBase, entry::Union{wxArchiveEntry, Nothing})
+function put_next_entry(obj::wxArchiveOutputStreamBase, entry::Union{wxArchiveEntryBase, Nothing})
     entry_ptr = isnothing(entry) ? C_NULL : entry.ptr
     return KwxFFI.wxArchiveOutputStream_PutNextEntry(obj.ptr, entry_ptr) != 0
 end
@@ -33,13 +33,13 @@ function put_next_dir_entry_date(obj::wxArchiveOutputStreamBase, entry_name::Abs
     return _result
 end
 
-function copy_entry(obj::wxArchiveOutputStreamBase, entry::Union{wxArchiveEntry, Nothing}, input_stream::Union{wxArchiveInputStream, Nothing})
+function copy_entry(obj::wxArchiveOutputStreamBase, entry::Union{wxArchiveEntryBase, Nothing}, input_stream::Union{wxArchiveInputStreamBase, Nothing})
     entry_ptr = isnothing(entry) ? C_NULL : entry.ptr
     input_stream_ptr = isnothing(input_stream) ? C_NULL : input_stream.ptr
     return KwxFFI.wxArchiveOutputStream_CopyEntry(obj.ptr, entry_ptr, input_stream_ptr) != 0
 end
 
-function copy_archive_meta_data(obj::wxArchiveOutputStreamBase, input_stream::Union{wxArchiveInputStream, Nothing})
+function copy_archive_meta_data(obj::wxArchiveOutputStreamBase, input_stream::Union{wxArchiveInputStreamBase, Nothing})
     input_stream_ptr = isnothing(input_stream) ? C_NULL : input_stream.ptr
     return KwxFFI.wxArchiveOutputStream_CopyArchiveMetaData(obj.ptr, input_stream_ptr) != 0
 end

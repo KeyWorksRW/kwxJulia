@@ -27,6 +27,13 @@ function wxCursor(name::AbstractString, type_::Integer, width::Integer, height::
     return obj
 end
 
+function wxCursor(xpm::AbstractString)
+    ptr = GC.@preserve xpm KwxFFI.Cursor_CreateFromXPMString(Base.unsafe_convert(Cstring, xpm))
+    ptr == C_NULL && error("Failed to create wxCursor")
+    obj = wxCursor(ptr)
+    return obj
+end
+
 function Base.delete!(obj::wxCursor)
     KwxFFI.wxCursor_Delete(obj.ptr)
     obj.ptr = C_NULL

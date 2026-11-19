@@ -36,8 +36,121 @@ function wxSVGFileDC(fileName::AbstractString, width::Integer, height::Integer, 
     return obj
 end
 
+function wxSVGFileDC(fileName::AbstractString, title::AbstractString)
+    fileName_ws = wxString(fileName)
+    title_ws = wxString(title)
+    ptr = try
+        KwxFFI.wxSVGFileDC_CreateWithTitle(fileName_ws.ptr, title_ws.ptr)
+    finally
+        Base.delete!(fileName_ws)
+        Base.delete!(title_ws)
+    end
+    ptr == C_NULL && error("Failed to create wxSVGFileDC")
+    obj = wxSVGFileDC(ptr)
+    return obj
+end
+
+function wxSVGFileDC(fileName::AbstractString, width::Integer, height::Integer, title::AbstractString)
+    fileName_ws = wxString(fileName)
+    title_ws = wxString(title)
+    ptr = try
+        KwxFFI.wxSVGFileDC_CreateWithSizeAndTitle(fileName_ws.ptr, Cint(width), Cint(height), title_ws.ptr)
+    finally
+        Base.delete!(fileName_ws)
+        Base.delete!(title_ws)
+    end
+    ptr == C_NULL && error("Failed to create wxSVGFileDC")
+    obj = wxSVGFileDC(ptr)
+    return obj
+end
+
+function wxSVGFileDC(fileName::AbstractString, width::Integer, height::Integer, a_dpi::Float32, title::AbstractString)
+    fileName_ws = wxString(fileName)
+    title_ws = wxString(title)
+    ptr = try
+        KwxFFI.wxSVGFileDC_CreateWithSizeResolutionAndTitle(fileName_ws.ptr, Cint(width), Cint(height), Cfloat(a_dpi), title_ws.ptr)
+    finally
+        Base.delete!(fileName_ws)
+        Base.delete!(title_ws)
+    end
+    ptr == C_NULL && error("Failed to create wxSVGFileDC")
+    obj = wxSVGFileDC(ptr)
+    return obj
+end
+
+function wxSVGFileDC(width::Integer, height::Integer)
+    ptr = KwxFFI.wxSVGFileDC_CreateFromSize(Cint(width), Cint(height))
+    ptr == C_NULL && error("Failed to create wxSVGFileDC")
+    obj = wxSVGFileDC(ptr)
+    return obj
+end
+
+function wxSVGFileDC(width::Integer, height::Integer, fileName::AbstractString, title::AbstractString)
+    fileName_ws = wxString(fileName)
+    title_ws = wxString(title)
+    ptr = try
+        KwxFFI.wxSVGFileDC_CreateFromSizeWithFileAndTitle(Cint(width), Cint(height), fileName_ws.ptr, title_ws.ptr)
+    finally
+        Base.delete!(fileName_ws)
+        Base.delete!(title_ws)
+    end
+    ptr == C_NULL && error("Failed to create wxSVGFileDC")
+    obj = wxSVGFileDC(ptr)
+    return obj
+end
+
+function wxSVGFileDC(width::Integer, height::Integer, fileName::AbstractString, title::AbstractString, a_dpi::Float32)
+    fileName_ws = wxString(fileName)
+    title_ws = wxString(title)
+    ptr = try
+        KwxFFI.wxSVGFileDC_CreateFromSizeWithFileTitleAndResolution(Cint(width), Cint(height), fileName_ws.ptr, title_ws.ptr, Cfloat(a_dpi))
+    finally
+        Base.delete!(fileName_ws)
+        Base.delete!(title_ws)
+    end
+    ptr == C_NULL && error("Failed to create wxSVGFileDC")
+    obj = wxSVGFileDC(ptr)
+    return obj
+end
+
+function begin_accessible_group!(obj::wxSVGFileDC, attributes::Union{wxSVGAttributes, Nothing}, title::AbstractString, desc::AbstractString)
+    attributes_ptr = isnothing(attributes) ? C_NULL : attributes.ptr
+    title_ws = wxString(title)
+    desc_ws = wxString(desc)
+    try
+        KwxFFI.wxSVGFileDC_BeginAccessibleGroup(obj.ptr, attributes_ptr, title_ws.ptr, desc_ws.ptr)
+    finally
+        Base.delete!(title_ws)
+        Base.delete!(desc_ws)
+    end
+    nothing
+end
+
 function end_accessible_group!(obj::wxSVGFileDC)
     KwxFFI.wxSVGFileDC_EndAccessibleGroup(obj.ptr)
+    nothing
+end
+
+function begin_layer!(obj::wxSVGFileDC, opacity::Float64)
+    KwxFFI.wxSVGFileDC_BeginLayer(obj.ptr, Cdouble(opacity))
+    nothing
+end
+
+function end_layer!(obj::wxSVGFileDC)
+    KwxFFI.wxSVGFileDC_EndLayer(obj.ptr)
+    nothing
+end
+
+function save(obj::wxSVGFileDC)
+    return KwxFFI.wxSVGFileDC_Save(obj.ptr) != 0
+end
+
+function get_svg_document(obj::wxSVGFileDC)
+    return _wx_take_wxstring(KwxFFI.wxSVGFileDC_GetSVGDocument(obj.ptr))
+end
+
+function set_shape_rendering_mode!(obj::wxSVGFileDC, mode::Integer)
+    KwxFFI.wxSVGFileDC_SetShapeRenderingMode(obj.ptr, Cint(mode))
     nothing
 end
 

@@ -58,7 +58,7 @@ function set_icon!(obj::wxNotificationMessageBase, icon::Union{wxIcon, Nothing})
     nothing
 end
 
-function set_icon_bitmap!(obj::wxNotificationMessageBase, icon::Union{wxBitmap, Nothing})
+function set_icon_bitmap!(obj::wxNotificationMessageBase, icon::Union{wxBitmapBase, Nothing})
     icon_ptr = isnothing(icon) ? C_NULL : icon.ptr
     KwxFFI.wxNotificationMessage_SetIconBitmap(obj.ptr, icon_ptr)
     nothing

@@ -37,7 +37,7 @@ function get_image_list(obj::wxSimplebook)
 end
 
 function get_page(obj::wxSimplebook, nPage::Integer)
-    return KwxFFI.wxSimplebook_GetPage(obj.ptr, Cint(nPage))
+    return _wx_ref(wxWindow, KwxFFI.wxSimplebook_GetPage(obj.ptr, Cint(nPage)))
 end
 
 function get_page_count(obj::wxSimplebook)

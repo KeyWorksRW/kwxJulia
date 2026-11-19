@@ -21,7 +21,7 @@ function deselect_all(obj::wxVListBoxBase)
 end
 
 function get_first_selected(obj::wxVListBoxBase, cookie::Ref{Culong})
-    return Int(KwxFFI.wxVListBox_GetFirstSelected(obj.ptr, cookie))
+    return Int(GC.@preserve cookie KwxFFI.wxVListBox_GetFirstSelected(obj.ptr, Base.unsafe_convert(Ptr{Culong}, cookie)))
 end
 
 function get_item_count(obj::wxVListBoxBase)
@@ -29,12 +29,12 @@ function get_item_count(obj::wxVListBoxBase)
 end
 
 function get_item_rect!(obj::wxVListBoxBase, item::Integer, x::Ref{Int32}, y::Ref{Int32}, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxVListBox_GetItemRect(obj.ptr, Csize_t(item), x, y, width, height)
+    GC.@preserve x y width height KwxFFI.wxVListBox_GetItemRect(obj.ptr, Csize_t(item), Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y), Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 
 function get_next_selected(obj::wxVListBoxBase, cookie::Ref{Culong})
-    return Int(KwxFFI.wxVListBox_GetNextSelected(obj.ptr, cookie))
+    return Int(GC.@preserve cookie KwxFFI.wxVListBox_GetNextSelected(obj.ptr, Base.unsafe_convert(Ptr{Culong}, cookie)))
 end
 
 function get_selected_count(obj::wxVListBoxBase)

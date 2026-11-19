@@ -37,7 +37,7 @@ function get_new_size(obj::wxSplitterEvent)
 end
 
 function get_window_being_removed(obj::wxSplitterEvent)
-    return KwxFFI.wxSplitterEvent_GetWindowBeingRemoved(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxSplitterEvent_GetWindowBeingRemoved(obj.ptr))
 end
 
 function get_x(obj::wxSplitterEvent)

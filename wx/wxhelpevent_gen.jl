@@ -5,7 +5,7 @@ function get_link(obj::wxHelpEvent)
 end
 
 function get_position(obj::wxHelpEvent)
-    return _wx_wrap(wxPoint, KwxFFI.wxHelpEvent_GetPosition(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxHelpEvent_GetPosition(obj.ptr); owned = true)
 end
 
 function get_target(obj::wxHelpEvent)

@@ -52,7 +52,7 @@ function add_growable_row!(obj::wxFlexGridSizer, idx::Integer, proportion::Integ
 end
 
 function calc_min(obj::wxFlexGridSizer)
-    return _wx_wrap(wxSize, KwxFFI.wxFlexGridSizer_CalcMin(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxFlexGridSizer_CalcMin(obj.ptr); owned = true)
 end
 
 function recalc_sizes!(obj::wxFlexGridSizer)

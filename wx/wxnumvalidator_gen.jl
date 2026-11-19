@@ -63,6 +63,11 @@ function set_min_double!(obj::wxNumValidator, min_value::Float64)
     nothing
 end
 
+function set_precision!(obj::wxNumValidator, precision::Integer)
+    KwxFFI.wxNumValidator_SetPrecision(obj.ptr, Cint(precision))
+    nothing
+end
+
 function set_range!(obj::wxNumValidator, min_value::Integer, max_value::Integer)
     KwxFFI.wxNumValidator_SetRange(obj.ptr, Clong(min_value), Clong(max_value))
     nothing

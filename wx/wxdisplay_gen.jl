@@ -29,7 +29,7 @@ function get_depth(obj::wxDisplay)
 end
 
 function get_raw_ppi(obj::wxDisplay)
-    return _wx_wrap(wxSize, KwxFFI.wxDisplay_GetRawPPI(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxDisplay_GetRawPPI(obj.ptr); owned = true)
 end
 
 function reset_mode!(obj::wxDisplay)
@@ -44,7 +44,7 @@ function Base.delete!(obj::wxDisplay)
 end
 
 function get_client_area!(obj::wxDisplay, x::Ref{Int32}, y::Ref{Int32}, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxDisplay_GetClientArea(obj.ptr, x, y, width, height)
+    GC.@preserve x y width height KwxFFI.wxDisplay_GetClientArea(obj.ptr, Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y), Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 
@@ -66,7 +66,7 @@ function wxDisplay_GetFromWindow(win::Union{wxWindow, Nothing})
 end
 
 function get_geometry!(obj::wxDisplay, x::Ref{Int32}, y::Ref{Int32}, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxDisplay_GetGeometry(obj.ptr, x, y, width, height)
+    GC.@preserve x y width height KwxFFI.wxDisplay_GetGeometry(obj.ptr, Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y), Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 
@@ -75,7 +75,7 @@ function get_name(obj::wxDisplay)
 end
 
 function get_ppi!(obj::wxDisplay, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxDisplay_GetPPI(obj.ptr, width, height)
+    GC.@preserve width height KwxFFI.wxDisplay_GetPPI(obj.ptr, Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 

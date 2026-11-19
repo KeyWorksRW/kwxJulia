@@ -36,6 +36,13 @@ function wxBitmap_CreateFromXPM(data::Ptr{Cvoid})
     return obj
 end
 
+function wxBitmap(xpm::AbstractString)
+    ptr = GC.@preserve xpm KwxFFI.wxBitmap_CreateFromXPMString(Base.unsafe_convert(Cstring, xpm))
+    ptr == C_NULL && error("Failed to create wxBitmap")
+    obj = wxBitmap(ptr)
+    return obj
+end
+
 function wxBitmap(name::AbstractString, type_::Integer)
     name_ws = wxString(name)
     ptr = try
@@ -48,15 +55,15 @@ function wxBitmap(name::AbstractString, type_::Integer)
     return obj
 end
 
-function wxBitmap_CreateFromData(data::Integer, size::Integer, bitmap_type::Integer)
-    ptr = KwxFFI.wxBitmap_CreateFromData(Cint(data), Csize_t(size), Cint(bitmap_type))
+function wxBitmap(data::Ptr{Cvoid}, size::Integer, bitmap_type::Integer)
+    ptr = KwxFFI.wxBitmap_CreateFromData(data, Csize_t(size), Cint(bitmap_type))
     ptr == C_NULL && error("Failed to create wxBitmap")
     obj = wxBitmap(ptr)
     return obj
 end
 
-function wxBitmap_CreateFromBase64(base64::Integer, len::Integer, bitmap_type::Integer)
-    ptr = KwxFFI.wxBitmap_CreateFromBase64(Cint(base64), Csize_t(len), Cint(bitmap_type))
+function wxBitmap_CreateFromBase64(base64::Ptr{Cvoid}, len::Integer, bitmap_type::Integer)
+    ptr = KwxFFI.wxBitmap_CreateFromBase64(base64, Csize_t(len), Cint(bitmap_type))
     ptr == C_NULL && error("Failed to create wxBitmap")
     obj = wxBitmap(ptr)
     return obj
@@ -67,7 +74,7 @@ function init(obj::wxBitmapBase, width::Integer, height::Integer, depth::Integer
 end
 
 function get_size(obj::wxBitmapBase)
-    return _wx_wrap(wxSize, KwxFFI.wxBitmap_GetSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxBitmap_GetSize(obj.ptr); owned = true)
 end
 
 function set_scale_factor!(obj::wxBitmapBase, scale::Float64)
@@ -80,11 +87,11 @@ function get_scale_factor(obj::wxBitmapBase)
 end
 
 function get_dip_size(obj::wxBitmapBase)
-    return _wx_wrap(wxSize, KwxFFI.wxBitmap_GetDIPSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxBitmap_GetDIPSize(obj.ptr); owned = true)
 end
 
 function get_logical_size(obj::wxBitmapBase)
-    return _wx_wrap(wxSize, KwxFFI.wxBitmap_GetLogicalSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxBitmap_GetLogicalSize(obj.ptr); owned = true)
 end
 
 function get_logical_width(obj::wxBitmapBase)
@@ -139,7 +146,7 @@ function wxBitmap_NewFromPNGData(data::Ptr{Cvoid}, size::Integer)
     return _wx_wrap(wxBitmap, KwxFFI.wxBitmap_NewFromPNGData(data, Csize_t(size)))
 end
 
-function wxBitmap_AddHandler(handler::Union{wxImageHandler, Nothing})
+function wxBitmap_AddHandler(handler::Union{wxImageHandlerBase, Nothing})
     handler_ptr = isnothing(handler) ? C_NULL : handler.ptr
     KwxFFI.wxBitmap_AddHandler(handler_ptr)
     nothing
@@ -191,7 +198,7 @@ function get_mask(obj::wxBitmapBase)
     return _wx_wrap(wxMask, KwxFFI.wxBitmap_GetMask(obj.ptr))
 end
 
-function get_sub_bitmap!(obj::wxBitmapBase, x::Integer, y::Integer, width::Integer, height::Integer, ref::Union{wxBitmap, Nothing})
+function get_sub_bitmap!(obj::wxBitmapBase, x::Integer, y::Integer, width::Integer, height::Integer, ref::Union{wxBitmapBase, Nothing})
     ref_ptr = isnothing(ref) ? C_NULL : ref.ptr
     KwxFFI.wxBitmap_GetSubBitmap(obj.ptr, Cint(x), Cint(y), Cint(width), Cint(height), ref_ptr)
     nothing

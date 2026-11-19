@@ -75,7 +75,7 @@ function load_page(obj::wxHtmlWindow, location::AbstractString)
     return _result
 end
 
-function read_customization!(obj::wxHtmlWindow, cfg::Union{wxConfigBase, Nothing}, path::AbstractString)
+function read_customization!(obj::wxHtmlWindow, cfg::Union{wxConfigBaseBase, Nothing}, path::AbstractString)
     cfg_ptr = isnothing(cfg) ? C_NULL : cfg.ptr
     path_ws = wxString(path)
     try
@@ -91,11 +91,11 @@ function set_borders!(obj::wxHtmlWindow, borders::Integer)
     nothing
 end
 
-function set_fonts!(obj::wxHtmlWindow, normal_face::AbstractString, fixed_face::AbstractString, sizes::Integer)
+function set_fonts!(obj::wxHtmlWindow, normal_face::AbstractString, fixed_face::AbstractString, sizes::Ptr{Cvoid})
     normal_face_ws = wxString(normal_face)
     fixed_face_ws = wxString(fixed_face)
     try
-        KwxFFI.wxHtmlWindow_SetFonts(obj.ptr, normal_face_ws.ptr, fixed_face_ws.ptr, Cint(sizes))
+        KwxFFI.wxHtmlWindow_SetFonts(obj.ptr, normal_face_ws.ptr, fixed_face_ws.ptr, sizes)
     finally
         Base.delete!(normal_face_ws)
         Base.delete!(fixed_face_ws)
@@ -113,7 +113,7 @@ function set_page(obj::wxHtmlWindow, source::AbstractString)
     return _result
 end
 
-function set_related_frame!(obj::wxHtmlWindow, frame::Union{wxFrame, Nothing}, format::AbstractString)
+function set_related_frame!(obj::wxHtmlWindow, frame::Union{wxFrameBase, Nothing}, format::AbstractString)
     frame_ptr = isnothing(frame) ? C_NULL : frame.ptr
     format_ws = wxString(format)
     try
@@ -129,7 +129,7 @@ function set_related_status_bar!(obj::wxHtmlWindow, bar::Integer)
     nothing
 end
 
-function write_customization!(obj::wxHtmlWindow, cfg::Union{wxConfigBase, Nothing}, path::AbstractString)
+function write_customization!(obj::wxHtmlWindow, cfg::Union{wxConfigBaseBase, Nothing}, path::AbstractString)
     cfg_ptr = isnothing(cfg) ? C_NULL : cfg.ptr
     path_ws = wxString(path)
     try

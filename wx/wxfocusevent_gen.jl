@@ -14,7 +14,7 @@ function Base.delete!(obj::wxFocusEvent)
 end
 
 function get_window(obj::wxFocusEvent)
-    return KwxFFI.wxFocusEvent_GetWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxFocusEvent_GetWindow(obj.ptr))
 end
 
 function set_window!(obj::wxFocusEvent, win::Union{wxWindow, Nothing})

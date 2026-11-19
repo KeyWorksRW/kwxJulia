@@ -38,7 +38,7 @@ function get_image_list(obj::wxToolbook)
 end
 
 function get_page(obj::wxToolbook, nPage::Integer)
-    return KwxFFI.wxToolbook_GetPage(obj.ptr, Cint(nPage))
+    return _wx_ref(wxWindow, KwxFFI.wxToolbook_GetPage(obj.ptr, Cint(nPage)))
 end
 
 function get_page_count(obj::wxToolbook)
@@ -62,7 +62,7 @@ function get_tool_bar(obj::wxToolbook)
 end
 
 function hit_test(obj::wxToolbook, x::Integer, y::Integer, flags::Ref{Clong})
-    return Int(KwxFFI.wxToolbook_HitTest(obj.ptr, Cint(x), Cint(y), flags))
+    return Int(GC.@preserve flags KwxFFI.wxToolbook_HitTest(obj.ptr, Cint(x), Cint(y), Base.unsafe_convert(Ptr{Clong}, flags)))
 end
 
 function insert_page(obj::wxToolbook, nPage::Integer, pPage::Union{wxWindow, Nothing}, strText::AbstractString, bSelect::Bool, imageId::Integer)

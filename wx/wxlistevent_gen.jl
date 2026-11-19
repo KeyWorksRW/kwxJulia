@@ -29,7 +29,7 @@ function get_column(obj::wxListEvent)
 end
 
 function get_data(obj::wxListEvent)
-    return Int(KwxFFI.wxListEvent_GetData(obj.ptr))
+    return UInt(KwxFFI.wxListEvent_GetData(obj.ptr))
 end
 
 function get_image(obj::wxListEvent)
@@ -55,7 +55,7 @@ function get_mask(obj::wxListEvent)
 end
 
 function get_point(obj::wxListEvent)
-    return _wx_wrap(wxPoint, KwxFFI.wxListEvent_GetPoint(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxListEvent_GetPoint(obj.ptr); owned = true)
 end
 
 function get_text(obj::wxListEvent)

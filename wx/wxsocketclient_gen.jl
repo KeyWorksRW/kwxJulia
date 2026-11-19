@@ -7,12 +7,12 @@ function wxSocketClient(flags::Integer)
     return obj
 end
 
-function connect(obj::wxSocketClientBase, address::Union{wxSockAddress, Nothing}, wait::Bool)
+function connect(obj::wxSocketClientBase, address::Union{wxSockAddressBase, Nothing}, wait::Bool)
     address_ptr = isnothing(address) ? C_NULL : address.ptr
     return KwxFFI.wxSocketClient_Connect(obj.ptr, address_ptr, Cint(wait)) != 0
 end
 
-function connect_local(obj::wxSocketClientBase, address::Union{wxSockAddress, Nothing}, local_::Union{wxSockAddress, Nothing}, wait::Bool)
+function connect_local(obj::wxSocketClientBase, address::Union{wxSockAddressBase, Nothing}, local_::Union{wxSockAddressBase, Nothing}, wait::Bool)
     address_ptr = isnothing(address) ? C_NULL : address.ptr
     local__ptr = isnothing(local_) ? C_NULL : local_.ptr
     return KwxFFI.wxSocketClient_ConnectLocal(obj.ptr, address_ptr, local__ptr, Cint(wait)) != 0

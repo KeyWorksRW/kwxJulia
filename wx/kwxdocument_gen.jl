@@ -7,6 +7,14 @@ function kwxDocument_Create(pObject::Ptr{Cvoid})
     return obj
 end
 
+function kwxDocument(pObject::Ptr{Cvoid}, parent::Union{wxDocumentBase, Nothing})
+    parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
+    ptr = KwxFFI.kwxDocument_CreateWithParent(pObject, parent_ptr)
+    ptr == C_NULL && error("Failed to create kwxDocument")
+    obj = kwxDocument(ptr)
+    return obj
+end
+
 function Base.delete!(obj::kwxDocument)
     KwxFFI.kwxDocument_Delete(obj.ptr)
     obj.ptr = C_NULL
@@ -45,6 +53,90 @@ end
 
 function set_on_on_open_document!(obj::kwxDocument, pFunction::Ptr{Cvoid})
     KwxFFI.kwxDocument_SetOnOnOpenDocument(obj.ptr, pFunction)
+    nothing
+end
+
+function set_on_do_open_document_with_data!(obj::kwxDocument, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxDocument_SetOnDoOpenDocumentWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_do_open_document_result!(obj::kwxDocument, result::Bool)
+    KwxFFI.kwxDocument_SetDoOpenDocumentResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_on_do_save_document_with_data!(obj::kwxDocument, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxDocument_SetOnDoSaveDocumentWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_do_save_document_result!(obj::kwxDocument, result::Bool)
+    KwxFFI.kwxDocument_SetDoSaveDocumentResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_on_is_modified_with_data!(obj::kwxDocument, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxDocument_SetOnIsModifiedWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_is_modified_result!(obj::kwxDocument, result::Bool)
+    KwxFFI.kwxDocument_SetIsModifiedResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_on_modify_with_data!(obj::kwxDocument, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxDocument_SetOnModifyWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_on_create_with_data!(obj::kwxDocument, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxDocument_SetOnOnCreateWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_create_result!(obj::kwxDocument, result::Bool)
+    KwxFFI.kwxDocument_SetOnCreateResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_on_on_open_document_with_data!(obj::kwxDocument, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxDocument_SetOnOnOpenDocumentWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_open_document_result!(obj::kwxDocument, result::Bool)
+    KwxFFI.kwxDocument_SetOnOpenDocumentResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function on_create_base(obj::kwxDocument, path::AbstractString, flags::Integer)
+    path_ws = wxString(path)
+    _result = try
+        KwxFFI.kwxDocument_OnCreateBase(obj.ptr, path_ws.ptr, Clong(flags)) != 0
+    finally
+        Base.delete!(path_ws)
+    end
+    return _result
+end
+
+function on_open_document_base(obj::kwxDocument, filename::AbstractString)
+    filename_ws = wxString(filename)
+    _result = try
+        KwxFFI.kwxDocument_OnOpenDocumentBase(obj.ptr, filename_ws.ptr) != 0
+    finally
+        Base.delete!(filename_ws)
+    end
+    return _result
+end
+
+function is_modified_base(obj::kwxDocument)
+    return KwxFFI.kwxDocument_IsModifiedBase(obj.ptr) != 0
+end
+
+function modify_base!(obj::kwxDocument, modified::Bool)
+    KwxFFI.kwxDocument_ModifyBase(obj.ptr, Cint(modified))
     nothing
 end
 

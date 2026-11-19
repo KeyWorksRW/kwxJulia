@@ -16,7 +16,7 @@ function get_effective_rows_count(obj::wxGridSizerBase)
 end
 
 function calc_min(obj::wxGridSizerBase)
-    return _wx_wrap(wxSize, KwxFFI.wxGridSizer_CalcMin(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxGridSizer_CalcMin(obj.ptr); owned = true)
 end
 
 function get_cols(obj::wxGridSizerBase)

@@ -28,6 +28,10 @@ function is_scrolled_window(obj::wxObject)
     return KwxFFI.wxObject_IsScrolledWindow(obj.ptr) != 0
 end
 
+function is_of_class(obj::wxObject, className::AbstractString)
+    return GC.@preserve className KwxFFI.wxObject_IsOfClass(obj.ptr, Base.unsafe_convert(Cstring, className)) != 0
+end
+
 function set_client_closure!(obj::wxObject, closure::Union{wxClosure, Nothing})
     closure_ptr = isnothing(closure) ? C_NULL : closure.ptr
     KwxFFI.wxObject_SetClientClosure(obj.ptr, closure_ptr)

@@ -46,11 +46,11 @@ function set_char_includes!(obj::wxTextValidatorBase, chars::AbstractString)
 end
 
 function get_excludes(obj::wxTextValidatorBase, count::Ref{Int32})
-    return KwxFFI.wxTextValidator_GetExcludes(obj.ptr, count)
+    return GC.@preserve count KwxFFI.wxTextValidator_GetExcludes(obj.ptr, Base.unsafe_convert(Ptr{Cint}, count))
 end
 
 function get_includes(obj::wxTextValidatorBase, count::Ref{Int32})
-    return KwxFFI.wxTextValidator_GetIncludes(obj.ptr, count)
+    return GC.@preserve count KwxFFI.wxTextValidator_GetIncludes(obj.ptr, Base.unsafe_convert(Ptr{Cint}, count))
 end
 
 function set_excludes!(obj::wxTextValidatorBase, list::Ptr{Cvoid}, count::Integer)

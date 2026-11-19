@@ -4,367 +4,402 @@ function wxDataViewCtrl(parent::Union{wxWindow, Nothing}, id::Integer, x::Intege
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     ptr = KwxFFI.wxDataViewCtrl_Create(parent_ptr, Cint(id), Cint(x), Cint(y), Cint(width), Cint(height), Cint(style))
     ptr == C_NULL && error("Failed to create wxDataViewCtrl")
-    obj = wxDataViewCtrl(ptr)
+    obj = wxDataViewCtrl(ptr, Any[], Any[])
+    isnothing(parent) || push!(parent.children, obj)
     return obj
 end
 
-function set_header_attr(obj::wxDataViewCtrl, attr::Ptr{Cvoid})
-    return KwxFFI.wxDataViewCtrl_SetHeaderAttr(obj.ptr, attr) != 0
+function set_header_attr(obj::wxDataViewCtrlBase, attr::Union{wxItemAttr, Nothing})
+    attr_ptr = isnothing(attr) ? C_NULL : attr.ptr
+    return KwxFFI.wxDataViewCtrl_SetHeaderAttr(obj.ptr, attr_ptr) != 0
 end
 
-function enable(obj::wxDataViewCtrl, enable::Bool)
+function enable(obj::wxDataViewCtrlBase, enable::Bool)
     return KwxFFI.wxDataViewCtrl_Enable(obj.ptr, Cint(enable)) != 0
 end
 
-function enable_drag_source(obj::wxDataViewCtrl, format::Union{wxDataFormat, Nothing})
+function enable_drag_source(obj::wxDataViewCtrlBase, format::Union{wxDataFormat, Nothing})
     format_ptr = isnothing(format) ? C_NULL : format.ptr
     return KwxFFI.wxDataViewCtrl_EnableDragSource(obj.ptr, format_ptr) != 0
 end
 
-function set_background_colour(obj::wxDataViewCtrl, colour::Union{wxColour, Nothing})
+function enable_drop_target(obj::wxDataViewCtrlBase, format::Union{wxDataFormat, Nothing})
+    format_ptr = isnothing(format) ? C_NULL : format.ptr
+    return KwxFFI.wxDataViewCtrl_EnableDropTarget(obj.ptr, format_ptr) != 0
+end
+
+function set_background_colour(obj::wxDataViewCtrlBase, colour::Union{wxColour, Nothing})
     colour_ptr = isnothing(colour) ? C_NULL : colour.ptr
     return KwxFFI.wxDataViewCtrl_SetBackgroundColour(obj.ptr, colour_ptr) != 0
 end
 
-function set_focus!(obj::wxDataViewCtrl)
+function set_focus!(obj::wxDataViewCtrlBase)
     KwxFFI.wxDataViewCtrl_SetFocus(obj.ptr)
     nothing
 end
 
-function set_foreground_colour(obj::wxDataViewCtrl, colour::Union{wxColour, Nothing})
+function set_foreground_colour(obj::wxDataViewCtrlBase, colour::Union{wxColour, Nothing})
     colour_ptr = isnothing(colour) ? C_NULL : colour.ptr
-    return KwxFFI.wxDataViewCtrl_SetForegroundColour(obj.ptr, colour_ptr) != 0
+    return Int(KwxFFI.wxDataViewCtrl_SetForegroundColour(obj.ptr, colour_ptr))
 end
 
-function associate_model(obj::wxDataViewCtrl, model::Ptr{Cvoid})
-    return KwxFFI.wxDataViewCtrl_AssociateModel(obj.ptr, model) != 0
+function get_sorting_column_count(obj::wxDataViewCtrlBase)
+    return Int(KwxFFI.wxDataViewCtrl_GetSortingColumnCount(obj.ptr))
 end
 
-function get_model(obj::wxDataViewCtrl)
-    return KwxFFI.wxDataViewCtrl_GetModel(obj.ptr)
+function get_sorting_column_at(obj::wxDataViewCtrlBase, pos::Integer)
+    return _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_GetSortingColumnAt(obj.ptr, Cint(pos)))
 end
 
-function append_text_column(obj::wxDataViewCtrl, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
+function generic_get_header(obj::wxDataViewCtrlBase)
+    return _wx_wrap(wxHeaderCtrl, KwxFFI.wxDataViewCtrl_GenericGetHeader(obj.ptr))
+end
+
+function hit_test_column_position(obj::wxDataViewCtrlBase, x::Integer, y::Integer, item::Union{wxDataViewItem, Nothing})
+    item_ptr = isnothing(item) ? C_NULL : item.ptr
+    return Int(KwxFFI.wxDataViewCtrl_HitTestColumnPosition(obj.ptr, Cint(x), Cint(y), item_ptr))
+end
+
+function associate_model(obj::wxDataViewCtrlBase, model::Union{wxDataViewModelBase, Nothing})
+    model_ptr = isnothing(model) ? C_NULL : model.ptr
+    return KwxFFI.wxDataViewCtrl_AssociateModel(obj.ptr, model_ptr) != 0
+end
+
+function get_model(obj::wxDataViewCtrlBase)
+    return _wx_wrap(wxDataViewModel, KwxFFI.wxDataViewCtrl_GetModel(obj.ptr))
+end
+
+function append_text_column(obj::wxDataViewCtrlBase, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewCtrl_AppendTextColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_AppendTextColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
     return _result
 end
 
-function append_toggle_column(obj::wxDataViewCtrl, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
+function append_toggle_column(obj::wxDataViewCtrlBase, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewCtrl_AppendToggleColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_AppendToggleColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
     return _result
 end
 
-function append_progress_column(obj::wxDataViewCtrl, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
+function append_progress_column(obj::wxDataViewCtrlBase, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewCtrl_AppendProgressColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_AppendProgressColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
     return _result
 end
 
-function append_bitmap_column(obj::wxDataViewCtrl, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
+function append_bitmap_column(obj::wxDataViewCtrlBase, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewCtrl_AppendBitmapColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_AppendBitmapColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
     return _result
 end
 
-function append_column(obj::wxDataViewCtrl, col::Ptr{Cvoid})
-    return KwxFFI.wxDataViewCtrl_AppendColumn(obj.ptr, col) != 0
+function append_column(obj::wxDataViewCtrlBase, col::Union{wxDataViewColumn, Nothing})
+    col_ptr = isnothing(col) ? C_NULL : col.ptr
+    return KwxFFI.wxDataViewCtrl_AppendColumn(obj.ptr, col_ptr) != 0
 end
 
-function prepend_column(obj::wxDataViewCtrl, col::Ptr{Cvoid})
-    return KwxFFI.wxDataViewCtrl_PrependColumn(obj.ptr, col) != 0
+function prepend_column(obj::wxDataViewCtrlBase, col::Union{wxDataViewColumn, Nothing})
+    col_ptr = isnothing(col) ? C_NULL : col.ptr
+    return KwxFFI.wxDataViewCtrl_PrependColumn(obj.ptr, col_ptr) != 0
 end
 
-function insert_column(obj::wxDataViewCtrl, pos::Integer, col::Ptr{Cvoid})
-    return KwxFFI.wxDataViewCtrl_InsertColumn(obj.ptr, Cuint(pos), col) != 0
+function insert_column(obj::wxDataViewCtrlBase, pos::Integer, col::Union{wxDataViewColumn, Nothing})
+    col_ptr = isnothing(col) ? C_NULL : col.ptr
+    return KwxFFI.wxDataViewCtrl_InsertColumn(obj.ptr, Cuint(pos), col_ptr) != 0
 end
 
-function get_column_count(obj::wxDataViewCtrl)
+function get_column_count(obj::wxDataViewCtrlBase)
     return KwxFFI.wxDataViewCtrl_GetColumnCount(obj.ptr)
 end
 
-function get_column(obj::wxDataViewCtrl, pos::Integer)
-    return KwxFFI.wxDataViewCtrl_GetColumn(obj.ptr, Cuint(pos))
+function get_column(obj::wxDataViewCtrlBase, pos::Integer)
+    return _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_GetColumn(obj.ptr, Cuint(pos)))
 end
 
-function get_column_position(obj::wxDataViewCtrl, column::Ptr{Cvoid})
-    return Int(KwxFFI.wxDataViewCtrl_GetColumnPosition(obj.ptr, column))
+function get_column_position(obj::wxDataViewCtrlBase, column::Union{wxDataViewColumn, Nothing})
+    column_ptr = isnothing(column) ? C_NULL : column.ptr
+    return Int(KwxFFI.wxDataViewCtrl_GetColumnPosition(obj.ptr, column_ptr))
 end
 
-function delete_column(obj::wxDataViewCtrl, column::Ptr{Cvoid})
-    return KwxFFI.wxDataViewCtrl_DeleteColumn(obj.ptr, column) != 0
+function delete_column(obj::wxDataViewCtrlBase, column::Union{wxDataViewColumn, Nothing})
+    column_ptr = isnothing(column) ? C_NULL : column.ptr
+    return KwxFFI.wxDataViewCtrl_DeleteColumn(obj.ptr, column_ptr) != 0
 end
 
-function clear_columns(obj::wxDataViewCtrl)
+function clear_columns(obj::wxDataViewCtrlBase)
     return KwxFFI.wxDataViewCtrl_ClearColumns(obj.ptr) != 0
 end
 
-function set_expander_column!(obj::wxDataViewCtrl, col::Ptr{Cvoid})
-    KwxFFI.wxDataViewCtrl_SetExpanderColumn(obj.ptr, col)
+function set_expander_column!(obj::wxDataViewCtrlBase, col::Union{wxDataViewColumn, Nothing})
+    col_ptr = isnothing(col) ? C_NULL : col.ptr
+    KwxFFI.wxDataViewCtrl_SetExpanderColumn(obj.ptr, col_ptr)
     nothing
 end
 
-function get_expander_column(obj::wxDataViewCtrl)
-    return KwxFFI.wxDataViewCtrl_GetExpanderColumn(obj.ptr)
+function get_expander_column(obj::wxDataViewCtrlBase)
+    return _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_GetExpanderColumn(obj.ptr))
 end
 
-function get_sorting_column(obj::wxDataViewCtrl)
-    return KwxFFI.wxDataViewCtrl_GetSortingColumn(obj.ptr)
+function get_sorting_column(obj::wxDataViewCtrlBase)
+    return _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_GetSortingColumn(obj.ptr))
 end
 
-function set_indent!(obj::wxDataViewCtrl, indent::Integer)
+function set_indent!(obj::wxDataViewCtrlBase, indent::Integer)
     KwxFFI.wxDataViewCtrl_SetIndent(obj.ptr, Cint(indent))
     nothing
 end
 
-function get_indent(obj::wxDataViewCtrl)
+function get_indent(obj::wxDataViewCtrlBase)
     return Int(KwxFFI.wxDataViewCtrl_GetIndent(obj.ptr))
 end
 
-function get_current_item!(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing})
+function get_current_item!(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     KwxFFI.wxDataViewCtrl_GetCurrentItem(obj.ptr, item_ptr)
     nothing
 end
 
-function set_current_item!(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing})
+function set_current_item!(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     KwxFFI.wxDataViewCtrl_SetCurrentItem(obj.ptr, item_ptr)
     nothing
 end
 
-function get_current_column(obj::wxDataViewCtrl)
-    return KwxFFI.wxDataViewCtrl_GetCurrentColumn(obj.ptr)
+function get_current_column(obj::wxDataViewCtrlBase)
+    return _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_GetCurrentColumn(obj.ptr))
 end
 
-function get_selected_items_count(obj::wxDataViewCtrl)
+function get_selected_items_count(obj::wxDataViewCtrlBase)
     return Int(KwxFFI.wxDataViewCtrl_GetSelectedItemsCount(obj.ptr))
 end
 
-function has_selection(obj::wxDataViewCtrl)
+function has_selection(obj::wxDataViewCtrlBase)
     return KwxFFI.wxDataViewCtrl_HasSelection(obj.ptr) != 0
 end
 
-function get_selection!(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing})
+function get_selection!(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     KwxFFI.wxDataViewCtrl_GetSelection(obj.ptr, item_ptr)
     nothing
 end
 
-function get_selections(obj::wxDataViewCtrl, sel::Union{wxDataViewItemArray, Nothing})
+function get_selections(obj::wxDataViewCtrlBase, sel::Union{wxDataViewItemArray, Nothing})
     sel_ptr = isnothing(sel) ? C_NULL : sel.ptr
     return Int(KwxFFI.wxDataViewCtrl_GetSelections(obj.ptr, sel_ptr))
 end
 
-function set_selections!(obj::wxDataViewCtrl, sel::Union{wxDataViewItemArray, Nothing})
+function set_selections!(obj::wxDataViewCtrlBase, sel::Union{wxDataViewItemArray, Nothing})
     sel_ptr = isnothing(sel) ? C_NULL : sel.ptr
     KwxFFI.wxDataViewCtrl_SetSelections(obj.ptr, sel_ptr)
     nothing
 end
 
-function select!(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing})
+function select!(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     KwxFFI.wxDataViewCtrl_Select(obj.ptr, item_ptr)
     nothing
 end
 
-function unselect!(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing})
+function unselect!(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     KwxFFI.wxDataViewCtrl_Unselect(obj.ptr, item_ptr)
     nothing
 end
 
-function is_selected(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing})
+function is_selected(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     return KwxFFI.wxDataViewCtrl_IsSelected(obj.ptr, item_ptr) != 0
 end
 
-function select_all!(obj::wxDataViewCtrl)
+function select_all!(obj::wxDataViewCtrlBase)
     KwxFFI.wxDataViewCtrl_SelectAll(obj.ptr)
     nothing
 end
 
-function unselect_all!(obj::wxDataViewCtrl)
+function unselect_all!(obj::wxDataViewCtrlBase)
     KwxFFI.wxDataViewCtrl_UnselectAll(obj.ptr)
     nothing
 end
 
-function expand!(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing})
+function expand!(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     KwxFFI.wxDataViewCtrl_Expand(obj.ptr, item_ptr)
     nothing
 end
 
-function collapse!(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing})
+function collapse!(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     KwxFFI.wxDataViewCtrl_Collapse(obj.ptr, item_ptr)
     nothing
 end
 
-function is_expanded(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing})
+function is_expanded(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     return KwxFFI.wxDataViewCtrl_IsExpanded(obj.ptr, item_ptr) != 0
 end
 
-function ensure_visible!(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing}, column::Ptr{Cvoid})
+function ensure_visible!(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing}, column::Union{wxDataViewColumn, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
-    KwxFFI.wxDataViewCtrl_EnsureVisible(obj.ptr, item_ptr, column)
+    column_ptr = isnothing(column) ? C_NULL : column.ptr
+    KwxFFI.wxDataViewCtrl_EnsureVisible(obj.ptr, item_ptr, column_ptr)
     nothing
 end
 
-function hit_test!(obj::wxDataViewCtrl, x::Integer, y::Integer, item::Union{wxDataViewItem, Nothing}, col::Ptr{Cvoid})
+function hit_test!(obj::wxDataViewCtrlBase, x::Integer, y::Integer, item::Union{wxDataViewItem, Nothing}, col::Union{wxDataViewColumn, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
-    KwxFFI.wxDataViewCtrl_HitTest(obj.ptr, Cint(x), Cint(y), item_ptr, col)
+    col_ptr = isnothing(col) ? C_NULL : col.ptr
+    KwxFFI.wxDataViewCtrl_HitTest(obj.ptr, Cint(x), Cint(y), item_ptr, col_ptr)
     nothing
 end
 
-function get_item_rect!(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing}, column::Ptr{Cvoid}, x::Ref{Int32}, y::Ref{Int32}, width::Ref{Int32}, height::Ref{Int32})
+function get_item_rect!(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing}, column::Union{wxDataViewColumn, Nothing}, x::Ref{Int32}, y::Ref{Int32}, width::Ref{Int32}, height::Ref{Int32})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
-    KwxFFI.wxDataViewCtrl_GetItemRect(obj.ptr, item_ptr, column, x, y, width, height)
+    column_ptr = isnothing(column) ? C_NULL : column.ptr
+    GC.@preserve x y width height KwxFFI.wxDataViewCtrl_GetItemRect(obj.ptr, item_ptr, column_ptr, Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y), Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 
-function edit_item!(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing}, column::Ptr{Cvoid})
+function edit_item!(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing}, column::Union{wxDataViewColumn, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
-    KwxFFI.wxDataViewCtrl_EditItem(obj.ptr, item_ptr, column)
+    column_ptr = isnothing(column) ? C_NULL : column.ptr
+    KwxFFI.wxDataViewCtrl_EditItem(obj.ptr, item_ptr, column_ptr)
     nothing
 end
 
-function get_count_per_page(obj::wxDataViewCtrl)
+function get_count_per_page(obj::wxDataViewCtrlBase)
     return Int(KwxFFI.wxDataViewCtrl_GetCountPerPage(obj.ptr))
 end
 
-function get_top_item!(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing})
+function get_top_item!(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     KwxFFI.wxDataViewCtrl_GetTopItem(obj.ptr, item_ptr)
     nothing
 end
 
-function expand_children!(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing})
+function expand_children!(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     KwxFFI.wxDataViewCtrl_ExpandChildren(obj.ptr, item_ptr)
     nothing
 end
 
-function expand_ancestors!(obj::wxDataViewCtrl, item::Union{wxDataViewItem, Nothing})
+function expand_ancestors!(obj::wxDataViewCtrlBase, item::Union{wxDataViewItem, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     KwxFFI.wxDataViewCtrl_ExpandAncestors(obj.ptr, item_ptr)
     nothing
 end
 
-function allow_multi_column_sort(obj::wxDataViewCtrl, allow::Bool)
+function allow_multi_column_sort(obj::wxDataViewCtrlBase, allow::Bool)
     return KwxFFI.wxDataViewCtrl_AllowMultiColumnSort(obj.ptr, Cint(allow)) != 0
 end
 
-function is_multi_column_sort_allowed(obj::wxDataViewCtrl)
+function is_multi_column_sort_allowed(obj::wxDataViewCtrlBase)
     return KwxFFI.wxDataViewCtrl_IsMultiColumnSortAllowed(obj.ptr) != 0
 end
 
-function toggle_sort_by_column!(obj::wxDataViewCtrl, column::Integer)
+function toggle_sort_by_column!(obj::wxDataViewCtrlBase, column::Integer)
     KwxFFI.wxDataViewCtrl_ToggleSortByColumn(obj.ptr, Cint(column))
     nothing
 end
 
-function set_row_height(obj::wxDataViewCtrl, rowHeight::Integer)
+function set_row_height(obj::wxDataViewCtrlBase, rowHeight::Integer)
     return KwxFFI.wxDataViewCtrl_SetRowHeight(obj.ptr, Cint(rowHeight)) != 0
 end
 
-function set_alternate_row_colour(obj::wxDataViewCtrl, colour::Union{wxColour, Nothing})
+function set_alternate_row_colour(obj::wxDataViewCtrlBase, colour::Union{wxColour, Nothing})
     colour_ptr = isnothing(colour) ? C_NULL : colour.ptr
     return KwxFFI.wxDataViewCtrl_SetAlternateRowColour(obj.ptr, colour_ptr) != 0
 end
 
-function append_icon_text_column(obj::wxDataViewCtrl, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
+function append_icon_text_column(obj::wxDataViewCtrlBase, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewCtrl_AppendIconTextColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_AppendIconTextColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
     return _result
 end
 
-function append_date_column(obj::wxDataViewCtrl, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
+function append_date_column(obj::wxDataViewCtrlBase, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewCtrl_AppendDateColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_AppendDateColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
     return _result
 end
 
-function prepend_text_column(obj::wxDataViewCtrl, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
+function prepend_text_column(obj::wxDataViewCtrlBase, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewCtrl_PrependTextColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_PrependTextColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
     return _result
 end
 
-function prepend_icon_text_column(obj::wxDataViewCtrl, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
+function prepend_icon_text_column(obj::wxDataViewCtrlBase, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewCtrl_PrependIconTextColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_PrependIconTextColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
     return _result
 end
 
-function prepend_toggle_column(obj::wxDataViewCtrl, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
+function prepend_toggle_column(obj::wxDataViewCtrlBase, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewCtrl_PrependToggleColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_PrependToggleColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
     return _result
 end
 
-function prepend_progress_column(obj::wxDataViewCtrl, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
+function prepend_progress_column(obj::wxDataViewCtrlBase, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewCtrl_PrependProgressColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_PrependProgressColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
     return _result
 end
 
-function prepend_date_column(obj::wxDataViewCtrl, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
+function prepend_date_column(obj::wxDataViewCtrlBase, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewCtrl_PrependDateColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_PrependDateColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
     return _result
 end
 
-function prepend_bitmap_column(obj::wxDataViewCtrl, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
+function prepend_bitmap_column(obj::wxDataViewCtrlBase, label::AbstractString, model_column::Integer, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewCtrl_PrependBitmapColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewCtrl_PrependBitmapColumn(obj.ptr, label_ws.ptr, Cuint(model_column), Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end

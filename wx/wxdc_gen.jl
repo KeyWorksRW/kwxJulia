@@ -15,7 +15,7 @@ function get_user_scale_y(obj::wxDCBase)
 end
 
 function get_window(obj::wxDCBase)
-    return KwxFFI.wxDC_GetWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxDC_GetWindow(obj.ptr))
 end
 
 function get_resolution(obj::wxDCBase)
@@ -35,11 +35,11 @@ function to_dip(obj::wxDCBase, value::Integer)
 end
 
 function from_dip_size(obj::wxDCBase, width::Integer, height::Integer)
-    return _wx_wrap(wxSize, KwxFFI.wxDC_FromDIPSize(obj.ptr, Cint(width), Cint(height)))
+    return _wx_wrap(wxSize, KwxFFI.wxDC_FromDIPSize(obj.ptr, Cint(width), Cint(height)); owned = true)
 end
 
 function to_dip_size(obj::wxDCBase, width::Integer, height::Integer)
-    return _wx_wrap(wxSize, KwxFFI.wxDC_ToDIPSize(obj.ptr, Cint(width), Cint(height)))
+    return _wx_wrap(wxSize, KwxFFI.wxDC_ToDIPSize(obj.ptr, Cint(width), Cint(height)); owned = true)
 end
 
 function set_layout_direction!(obj::wxDCBase, direction::Integer)
@@ -54,7 +54,7 @@ end
 function get_text_extent_size(obj::wxDCBase, string::AbstractString)
     string_ws = wxString(string)
     _result = try
-        _wx_wrap(wxSize, KwxFFI.wxDC_GetTextExtentSize(obj.ptr, string_ws.ptr))
+        _wx_wrap(wxSize, KwxFFI.wxDC_GetTextExtentSize(obj.ptr, string_ws.ptr); owned = true)
     finally
         Base.delete!(string_ws)
     end
@@ -64,17 +64,17 @@ end
 function get_multi_line_text_extent_size(obj::wxDCBase, string::AbstractString)
     string_ws = wxString(string)
     _result = try
-        _wx_wrap(wxSize, KwxFFI.wxDC_GetMultiLineTextExtentSize(obj.ptr, string_ws.ptr))
+        _wx_wrap(wxSize, KwxFFI.wxDC_GetMultiLineTextExtentSize(obj.ptr, string_ws.ptr); owned = true)
     finally
         Base.delete!(string_ws)
     end
     return _result
 end
 
-function get_partial_text_extents(obj::wxDCBase, text::AbstractString, count::Integer, widths::Integer)
+function get_partial_text_extents(obj::wxDCBase, text::AbstractString, count::Integer, widths::Ptr{Cvoid})
     text_ws = wxString(text)
     _result = try
-        KwxFFI.wxDC_GetPartialTextExtents(obj.ptr, text_ws.ptr, Cint(count), Cint(widths)) != 0
+        KwxFFI.wxDC_GetPartialTextExtents(obj.ptr, text_ws.ptr, Cint(count), widths) != 0
     finally
         Base.delete!(text_ws)
     end
@@ -82,30 +82,30 @@ function get_partial_text_extents(obj::wxDCBase, text::AbstractString, count::In
 end
 
 function device_to_logical(obj::wxDCBase, x::Integer, y::Integer)
-    return _wx_wrap(wxPoint, KwxFFI.wxDC_DeviceToLogical(obj.ptr, Cint(x), Cint(y)))
+    return _wx_wrap(wxPoint, KwxFFI.wxDC_DeviceToLogical(obj.ptr, Cint(x), Cint(y)); owned = true)
 end
 
 function logical_to_device(obj::wxDCBase, x::Integer, y::Integer)
-    return _wx_wrap(wxPoint, KwxFFI.wxDC_LogicalToDevice(obj.ptr, Cint(x), Cint(y)))
+    return _wx_wrap(wxPoint, KwxFFI.wxDC_LogicalToDevice(obj.ptr, Cint(x), Cint(y)); owned = true)
 end
 
 function device_to_logical_rel(obj::wxDCBase, width::Integer, height::Integer)
-    return _wx_wrap(wxSize, KwxFFI.wxDC_DeviceToLogicalRel(obj.ptr, Cint(width), Cint(height)))
+    return _wx_wrap(wxSize, KwxFFI.wxDC_DeviceToLogicalRel(obj.ptr, Cint(width), Cint(height)); owned = true)
 end
 
 function logical_to_device_rel(obj::wxDCBase, width::Integer, height::Integer)
-    return _wx_wrap(wxSize, KwxFFI.wxDC_LogicalToDeviceRel(obj.ptr, Cint(width), Cint(height)))
+    return _wx_wrap(wxSize, KwxFFI.wxDC_LogicalToDeviceRel(obj.ptr, Cint(width), Cint(height)); owned = true)
 end
 
 function get_logical_origin_point(obj::wxDCBase)
-    return _wx_wrap(wxPoint, KwxFFI.wxDC_GetLogicalOriginPoint(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxDC_GetLogicalOriginPoint(obj.ptr); owned = true)
 end
 
 function get_device_origin_point(obj::wxDCBase)
-    return _wx_wrap(wxPoint, KwxFFI.wxDC_GetDeviceOriginPoint(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxDC_GetDeviceOriginPoint(obj.ptr); owned = true)
 end
 
-function copy_attributes!(obj::wxDCBase, dc::Union{wxDC, Nothing})
+function copy_attributes!(obj::wxDCBase, dc::Union{wxDCBase, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxDC_CopyAttributes(obj.ptr, dc_ptr)
     nothing
@@ -159,7 +159,7 @@ function gradient_fill_linear!(obj::wxDCBase, x::Integer, y::Integer, width::Int
     nothing
 end
 
-function stretch_blit(obj::wxDCBase, dstX::Integer, dstY::Integer, dstWidth::Integer, dstHeight::Integer, source::Union{wxDC, Nothing}, srcX::Integer, srcY::Integer, srcWidth::Integer, srcHeight::Integer, rop::Integer, useMask::Bool, maskX::Integer, maskY::Integer)
+function stretch_blit(obj::wxDCBase, dstX::Integer, dstY::Integer, dstWidth::Integer, dstHeight::Integer, source::Union{wxDCBase, Nothing}, srcX::Integer, srcY::Integer, srcWidth::Integer, srcHeight::Integer, rop::Integer, useMask::Bool, maskX::Integer, maskY::Integer)
     source_ptr = isnothing(source) ? C_NULL : source.ptr
     return KwxFFI.wxDC_StretchBlit(obj.ptr, Cint(dstX), Cint(dstY), Cint(dstWidth), Cint(dstHeight), source_ptr, Cint(srcX), Cint(srcY), Cint(srcWidth), Cint(srcHeight), Cint(rop), Cint(useMask), Cint(maskX), Cint(maskY)) != 0
 end
@@ -182,13 +182,13 @@ function get_graphics_context(obj::wxDCBase)
     return _wx_wrap(wxGraphicsContext, KwxFFI.wxDC_GetGraphicsContext(obj.ptr))
 end
 
-function set_graphics_context!(obj::wxDCBase, ctx::Union{wxGraphicsContext, Nothing})
+function set_graphics_context!(obj::wxDCBase, ctx::Union{wxGraphicsContextBase, Nothing})
     ctx_ptr = isnothing(ctx) ? C_NULL : ctx.ptr
     KwxFFI.wxDC_SetGraphicsContext(obj.ptr, ctx_ptr)
     nothing
 end
 
-function blit(obj::wxDCBase, xdest::Integer, ydest::Integer, width::Integer, height::Integer, source::Union{wxDC, Nothing}, xsrc::Integer, ysrc::Integer, rop::Integer, useMask::Bool, xsrcMask::Integer, ysrcMask::Integer)
+function blit(obj::wxDCBase, xdest::Integer, ydest::Integer, width::Integer, height::Integer, source::Union{wxDCBase, Nothing}, xsrc::Integer, ysrc::Integer, rop::Integer, useMask::Bool, xsrcMask::Integer, ysrcMask::Integer)
     source_ptr = isnothing(source) ? C_NULL : source.ptr
     return KwxFFI.wxDC_Blit(obj.ptr, Cint(xdest), Cint(ydest), Cint(width), Cint(height), source_ptr, Cint(xsrc), Cint(ysrc), Cint(rop), Cint(useMask), Cint(xsrcMask), Cint(ysrcMask)) != 0
 end
@@ -257,7 +257,7 @@ function draw_arc!(obj::wxDCBase, x1::Integer, y1::Integer, x2::Integer, y2::Int
     nothing
 end
 
-function draw_bitmap!(obj::wxDCBase, bmp::Union{wxBitmap, Nothing}, x::Integer, y::Integer, useMask::Bool)
+function draw_bitmap!(obj::wxDCBase, bmp::Union{wxBitmapBase, Nothing}, x::Integer, y::Integer, useMask::Bool)
     bmp_ptr = isnothing(bmp) ? C_NULL : bmp.ptr
     KwxFFI.wxDC_DrawBitmap(obj.ptr, bmp_ptr, Cint(x), Cint(y), Cint(useMask))
     nothing
@@ -299,11 +299,11 @@ function draw_label!(obj::wxDCBase, str::AbstractString, x::Integer, y::Integer,
     nothing
 end
 
-function draw_label_bitmap(obj::wxDCBase, str::AbstractString, bmp::Union{wxBitmap, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer, align::Integer, indexAccel::Integer)
+function draw_label_bitmap(obj::wxDCBase, str::AbstractString, bmp::Union{wxBitmapBase, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer, align::Integer, indexAccel::Integer)
     str_ws = wxString(str)
     bmp_ptr = isnothing(bmp) ? C_NULL : bmp.ptr
     _result = try
-        _wx_wrap(wxRect, KwxFFI.wxDC_DrawLabelBitmap(obj.ptr, str_ws.ptr, bmp_ptr, Cint(x), Cint(y), Cint(width), Cint(height), Cint(align), Cint(indexAccel)))
+        _wx_wrap(wxRect, KwxFFI.wxDC_DrawLabelBitmap(obj.ptr, str_ws.ptr, bmp_ptr, Cint(x), Cint(y), Cint(width), Cint(height), Cint(align), Cint(indexAccel)); owned = true)
     finally
         Base.delete!(str_ws)
     end
@@ -444,7 +444,7 @@ function get_map_mode(obj::wxDCBase)
 end
 
 function get_ppi(obj::wxDCBase)
-    return _wx_wrap(wxSize, KwxFFI.wxDC_GetPPI(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxDC_GetPPI(obj.ptr); owned = true)
 end
 
 function get_pen!(obj::wxDCBase, ref::Union{wxPen, Nothing})
@@ -459,11 +459,11 @@ function get_pixel(obj::wxDCBase, x::Integer, y::Integer, col::Union{wxColour, N
 end
 
 function get_size(obj::wxDCBase)
-    return _wx_wrap(wxSize, KwxFFI.wxDC_GetSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxDC_GetSize(obj.ptr); owned = true)
 end
 
 function get_size_mm(obj::wxDCBase)
-    return _wx_wrap(wxSize, KwxFFI.wxDC_GetSizeMM(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxDC_GetSizeMM(obj.ptr); owned = true)
 end
 
 function get_text_background!(obj::wxDCBase, ref::Union{wxColour, Nothing})

@@ -9,7 +9,7 @@ function wxBannerWindow(parent::Union{wxWindow, Nothing}, id::Integer, dir::Inte
     return obj
 end
 
-function set_bitmap!(obj::wxBannerWindow, bmp::Union{wxBitmap, Nothing})
+function set_bitmap!(obj::wxBannerWindow, bmp::Union{wxBitmapBase, Nothing})
     bmp_ptr = isnothing(bmp) ? C_NULL : bmp.ptr
     KwxFFI.wxBannerWindow_SetBitmap(obj.ptr, bmp_ptr)
     nothing

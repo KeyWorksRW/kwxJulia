@@ -14,7 +14,7 @@ function wxRichTextFieldTypeStandard(name::AbstractString, label::AbstractString
     return obj
 end
 
-function wxRichTextFieldTypeStandard(name::AbstractString, bitmap::Union{wxBitmap, Nothing}, displayStyle::Integer)
+function wxRichTextFieldTypeStandard(name::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, displayStyle::Integer)
     name_ws = wxString(name)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     ptr = try
@@ -59,7 +59,7 @@ function get_label(obj::wxRichTextFieldTypeStandardBase)
     return _wx_take_wxstring(KwxFFI.wxRichTextFieldTypeStandard_GetLabel(obj.ptr))
 end
 
-function set_bitmap!(obj::wxRichTextFieldTypeStandardBase, bitmap::Union{wxBitmap, Nothing})
+function set_bitmap!(obj::wxRichTextFieldTypeStandardBase, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxRichTextFieldTypeStandard_SetBitmap(obj.ptr, bitmap_ptr)
     nothing

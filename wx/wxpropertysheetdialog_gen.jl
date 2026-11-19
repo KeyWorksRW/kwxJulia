@@ -42,7 +42,7 @@ function get_book_ctrl(obj::wxPropertySheetDialogBase)
 end
 
 function get_inner_sizer(obj::wxPropertySheetDialogBase)
-    return KwxFFI.wxPropertySheetDialog_GetInnerSizer(obj.ptr)
+    return _wx_ref(wxSizer, KwxFFI.wxPropertySheetDialog_GetInnerSizer(obj.ptr))
 end
 
 function set_inner_sizer!(obj::wxPropertySheetDialogBase, sizer::Union{wxSizer, Nothing})

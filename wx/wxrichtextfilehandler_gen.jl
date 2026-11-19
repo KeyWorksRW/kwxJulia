@@ -4,7 +4,7 @@ function get_name(obj::wxRichTextFileHandlerBase)
     return _wx_take_wxstring(KwxFFI.wxRichTextFileHandler_GetName(obj.ptr))
 end
 
-function save_file(obj::wxRichTextFileHandlerBase, buffer::Ptr{Cvoid}, stream::Union{wxOutputStream, Nothing})
+function save_file(obj::wxRichTextFileHandlerBase, buffer::Ptr{Cvoid}, stream::Union{wxOutputStreamBase, Nothing})
     stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
     return KwxFFI.wxRichTextFileHandler_SaveFile(obj.ptr, buffer, stream_ptr) != 0
 end

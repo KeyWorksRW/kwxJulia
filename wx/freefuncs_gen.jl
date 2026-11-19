@@ -145,6 +145,11 @@ function wxGetEnv(var::Ptr{Cvoid}, value::Ptr{Cvoid})
         (Ptr{Cvoid}, Ptr{Cvoid}),
         var, value)
 end
+function wxGetEnvValue(var::Ptr{Cvoid})
+    ccall((:wxGetEnvValue, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        var)
+end
 function wxSetEnv(var::Ptr{Cvoid}, value::Ptr{Cvoid})
     ccall((:wxSetEnv, libkwxFFI), Cint,
         (Ptr{Cvoid}, Ptr{Cvoid}),
@@ -438,6 +443,11 @@ function wxGetSingleChoiceIndex(message::Ptr{Cvoid}, caption::Ptr{Cvoid}, choice
         (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}),
         message, caption, choices, count, parent)
 end
+function wxGetSingleChoiceIndexArray(message::Ptr{Cvoid}, caption::Ptr{Cvoid}, choices::Ptr{Cvoid}, parent::Ptr{Cvoid})
+    ccall((:wxGetSingleChoiceIndexArray, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        message, caption, choices, parent)
+end
 function wxGetSingleChoiceIndexEx(message::Ptr{Cvoid}, caption::Ptr{Cvoid}, n::Cint, choices::Ptr{Cvoid}, parent::Ptr{Cvoid}, x::Cint, y::Cint, centre::Cint, width::Cint, height::Cint, initialSelection::Cint)
     ccall((:wxGetSingleChoiceIndexEx, libkwxFFI), Cint,
         (Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Cint, Cint, Cint, Cint, Cint),
@@ -478,10 +488,15 @@ function wxDegToRad(degrees::Cdouble)
         (Cdouble,),
         degrees)
 end
-function wxFgets(buffer::Cstring, size::Cint, stream::Ptr{Cvoid})
+function wxFgets(buffer::Ptr{UInt8}, size::Cint, stream::Ptr{Cvoid})
     ccall((:wxFgets, libkwxFFI), Ptr{Cchar},
-        (Cstring, Cint, Ptr{Cvoid}),
+        (Ptr{UInt8}, Cint, Ptr{Cvoid}),
         buffer, size, stream)
+end
+function wxFputs(str::Ptr{Cvoid}, stream::Ptr{Cvoid})
+    ccall((:wxFputs, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        str, stream)
 end
 wxGetCwd() = ccall((:wxGetCwd, libkwxFFI), Ptr{Cvoid}, ())
 wxIsMainThread() = ccall((:wxIsMainThread, libkwxFFI), Cint, ())
@@ -540,25 +555,25 @@ wxGetBatteryState() = ccall((:wxGetBatteryState, libkwxFFI), Cint, ())
 wxGetClientDisplayRect() = ccall((:wxGetClientDisplayRect, libkwxFFI), Ptr{Cvoid}, ())
 wxGetLocalTime() = ccall((:wxGetLocalTime, libkwxFFI), Clong, ())
 wxGetPowerType() = ccall((:wxGetPowerType, libkwxFFI), Cint, ())
-function wxGetSelectedChoices(selections::Ptr{Cvoid}, choices::Ptr{Cvoid}, count::Cint, message::Ptr{Cvoid}, caption::Ptr{Cvoid}, parent::Ptr{Cvoid})
+function wxGetSelectedChoices(selections::Ptr{Cvoid}, count::Cint, choices::Ptr{Cvoid}, message::Ptr{Cvoid}, caption::Ptr{Cvoid}, parent::Ptr{Cvoid})
     ccall((:wxGetSelectedChoices, libkwxFFI), Cint,
-        (Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
-        selections, choices, count, message, caption, parent)
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        selections, count, choices, message, caption, parent)
 end
 function wxGetSelectedChoicesEx(selections::Ptr{Cvoid}, message::Ptr{Cvoid}, caption::Ptr{Cvoid}, n::Cint, choices::Ptr{Cvoid}, parent::Ptr{Cvoid}, x::Cint, y::Cint, centre::Cint, width::Cint, height::Cint)
     ccall((:wxGetSelectedChoicesEx, libkwxFFI), Cint,
         (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Cint, Cint, Cint, Cint),
         selections, message, caption, n, choices, parent, x, y, centre, width, height)
 end
-function wxGetSingleChoice(message::Ptr{Cvoid}, caption::Ptr{Cvoid}, choices::Ptr{Cvoid}, count::Cint, parent::Ptr{Cvoid})
+function wxGetSingleChoice(message::Ptr{Cvoid}, caption::Ptr{Cvoid}, count::Cint, choices::Ptr{Cvoid}, parent::Ptr{Cvoid})
     ccall((:wxGetSingleChoice, libkwxFFI), Ptr{Cvoid},
-        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}),
-        message, caption, choices, count, parent)
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}),
+        message, caption, count, choices, parent)
 end
-function wxGetSingleChoiceData(message::Ptr{Cvoid}, caption::Ptr{Cvoid}, choices::Ptr{Cvoid}, count::Cint, client_data::Ptr{Cvoid}, parent::Ptr{Cvoid})
+function wxGetSingleChoiceData(message::Ptr{Cvoid}, caption::Ptr{Cvoid}, count::Cint, choices::Ptr{Cvoid}, client_data::Ptr{Cvoid}, parent::Ptr{Cvoid})
     ccall((:wxGetSingleChoiceData, libkwxFFI), Ptr{Cvoid},
-        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}),
-        message, caption, choices, count, client_data, parent)
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        message, caption, count, choices, client_data, parent)
 end
 function wxGetSingleChoiceDataEx(message::Ptr{Cvoid}, caption::Ptr{Cvoid}, n::Cint, choices::Ptr{Cvoid}, client_data::Ptr{Cvoid}, parent::Ptr{Cvoid}, x::Cint, y::Cint, centre::Cint, width::Cint, height::Cint, initialSelection::Cint)
     ccall((:wxGetSingleChoiceDataEx, libkwxFFI), Ptr{Cvoid},
@@ -593,6 +608,51 @@ function wxMakeFloatingPointValidator(value::Ptr{Cdouble}, style::Cint)
     ccall((:wxMakeFloatingPointValidator, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cdouble}, Cint),
         value, style)
+end
+function wxMakeFloatingPointValidatorWithPrecision(precision::Cint, value::Ptr{Cdouble}, style::Cint)
+    ccall((:wxMakeFloatingPointValidatorWithPrecision, libkwxFFI), Ptr{Cvoid},
+        (Cint, Ptr{Cdouble}, Cint),
+        precision, value, style)
+end
+function wxFloatingPointValidator_SetPrecision(validator::Ptr{Cvoid}, precision::Cint)
+    ccall((:wxFloatingPointValidator_SetPrecision, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        validator, precision)
+end
+function wxFloatingPointValidator_SetFactor(validator::Ptr{Cvoid}, factor::Cdouble)
+    ccall((:wxFloatingPointValidator_SetFactor, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cdouble),
+        validator, factor)
+end
+function wxFloatingPointValidator_SetStyle(validator::Ptr{Cvoid}, style::Cint)
+    ccall((:wxFloatingPointValidator_SetStyle, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        validator, style)
+end
+function wxFloatingPointValidator_SetMin(validator::Ptr{Cvoid}, min::Cdouble)
+    ccall((:wxFloatingPointValidator_SetMin, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cdouble),
+        validator, min)
+end
+function wxFloatingPointValidator_GetMin(validator::Ptr{Cvoid})
+    ccall((:wxFloatingPointValidator_GetMin, libkwxFFI), Cdouble,
+        (Ptr{Cvoid},),
+        validator)
+end
+function wxFloatingPointValidator_SetMax(validator::Ptr{Cvoid}, max::Cdouble)
+    ccall((:wxFloatingPointValidator_SetMax, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cdouble),
+        validator, max)
+end
+function wxFloatingPointValidator_GetMax(validator::Ptr{Cvoid})
+    ccall((:wxFloatingPointValidator_GetMax, libkwxFFI), Cdouble,
+        (Ptr{Cvoid},),
+        validator)
+end
+function wxFloatingPointValidator_SetRange(validator::Ptr{Cvoid}, min::Cdouble, max::Cdouble)
+    ccall((:wxFloatingPointValidator_SetRange, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cdouble, Cdouble),
+        validator, min, max)
 end
 wxMutexGuiEnter() = ccall((:wxMutexGuiEnter, libkwxFFI), Cvoid, ())
 wxMutexGuiLeave() = ccall((:wxMutexGuiLeave, libkwxFFI), Cvoid, ())
@@ -644,6 +704,11 @@ end
 function wxStrdup(str::Ptr{Cvoid})
     ccall((:wxStrdup, libkwxFFI), Ptr{Cchar},
         (Ptr{Cvoid},),
+        str)
+end
+function wxStrlen(str::Cstring)
+    ccall((:wxStrlen, libkwxFFI), Csize_t,
+        (Cstring,),
         str)
 end
 function wxStrtod(nptr::Ptr{Cvoid})
@@ -737,6 +802,11 @@ function wxDragIcon(icon::Ptr{Cvoid}, x::Cint, y::Cint)
         (Ptr{Cvoid}, Cint, Cint),
         icon, x, y)
 end
+function wxDragIconWithCursor(icon::Ptr{Cvoid}, cursor::Ptr{Cvoid})
+    ccall((:wxDragIconWithCursor, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        icon, cursor)
+end
 function wxDragListItem(listCtrl::Ptr{Cvoid}, id::Clong)
     ccall((:wxDragListItem, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Clong),
@@ -746,6 +816,11 @@ function wxDragString(text::Ptr{Cvoid}, x::Cint, y::Cint)
     ccall((:wxDragString, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Cint, Cint),
         text, x, y)
+end
+function wxDragStringWithCursor(text::Ptr{Cvoid}, cursor::Ptr{Cvoid})
+    ccall((:wxDragStringWithCursor, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        text, cursor)
 end
 function wxDragTreeItem(treeCtrl::Ptr{Cvoid}, id::Ptr{Cvoid})
     ccall((:wxDragTreeItem, libkwxFFI), Ptr{Cvoid},
@@ -757,6 +832,11 @@ function wxGenericDragIcon(icon::Ptr{Cvoid})
         (Ptr{Cvoid},),
         icon)
 end
+function wxGenericDragIconWithCursor(icon::Ptr{Cvoid}, cursor::Ptr{Cvoid})
+    ccall((:wxGenericDragIconWithCursor, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        icon, cursor)
+end
 function wxGenericDragListItem(listCtrl::Ptr{Cvoid}, id::Clong)
     ccall((:wxGenericDragListItem, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Clong),
@@ -766,6 +846,11 @@ function wxGenericDragString(text::Ptr{Cvoid})
     ccall((:wxGenericDragString, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid},),
         text)
+end
+function wxGenericDragStringWithCursor(text::Ptr{Cvoid}, cursor::Ptr{Cvoid})
+    ccall((:wxGenericDragStringWithCursor, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        text, cursor)
 end
 function wxGenericDragTreeItem(treeCtrl::Ptr{Cvoid}, id::Ptr{Cvoid})
     ccall((:wxGenericDragTreeItem, libkwxFFI), Ptr{Cvoid},
@@ -826,6 +911,11 @@ function kwxConsoleInitialize(argc::Cint, argv::Ptr{Cvoid})
         (Cint, Ptr{Cvoid}),
         argc, argv)
 end
+function kwxConsoleInitializeFromArgs(argc::Cint, argv::Ptr{Cvoid})
+    ccall((:kwxConsoleInitializeFromArgs, libkwxFFI), Cint,
+        (Cint, Ptr{Cvoid}),
+        argc, argv)
+end
 kwxConsoleRun() = ccall((:kwxConsoleRun, libkwxFFI), Cint, ())
 kwxConsoleExitMainLoop() = ccall((:kwxConsoleExitMainLoop, libkwxFFI), Cvoid, ())
 kwxConsoleShutdown() = ccall((:kwxConsoleShutdown, libkwxFFI), Cvoid, ())
@@ -833,14 +923,38 @@ kwxConsoleIsInitialized() = ccall((:kwxConsoleIsInitialized, libkwxFFI), Cint, (
 kwxConsoleGetApp() = ccall((:kwxConsoleGetApp, libkwxFFI), Ptr{Cvoid}, ())
 kwxConsoleProcessPendingEvents() = ccall((:kwxConsoleProcessPendingEvents, libkwxFFI), Cvoid, ())
 kwxConsoleYield() = ccall((:kwxConsoleYield, libkwxFFI), Cint, ())
+function kwxConsoleOnInitCmdLineBase(parser::Ptr{Cvoid})
+    ccall((:kwxConsoleOnInitCmdLineBase, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        parser)
+end
+function kwxConsoleOnCmdLineParsedBase(parser::Ptr{Cvoid})
+    ccall((:kwxConsoleOnCmdLineParsedBase, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        parser)
+end
+kwxStdin() = ccall((:kwxStdin, libkwxFFI), Ptr{Cvoid}, ())
+kwxStdout() = ccall((:kwxStdout, libkwxFFI), Ptr{Cvoid}, ())
+kwxStderr() = ccall((:kwxStderr, libkwxFFI), Ptr{Cvoid}, ())
+function kwxConsoleCheckBuildOptions(componentName::Cstring)
+    ccall((:kwxConsoleCheckBuildOptions, libkwxFFI), Cint,
+        (Cstring,),
+        componentName)
+end
 function wxPrintf(text::Ptr{Cvoid})
     ccall((:wxPrintf, libkwxFFI), Cint,
         (Ptr{Cvoid},),
         text)
 end
+function wxPrintfLen(text::Cstring, len::Cint)
+    ccall((:wxPrintfLen, libkwxFFI), Cint,
+        (Cstring, Cint),
+        text, len)
+end
 kwxMessageOutputUseStderr() = ccall((:kwxMessageOutputUseStderr, libkwxFFI), Cvoid, ())
 kwxMessageOutputUseStdout() = ccall((:kwxMessageOutputUseStdout, libkwxFFI), Cvoid, ())
 kwxMessageOutputReset() = ccall((:kwxMessageOutputReset, libkwxFFI), Cvoid, ())
+kwxLogUseStderr() = ccall((:kwxLogUseStderr, libkwxFFI), Cvoid, ())
 function wxBase64EncodeBuffer(source::Ptr{Cvoid}, src_length::Csize_t)
     ccall((:wxBase64EncodeBuffer, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Csize_t),
@@ -909,6 +1023,7 @@ expPROPSHEET_LISTBOOK() = ccall((:expPROPSHEET_LISTBOOK, libkwxFFI), Cint, ())
 expPROPSHEET_BUTTONTOOLBOOK() = ccall((:expPROPSHEET_BUTTONTOOLBOOK, libkwxFFI), Cint, ())
 expPROPSHEET_TREEBOOK() = ccall((:expPROPSHEET_TREEBOOK, libkwxFFI), Cint, ())
 expPROPSHEET_SHRINKTOFIT() = ccall((:expPROPSHEET_SHRINKTOFIT, libkwxFFI), Cint, ())
+wxCreateSVGBitmapEmbedHandler() = ccall((:wxCreateSVGBitmapEmbedHandler, libkwxFFI), Ptr{Cvoid}, ())
 kwxGetMousePositionPoint() = ccall((:kwxGetMousePositionPoint, libkwxFFI), Ptr{Cvoid}, ())
 function kwxSetActiveLogTarget(pLogger::Ptr{Cvoid})
     ccall((:kwxSetActiveLogTarget, libkwxFFI), Ptr{Cvoid},

@@ -7,12 +7,16 @@ function wxDataObjectComposite()
     return obj
 end
 
-function add!(obj::wxDataObjectComposite, data::Ptr{Cvoid}, preferred::Integer)
+function add!(obj::wxDataObjectCompositeBase, data::Ptr{Cvoid}, preferred::Integer)
     KwxFFI.wxDataObjectComposite_Add(obj.ptr, data, Cint(preferred))
     nothing
 end
 
-function Base.delete!(obj::wxDataObjectComposite)
+function get_received_format(obj::wxDataObjectCompositeBase)
+    return _wx_wrap(wxDataFormat, KwxFFI.wxDataObjectComposite_GetReceivedFormat(obj.ptr); owned = true)
+end
+
+function Base.delete!(obj::wxDataObjectCompositeBase)
     KwxFFI.wxDataObjectComposite_Delete(obj.ptr)
     obj.ptr = C_NULL
     nothing

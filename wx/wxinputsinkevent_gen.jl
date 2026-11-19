@@ -5,7 +5,7 @@ function last_error(obj::wxInputSinkEvent)
 end
 
 function last_input(obj::wxInputSinkEvent)
-    return _wx_take_cstring(KwxFFI.wxInputSinkEvent_LastInput(obj.ptr))
+    return _wx_borrow_cstring(KwxFFI.wxInputSinkEvent_LastInput(obj.ptr))
 end
 
 function last_read(obj::wxInputSinkEvent)

@@ -12,7 +12,7 @@ function wxRichTextBuffer_AddHandler(handler::Ptr{Cvoid})
     nothing
 end
 
-function wxRichTextBuffer_AddFieldType(fieldType::Union{wxRichTextFieldType, Nothing})
+function wxRichTextBuffer_AddFieldType(fieldType::Union{wxRichTextFieldTypeBase, Nothing})
     fieldType_ptr = isnothing(fieldType) ? C_NULL : fieldType.ptr
     KwxFFI.wxRichTextBuffer_AddFieldType(fieldType_ptr)
     nothing
@@ -38,13 +38,13 @@ function wxRichTextBuffer_FindFieldType(name::AbstractString)
     return _result
 end
 
-function wxRichTextBuffer_AddDrawingHandler(handler::Union{wxRichTextDrawingHandler, Nothing})
+function wxRichTextBuffer_AddDrawingHandler(handler::Union{wxRichTextDrawingHandlerBase, Nothing})
     handler_ptr = isnothing(handler) ? C_NULL : handler.ptr
     KwxFFI.wxRichTextBuffer_AddDrawingHandler(handler_ptr)
     nothing
 end
 
-function wxRichTextBuffer_InsertDrawingHandler(handler::Union{wxRichTextDrawingHandler, Nothing})
+function wxRichTextBuffer_InsertDrawingHandler(handler::Union{wxRichTextDrawingHandlerBase, Nothing})
     handler_ptr = isnothing(handler) ? C_NULL : handler.ptr
     KwxFFI.wxRichTextBuffer_InsertDrawingHandler(handler_ptr)
     nothing
@@ -80,7 +80,7 @@ function add_paragraph!(obj::wxRichTextBuffer, text::AbstractString, paraStyle::
     text_ws = wxString(text)
     paraStyle_ptr = isnothing(paraStyle) ? C_NULL : paraStyle.ptr
     try
-        KwxFFI.wxRichTextBuffer_AddParagraph(obj.ptr, text_ws.ptr, paraStyle_ptr, start, end_)
+        GC.@preserve start end_ KwxFFI.wxRichTextBuffer_AddParagraph(obj.ptr, text_ws.ptr, paraStyle_ptr, Base.unsafe_convert(Ptr{Clong}, start), Base.unsafe_convert(Ptr{Clong}, end_))
     finally
         Base.delete!(text_ws)
     end
@@ -92,7 +92,7 @@ function delete_range(obj::wxRichTextBuffer, start::Integer, end_::Integer)
 end
 
 function get_range!(obj::wxRichTextBuffer, start::Ref{Clong}, end_::Ref{Clong})
-    KwxFFI.wxRichTextBuffer_GetRange(obj.ptr, start, end_)
+    GC.@preserve start end_ KwxFFI.wxRichTextBuffer_GetRange(obj.ptr, Base.unsafe_convert(Ptr{Clong}, start), Base.unsafe_convert(Ptr{Clong}, end_))
     nothing
 end
 

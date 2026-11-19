@@ -38,7 +38,7 @@ function set_empty_data!(obj::wxPGCellBase)
     nothing
 end
 
-function merge_from!(obj::wxPGCellBase, srcCell::Union{wxPGCell, Nothing})
+function merge_from!(obj::wxPGCellBase, srcCell::Union{wxPGCellBase, Nothing})
     srcCell_ptr = isnothing(srcCell) ? C_NULL : srcCell.ptr
     KwxFFI.wxPGCell_MergeFrom(obj.ptr, srcCell_ptr)
     nothing

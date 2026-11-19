@@ -19,7 +19,7 @@ function append_string!(obj::wxChoice, item::AbstractString)
     nothing
 end
 
-function set_client_object!(obj::wxChoice, n::Integer, clientData::Union{wxClientData, Nothing})
+function set_client_object!(obj::wxChoice, n::Integer, clientData::Union{wxClientDataBase, Nothing})
     clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
     KwxFFI.wxItemContainer_SetClientObject(obj.ptr, Cuint(n), clientData_ptr)
     nothing
@@ -185,7 +185,7 @@ function append_with_client_data(obj::wxChoiceBase, item::AbstractString, client
     return _result
 end
 
-function append_with_client_object(obj::wxChoiceBase, item::AbstractString, clientData::Union{wxClientData, Nothing})
+function append_with_client_object(obj::wxChoiceBase, item::AbstractString, clientData::Union{wxClientDataBase, Nothing})
     item_ws = wxString(item)
     clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
     _result = try

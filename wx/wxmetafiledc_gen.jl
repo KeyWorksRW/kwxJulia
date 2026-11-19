@@ -12,8 +12,27 @@ function wxMetafileDC(filePath::AbstractString)
     return obj
 end
 
+function wxMetafileDC()
+    ptr = KwxFFI.wxMetafileDC_CreateDefault()
+    ptr == C_NULL && error("Failed to create wxMetafileDC")
+    obj = wxMetafileDC(ptr)
+    return obj
+end
+
+function wxMetafileDC(filePath::AbstractString, xext::Integer, yext::Integer, xorg::Integer, yorg::Integer)
+    filePath_ws = wxString(filePath)
+    ptr = try
+        KwxFFI.wxMetafileDC_CreateWithExtent(filePath_ws.ptr, Cint(xext), Cint(yext), Cint(xorg), Cint(yorg))
+    finally
+        Base.delete!(filePath_ws)
+    end
+    ptr == C_NULL && error("Failed to create wxMetafileDC")
+    obj = wxMetafileDC(ptr)
+    return obj
+end
+
 function Base.close(obj::wxMetafileDC)
-    return KwxFFI.wxMetafileDC_Close(obj.ptr)
+    return _wx_wrap(wxMetafile, KwxFFI.wxMetafileDC_Close(obj.ptr); owned = true)
 end
 
 function Base.delete!(obj::wxMetafileDC)

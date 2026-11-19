@@ -8,7 +8,7 @@ function wxBufferedPaintDC(window::Union{wxWindow, Nothing}, style::Integer)
     return obj
 end
 
-function wxBufferedPaintDC(window::Union{wxWindow, Nothing}, bitmap::Union{wxBitmap, Nothing}, style::Integer)
+function wxBufferedPaintDC(window::Union{wxWindow, Nothing}, bitmap::Union{wxBitmapBase, Nothing}, style::Integer)
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     ptr = KwxFFI.wxBufferedPaintDC_CreateWithBitmap(window_ptr, bitmap_ptr, Cint(style))

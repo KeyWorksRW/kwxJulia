@@ -37,7 +37,7 @@ function set_icon!(obj::wxRichToolTip, icon::Integer)
     nothing
 end
 
-function set_icon_bitmap!(obj::wxRichToolTip, icon::Union{wxBitmap, Nothing})
+function set_icon_bitmap!(obj::wxRichToolTip, icon::Union{wxBitmapBase, Nothing})
     icon_ptr = isnothing(icon) ? C_NULL : icon.ptr
     KwxFFI.wxRichToolTip_SetIconBitmap(obj.ptr, icon_ptr)
     nothing

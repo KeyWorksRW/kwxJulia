@@ -29,7 +29,7 @@ function set_key_tip!(obj::wxRibbonToolBar, tool_id::Integer, keytip::AbstractSt
     nothing
 end
 
-function add_tool(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString, kind::Integer, bitmap_disabled::Union{wxBitmap, Nothing}, client_data::Ptr{Cvoid})
+function add_tool(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString, kind::Integer, bitmap_disabled::Union{wxBitmapBase, Nothing}, client_data::Ptr{Cvoid})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
     bitmap_disabled_ptr = isnothing(bitmap_disabled) ? C_NULL : bitmap_disabled.ptr
@@ -41,7 +41,7 @@ function add_tool(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{wxBitmap
     return _result
 end
 
-function add_dropdown_tool(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString)
+function add_dropdown_tool(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
     _result = try
@@ -52,7 +52,7 @@ function add_dropdown_tool(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union
     return _result
 end
 
-function add_hybrid_tool(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString)
+function add_hybrid_tool(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
     _result = try
@@ -63,7 +63,7 @@ function add_hybrid_tool(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{w
     return _result
 end
 
-function add_toggle_tool(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString)
+function add_toggle_tool(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
     _result = try
@@ -78,7 +78,7 @@ function add_separator(obj::wxRibbonToolBar)
     return KwxFFI.wxRibbonToolBar_AddSeparator(obj.ptr)
 end
 
-function insert_tool(obj::wxRibbonToolBar, pos::Integer, tool_id::Integer, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString, kind::Integer, bitmap_disabled::Union{wxBitmap, Nothing}, client_data::Ptr{Cvoid})
+function insert_tool(obj::wxRibbonToolBar, pos::Integer, tool_id::Integer, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString, kind::Integer, bitmap_disabled::Union{wxBitmapBase, Nothing}, client_data::Ptr{Cvoid})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
     bitmap_disabled_ptr = isnothing(bitmap_disabled) ? C_NULL : bitmap_disabled.ptr
@@ -90,7 +90,7 @@ function insert_tool(obj::wxRibbonToolBar, pos::Integer, tool_id::Integer, bitma
     return _result
 end
 
-function insert_dropdown_tool(obj::wxRibbonToolBar, pos::Integer, tool_id::Integer, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString)
+function insert_dropdown_tool(obj::wxRibbonToolBar, pos::Integer, tool_id::Integer, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
     _result = try
@@ -101,7 +101,7 @@ function insert_dropdown_tool(obj::wxRibbonToolBar, pos::Integer, tool_id::Integ
     return _result
 end
 
-function insert_hybrid_tool(obj::wxRibbonToolBar, pos::Integer, tool_id::Integer, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString)
+function insert_hybrid_tool(obj::wxRibbonToolBar, pos::Integer, tool_id::Integer, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
     _result = try
@@ -112,7 +112,7 @@ function insert_hybrid_tool(obj::wxRibbonToolBar, pos::Integer, tool_id::Integer
     return _result
 end
 
-function insert_toggle_tool(obj::wxRibbonToolBar, pos::Integer, tool_id::Integer, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString)
+function insert_toggle_tool(obj::wxRibbonToolBar, pos::Integer, tool_id::Integer, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
     _result = try
@@ -169,7 +169,7 @@ function get_tool_pos(obj::wxRibbonToolBar, tool_id::Integer)
 end
 
 function get_tool_rect!(obj::wxRibbonToolBar, tool_id::Integer, x::Ref{Int32}, y::Ref{Int32}, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxRibbonToolBar_GetToolRect(obj.ptr, Cint(tool_id), x, y, width, height)
+    GC.@preserve x y width height KwxFFI.wxRibbonToolBar_GetToolRect(obj.ptr, Cint(tool_id), Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y), Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 
@@ -204,13 +204,13 @@ function get_tool_state(obj::wxRibbonToolBar, tool_id::Integer)
     return KwxFFI.wxRibbonToolBar_GetToolState(obj.ptr, Cint(tool_id)) != 0
 end
 
-function set_tool_normal_bitmap!(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{wxBitmap, Nothing})
+function set_tool_normal_bitmap!(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxRibbonToolBar_SetToolNormalBitmap(obj.ptr, Cint(tool_id), bitmap_ptr)
     nothing
 end
 
-function set_tool_disabled_bitmap!(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{wxBitmap, Nothing})
+function set_tool_disabled_bitmap!(obj::wxRibbonToolBar, tool_id::Integer, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxRibbonToolBar_SetToolDisabledBitmap(obj.ptr, Cint(tool_id), bitmap_ptr)
     nothing
@@ -223,7 +223,7 @@ function set_tool_client_data!(obj::wxRibbonToolBar, tool_id::Integer, clientDat
 end
 
 function get_tool_client_data(obj::wxRibbonToolBar, tool_id::Integer)
-    return KwxFFI.wxRibbonToolBar_GetToolClientData(obj.ptr, Cint(tool_id))
+    return _wx_ref(wxObject, KwxFFI.wxRibbonToolBar_GetToolClientData(obj.ptr, Cint(tool_id)))
 end
 
 function set_rows!(obj::wxRibbonToolBar, nMin::Integer, nMax::Integer)

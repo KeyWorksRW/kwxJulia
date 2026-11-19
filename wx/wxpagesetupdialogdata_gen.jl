@@ -97,19 +97,19 @@ function get_enable_printer(obj::wxPageSetupDialogData)
 end
 
 function get_margin_bottom_right(obj::wxPageSetupDialogData)
-    return _wx_wrap(wxPoint, KwxFFI.wxPageSetupDialogData_GetMarginBottomRight(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxPageSetupDialogData_GetMarginBottomRight(obj.ptr); owned = true)
 end
 
 function get_margin_top_left(obj::wxPageSetupDialogData)
-    return _wx_wrap(wxPoint, KwxFFI.wxPageSetupDialogData_GetMarginTopLeft(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxPageSetupDialogData_GetMarginTopLeft(obj.ptr); owned = true)
 end
 
 function get_min_margin_bottom_right(obj::wxPageSetupDialogData)
-    return _wx_wrap(wxPoint, KwxFFI.wxPageSetupDialogData_GetMinMarginBottomRight(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxPageSetupDialogData_GetMinMarginBottomRight(obj.ptr); owned = true)
 end
 
 function get_min_margin_top_left(obj::wxPageSetupDialogData)
-    return _wx_wrap(wxPoint, KwxFFI.wxPageSetupDialogData_GetMinMarginTopLeft(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxPageSetupDialogData_GetMinMarginTopLeft(obj.ptr); owned = true)
 end
 
 function get_paper_id(obj::wxPageSetupDialogData)
@@ -117,7 +117,7 @@ function get_paper_id(obj::wxPageSetupDialogData)
 end
 
 function get_paper_size(obj::wxPageSetupDialogData)
-    return _wx_wrap(wxSize, KwxFFI.wxPageSetupDialogData_GetPaperSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxPageSetupDialogData_GetPaperSize(obj.ptr); owned = true)
 end
 
 function get_print_data!(obj::wxPageSetupDialogData, ref::Union{wxPrintData, Nothing})

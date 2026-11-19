@@ -111,6 +111,158 @@ function wxAccessible_SetOnGetFocus(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
 end
+function wxAccessible_SetOnGetSelections(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetSelections, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function wxAccessible_SetOnHitTestWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnHitTestWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetLocationWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetLocationWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnNavigateWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnNavigateWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetNameWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetNameWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetChildCountWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetChildCountWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetChildWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetChildWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetParentWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetParentWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnDoDefaultActionWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnDoDefaultActionWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetDefaultActionWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetDefaultActionWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetDescriptionWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetDescriptionWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetHelpTextWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetHelpTextWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetKeyboardShortcutWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetKeyboardShortcutWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetRoleWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetRoleWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetStateWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetStateWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetValueWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetValueWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnSelectWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnSelectWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetFocusWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetFocusWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetOnGetSelectionsWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxAccessible_SetOnGetSelectionsWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxAccessible_SetHookResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxAccessible_SetHookResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxAccessible_SetHitTestResult(pObject::Ptr{Cvoid}, childId::Cint, childObject::Ptr{Cvoid})
+    ccall((:wxAccessible_SetHitTestResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}),
+        pObject, childId, childObject)
+end
+function wxAccessible_SetGetLocationResult(pObject::Ptr{Cvoid}, x::Cint, y::Cint, width::Cint, height::Cint)
+    ccall((:wxAccessible_SetGetLocationResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint, Cint, Cint, Cint),
+        pObject, x, y, width, height)
+end
+function wxAccessible_SetNavigateResult(pObject::Ptr{Cvoid}, toId::Cint, toObject::Ptr{Cvoid})
+    ccall((:wxAccessible_SetNavigateResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}),
+        pObject, toId, toObject)
+end
+function wxAccessible_SetGetChildCountResult(pObject::Ptr{Cvoid}, childCount::Cint)
+    ccall((:wxAccessible_SetGetChildCountResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, childCount)
+end
+function wxAccessible_SetGetChildResult(pObject::Ptr{Cvoid}, child::Ptr{Cvoid})
+    ccall((:wxAccessible_SetGetChildResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, child)
+end
+function wxAccessible_SetGetParentResult(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid})
+    ccall((:wxAccessible_SetGetParentResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent)
+end
+function wxAccessible_SetGetRoleResult(pObject::Ptr{Cvoid}, role::Cint)
+    ccall((:wxAccessible_SetGetRoleResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, role)
+end
+function wxAccessible_SetGetStateResult(pObject::Ptr{Cvoid}, state::Cint)
+    ccall((:wxAccessible_SetGetStateResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, state)
+end
+function wxAccessible_SetGetFocusResult(pObject::Ptr{Cvoid}, childId::Cint, child::Ptr{Cvoid})
+    ccall((:wxAccessible_SetGetFocusResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}),
+        pObject, childId, child)
+end
+
+# kwxAccString
+function kwxAccString_SetValue(name::Ptr{Cvoid}, value::Cstring)
+    ccall((:kwxAccString_SetValue, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cstring),
+        name, value)
+end
 
 # wxWindow
 function wxWindow_SetAccessible(pObject::Ptr{Cvoid}, accessible::Ptr{Cvoid})
@@ -246,6 +398,11 @@ end
 function wxWindow_ClientToWindowSize(pObject::Ptr{Cvoid}, width::Ptr{Cint}, height::Ptr{Cint})
     ccall((:wxWindow_ClientToWindowSize, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cint}, Ptr{Cint}),
+        pObject, width, height)
+end
+function wxWindow_SetSizeWH(pObject::Ptr{Cvoid}, width::Cint, height::Cint)
+    ccall((:wxWindow_SetSizeWH, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint, Cint),
         pObject, width, height)
 end
 function wxWindow_WindowToClientSize(pObject::Ptr{Cvoid}, width::Ptr{Cint}, height::Ptr{Cint})
@@ -547,6 +704,21 @@ function wxWindow_ToDIP(pObject::Ptr{Cvoid}, value::Cint)
     ccall((:wxWindow_ToDIP, libkwxFFI), Cint,
         (Ptr{Cvoid}, Cint),
         pObject, value)
+end
+function wxWindow_FromDIPSize(pObject::Ptr{Cvoid}, width::Cint, height::Cint)
+    ccall((:wxWindow_FromDIPSize, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Cint),
+        pObject, width, height)
+end
+function wxWindow_FromDIPSizeForWindow(width::Cint, height::Cint, window::Ptr{Cvoid})
+    ccall((:wxWindow_FromDIPSizeForWindow, libkwxFFI), Ptr{Cvoid},
+        (Cint, Cint, Ptr{Cvoid}),
+        width, height, window)
+end
+function wxWindow_FromDIPSizeDefault(width::Cint, height::Cint)
+    ccall((:wxWindow_FromDIPSizeDefault, libkwxFFI), Ptr{Cvoid},
+        (Cint, Cint),
+        width, height)
 end
 function wxWindow_HasCapture(pObject::Ptr{Cvoid})
     ccall((:wxWindow_HasCapture, libkwxFFI), Cint,
@@ -1307,6 +1479,11 @@ function wxWindow_SetCursor(pObject::Ptr{Cvoid}, cursor::Ptr{Cvoid})
     ccall((:wxWindow_SetCursor, libkwxFFI), Cint,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, cursor)
+end
+function wxWindow_SetCursorBundle(pObject::Ptr{Cvoid}, bundle::Ptr{Cvoid})
+    ccall((:wxWindow_SetCursorBundle, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, bundle)
 end
 function wxWindow_SetDropTarget(pObject::Ptr{Cvoid}, dropTarget::Ptr{Cvoid})
     ccall((:wxWindow_SetDropTarget, libkwxFFI), Cvoid,
@@ -2337,6 +2514,11 @@ function wxBitmap_CreateFromXPM(data::Ptr{Cvoid})
         (Ptr{Cvoid},),
         data)
 end
+function wxBitmap_CreateFromXPMString(xpm::Cstring)
+    ccall((:wxBitmap_CreateFromXPMString, libkwxFFI), Ptr{Cvoid},
+        (Cstring,),
+        xpm)
+end
 function wxBitmap_CreateLoad(name::Ptr{Cvoid}, type_::Cint)
     ccall((:wxBitmap_CreateLoad, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Cint),
@@ -3221,6 +3403,11 @@ function Cursor_CreateLoad(name::Ptr{Cvoid}, type_::Clong, width::Cint, height::
     ccall((:Cursor_CreateLoad, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Clong, Cint, Cint),
         name, type_, width, height)
+end
+function Cursor_CreateFromXPMString(xpm::Cstring)
+    ccall((:Cursor_CreateFromXPMString, libkwxFFI), Ptr{Cvoid},
+        (Cstring,),
+        xpm)
 end
 
 # wxDateTime
@@ -4549,10 +4736,20 @@ function wxDragImage_BeginDragFullScreen(pObject::Ptr{Cvoid}, x_pos::Cint, y_pos
         (Ptr{Cvoid}, Cint, Cint, Ptr{Cvoid}, Cint, Ptr{Cvoid}),
         pObject, x_pos, y_pos, window, fullScreen, rect)
 end
+function wxDragImage_BeginDragFullScreenDefault(pObject::Ptr{Cvoid}, x_pos::Cint, y_pos::Cint, window::Ptr{Cvoid}, fullScreen::Cint)
+    ccall((:wxDragImage_BeginDragFullScreenDefault, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint, Cint, Ptr{Cvoid}, Cint),
+        pObject, x_pos, y_pos, window, fullScreen)
+end
 function wxDragImage_Create(image::Ptr{Cvoid}, x::Cint, y::Cint)
     ccall((:wxDragImage_Create, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Cint, Cint),
         image, x, y)
+end
+function wxDragImage_CreateWithCursor(image::Ptr{Cvoid}, cursor::Ptr{Cvoid})
+    ccall((:wxDragImage_CreateWithCursor, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        image, cursor)
 end
 function wxDragImage_Delete(pObject::Ptr{Cvoid})
     ccall((:wxDragImage_Delete, libkwxFFI), Cvoid,
@@ -4651,6 +4848,16 @@ function wxEvent_Skip(pObject::Ptr{Cvoid}, skip::Cint)
     ccall((:wxEvent_Skip, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Cint),
         pObject, skip)
+end
+function wxEvent_StopPropagation(pObject::Ptr{Cvoid})
+    ccall((:wxEvent_StopPropagation, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxEvent_ResumePropagation(pObject::Ptr{Cvoid}, propagationLevel::Cint)
+    ccall((:wxEvent_ResumePropagation, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, propagationLevel)
 end
 function wxEvent_SetOnClone(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
     ccall((:wxEvent_SetOnClone, libkwxFFI), Cvoid,
@@ -4861,6 +5068,18 @@ function wxStringOutputStream_Delete(self::Ptr{Cvoid})
 end
 function wxStringOutputStream_GetString(self::Ptr{Cvoid})
     ccall((:wxStringOutputStream_GetString, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        self)
+end
+
+# wxStringInputStream
+function wxStringInputStream_Create(str::Ptr{Cvoid})
+    ccall((:wxStringInputStream_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        str)
+end
+function wxStringInputStream_Delete(self::Ptr{Cvoid})
+    ccall((:wxStringInputStream_Delete, libkwxFFI), Cvoid,
         (Ptr{Cvoid},),
         self)
 end
@@ -5078,6 +5297,7 @@ function wxGCDC_CreateFromPrinter(dc::Ptr{Cvoid})
         (Ptr{Cvoid},),
         dc)
 end
+wxGCDC_CreateDefault() = ccall((:wxGCDC_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
 function wxGCDC_Delete(pObject::Ptr{Cvoid})
     ccall((:wxGCDC_Delete, libkwxFFI), Cvoid,
         (Ptr{Cvoid},),
@@ -5331,6 +5551,21 @@ function wxGraphicsContext_CreatePen(pObject::Ptr{Cvoid}, pen::Ptr{Cvoid})
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pen)
 end
+function wxGraphicsContext_CreatePenFromInfo(pObject::Ptr{Cvoid}, info::Ptr{Cvoid})
+    ccall((:wxGraphicsContext_CreatePenFromInfo, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, info)
+end
+function wxGraphicsContext_CreateLinearGradientBrushFromStops(pObject::Ptr{Cvoid}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble, stops::Ptr{Cvoid}, matrix::Ptr{Cvoid})
+    ccall((:wxGraphicsContext_CreateLinearGradientBrushFromStops, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cdouble, Cdouble, Cdouble, Cdouble, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, x1, y1, x2, y2, stops, matrix)
+end
+function wxGraphicsContext_CreateRadialGradientBrushFromStops(pObject::Ptr{Cvoid}, startX::Cdouble, startY::Cdouble, endX::Cdouble, endY::Cdouble, radius::Cdouble, stops::Ptr{Cvoid}, matrix::Ptr{Cvoid})
+    ccall((:wxGraphicsContext_CreateRadialGradientBrushFromStops, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, startX, startY, endX, endY, radius, stops, matrix)
+end
 function wxGraphicsContext_CreateRadialGradientBrush(pObject::Ptr{Cvoid}, startX::Cdouble, startY::Cdouble, endX::Cdouble, endY::Cdouble, radius::Cdouble, oColor::Ptr{Cvoid}, cColor::Ptr{Cvoid}, matrix::Ptr{Cvoid})
     ccall((:wxGraphicsContext_CreateRadialGradientBrush, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
@@ -5423,6 +5658,11 @@ function wxGraphicsContext_Delete(pObject::Ptr{Cvoid})
 end
 function wxGraphicsContext_DrawBitmap(pObject::Ptr{Cvoid}, bmp::Ptr{Cvoid}, x::Cdouble, y::Cdouble, width::Cdouble, height::Cdouble)
     ccall((:wxGraphicsContext_DrawBitmap, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cdouble, Cdouble, Cdouble, Cdouble),
+        pObject, bmp, x, y, width, height)
+end
+function wxGraphicsContext_DrawGraphicsBitmap(pObject::Ptr{Cvoid}, bmp::Ptr{Cvoid}, x::Cdouble, y::Cdouble, width::Cdouble, height::Cdouble)
+    ccall((:wxGraphicsContext_DrawGraphicsBitmap, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}, Cdouble, Cdouble, Cdouble, Cdouble),
         pObject, bmp, x, y, width, height)
 end
@@ -5771,6 +6011,85 @@ function wxGraphicsPen_Delete(pObject::Ptr{Cvoid})
         pObject)
 end
 
+# wxGraphicsGradientStops
+function wxGraphicsGradientStops_Create(startColour::Ptr{Cvoid}, endColour::Ptr{Cvoid})
+    ccall((:wxGraphicsGradientStops_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        startColour, endColour)
+end
+function wxGraphicsGradientStops_Add(pObject::Ptr{Cvoid}, colour::Ptr{Cvoid}, pos::Cfloat)
+    ccall((:wxGraphicsGradientStops_Add, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cfloat),
+        pObject, colour, pos)
+end
+function wxGraphicsGradientStops_GetCount(pObject::Ptr{Cvoid})
+    ccall((:wxGraphicsGradientStops_GetCount, libkwxFFI), Csize_t,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxGraphicsGradientStops_GetStartColour(pObject::Ptr{Cvoid})
+    ccall((:wxGraphicsGradientStops_GetStartColour, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxGraphicsGradientStops_SetStartColour(pObject::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxGraphicsGradientStops_SetStartColour, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, colour)
+end
+function wxGraphicsGradientStops_GetEndColour(pObject::Ptr{Cvoid})
+    ccall((:wxGraphicsGradientStops_GetEndColour, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxGraphicsGradientStops_SetEndColour(pObject::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxGraphicsGradientStops_SetEndColour, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, colour)
+end
+function wxGraphicsGradientStops_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxGraphicsGradientStops_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxGraphicsPenInfo
+function wxGraphicsPenInfo_Create(colour::Ptr{Cvoid}, width::Cdouble, style::Cint)
+    ccall((:wxGraphicsPenInfo_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cdouble, Cint),
+        colour, width, style)
+end
+function wxGraphicsPenInfo_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxGraphicsPenInfo_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxGraphicsPenInfo_SetWidth(pObject::Ptr{Cvoid}, width::Cdouble)
+    ccall((:wxGraphicsPenInfo_SetWidth, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cdouble),
+        pObject, width)
+end
+function wxGraphicsPenInfo_SetLinearGradient(pObject::Ptr{Cvoid}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble, c1::Ptr{Cvoid}, c2::Ptr{Cvoid})
+    ccall((:wxGraphicsPenInfo_SetLinearGradient, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cdouble, Cdouble, Cdouble, Cdouble, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, x1, y1, x2, y2, c1, c2)
+end
+function wxGraphicsPenInfo_SetLinearGradientStops(pObject::Ptr{Cvoid}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble, stops::Ptr{Cvoid})
+    ccall((:wxGraphicsPenInfo_SetLinearGradientStops, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cdouble, Cdouble, Cdouble, Cdouble, Ptr{Cvoid}),
+        pObject, x1, y1, x2, y2, stops)
+end
+function wxGraphicsPenInfo_SetRadialGradient(pObject::Ptr{Cvoid}, startX::Cdouble, startY::Cdouble, endX::Cdouble, endY::Cdouble, radius::Cdouble, oColor::Ptr{Cvoid}, cColor::Ptr{Cvoid})
+    ccall((:wxGraphicsPenInfo_SetRadialGradient, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, startX, startY, endX, endY, radius, oColor, cColor)
+end
+function wxGraphicsPenInfo_SetRadialGradientStops(pObject::Ptr{Cvoid}, startX::Cdouble, startY::Cdouble, endX::Cdouble, endY::Cdouble, radius::Cdouble, stops::Ptr{Cvoid})
+    ccall((:wxGraphicsPenInfo_SetRadialGradientStops, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Ptr{Cvoid}),
+        pObject, startX, startY, endX, endY, radius, stops)
+end
+
 # wxGraphicsRenderer
 function wxGraphicsRenderer_CreateContext(pObject::Ptr{Cvoid}, dc::Ptr{Cvoid})
     ccall((:wxGraphicsRenderer_CreateContext, libkwxFFI), Ptr{Cvoid},
@@ -5781,6 +6100,11 @@ function wxGraphicsRenderer_CreateContextFromWindow(pObject::Ptr{Cvoid}, window:
     ccall((:wxGraphicsRenderer_CreateContextFromWindow, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, window)
+end
+function wxGraphicsRenderer_CreateContextFromMemory(pObject::Ptr{Cvoid}, dc::Ptr{Cvoid})
+    ccall((:wxGraphicsRenderer_CreateContextFromMemory, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, dc)
 end
 function wxGraphicsRenderer_CreateContextFromNativeContext(pObject::Ptr{Cvoid}, context::Ptr{Cvoid})
     ccall((:wxGraphicsRenderer_CreateContextFromNativeContext, libkwxFFI), Ptr{Cvoid},
@@ -5799,6 +6123,11 @@ function wxGraphicsRenderer_CreatePath(pObject::Ptr{Cvoid})
 end
 function wxGraphicsRenderer_Delete(pObject::Ptr{Cvoid})
     ccall((:wxGraphicsRenderer_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxGraphicsRenderer_GetCairoRenderer(pObject::Ptr{Cvoid})
+    ccall((:wxGraphicsRenderer_GetCairoRenderer, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid},),
         pObject)
 end
@@ -7084,6 +7413,11 @@ function wxListCtrl_SetItemPtrData(pObject::Ptr{Cvoid}, item::Clong, data::Csize
         (Ptr{Cvoid}, Clong, Csize_t),
         pObject, item, data)
 end
+function wxListCtrl_GetItemPtrData(pObject::Ptr{Cvoid}, item::Clong)
+    ccall((:wxListCtrl_GetItemPtrData, libkwxFFI), Csize_t,
+        (Ptr{Cvoid}, Clong),
+        pObject, item)
+end
 function wxListCtrl_GetItemTextColour(pObject::Ptr{Cvoid}, item::Clong)
     ccall((:wxListCtrl_GetItemTextColour, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Clong),
@@ -7547,7 +7881,7 @@ function wxListEvent_GetColumn(pObject::Ptr{Cvoid})
         pObject)
 end
 function wxListEvent_GetData(pObject::Ptr{Cvoid})
-    ccall((:wxListEvent_GetData, libkwxFFI), Cint,
+    ccall((:wxListEvent_GetData, libkwxFFI), Csize_t,
         (Ptr{Cvoid},),
         pObject)
 end
@@ -7782,6 +8116,7 @@ function wxMenu_Create(title::Ptr{Cvoid}, style::Clong)
         (Ptr{Cvoid}, Clong),
         title, style)
 end
+wxMenu_CreateDefault() = ccall((:wxMenu_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
 function wxMenu_DeleteById(pObject::Ptr{Cvoid}, id::Cint)
     ccall((:wxMenu_DeleteById, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Cint),
@@ -8858,6 +9193,11 @@ function wxObject_IsScrolledWindow(pObject::Ptr{Cvoid})
         (Ptr{Cvoid},),
         pObject)
 end
+function wxObject_IsOfClass(pObject::Ptr{Cvoid}, className::Cstring)
+    ccall((:wxObject_IsOfClass, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cstring),
+        pObject, className)
+end
 function wxObject_SetClientClosure(pObject::Ptr{Cvoid}, closure::Ptr{Cvoid})
     ccall((:wxObject_SetClientClosure, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}),
@@ -9517,6 +9857,26 @@ function wxScrolledWindow_GetViewStartPixels(pObject::Ptr{Cvoid}, x::Ptr{Cint}, 
     ccall((:wxScrolledWindow_GetViewStartPixels, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cint}, Ptr{Cint}),
         pObject, x, y)
+end
+function wxScrolledWindow_EnableAutoScrollInside(pObject::Ptr{Cvoid}, insideWidth::Cint)
+    ccall((:wxScrolledWindow_EnableAutoScrollInside, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, insideWidth)
+end
+function wxScrolledWindow_DisableAutoScrollOutside(pObject::Ptr{Cvoid})
+    ccall((:wxScrolledWindow_DisableAutoScrollOutside, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxScrolledWindow_EnableAutoscrollWithoutCapture(pObject::Ptr{Cvoid})
+    ccall((:wxScrolledWindow_EnableAutoscrollWithoutCapture, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxScrolledWindow_DisableAutoscrollWithoutCapture(pObject::Ptr{Cvoid})
+    ccall((:wxScrolledWindow_DisableAutoscrollWithoutCapture, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
 end
 
 # wxSockAddress
@@ -14599,6 +14959,129 @@ function wxXmlNode_SetNoConversion(pObject::Ptr{Cvoid}, no_conversion::Cint)
         pObject, no_conversion)
 end
 
+# wxXmlDocument
+function wxXmlDocument_LoadFile(pObject::Ptr{Cvoid}, filename::Ptr{Cvoid}, flags::Cint)
+    ccall((:wxXmlDocument_LoadFile, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
+        pObject, filename, flags)
+end
+function wxXmlDocument_LoadStream(pObject::Ptr{Cvoid}, stream::Ptr{Cvoid}, flags::Cint)
+    ccall((:wxXmlDocument_LoadStream, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
+        pObject, stream, flags)
+end
+function wxXmlDocument_SaveFile(pObject::Ptr{Cvoid}, filename::Ptr{Cvoid}, indentstep::Cint)
+    ccall((:wxXmlDocument_SaveFile, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
+        pObject, filename, indentstep)
+end
+function wxXmlDocument_SaveStream(pObject::Ptr{Cvoid}, stream::Ptr{Cvoid}, indentstep::Cint)
+    ccall((:wxXmlDocument_SaveStream, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
+        pObject, stream, indentstep)
+end
+wxXmlDocument_Create() = ccall((:wxXmlDocument_Create, libkwxFFI), Ptr{Cvoid}, ())
+function wxXmlDocument_GetDocumentNode(pObject::Ptr{Cvoid})
+    ccall((:wxXmlDocument_GetDocumentNode, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxXmlDocument_CreateFromFile(file_name::Ptr{Cvoid}, flags::Cint)
+    ccall((:wxXmlDocument_CreateFromFile, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        file_name, flags)
+end
+function wxXmlDocument_CreateFromString(text::Ptr{Cvoid}, flags::Cint)
+    ccall((:wxXmlDocument_CreateFromString, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        text, flags)
+end
+function wxXmlDocument_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxXmlDocument_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxXmlDocument_Load(pObject::Ptr{Cvoid}, file_name::Ptr{Cvoid}, flags::Cint)
+    ccall((:wxXmlDocument_Load, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
+        pObject, file_name, flags)
+end
+function wxXmlDocument_LoadFromString(pObject::Ptr{Cvoid}, text::Ptr{Cvoid}, flags::Cint)
+    ccall((:wxXmlDocument_LoadFromString, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
+        pObject, text, flags)
+end
+function wxXmlDocument_Save(pObject::Ptr{Cvoid}, file_name::Ptr{Cvoid}, indent_step::Cint)
+    ccall((:wxXmlDocument_Save, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
+        pObject, file_name, indent_step)
+end
+function wxXmlDocument_SaveToString(pObject::Ptr{Cvoid}, indent_step::Cint)
+    ccall((:wxXmlDocument_SaveToString, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        pObject, indent_step)
+end
+function wxXmlDocument_GetRoot(pObject::Ptr{Cvoid})
+    ccall((:wxXmlDocument_GetRoot, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxXmlDocument_SetRoot(pObject::Ptr{Cvoid}, root::Ptr{Cvoid})
+    ccall((:wxXmlDocument_SetRoot, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, root)
+end
+function wxXmlDocument_DetachRoot(pObject::Ptr{Cvoid})
+    ccall((:wxXmlDocument_DetachRoot, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxXmlDocument_GetVersion(pObject::Ptr{Cvoid})
+    ccall((:wxXmlDocument_GetVersion, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxXmlDocument_SetVersion(pObject::Ptr{Cvoid}, version::Ptr{Cvoid})
+    ccall((:wxXmlDocument_SetVersion, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, version)
+end
+function wxXmlDocument_GetFileEncoding(pObject::Ptr{Cvoid})
+    ccall((:wxXmlDocument_GetFileEncoding, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxXmlDocument_SetFileEncoding(pObject::Ptr{Cvoid}, encoding::Ptr{Cvoid})
+    ccall((:wxXmlDocument_SetFileEncoding, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, encoding)
+end
+function wxXmlDocument_GetFileType(pObject::Ptr{Cvoid})
+    ccall((:wxXmlDocument_GetFileType, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxXmlDocument_SetFileType(pObject::Ptr{Cvoid}, file_type::Cint)
+    ccall((:wxXmlDocument_SetFileType, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, file_type)
+end
+function wxXmlDocument_AppendToProlog(pObject::Ptr{Cvoid}, node::Ptr{Cvoid})
+    ccall((:wxXmlDocument_AppendToProlog, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, node)
+end
+function wxXmlDocument_AppendChild(pObject::Ptr{Cvoid}, child::Ptr{Cvoid})
+    ccall((:wxXmlDocument_AppendChild, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, child)
+end
+function wxXmlDocument_IsOk(pObject::Ptr{Cvoid})
+    ccall((:wxXmlDocument_IsOk, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
 # wxFSFile
 function wxFSFile_Delete(pObject::Ptr{Cvoid})
     ccall((:wxFSFile_Delete, libkwxFFI), Cvoid,
@@ -16212,6 +16695,11 @@ function wxCmdLineParser_ParseStringArgs(pObject::Ptr{Cvoid}, command_line::Ptr{
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, command_line)
 end
+function wxCmdLineParser_ParseArgv(pObject::Ptr{Cvoid}, argc::Cint, argv::Ptr{Cvoid})
+    ccall((:wxCmdLineParser_ParseArgv, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}),
+        pObject, argc, argv)
+end
 function wxCmdLineParser_Found(pObject::Ptr{Cvoid}, name::Ptr{Cvoid})
     ccall((:wxCmdLineParser_Found, libkwxFFI), Cint,
         (Ptr{Cvoid}, Ptr{Cvoid}),
@@ -16311,6 +16799,26 @@ function wxVariant_CreateFromArrayString(value::Ptr{Cvoid}, name::Ptr{Cvoid})
     ccall((:wxVariant_CreateFromArrayString, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Ptr{Cvoid}),
         value, name)
+end
+function wxVariant_CreateFromDataViewIconText(text::Ptr{Cvoid}, icon::Ptr{Cvoid}, name::Ptr{Cvoid})
+    ccall((:wxVariant_CreateFromDataViewIconText, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        text, icon, name)
+end
+function wxVariant_CreateFromDataViewCheckIconText(text::Ptr{Cvoid}, icon::Ptr{Cvoid}, checkedState::Cint, name::Ptr{Cvoid})
+    ccall((:wxVariant_CreateFromDataViewCheckIconText, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}),
+        text, icon, checkedState, name)
+end
+function wxVariant_GetDataViewIconText(pObject::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxVariant_GetDataViewIconText, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, result)
+end
+function wxVariant_GetDataViewCheckIconText(pObject::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxVariant_GetDataViewCheckIconText, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, result)
 end
 function wxVariant_SetName(pObject::Ptr{Cvoid}, name::Ptr{Cvoid})
     ccall((:wxVariant_SetName, libkwxFFI), Cvoid,
@@ -16497,6 +17005,157 @@ function wxVariant_GetDouble(pObject::Ptr{Cvoid})
     ccall((:wxVariant_GetDouble, libkwxFFI), Cdouble,
         (Ptr{Cvoid},),
         pObject)
+end
+
+# wxDebugReport
+wxDebugReport_Create() = ccall((:wxDebugReport_Create, libkwxFFI), Ptr{Cvoid}, ())
+function wxDebugReport_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReport_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDebugReport_GetDirectory(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReport_GetDirectory, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDebugReport_IsOk(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReport_IsOk, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDebugReport_Reset(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReport_Reset, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDebugReport_AddFile(pObject::Ptr{Cvoid}, filename::Ptr{Cvoid}, description::Ptr{Cvoid})
+    ccall((:wxDebugReport_AddFile, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, filename, description)
+end
+function wxDebugReport_AddText(pObject::Ptr{Cvoid}, filename::Ptr{Cvoid}, text::Ptr{Cvoid}, description::Ptr{Cvoid})
+    ccall((:wxDebugReport_AddText, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, filename, text, description)
+end
+function wxDebugReport_AddContext(pObject::Ptr{Cvoid}, ctx::Cint)
+    ccall((:wxDebugReport_AddContext, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint),
+        pObject, ctx)
+end
+function wxDebugReport_AddCurrentContext(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReport_AddCurrentContext, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDebugReport_AddExceptionContext(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReport_AddExceptionContext, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDebugReport_AddDump(pObject::Ptr{Cvoid}, ctx::Cint)
+    ccall((:wxDebugReport_AddDump, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint),
+        pObject, ctx)
+end
+function wxDebugReport_AddCurrentDump(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReport_AddCurrentDump, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDebugReport_AddExceptionDump(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReport_AddExceptionDump, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDebugReport_AddAll(pObject::Ptr{Cvoid}, context::Cint)
+    ccall((:wxDebugReport_AddAll, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, context)
+end
+function wxDebugReport_Process(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReport_Process, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDebugReport_GetReportName(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReport_GetReportName, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDebugReport_GetFilesCount(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReport_GetFilesCount, libkwxFFI), Csize_t,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDebugReport_GetFileName(pObject::Ptr{Cvoid}, index::Csize_t)
+    ccall((:wxDebugReport_GetFileName, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Csize_t),
+        pObject, index)
+end
+function wxDebugReport_GetFileDescription(pObject::Ptr{Cvoid}, index::Csize_t)
+    ccall((:wxDebugReport_GetFileDescription, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Csize_t),
+        pObject, index)
+end
+function wxDebugReport_RemoveFile(pObject::Ptr{Cvoid}, name::Ptr{Cvoid})
+    ccall((:wxDebugReport_RemoveFile, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, name)
+end
+
+# wxDebugReportCompress
+wxDebugReportCompress_Create() = ccall((:wxDebugReportCompress_Create, libkwxFFI), Ptr{Cvoid}, ())
+function wxDebugReportCompress_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReportCompress_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDebugReportCompress_SetCompressedFileDirectory(pObject::Ptr{Cvoid}, dir::Ptr{Cvoid})
+    ccall((:wxDebugReportCompress_SetCompressedFileDirectory, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, dir)
+end
+function wxDebugReportCompress_SetCompressedFileBaseName(pObject::Ptr{Cvoid}, name::Ptr{Cvoid})
+    ccall((:wxDebugReportCompress_SetCompressedFileBaseName, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, name)
+end
+function wxDebugReportCompress_GetCompressedFileName(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReportCompress_GetCompressedFileName, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDebugReportUpload
+function wxDebugReportUpload_Create(url::Ptr{Cvoid}, input::Ptr{Cvoid}, action::Ptr{Cvoid}, curl::Ptr{Cvoid})
+    ccall((:wxDebugReportUpload_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        url, input, action, curl)
+end
+function wxDebugReportUpload_CreateDefault(url::Ptr{Cvoid}, input::Ptr{Cvoid}, action::Ptr{Cvoid})
+    ccall((:wxDebugReportUpload_CreateDefault, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        url, input, action)
+end
+function wxDebugReportUpload_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReportUpload_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDebugReportPreviewStd
+wxDebugReportPreviewStd_Create() = ccall((:wxDebugReportPreviewStd_Create, libkwxFFI), Ptr{Cvoid}, ())
+function wxDebugReportPreviewStd_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDebugReportPreviewStd_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDebugReportPreviewStd_Show(pObject::Ptr{Cvoid}, report::Ptr{Cvoid})
+    ccall((:wxDebugReportPreviewStd_Show, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, report)
 end
 
 # wxCredentialEntryDialog
@@ -16823,6 +17482,21 @@ function wxGenericFileDialog_GetDirectory(pObject::Ptr{Cvoid})
         (Ptr{Cvoid},),
         pObject)
 end
+function wxGenericFileDialog_SetDirectory(pObject::Ptr{Cvoid}, dir::Ptr{Cvoid})
+    ccall((:wxGenericFileDialog_SetDirectory, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, dir)
+end
+function wxGenericFileDialog_GetMessage(pObject::Ptr{Cvoid})
+    ccall((:wxGenericFileDialog_GetMessage, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxGenericFileDialog_SetMessage(pObject::Ptr{Cvoid}, message::Ptr{Cvoid})
+    ccall((:wxGenericFileDialog_SetMessage, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, message)
+end
 function wxGenericFileDialog_GetFilename(pObject::Ptr{Cvoid})
     ccall((:wxGenericFileDialog_GetFilename, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid},),
@@ -16857,6 +17531,11 @@ function wxGenericFileDialog_SetCustomizeHook(pObject::Ptr{Cvoid}, customizeHook
     ccall((:wxGenericFileDialog_SetCustomizeHook, libkwxFFI), Cint,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, customizeHook)
+end
+function wxGenericFileDialog_GetCurrentlySelectedFilename(pObject::Ptr{Cvoid})
+    ccall((:wxGenericFileDialog_GetCurrentlySelectedFilename, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
 end
 function wxGenericFileDialog_Delete(pObject::Ptr{Cvoid})
     ccall((:wxGenericFileDialog_Delete, libkwxFFI), Cvoid,
@@ -16995,6 +17674,11 @@ function wxNumValidator_SetMinDouble(pObject::Ptr{Cvoid}, min_value::Cdouble)
     ccall((:wxNumValidator_SetMinDouble, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Cdouble),
         pObject, min_value)
+end
+function wxNumValidator_SetPrecision(pObject::Ptr{Cvoid}, precision::Cint)
+    ccall((:wxNumValidator_SetPrecision, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, precision)
 end
 function wxNumValidator_SetRange(pObject::Ptr{Cvoid}, min_value::Clong, max_value::Clong)
     ccall((:wxNumValidator_SetRange, libkwxFFI), Cvoid,
@@ -19484,6 +20168,53 @@ function kwxApp_SetOnCreateTraits(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
 end
+function kwxApp_SetOnOnFatalException(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxApp_SetOnOnFatalException, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxApp_SetOnOnUnhandledException(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxApp_SetOnOnUnhandledException, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxApp_SetOnStoreCurrentException(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxApp_SetOnStoreCurrentException, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxApp_SetOnOnExceptionInMainLoop(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxApp_SetOnOnExceptionInMainLoop, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxApp_SetOnRethrowStoredException(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxApp_SetOnRethrowStoredException, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+
+# kwxDebugReportUpload
+function kwxDebugReportUpload_Create(pObject::Ptr{Cvoid}, url::Ptr{Cvoid}, input::Ptr{Cvoid}, action::Ptr{Cvoid})
+    ccall((:kwxDebugReportUpload_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, url, input, action)
+end
+function kwxDebugReportUpload_Delete(pObject::Ptr{Cvoid})
+    ccall((:kwxDebugReportUpload_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxDebugReportUpload_SetOnOnServerReply(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxDebugReportUpload_SetOnOnServerReply, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxDebugReportUpload_SetOnServerReplyResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxDebugReportUpload_SetOnServerReplyResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
 
 # kwxObject
 function kwxObject_Create(pObject::Ptr{Cvoid})
@@ -19566,6 +20297,58 @@ function kwxEvtHandler_SetOnProcessEvent(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvo
     ccall((:kwxEvtHandler_SetOnProcessEvent, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
+end
+
+# kwxFrame
+function kwxFrame_Create(parent::Ptr{Cvoid}, id::Cint, title::Ptr{Cvoid}, x::Cint, y::Cint, width::Cint, height::Cint, style::Clong)
+    ccall((:kwxFrame_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}, Cint, Cint, Cint, Cint, Clong),
+        parent, id, title, x, y, width, height, style)
+end
+function kwxFrame_Delete(pObject::Ptr{Cvoid})
+    ccall((:kwxFrame_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxFrame_SetCallbackObject(pObject::Ptr{Cvoid}, object::Ptr{Cvoid})
+    ccall((:kwxFrame_SetCallbackObject, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, object)
+end
+function kwxFrame_GetCallbackObject(pObject::Ptr{Cvoid})
+    ccall((:kwxFrame_GetCallbackObject, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxFrame_SetOnProcessEvent(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxFrame_SetOnProcessEvent, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxFrame_SetOnProcessEventWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxFrame_SetOnProcessEventWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxFrame_SetProcessEventResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxFrame_SetProcessEventResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxFrame_SetOnTryBefore(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxFrame_SetOnTryBefore, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxFrame_SetOnTryBeforeWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxFrame_SetOnTryBeforeWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxFrame_SetTryBeforeResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxFrame_SetTryBeforeResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
 end
 
 # kwxVarHScrollHelper
@@ -20142,6 +20925,86 @@ function kwxDocument_SetOnOnOpenDocument(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvo
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
 end
+function kwxDocument_SetOnDoOpenDocumentWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxDocument_SetOnDoOpenDocumentWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxDocument_SetDoOpenDocumentResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxDocument_SetDoOpenDocumentResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxDocument_SetOnDoSaveDocumentWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxDocument_SetOnDoSaveDocumentWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxDocument_SetDoSaveDocumentResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxDocument_SetDoSaveDocumentResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxDocument_SetOnIsModifiedWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxDocument_SetOnIsModifiedWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxDocument_SetIsModifiedResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxDocument_SetIsModifiedResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxDocument_SetOnModifyWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxDocument_SetOnModifyWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxDocument_SetOnOnCreateWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxDocument_SetOnOnCreateWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxDocument_SetOnCreateResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxDocument_SetOnCreateResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxDocument_SetOnOnOpenDocumentWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxDocument_SetOnOnOpenDocumentWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxDocument_SetOnOpenDocumentResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxDocument_SetOnOpenDocumentResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxDocument_OnCreateBase(pObject::Ptr{Cvoid}, path::Ptr{Cvoid}, flags::Clong)
+    ccall((:kwxDocument_OnCreateBase, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Clong),
+        pObject, path, flags)
+end
+function kwxDocument_OnOpenDocumentBase(pObject::Ptr{Cvoid}, filename::Ptr{Cvoid})
+    ccall((:kwxDocument_OnOpenDocumentBase, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, filename)
+end
+function kwxDocument_IsModifiedBase(pObject::Ptr{Cvoid})
+    ccall((:kwxDocument_IsModifiedBase, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxDocument_ModifyBase(pObject::Ptr{Cvoid}, modified::Cint)
+    ccall((:kwxDocument_ModifyBase, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, modified)
+end
+function kwxDocument_CreateWithParent(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid})
+    ccall((:kwxDocument_CreateWithParent, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent)
+end
 
 # kwxView
 function kwxView_Create(pObject::Ptr{Cvoid})
@@ -20173,6 +21036,87 @@ function kwxView_SetOnOnUpdate(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
     ccall((:kwxView_SetOnOnUpdate, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
+end
+function kwxView_SetOnOnCreateWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxView_SetOnOnCreateWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxView_SetOnCreateResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxView_SetOnCreateResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxView_SetOnOnCloseWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxView_SetOnOnCloseWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxView_SetOnCloseResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxView_SetOnCloseResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxView_OnCloseBase(pObject::Ptr{Cvoid}, deleteWindow::Cint)
+    ccall((:kwxView_OnCloseBase, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint),
+        pObject, deleteWindow)
+end
+
+# kwxDocTemplate
+function kwxDocTemplate_Create(pObject::Ptr{Cvoid}, manager::Ptr{Cvoid}, descr::Ptr{Cvoid}, filter::Ptr{Cvoid}, dir::Ptr{Cvoid}, ext::Ptr{Cvoid}, docTypeName::Ptr{Cvoid}, viewTypeName::Ptr{Cvoid}, flags::Clong)
+    ccall((:kwxDocTemplate_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Clong),
+        pObject, manager, descr, filter, dir, ext, docTypeName, viewTypeName, flags)
+end
+function kwxDocTemplate_SetOnCreateDocument(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxDocTemplate_SetOnCreateDocument, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxDocTemplate_SetOnCreateView(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxDocTemplate_SetOnCreateView, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxDocTemplate_SetCreatedDocument(pObject::Ptr{Cvoid}, doc::Ptr{Cvoid})
+    ccall((:kwxDocTemplate_SetCreatedDocument, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, doc)
+end
+function kwxDocTemplate_SetCreatedView(pObject::Ptr{Cvoid}, view::Ptr{Cvoid})
+    ccall((:kwxDocTemplate_SetCreatedView, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, view)
+end
+
+# kwxDocAuiParentFrame
+function kwxDocAuiParentFrame_Create(manager::Ptr{Cvoid}, parent::Ptr{Cvoid}, id::Cint, title::Ptr{Cvoid}, x::Cint, y::Cint, width::Cint, height::Cint, style::Cint)
+    ccall((:kwxDocAuiParentFrame_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}, Cint, Cint, Cint, Cint, Cint),
+        manager, parent, id, title, x, y, width, height, style)
+end
+function kwxDocAuiParentFrame_GetDocumentManager(self::Ptr{Cvoid})
+    ccall((:kwxDocAuiParentFrame_GetDocumentManager, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        self)
+end
+
+# kwxDocAuiChildFrame
+function kwxDocAuiChildFrame_Create(doc::Ptr{Cvoid}, view::Ptr{Cvoid}, parent::Ptr{Cvoid}, id::Cint, title::Ptr{Cvoid}, x::Cint, y::Cint, width::Cint, height::Cint, style::Cint)
+    ccall((:kwxDocAuiChildFrame_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}, Cint, Cint, Cint, Cint, Cint),
+        doc, view, parent, id, title, x, y, width, height, style)
+end
+function kwxDocAuiChildFrame_GetDocument(self::Ptr{Cvoid})
+    ccall((:kwxDocAuiChildFrame_GetDocument, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        self)
+end
+function kwxDocAuiChildFrame_GetView(self::Ptr{Cvoid})
+    ccall((:kwxDocAuiChildFrame_GetView, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        self)
 end
 
 # kwxFileSystemHandler
@@ -20315,6 +21259,58 @@ function kwxWizardPage_SetOnTransferDataToWindowOut(pObject::Ptr{Cvoid}, pFuncti
         pObject, pFunction)
 end
 
+# kwxWizardPageSimple
+function kwxWizardPageSimple_Create(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, prev::Ptr{Cvoid}, next::Ptr{Cvoid}, bitmap::Ptr{Cvoid})
+    ccall((:kwxWizardPageSimple_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, prev, next, bitmap)
+end
+function kwxWizardPageSimple_Delete(pObject::Ptr{Cvoid})
+    ccall((:kwxWizardPageSimple_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxWizardPageSimple_SetOnGetNext(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxWizardPageSimple_SetOnGetNext, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxWizardPageSimple_SetOnGetPrev(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxWizardPageSimple_SetOnGetPrev, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxWizardPageSimple_SetOnTransferDataFromWindow(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxWizardPageSimple_SetOnTransferDataFromWindow, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxWizardPageSimple_SetOnTransferDataToWindow(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxWizardPageSimple_SetOnTransferDataToWindow, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxWizardPageSimple_SetOnGetNextOut(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxWizardPageSimple_SetOnGetNextOut, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxWizardPageSimple_SetOnGetPrevOut(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxWizardPageSimple_SetOnGetPrevOut, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxWizardPageSimple_SetOnTransferDataFromWindowOut(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxWizardPageSimple_SetOnTransferDataFromWindowOut, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function kwxWizardPageSimple_SetOnTransferDataToWindowOut(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:kwxWizardPageSimple_SetOnTransferDataToWindowOut, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+
 # kwxPopupTransientWindow
 function kwxPopupTransientWindow_Create(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, style::Cint)
     ccall((:kwxPopupTransientWindow_Create, libkwxFFI), Ptr{Cvoid},
@@ -20363,6 +21359,1225 @@ function kwxPopupTransientWindow_CallBaseProcessLeftDown(pObject::Ptr{Cvoid}, ev
 end
 function kwxPopupTransientWindow_CallBaseOnDismiss(pObject::Ptr{Cvoid})
     ccall((:kwxPopupTransientWindow_CallBaseOnDismiss, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDataViewModel
+function wxDataViewModel_CreateDefault(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewModel_CreateDefault, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewModel_SetOnGetValueWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetOnGetValueWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewModel_SetOnSetValueWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetOnSetValueWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewModel_SetOnGetParentWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetOnGetParentWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewModel_SetOnIsContainerWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetOnIsContainerWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewModel_SetOnGetChildrenWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetOnGetChildrenWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewModel_SetOnHasValueWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetOnHasValueWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewModel_SetOnIsEnabledWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetOnIsEnabledWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewModel_SetOnHasContainerColumnsWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetOnHasContainerColumnsWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewModel_SetOnCompareWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetOnCompareWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewModel_SetOnHasDefaultCompareWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetOnHasDefaultCompareWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewModel_SetOnResortWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetOnResortWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewModel_SetOnGetAttrWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetOnGetAttrWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewModel_GetPendingColumn(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewModel_GetPendingColumn, libkwxFFI), Cuint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewModel_GetPendingAscending(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewModel_GetPendingAscending, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewModel_SetGetValueResult(pObject::Ptr{Cvoid}, value::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetGetValueResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, value)
+end
+function wxDataViewModel_SetSetValueResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewModel_SetSetValueResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewModel_SetGetParentResult(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetGetParentResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent)
+end
+function wxDataViewModel_SetIsContainerResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewModel_SetIsContainerResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewModel_SetGetChildrenCountResult(pObject::Ptr{Cvoid}, count::Cuint)
+    ccall((:wxDataViewModel_SetGetChildrenCountResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, count)
+end
+function wxDataViewModel_AddChildResult(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewModel_AddChildResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewModel_SetHasValueResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewModel_SetHasValueResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewModel_SetIsEnabledResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewModel_SetIsEnabledResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewModel_SetHasContainerColumnsResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewModel_SetHasContainerColumnsResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewModel_SetCompareResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewModel_SetCompareResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewModel_SetHasDefaultCompareResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewModel_SetHasDefaultCompareResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewModel_SetGetAttrResult(pObject::Ptr{Cvoid}, attr::Ptr{Cvoid})
+    ccall((:wxDataViewModel_SetGetAttrResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, attr)
+end
+function wxDataViewModel_GetValue(pObject::Ptr{Cvoid}, variant::Ptr{Cvoid}, item::Ptr{Cvoid}, col::Cuint)
+    ccall((:wxDataViewModel_GetValue, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cuint),
+        pObject, variant, item, col)
+end
+function wxDataViewModel_SetValue(pObject::Ptr{Cvoid}, variant::Ptr{Cvoid}, item::Ptr{Cvoid}, col::Cuint)
+    ccall((:wxDataViewModel_SetValue, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cuint),
+        pObject, variant, item, col)
+end
+function wxDataViewModel_ChangeValue(pObject::Ptr{Cvoid}, variant::Ptr{Cvoid}, item::Ptr{Cvoid}, col::Cuint)
+    ccall((:wxDataViewModel_ChangeValue, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cuint),
+        pObject, variant, item, col)
+end
+function wxDataViewModel_HasValue(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, col::Cuint)
+    ccall((:wxDataViewModel_HasValue, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cuint),
+        pObject, item, col)
+end
+function wxDataViewModel_IsEnabled(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, col::Cuint)
+    ccall((:wxDataViewModel_IsEnabled, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cuint),
+        pObject, item, col)
+end
+function wxDataViewModel_GetAttr(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, col::Cuint, attr::Ptr{Cvoid})
+    ccall((:wxDataViewModel_GetAttr, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cuint, Ptr{Cvoid}),
+        pObject, item, col, attr)
+end
+function wxDataViewModel_GetParent(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, parent::Ptr{Cvoid})
+    ccall((:wxDataViewModel_GetParent, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item, parent)
+end
+function wxDataViewModel_IsContainer(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewModel_IsContainer, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewModel_HasContainerColumns(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewModel_HasContainerColumns, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewModel_GetChildren(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, children::Ptr{Cvoid})
+    ccall((:wxDataViewModel_GetChildren, libkwxFFI), Cuint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item, children)
+end
+function wxDataViewModel_ItemAdded(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewModel_ItemAdded, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, item)
+end
+function wxDataViewModel_ItemsAdded(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, items::Ptr{Cvoid})
+    ccall((:wxDataViewModel_ItemsAdded, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, items)
+end
+function wxDataViewModel_ItemDeleted(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewModel_ItemDeleted, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, item)
+end
+function wxDataViewModel_ItemsDeleted(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, items::Ptr{Cvoid})
+    ccall((:wxDataViewModel_ItemsDeleted, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, items)
+end
+function wxDataViewModel_ItemChanged(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewModel_ItemChanged, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewModel_ItemsChanged(pObject::Ptr{Cvoid}, items::Ptr{Cvoid})
+    ccall((:wxDataViewModel_ItemsChanged, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, items)
+end
+function wxDataViewModel_ValueChanged(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, col::Cuint)
+    ccall((:wxDataViewModel_ValueChanged, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cuint),
+        pObject, item, col)
+end
+function wxDataViewModel_Cleared(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewModel_Cleared, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewModel_BeforeReset(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewModel_BeforeReset, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewModel_AfterReset(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewModel_AfterReset, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewModel_Compare(pObject::Ptr{Cvoid}, item1::Ptr{Cvoid}, item2::Ptr{Cvoid}, column::Cuint, ascending::Cint)
+    ccall((:wxDataViewModel_Compare, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cuint, Cint),
+        pObject, item1, item2, column, ascending)
+end
+function wxDataViewModel_HasDefaultCompare(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewModel_HasDefaultCompare, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewModel_Resort(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewModel_Resort, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewModel_IncRef(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewModel_IncRef, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewModel_DecRef(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewModel_DecRef, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDataViewVirtualListModel
+function wxDataViewVirtualListModel_Create(pObject::Ptr{Cvoid}, initialSize::Cuint)
+    ccall((:wxDataViewVirtualListModel_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cuint),
+        pObject, initialSize)
+end
+function wxDataViewVirtualListModel_SetOnGetValueByRowWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_SetOnGetValueByRowWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewVirtualListModel_SetOnSetValueByRowWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_SetOnSetValueByRowWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewVirtualListModel_SetOnGetRowWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_SetOnGetRowWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewVirtualListModel_SetOnGetCountWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_SetOnGetCountWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewVirtualListModel_SetOnGetAttrByRowWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_SetOnGetAttrByRowWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewVirtualListModel_SetOnIsEnabledByRowWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_SetOnIsEnabledByRowWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewVirtualListModel_SetOnCompareWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_SetOnCompareWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewVirtualListModel_SetOnHasDefaultCompareWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_SetOnHasDefaultCompareWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewVirtualListModel_GetPendingColumn(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_GetPendingColumn, libkwxFFI), Cuint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewVirtualListModel_GetPendingRow(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_GetPendingRow, libkwxFFI), Cuint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewVirtualListModel_GetPendingAscending(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_GetPendingAscending, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewVirtualListModel_SetGetValueByRowResult(pObject::Ptr{Cvoid}, value::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_SetGetValueByRowResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, value)
+end
+function wxDataViewVirtualListModel_SetSetValueByRowResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewVirtualListModel_SetSetValueByRowResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewVirtualListModel_SetGetRowResult(pObject::Ptr{Cvoid}, row::Cuint)
+    ccall((:wxDataViewVirtualListModel_SetGetRowResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, row)
+end
+function wxDataViewVirtualListModel_SetGetCountResult(pObject::Ptr{Cvoid}, count::Cuint)
+    ccall((:wxDataViewVirtualListModel_SetGetCountResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, count)
+end
+function wxDataViewVirtualListModel_SetGetAttrByRowResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewVirtualListModel_SetGetAttrByRowResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewVirtualListModel_SetGetAttrByRowAttr(pObject::Ptr{Cvoid}, attr::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_SetGetAttrByRowAttr, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, attr)
+end
+function wxDataViewVirtualListModel_SetIsEnabledByRowResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewVirtualListModel_SetIsEnabledByRowResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewVirtualListModel_SetCompareResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewVirtualListModel_SetCompareResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewVirtualListModel_SetHasDefaultCompareResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewVirtualListModel_SetHasDefaultCompareResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewVirtualListModel_RowPrepended(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_RowPrepended, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewVirtualListModel_RowInserted(pObject::Ptr{Cvoid}, before::Cuint)
+    ccall((:wxDataViewVirtualListModel_RowInserted, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, before)
+end
+function wxDataViewVirtualListModel_RowAppended(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_RowAppended, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewVirtualListModel_RowDeleted(pObject::Ptr{Cvoid}, row::Cuint)
+    ccall((:wxDataViewVirtualListModel_RowDeleted, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, row)
+end
+function wxDataViewVirtualListModel_RowsDeleted(pObject::Ptr{Cvoid}, rows::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_RowsDeleted, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, rows)
+end
+function wxDataViewVirtualListModel_RowChanged(pObject::Ptr{Cvoid}, row::Cuint)
+    ccall((:wxDataViewVirtualListModel_RowChanged, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, row)
+end
+function wxDataViewVirtualListModel_RowValueChanged(pObject::Ptr{Cvoid}, row::Cuint, col::Cuint)
+    ccall((:wxDataViewVirtualListModel_RowValueChanged, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint, Cuint),
+        pObject, row, col)
+end
+function wxDataViewVirtualListModel_Reset(pObject::Ptr{Cvoid}, newSize::Cuint)
+    ccall((:wxDataViewVirtualListModel_Reset, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, newSize)
+end
+function wxDataViewVirtualListModel_GetItem(pObject::Ptr{Cvoid}, row::Cuint, result::Ptr{Cvoid})
+    ccall((:wxDataViewVirtualListModel_GetItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint, Ptr{Cvoid}),
+        pObject, row, result)
+end
+
+# wxDataViewIndexListModel
+function wxDataViewIndexListModel_Create(pObject::Ptr{Cvoid}, initialSize::Cuint)
+    ccall((:wxDataViewIndexListModel_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cuint),
+        pObject, initialSize)
+end
+function wxDataViewIndexListModel_SetOnGetValueByRowWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_SetOnGetValueByRowWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewIndexListModel_SetOnSetValueByRowWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_SetOnSetValueByRowWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewIndexListModel_SetOnGetRowWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_SetOnGetRowWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewIndexListModel_SetOnGetCountWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_SetOnGetCountWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewIndexListModel_SetOnGetAttrByRowWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_SetOnGetAttrByRowWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewIndexListModel_SetOnIsEnabledByRowWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_SetOnIsEnabledByRowWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewIndexListModel_SetOnCompareWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_SetOnCompareWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewIndexListModel_SetOnHasDefaultCompareWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_SetOnHasDefaultCompareWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewIndexListModel_GetPendingColumn(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_GetPendingColumn, libkwxFFI), Cuint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewIndexListModel_GetPendingRow(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_GetPendingRow, libkwxFFI), Cuint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewIndexListModel_GetPendingAscending(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_GetPendingAscending, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewIndexListModel_SetGetValueByRowResult(pObject::Ptr{Cvoid}, value::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_SetGetValueByRowResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, value)
+end
+function wxDataViewIndexListModel_SetSetValueByRowResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewIndexListModel_SetSetValueByRowResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewIndexListModel_SetGetRowResult(pObject::Ptr{Cvoid}, row::Cuint)
+    ccall((:wxDataViewIndexListModel_SetGetRowResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, row)
+end
+function wxDataViewIndexListModel_SetGetCountResult(pObject::Ptr{Cvoid}, count::Cuint)
+    ccall((:wxDataViewIndexListModel_SetGetCountResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, count)
+end
+function wxDataViewIndexListModel_SetGetAttrByRowResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewIndexListModel_SetGetAttrByRowResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewIndexListModel_SetGetAttrByRowAttr(pObject::Ptr{Cvoid}, attr::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_SetGetAttrByRowAttr, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, attr)
+end
+function wxDataViewIndexListModel_SetIsEnabledByRowResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewIndexListModel_SetIsEnabledByRowResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewIndexListModel_SetCompareResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewIndexListModel_SetCompareResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewIndexListModel_SetHasDefaultCompareResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewIndexListModel_SetHasDefaultCompareResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewIndexListModel_RowPrepended(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_RowPrepended, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewIndexListModel_RowInserted(pObject::Ptr{Cvoid}, before::Cuint)
+    ccall((:wxDataViewIndexListModel_RowInserted, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, before)
+end
+function wxDataViewIndexListModel_RowAppended(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_RowAppended, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewIndexListModel_RowDeleted(pObject::Ptr{Cvoid}, row::Cuint)
+    ccall((:wxDataViewIndexListModel_RowDeleted, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, row)
+end
+function wxDataViewIndexListModel_RowsDeleted(pObject::Ptr{Cvoid}, rows::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_RowsDeleted, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, rows)
+end
+function wxDataViewIndexListModel_RowChanged(pObject::Ptr{Cvoid}, row::Cuint)
+    ccall((:wxDataViewIndexListModel_RowChanged, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, row)
+end
+function wxDataViewIndexListModel_RowValueChanged(pObject::Ptr{Cvoid}, row::Cuint, col::Cuint)
+    ccall((:wxDataViewIndexListModel_RowValueChanged, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint, Cuint),
+        pObject, row, col)
+end
+function wxDataViewIndexListModel_Reset(pObject::Ptr{Cvoid}, newSize::Cuint)
+    ccall((:wxDataViewIndexListModel_Reset, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, newSize)
+end
+function wxDataViewIndexListModel_GetItem(pObject::Ptr{Cvoid}, row::Cuint, result::Ptr{Cvoid})
+    ccall((:wxDataViewIndexListModel_GetItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint, Ptr{Cvoid}),
+        pObject, row, result)
+end
+
+# wxDataViewListStore
+function wxDataViewListStore_SetOnHasValueWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_SetOnHasValueWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewListStore_SetOnIsEnabledByRowWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_SetOnIsEnabledByRowWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewListStore_SetOnGetAttrByRowWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_SetOnGetAttrByRowWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewListStore_SetHasValueResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewListStore_SetHasValueResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewListStore_SetIsEnabledByRowResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewListStore_SetIsEnabledByRowResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewListStore_SetGetAttrByRowResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewListStore_SetGetAttrByRowResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewListStore_SetGetAttrByRowAttr(pObject::Ptr{Cvoid}, attr::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_SetGetAttrByRowAttr, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, attr)
+end
+function wxDataViewListStore_GetPendingRow(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_GetPendingRow, libkwxFFI), Cuint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewListStore_GetPendingColumn(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_GetPendingColumn, libkwxFFI), Cuint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewListStore_PrependColumn(pObject::Ptr{Cvoid}, variant_type::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_PrependColumn, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, variant_type)
+end
+function wxDataViewListStore_AppendColumn(pObject::Ptr{Cvoid}, variant_type::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_AppendColumn, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, variant_type)
+end
+function wxDataViewListStore_InsertColumn(pObject::Ptr{Cvoid}, pos::Cuint, variant_type::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_InsertColumn, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint, Ptr{Cvoid}),
+        pObject, pos, variant_type)
+end
+function wxDataViewListStore_AppendItem(pObject::Ptr{Cvoid}, values::Ptr{Cvoid}, data::Csize_t)
+    ccall((:wxDataViewListStore_AppendItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Csize_t),
+        pObject, values, data)
+end
+function wxDataViewListStore_PrependItem(pObject::Ptr{Cvoid}, values::Ptr{Cvoid}, data::Csize_t)
+    ccall((:wxDataViewListStore_PrependItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Csize_t),
+        pObject, values, data)
+end
+function wxDataViewListStore_InsertItem(pObject::Ptr{Cvoid}, row::Cuint, values::Ptr{Cvoid}, data::Csize_t)
+    ccall((:wxDataViewListStore_InsertItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint, Ptr{Cvoid}, Csize_t),
+        pObject, row, values, data)
+end
+function wxDataViewListStore_DeleteItem(pObject::Ptr{Cvoid}, pos::Cuint)
+    ccall((:wxDataViewListStore_DeleteItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cuint),
+        pObject, pos)
+end
+function wxDataViewListStore_DeleteAllItems(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_DeleteAllItems, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewListStore_ClearColumns(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_ClearColumns, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewListStore_GetItemCount(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_GetItemCount, libkwxFFI), Cuint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewListStore_SetItemData(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, data::Csize_t)
+    ccall((:wxDataViewListStore_SetItemData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Csize_t),
+        pObject, item, data)
+end
+function wxDataViewListStore_GetItemData(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_GetItemData, libkwxFFI), Csize_t,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewListStore_GetValueByRow(pObject::Ptr{Cvoid}, value::Ptr{Cvoid}, row::Cuint, col::Cuint)
+    ccall((:wxDataViewListStore_GetValueByRow, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cuint, Cuint),
+        pObject, value, row, col)
+end
+function wxDataViewListStore_SetValueByRow(pObject::Ptr{Cvoid}, value::Ptr{Cvoid}, row::Cuint, col::Cuint)
+    ccall((:wxDataViewListStore_SetValueByRow, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cuint, Cuint),
+        pObject, value, row, col)
+end
+function wxDataViewListStore_Create(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewListStore_IsEnabledByRow(pObject::Ptr{Cvoid}, row::Cuint, col::Cuint)
+    ccall((:wxDataViewListStore_IsEnabledByRow, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cuint, Cuint),
+        pObject, row, col)
+end
+function wxDataViewListStore_GetAttrByRow(pObject::Ptr{Cvoid}, row::Cuint, col::Cuint, attr::Ptr{Cvoid})
+    ccall((:wxDataViewListStore_GetAttrByRow, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cuint, Cuint, Ptr{Cvoid}),
+        pObject, row, col, attr)
+end
+
+# wxDataViewRenderer
+function wxDataViewRenderer_SetMode(pObject::Ptr{Cvoid}, mode::Cint)
+    ccall((:wxDataViewRenderer_SetMode, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, mode)
+end
+function wxDataViewRenderer_GetMode(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewRenderer_GetMode, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewRenderer_SetAlignment(pObject::Ptr{Cvoid}, align::Cint)
+    ccall((:wxDataViewRenderer_SetAlignment, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, align)
+end
+function wxDataViewRenderer_GetAlignment(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewRenderer_GetAlignment, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewRenderer_EnableEllipsize(pObject::Ptr{Cvoid}, mode::Cint)
+    ccall((:wxDataViewRenderer_EnableEllipsize, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, mode)
+end
+function wxDataViewRenderer_GetEllipsizeMode(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewRenderer_GetEllipsizeMode, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewRenderer_GetVariantType(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewRenderer_GetVariantType, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewRenderer_GetValue(pObject::Ptr{Cvoid}, value::Ptr{Cvoid})
+    ccall((:wxDataViewRenderer_GetValue, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, value)
+end
+function wxDataViewRenderer_SetValue(pObject::Ptr{Cvoid}, value::Ptr{Cvoid})
+    ccall((:wxDataViewRenderer_SetValue, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, value)
+end
+function wxDataViewRenderer_SetEnabled(pObject::Ptr{Cvoid}, enabled::Cint)
+    ccall((:wxDataViewRenderer_SetEnabled, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, enabled)
+end
+function wxDataViewRenderer_IsHighlighted(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewRenderer_IsHighlighted, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewRenderer_GetAccessibleDescription(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewRenderer_GetAccessibleDescription, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDataViewCustomRenderer
+function wxDataViewCustomRenderer_Create(variantType::Cstring, mode::Cint, align::Cint)
+    ccall((:wxDataViewCustomRenderer_Create, libkwxFFI), Ptr{Cvoid},
+        (Cstring, Cint, Cint),
+        variantType, mode, align)
+end
+function wxDataViewCustomRenderer_SetOnRenderWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetOnRenderWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewCustomRenderer_SetOnGetSizeWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetOnGetSizeWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewCustomRenderer_SetOnSetValueWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetOnSetValueWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewCustomRenderer_SetOnGetValueWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetOnGetValueWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewCustomRenderer_SetOnActivateCellWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetOnActivateCellWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewCustomRenderer_SetOnActivateWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetOnActivateWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewCustomRenderer_SetOnLeftClickWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetOnLeftClickWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewCustomRenderer_SetOnStartDragWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetOnStartDragWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewCustomRenderer_SetOnCreateEditorCtrlWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetOnCreateEditorCtrlWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewCustomRenderer_SetOnGetValueFromEditorCtrlWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetOnGetValueFromEditorCtrlWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewCustomRenderer_SetOnValidateWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetOnValidateWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewCustomRenderer_SetOnHasEditorCtrlWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetOnHasEditorCtrlWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewCustomRenderer_SetOnGetAccessibleDescriptionWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetOnGetAccessibleDescriptionWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDataViewCustomRenderer_GetRenderDC(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_GetRenderDC, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewCustomRenderer_GetRenderRect(pObject::Ptr{Cvoid}, x::Ptr{Cint}, y::Ptr{Cint}, width::Ptr{Cint}, height::Ptr{Cint})
+    ccall((:wxDataViewCustomRenderer_GetRenderRect, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}),
+        pObject, x, y, width, height)
+end
+function wxDataViewCustomRenderer_GetRenderState(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_GetRenderState, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewCustomRenderer_GetCurrentValue(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_GetCurrentValue, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewCustomRenderer_GetEditorRect(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_GetEditorRect, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewCustomRenderer_GetEditorParent(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_GetEditorParent, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewCustomRenderer_GetEditorCtrl(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_GetEditorCtrl, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewCustomRenderer_GetPendingColumn(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_GetPendingColumn, libkwxFFI), Cuint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewCustomRenderer_GetActivateCellMouseEvent(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_GetActivateCellMouseEvent, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewCustomRenderer_GetPendingCursorX(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_GetPendingCursorX, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewCustomRenderer_GetPendingCursorY(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_GetPendingCursorY, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewCustomRenderer_RenderText(pObject::Ptr{Cvoid}, text::Cstring, xoffset::Cint, cell_x::Cint, cell_y::Cint, cell_width::Cint, cell_height::Cint, dc::Ptr{Cvoid}, state::Cint)
+    ccall((:wxDataViewCustomRenderer_RenderText, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cstring, Cint, Cint, Cint, Cint, Cint, Ptr{Cvoid}, Cint),
+        pObject, text, xoffset, cell_x, cell_y, cell_width, cell_height, dc, state)
+end
+function wxDataViewCustomRenderer_GetTextExtent(pObject::Ptr{Cvoid}, text::Cstring, width::Ptr{Cint}, height::Ptr{Cint})
+    ccall((:wxDataViewCustomRenderer_GetTextExtent, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cstring, Ptr{Cint}, Ptr{Cint}),
+        pObject, text, width, height)
+end
+function wxDataViewCustomRenderer_SetRenderResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewCustomRenderer_SetRenderResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewCustomRenderer_SetGetSizeResult(pObject::Ptr{Cvoid}, width::Cint, height::Cint)
+    ccall((:wxDataViewCustomRenderer_SetGetSizeResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint, Cint),
+        pObject, width, height)
+end
+function wxDataViewCustomRenderer_SetGetValueResult(pObject::Ptr{Cvoid}, value::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetGetValueResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, value)
+end
+function wxDataViewCustomRenderer_SetSetValueResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewCustomRenderer_SetSetValueResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewCustomRenderer_SetActivateCellResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewCustomRenderer_SetActivateCellResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewCustomRenderer_SetActivateResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewCustomRenderer_SetActivateResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewCustomRenderer_SetLeftClickResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewCustomRenderer_SetLeftClickResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewCustomRenderer_SetStartDragResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewCustomRenderer_SetStartDragResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewCustomRenderer_SetCreateEditorCtrlResult(pObject::Ptr{Cvoid}, editor::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetCreateEditorCtrlResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, editor)
+end
+function wxDataViewCustomRenderer_SetGetValueFromEditorCtrlResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewCustomRenderer_SetGetValueFromEditorCtrlResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewCustomRenderer_SetGetValueFromEditorCtrlValue(pObject::Ptr{Cvoid}, value::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetGetValueFromEditorCtrlValue, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, value)
+end
+function wxDataViewCustomRenderer_SetValidateResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewCustomRenderer_SetValidateResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewCustomRenderer_SetHasEditorCtrlResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDataViewCustomRenderer_SetHasEditorCtrlResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDataViewCustomRenderer_SetAccessibleDescription(pObject::Ptr{Cvoid}, description::Ptr{Cvoid})
+    ccall((:wxDataViewCustomRenderer_SetAccessibleDescription, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, description)
+end
+
+# wxDataViewTextRenderer
+wxDataViewTextRenderer_CreateDefault() = ccall((:wxDataViewTextRenderer_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
+function wxDataViewTextRenderer_Create(variantType::Cstring, mode::Cint, align::Cint)
+    ccall((:wxDataViewTextRenderer_Create, libkwxFFI), Ptr{Cvoid},
+        (Cstring, Cint, Cint),
+        variantType, mode, align)
+end
+function wxDataViewTextRenderer_EnableMarkup(pObject::Ptr{Cvoid}, enable::Cint)
+    ccall((:wxDataViewTextRenderer_EnableMarkup, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, enable)
+end
+
+# wxDataViewToggleRenderer
+wxDataViewToggleRenderer_CreateDefault() = ccall((:wxDataViewToggleRenderer_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
+function wxDataViewToggleRenderer_Create(variantType::Cstring, mode::Cint, align::Cint)
+    ccall((:wxDataViewToggleRenderer_Create, libkwxFFI), Ptr{Cvoid},
+        (Cstring, Cint, Cint),
+        variantType, mode, align)
+end
+function wxDataViewToggleRenderer_ShowAsRadio(pObject::Ptr{Cvoid}, radio::Cint)
+    ccall((:wxDataViewToggleRenderer_ShowAsRadio, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, radio)
+end
+
+# wxDataViewBitmapRenderer
+wxDataViewBitmapRenderer_CreateDefault() = ccall((:wxDataViewBitmapRenderer_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
+function wxDataViewBitmapRenderer_Create(variantType::Cstring, mode::Cint, align::Cint)
+    ccall((:wxDataViewBitmapRenderer_Create, libkwxFFI), Ptr{Cvoid},
+        (Cstring, Cint, Cint),
+        variantType, mode, align)
+end
+
+# wxDataViewProgressRenderer
+function wxDataViewProgressRenderer_Create(label::Ptr{Cvoid}, variantType::Cstring, mode::Cint, align::Cint)
+    ccall((:wxDataViewProgressRenderer_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cstring, Cint, Cint),
+        label, variantType, mode, align)
+end
+
+# wxDataViewIconTextRenderer
+wxDataViewIconTextRenderer_CreateDefault() = ccall((:wxDataViewIconTextRenderer_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
+function wxDataViewIconTextRenderer_Create(variantType::Cstring, mode::Cint, align::Cint)
+    ccall((:wxDataViewIconTextRenderer_Create, libkwxFFI), Ptr{Cvoid},
+        (Cstring, Cint, Cint),
+        variantType, mode, align)
+end
+
+# wxDataViewSpinRenderer
+function wxDataViewSpinRenderer_Create(min::Cint, max::Cint, mode::Cint, align::Cint)
+    ccall((:wxDataViewSpinRenderer_Create, libkwxFFI), Ptr{Cvoid},
+        (Cint, Cint, Cint, Cint),
+        min, max, mode, align)
+end
+
+# wxDataViewChoiceRenderer
+function wxDataViewChoiceRenderer_Create(choices::Ptr{Cvoid}, mode::Cint, align::Cint)
+    ccall((:wxDataViewChoiceRenderer_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Cint),
+        choices, mode, align)
+end
+function wxDataViewChoiceRenderer_GetChoice(pObject::Ptr{Cvoid}, index::Cint)
+    ccall((:wxDataViewChoiceRenderer_GetChoice, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        pObject, index)
+end
+function wxDataViewChoiceRenderer_GetChoices(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewChoiceRenderer_GetChoices, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDataViewChoiceByIndexRenderer
+function wxDataViewChoiceByIndexRenderer_Create(choices::Ptr{Cvoid}, mode::Cint, align::Cint)
+    ccall((:wxDataViewChoiceByIndexRenderer_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Cint),
+        choices, mode, align)
+end
+
+# wxDataViewDateRenderer
+function wxDataViewDateRenderer_Create(variantType::Cstring, mode::Cint, align::Cint)
+    ccall((:wxDataViewDateRenderer_Create, libkwxFFI), Ptr{Cvoid},
+        (Cstring, Cint, Cint),
+        variantType, mode, align)
+end
+
+# wxDataViewCheckIconTextRenderer
+wxDataViewCheckIconTextRenderer_CreateDefault() = ccall((:wxDataViewCheckIconTextRenderer_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
+function wxDataViewCheckIconTextRenderer_Create(mode::Cint, align::Cint)
+    ccall((:wxDataViewCheckIconTextRenderer_Create, libkwxFFI), Ptr{Cvoid},
+        (Cint, Cint),
+        mode, align)
+end
+function wxDataViewCheckIconTextRenderer_Allow3rdStateForUser(pObject::Ptr{Cvoid}, allow::Cint)
+    ccall((:wxDataViewCheckIconTextRenderer_Allow3rdStateForUser, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, allow)
+end
+
+# wxDataViewColumn
+function wxDataViewColumn_CreateWithRenderer(title::Ptr{Cvoid}, renderer::Ptr{Cvoid}, modelColumn::Cuint, width::Cint, align::Cint, flags::Cint)
+    ccall((:wxDataViewColumn_CreateWithRenderer, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cuint, Cint, Cint, Cint),
+        title, renderer, modelColumn, width, align, flags)
+end
+function wxDataViewColumn_GetTitle(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_GetTitle, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_SetTitle(pObject::Ptr{Cvoid}, title::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_SetTitle, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, title)
+end
+function wxDataViewColumn_GetBitmapBundle(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_GetBitmapBundle, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_SetBitmap(pObject::Ptr{Cvoid}, bitmap::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_SetBitmap, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, bitmap)
+end
+function wxDataViewColumn_GetWidth(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_GetWidth, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_SetWidth(pObject::Ptr{Cvoid}, width::Cint)
+    ccall((:wxDataViewColumn_SetWidth, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, width)
+end
+function wxDataViewColumn_GetMinWidth(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_GetMinWidth, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_SetMinWidth(pObject::Ptr{Cvoid}, min_width::Cint)
+    ccall((:wxDataViewColumn_SetMinWidth, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, min_width)
+end
+function wxDataViewColumn_GetAlignment(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_GetAlignment, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_SetAlignment(pObject::Ptr{Cvoid}, alignment::Cint)
+    ccall((:wxDataViewColumn_SetAlignment, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, alignment)
+end
+function wxDataViewColumn_GetFlags(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_GetFlags, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_SetFlags(pObject::Ptr{Cvoid}, flags::Cint)
+    ccall((:wxDataViewColumn_SetFlags, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, flags)
+end
+function wxDataViewColumn_SetFlag(pObject::Ptr{Cvoid}, flag::Cint)
+    ccall((:wxDataViewColumn_SetFlag, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, flag)
+end
+function wxDataViewColumn_ChangeFlag(pObject::Ptr{Cvoid}, flag::Cint, set::Cint)
+    ccall((:wxDataViewColumn_ChangeFlag, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint, Cint),
+        pObject, flag, set)
+end
+function wxDataViewColumn_IsResizeable(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_IsResizeable, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_SetResizeable(pObject::Ptr{Cvoid}, resizeable::Cint)
+    ccall((:wxDataViewColumn_SetResizeable, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, resizeable)
+end
+function wxDataViewColumn_IsSortable(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_IsSortable, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_SetSortable(pObject::Ptr{Cvoid}, sortable::Cint)
+    ccall((:wxDataViewColumn_SetSortable, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, sortable)
+end
+function wxDataViewColumn_IsReorderable(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_IsReorderable, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_SetReorderable(pObject::Ptr{Cvoid}, reorderable::Cint)
+    ccall((:wxDataViewColumn_SetReorderable, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, reorderable)
+end
+function wxDataViewColumn_IsHidden(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_IsHidden, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_SetHidden(pObject::Ptr{Cvoid}, hidden::Cint)
+    ccall((:wxDataViewColumn_SetHidden, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, hidden)
+end
+function wxDataViewColumn_IsShown(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_IsShown, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_IsSortKey(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_IsSortKey, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_SetSortOrder(pObject::Ptr{Cvoid}, ascending::Cint)
+    ccall((:wxDataViewColumn_SetSortOrder, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, ascending)
+end
+function wxDataViewColumn_IsSortOrderAscending(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_IsSortOrderAscending, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_UnsetAsSortKey(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_UnsetAsSortKey, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_GetModelColumn(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_GetModelColumn, libkwxFFI), Cuint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewColumn_GetRenderer(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewColumn_GetRenderer, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid},),
         pObject)
 end
@@ -22313,6 +24528,196 @@ function wxAcceleratorTable_Delete(pObject::Ptr{Cvoid})
         pObject)
 end
 
+# wxDCPenChanger
+function wxDCPenChanger_Create(dc::Ptr{Cvoid}, pen::Ptr{Cvoid})
+    ccall((:wxDCPenChanger_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        dc, pen)
+end
+function wxDCPenChanger_Set(pObject::Ptr{Cvoid}, pen::Ptr{Cvoid})
+    ccall((:wxDCPenChanger_Set, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pen)
+end
+function wxDCPenChanger_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDCPenChanger_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDCBrushChanger
+function wxDCBrushChanger_Create(dc::Ptr{Cvoid}, brush::Ptr{Cvoid})
+    ccall((:wxDCBrushChanger_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        dc, brush)
+end
+function wxDCBrushChanger_Set(pObject::Ptr{Cvoid}, brush::Ptr{Cvoid})
+    ccall((:wxDCBrushChanger_Set, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, brush)
+end
+function wxDCBrushChanger_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDCBrushChanger_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDCFontChanger
+function wxDCFontChanger_Create(dc::Ptr{Cvoid}, font::Ptr{Cvoid})
+    ccall((:wxDCFontChanger_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        dc, font)
+end
+function wxDCFontChanger_Set(pObject::Ptr{Cvoid}, font::Ptr{Cvoid})
+    ccall((:wxDCFontChanger_Set, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, font)
+end
+function wxDCFontChanger_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDCFontChanger_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDCTextColourChanger
+function wxDCTextColourChanger_Create(dc::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxDCTextColourChanger_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        dc, colour)
+end
+function wxDCTextColourChanger_Set(pObject::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxDCTextColourChanger_Set, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, colour)
+end
+function wxDCTextColourChanger_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDCTextColourChanger_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDCTextBgColourChanger
+function wxDCTextBgColourChanger_Create(dc::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxDCTextBgColourChanger_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        dc, colour)
+end
+function wxDCTextBgColourChanger_Set(pObject::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxDCTextBgColourChanger_Set, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, colour)
+end
+function wxDCTextBgColourChanger_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDCTextBgColourChanger_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDCTextBgModeChanger
+function wxDCTextBgModeChanger_Create(dc::Ptr{Cvoid}, mode::Cint)
+    ccall((:wxDCTextBgModeChanger_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        dc, mode)
+end
+function wxDCTextBgModeChanger_Set(pObject::Ptr{Cvoid}, mode::Cint)
+    ccall((:wxDCTextBgModeChanger_Set, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, mode)
+end
+function wxDCTextBgModeChanger_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDCTextBgModeChanger_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDataViewItemAttr
+wxDataViewItemAttr_Create() = ccall((:wxDataViewItemAttr_Create, libkwxFFI), Ptr{Cvoid}, ())
+function wxDataViewItemAttr_Copy(pObject::Ptr{Cvoid}, other::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_Copy, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, other)
+end
+function wxDataViewItemAttr_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewItemAttr_SetColour(pObject::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_SetColour, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, colour)
+end
+function wxDataViewItemAttr_SetBackgroundColour(pObject::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_SetBackgroundColour, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, colour)
+end
+function wxDataViewItemAttr_SetBold(pObject::Ptr{Cvoid}, set::Cint)
+    ccall((:wxDataViewItemAttr_SetBold, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, set)
+end
+function wxDataViewItemAttr_SetItalic(pObject::Ptr{Cvoid}, set::Cint)
+    ccall((:wxDataViewItemAttr_SetItalic, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, set)
+end
+function wxDataViewItemAttr_SetStrikethrough(pObject::Ptr{Cvoid}, set::Cint)
+    ccall((:wxDataViewItemAttr_SetStrikethrough, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, set)
+end
+function wxDataViewItemAttr_HasColour(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_HasColour, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewItemAttr_HasFont(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_HasFont, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewItemAttr_HasBackgroundColour(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_HasBackgroundColour, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewItemAttr_GetBold(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_GetBold, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewItemAttr_GetItalic(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_GetItalic, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewItemAttr_GetStrikethrough(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_GetStrikethrough, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewItemAttr_IsDefault(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_IsDefault, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewItemAttr_GetColour(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_GetColour, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewItemAttr_GetBackgroundColour(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_GetBackgroundColour, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewItemAttr_GetEffectiveFont(pObject::Ptr{Cvoid}, font::Ptr{Cvoid})
+    ccall((:wxDataViewItemAttr_GetEffectiveFont, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, font)
+end
+
 # wxDataViewCtrl
 function wxDataViewCtrl_SetHeaderAttr(pObject::Ptr{Cvoid}, attr::Ptr{Cvoid})
     ccall((:wxDataViewCtrl_SetHeaderAttr, libkwxFFI), Cint,
@@ -22326,6 +24731,11 @@ function wxDataViewCtrl_Enable(pObject::Ptr{Cvoid}, enable::Cint)
 end
 function wxDataViewCtrl_EnableDragSource(pObject::Ptr{Cvoid}, format::Ptr{Cvoid})
     ccall((:wxDataViewCtrl_EnableDragSource, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, format)
+end
+function wxDataViewCtrl_EnableDropTarget(pObject::Ptr{Cvoid}, format::Ptr{Cvoid})
+    ccall((:wxDataViewCtrl_EnableDropTarget, libkwxFFI), Cint,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, format)
 end
@@ -22343,6 +24753,26 @@ function wxDataViewCtrl_SetForegroundColour(pObject::Ptr{Cvoid}, colour::Ptr{Cvo
     ccall((:wxDataViewCtrl_SetForegroundColour, libkwxFFI), Cint,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, colour)
+end
+function wxDataViewCtrl_GetSortingColumnCount(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCtrl_GetSortingColumnCount, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewCtrl_GetSortingColumnAt(pObject::Ptr{Cvoid}, pos::Cint)
+    ccall((:wxDataViewCtrl_GetSortingColumnAt, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        pObject, pos)
+end
+function wxDataViewCtrl_GenericGetHeader(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCtrl_GenericGetHeader, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewCtrl_HitTestColumnPosition(pObject::Ptr{Cvoid}, x::Cint, y::Cint, item::Ptr{Cvoid})
+    ccall((:wxDataViewCtrl_HitTestColumnPosition, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint, Cint, Ptr{Cvoid}),
+        pObject, x, y, item)
 end
 function wxDataViewCtrl_Create(parent::Ptr{Cvoid}, id::Cint, x::Cint, y::Cint, width::Cint, height::Cint, style::Cint)
     ccall((:wxDataViewCtrl_Create, libkwxFFI), Ptr{Cvoid},
@@ -22777,6 +25207,383 @@ function wxDataViewListCtrl_IsRowSelected(pObject::Ptr{Cvoid}, row::Cuint)
         pObject, row)
 end
 
+# wxDataViewTreeStore
+wxDataViewTreeStore_Create() = ccall((:wxDataViewTreeStore_Create, libkwxFFI), Ptr{Cvoid}, ())
+function wxDataViewTreeStore_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewTreeStore_AppendContainer(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, text::Ptr{Cvoid}, icon::Ptr{Cvoid}, expanded::Ptr{Cvoid}, data::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_AppendContainer, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, text, icon, expanded, data, result)
+end
+function wxDataViewTreeStore_AppendItem(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, text::Ptr{Cvoid}, icon::Ptr{Cvoid}, data::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_AppendItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, text, icon, data, result)
+end
+function wxDataViewTreeStore_PrependContainer(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, text::Ptr{Cvoid}, icon::Ptr{Cvoid}, expanded::Ptr{Cvoid}, data::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_PrependContainer, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, text, icon, expanded, data, result)
+end
+function wxDataViewTreeStore_PrependItem(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, text::Ptr{Cvoid}, icon::Ptr{Cvoid}, data::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_PrependItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, text, icon, data, result)
+end
+function wxDataViewTreeStore_InsertContainer(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, previous::Ptr{Cvoid}, text::Ptr{Cvoid}, icon::Ptr{Cvoid}, expanded::Ptr{Cvoid}, data::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_InsertContainer, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, previous, text, icon, expanded, data, result)
+end
+function wxDataViewTreeStore_InsertItem(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, previous::Ptr{Cvoid}, text::Ptr{Cvoid}, icon::Ptr{Cvoid}, data::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_InsertItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, previous, text, icon, data, result)
+end
+function wxDataViewTreeStore_GetNthChild(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, pos::Cuint, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_GetNthChild, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cuint, Ptr{Cvoid}),
+        pObject, parent, pos, result)
+end
+function wxDataViewTreeStore_GetChildCount(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_GetChildCount, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent)
+end
+function wxDataViewTreeStore_SetItemText(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, text::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_SetItemText, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item, text)
+end
+function wxDataViewTreeStore_GetItemText(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_GetItemText, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeStore_SetItemIcon(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, icon::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_SetItemIcon, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item, icon)
+end
+function wxDataViewTreeStore_GetItemIcon(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_GetItemIcon, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeStore_SetItemExpandedIcon(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, icon::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_SetItemExpandedIcon, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item, icon)
+end
+function wxDataViewTreeStore_GetItemExpandedIcon(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_GetItemExpandedIcon, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeStore_SetItemData(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_SetItemData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item, data)
+end
+function wxDataViewTreeStore_GetItemData(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_GetItemData, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeStore_DeleteItem(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_DeleteItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeStore_DeleteChildren(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_DeleteChildren, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeStore_DeleteAllItems(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewTreeStore_DeleteAllItems, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDataViewTreeCtrl
+function wxDataViewTreeCtrl_Create(parent::Ptr{Cvoid}, id::Cint, x::Cint, y::Cint, width::Cint, height::Cint, style::Cint)
+    ccall((:wxDataViewTreeCtrl_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Cint, Cint, Cint, Cint, Cint),
+        parent, id, x, y, width, height, style)
+end
+function wxDataViewTreeCtrl_GetStore(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_GetStore, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewTreeCtrl_AppendContainer(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, text::Ptr{Cvoid}, icon::Cint, expanded::Cint, data::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_AppendContainer, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Cint, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, text, icon, expanded, data, result)
+end
+function wxDataViewTreeCtrl_AppendItem(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, text::Ptr{Cvoid}, icon::Cint, data::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_AppendItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, text, icon, data, result)
+end
+function wxDataViewTreeCtrl_PrependContainer(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, text::Ptr{Cvoid}, icon::Cint, expanded::Cint, data::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_PrependContainer, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Cint, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, text, icon, expanded, data, result)
+end
+function wxDataViewTreeCtrl_PrependItem(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, text::Ptr{Cvoid}, icon::Cint, data::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_PrependItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, text, icon, data, result)
+end
+function wxDataViewTreeCtrl_InsertContainer(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, previous::Ptr{Cvoid}, text::Ptr{Cvoid}, icon::Cint, expanded::Cint, data::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_InsertContainer, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Cint, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, previous, text, icon, expanded, data, result)
+end
+function wxDataViewTreeCtrl_InsertItem(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, previous::Ptr{Cvoid}, text::Ptr{Cvoid}, icon::Cint, data::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_InsertItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent, previous, text, icon, data, result)
+end
+function wxDataViewTreeCtrl_DeleteItem(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_DeleteItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeCtrl_DeleteChildren(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_DeleteChildren, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeCtrl_DeleteAllItems(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_DeleteAllItems, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewTreeCtrl_GetChildCount(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_GetChildCount, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent)
+end
+function wxDataViewTreeCtrl_GetItemText(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_GetItemText, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeCtrl_SetItemText(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, text::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_SetItemText, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item, text)
+end
+function wxDataViewTreeCtrl_GetItemIcon(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_GetItemIcon, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeCtrl_SetItemIcon(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, icon::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_SetItemIcon, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item, icon)
+end
+function wxDataViewTreeCtrl_GetItemExpandedIcon(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_GetItemExpandedIcon, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeCtrl_SetItemExpandedIcon(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, icon::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_SetItemExpandedIcon, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item, icon)
+end
+function wxDataViewTreeCtrl_GetItemData(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_GetItemData, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeCtrl_SetItemData(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_SetItemData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item, data)
+end
+function wxDataViewTreeCtrl_IsContainer(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_IsContainer, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeCtrl_GetItemParent(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_GetItemParent, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item, result)
+end
+function wxDataViewTreeCtrl_GetNthChild(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid}, pos::Cuint, result::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_GetNthChild, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cuint, Ptr{Cvoid}),
+        pObject, parent, pos, result)
+end
+function wxDataViewTreeCtrl_Expand(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_Expand, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeCtrl_Collapse(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_Collapse, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeCtrl_IsExpanded(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_IsExpanded, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewTreeCtrl_SetImageList(pObject::Ptr{Cvoid}, list::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_SetImageList, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, list)
+end
+function wxDataViewTreeCtrl_GetImageList(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_GetImageList, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewTreeCtrl_AssignImageList(pObject::Ptr{Cvoid}, list::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_AssignImageList, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, list)
+end
+function wxDataViewTreeCtrl_SetImages(pObject::Ptr{Cvoid}, images::Ptr{Cvoid})
+    ccall((:wxDataViewTreeCtrl_SetImages, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, images)
+end
+
+# wxDataViewEvent
+function wxDataViewEvent_GetItem(pObject::Ptr{Cvoid}, item::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_GetItem, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, item)
+end
+function wxDataViewEvent_GetColumn(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_GetColumn, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewEvent_GetDataViewColumn(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_GetDataViewColumn, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewEvent_GetValue(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_GetValue, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewEvent_SetValue(pObject::Ptr{Cvoid}, value::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_SetValue, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, value)
+end
+function wxDataViewEvent_GetDataObject(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_GetDataObject, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewEvent_SetDataObject(pObject::Ptr{Cvoid}, obj::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_SetDataObject, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, obj)
+end
+function wxDataViewEvent_GetDataFormat(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_GetDataFormat, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewEvent_SetDataFormat(pObject::Ptr{Cvoid}, format::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_SetDataFormat, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, format)
+end
+function wxDataViewEvent_GetDataSize(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_GetDataSize, libkwxFFI), Csize_t,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewEvent_SetDataSize(pObject::Ptr{Cvoid}, size::Csize_t)
+    ccall((:wxDataViewEvent_SetDataSize, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Csize_t),
+        pObject, size)
+end
+function wxDataViewEvent_GetDataBuffer(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_GetDataBuffer, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewEvent_SetDataBuffer(pObject::Ptr{Cvoid}, buffer::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_SetDataBuffer, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, buffer)
+end
+function wxDataViewEvent_GetDropEffect(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_GetDropEffect, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewEvent_SetDropEffect(pObject::Ptr{Cvoid}, effect::Cint)
+    ccall((:wxDataViewEvent_SetDropEffect, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, effect)
+end
+function wxDataViewEvent_SetDragFlags(pObject::Ptr{Cvoid}, flags::Cint)
+    ccall((:wxDataViewEvent_SetDragFlags, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, flags)
+end
+function wxDataViewEvent_GetDragFlags(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_GetDragFlags, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewEvent_SetProposedDropIndex(pObject::Ptr{Cvoid}, index::Cint)
+    ccall((:wxDataViewEvent_SetProposedDropIndex, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, index)
+end
+function wxDataViewEvent_GetProposedDropIndex(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_GetProposedDropIndex, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewEvent_GetPosition(pObject::Ptr{Cvoid}, x::Ptr{Cint}, y::Ptr{Cint})
+    ccall((:wxDataViewEvent_GetPosition, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cint}, Ptr{Cint}),
+        pObject, x, y)
+end
+function wxDataViewEvent_SetPosition(pObject::Ptr{Cvoid}, x::Cint, y::Cint)
+    ccall((:wxDataViewEvent_SetPosition, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint, Cint),
+        pObject, x, y)
+end
+function wxDataViewEvent_IsEditCancelled(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_IsEditCancelled, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewEvent_SetEditCancelled(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_SetEditCancelled, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewEvent_GetModel(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewEvent_GetModel, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+
 # wxTreeListCtrl
 function wxTreeListCtrl_SetItemTextSimple(pObject::Ptr{Cvoid}, item::Ptr{Cvoid}, text::Ptr{Cvoid})
     ccall((:wxTreeListCtrl_SetItemTextSimple, libkwxFFI), Cvoid,
@@ -23091,6 +25898,82 @@ function wxStatusBar_GetStatusStyle(pObject::Ptr{Cvoid}, n::Cint)
         pObject, n)
 end
 
+# wxDataViewIconText
+function wxDataViewIconText_Create(text::Ptr{Cvoid}, icon::Ptr{Cvoid})
+    ccall((:wxDataViewIconText_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        text, icon)
+end
+wxDataViewIconText_CreateDefault() = ccall((:wxDataViewIconText_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
+function wxDataViewIconText_Copy(pObject::Ptr{Cvoid}, other::Ptr{Cvoid})
+    ccall((:wxDataViewIconText_Copy, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, other)
+end
+function wxDataViewIconText_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewIconText_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewIconText_SetText(pObject::Ptr{Cvoid}, text::Ptr{Cvoid})
+    ccall((:wxDataViewIconText_SetText, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, text)
+end
+function wxDataViewIconText_GetText(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewIconText_GetText, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewIconText_SetBitmapBundle(pObject::Ptr{Cvoid}, icon::Ptr{Cvoid})
+    ccall((:wxDataViewIconText_SetBitmapBundle, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, icon)
+end
+function wxDataViewIconText_GetBitmapBundle(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewIconText_GetBitmapBundle, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewIconText_SetIcon(pObject::Ptr{Cvoid}, icon::Ptr{Cvoid})
+    ccall((:wxDataViewIconText_SetIcon, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, icon)
+end
+function wxDataViewIconText_GetIcon(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewIconText_GetIcon, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxDataViewCheckIconText
+function wxDataViewCheckIconText_Create(text::Ptr{Cvoid}, icon::Ptr{Cvoid}, checkedState::Cint)
+    ccall((:wxDataViewCheckIconText_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
+        text, icon, checkedState)
+end
+wxDataViewCheckIconText_CreateDefault() = ccall((:wxDataViewCheckIconText_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
+function wxDataViewCheckIconText_Copy(pObject::Ptr{Cvoid}, other::Ptr{Cvoid})
+    ccall((:wxDataViewCheckIconText_Copy, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, other)
+end
+function wxDataViewCheckIconText_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCheckIconText_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDataViewCheckIconText_SetCheckedState(pObject::Ptr{Cvoid}, state::Cint)
+    ccall((:wxDataViewCheckIconText_SetCheckedState, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, state)
+end
+function wxDataViewCheckIconText_GetCheckedState(pObject::Ptr{Cvoid})
+    ccall((:wxDataViewCheckIconText_GetCheckedState, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
 # wxControl
 function wxControl_FindAccelIndex(label::Ptr{Cvoid})
     ccall((:wxControl_FindAccelIndex, libkwxFFI), Cint,
@@ -23379,6 +26262,11 @@ function wxTextEntry_AutoComplete(self::Ptr{Cvoid}, count::Cint, items::Ptr{Cvoi
         (Ptr{Cvoid}, Cint, Ptr{Cvoid}),
         self, count, items)
 end
+function wxTextEntry_AutoCompleteStrings(self::Ptr{Cvoid}, items::Ptr{Cvoid})
+    ccall((:wxTextEntry_AutoCompleteStrings, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        self, items)
+end
 function wxTextEntry_AutoCompleteFileNames(self::Ptr{Cvoid})
     ccall((:wxTextEntry_AutoCompleteFileNames, libkwxFFI), Cint,
         (Ptr{Cvoid},),
@@ -23388,6 +26276,11 @@ function wxTextEntry_AutoCompleteDirectories(self::Ptr{Cvoid})
     ccall((:wxTextEntry_AutoCompleteDirectories, libkwxFFI), Cint,
         (Ptr{Cvoid},),
         self)
+end
+function wxTextEntry_AutoCompleteCompleter(self::Ptr{Cvoid}, completer::Ptr{Cvoid})
+    ccall((:wxTextEntry_AutoCompleteCompleter, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        self, completer)
 end
 
 # wxItemContainer
@@ -23851,6 +26744,83 @@ function wxTopLevelWindow_SetRepresentedFilename(pObject::Ptr{Cvoid}, filename::
     ccall((:wxTopLevelWindow_SetRepresentedFilename, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, filename)
+end
+
+# kwxMSAA
+function kwxMSAA_FromWindow(window::Ptr{Cvoid}, objectId::Cint)
+    ccall((:kwxMSAA_FromWindow, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        window, objectId)
+end
+function kwxMSAA_Release(accessible::Ptr{Cvoid})
+    ccall((:kwxMSAA_Release, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        accessible)
+end
+function kwxMSAA_GetChildCount(accessible::Ptr{Cvoid})
+    ccall((:kwxMSAA_GetChildCount, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        accessible)
+end
+function kwxMSAA_GetName(accessible::Ptr{Cvoid}, childId::Cint)
+    ccall((:kwxMSAA_GetName, libkwxFFI), Ptr{Cchar},
+        (Ptr{Cvoid}, Cint),
+        accessible, childId)
+end
+function kwxMSAA_GetRoleText(accessible::Ptr{Cvoid}, childId::Cint)
+    ccall((:kwxMSAA_GetRoleText, libkwxFFI), Ptr{Cchar},
+        (Ptr{Cvoid}, Cint),
+        accessible, childId)
+end
+function kwxMSAA_GetValue(accessible::Ptr{Cvoid}, childId::Cint)
+    ccall((:kwxMSAA_GetValue, libkwxFFI), Ptr{Cchar},
+        (Ptr{Cvoid}, Cint),
+        accessible, childId)
+end
+function kwxMSAA_GetDescription(accessible::Ptr{Cvoid}, childId::Cint)
+    ccall((:kwxMSAA_GetDescription, libkwxFFI), Ptr{Cchar},
+        (Ptr{Cvoid}, Cint),
+        accessible, childId)
+end
+function kwxMSAA_GetNameWithStatus(accessible::Ptr{Cvoid}, childId::Cint, result::Ptr{Cint})
+    ccall((:kwxMSAA_GetNameWithStatus, libkwxFFI), Ptr{Cchar},
+        (Ptr{Cvoid}, Cint, Ptr{Cint}),
+        accessible, childId, result)
+end
+function kwxMSAA_GetRoleTextWithStatus(accessible::Ptr{Cvoid}, childId::Cint, result::Ptr{Cint})
+    ccall((:kwxMSAA_GetRoleTextWithStatus, libkwxFFI), Ptr{Cchar},
+        (Ptr{Cvoid}, Cint, Ptr{Cint}),
+        accessible, childId, result)
+end
+function kwxMSAA_GetValueWithStatus(accessible::Ptr{Cvoid}, childId::Cint, result::Ptr{Cint})
+    ccall((:kwxMSAA_GetValueWithStatus, libkwxFFI), Ptr{Cchar},
+        (Ptr{Cvoid}, Cint, Ptr{Cint}),
+        accessible, childId, result)
+end
+function kwxMSAA_GetDescriptionWithStatus(accessible::Ptr{Cvoid}, childId::Cint, result::Ptr{Cint})
+    ccall((:kwxMSAA_GetDescriptionWithStatus, libkwxFFI), Ptr{Cchar},
+        (Ptr{Cvoid}, Cint, Ptr{Cint}),
+        accessible, childId, result)
+end
+function kwxMSAA_GetState(accessible::Ptr{Cvoid}, childId::Cint)
+    ccall((:kwxMSAA_GetState, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint),
+        accessible, childId)
+end
+function kwxMSAA_GetChild(accessible::Ptr{Cvoid}, childId::Cint)
+    ccall((:kwxMSAA_GetChild, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        accessible, childId)
+end
+function kwxMSAA_GetAccessibleChildCount(accessible::Ptr{Cvoid})
+    ccall((:kwxMSAA_GetAccessibleChildCount, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        accessible)
+end
+function kwxMSAA_GetAccessibleChild(accessible::Ptr{Cvoid}, index::Cint)
+    ccall((:kwxMSAA_GetAccessibleChild, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        accessible, index)
 end
 
 # wxProtocol
@@ -26904,109 +29874,6 @@ function wxRegEx_ReplaceFirst(pObject::Ptr{Cvoid}, text::Ptr{Cvoid}, replacement
         pObject, text, replacement)
 end
 
-# wxXmlDocument
-wxXmlDocument_Create() = ccall((:wxXmlDocument_Create, libkwxFFI), Ptr{Cvoid}, ())
-function wxXmlDocument_GetDocumentNode(pObject::Ptr{Cvoid})
-    ccall((:wxXmlDocument_GetDocumentNode, libkwxFFI), Ptr{Cvoid},
-        (Ptr{Cvoid},),
-        pObject)
-end
-function wxXmlDocument_CreateFromFile(file_name::Ptr{Cvoid}, flags::Cint)
-    ccall((:wxXmlDocument_CreateFromFile, libkwxFFI), Ptr{Cvoid},
-        (Ptr{Cvoid}, Cint),
-        file_name, flags)
-end
-function wxXmlDocument_CreateFromString(text::Ptr{Cvoid}, flags::Cint)
-    ccall((:wxXmlDocument_CreateFromString, libkwxFFI), Ptr{Cvoid},
-        (Ptr{Cvoid}, Cint),
-        text, flags)
-end
-function wxXmlDocument_Delete(pObject::Ptr{Cvoid})
-    ccall((:wxXmlDocument_Delete, libkwxFFI), Cvoid,
-        (Ptr{Cvoid},),
-        pObject)
-end
-function wxXmlDocument_Load(pObject::Ptr{Cvoid}, file_name::Ptr{Cvoid}, flags::Cint)
-    ccall((:wxXmlDocument_Load, libkwxFFI), Cint,
-        (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
-        pObject, file_name, flags)
-end
-function wxXmlDocument_LoadFromString(pObject::Ptr{Cvoid}, text::Ptr{Cvoid}, flags::Cint)
-    ccall((:wxXmlDocument_LoadFromString, libkwxFFI), Cint,
-        (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
-        pObject, text, flags)
-end
-function wxXmlDocument_Save(pObject::Ptr{Cvoid}, file_name::Ptr{Cvoid}, indent_step::Cint)
-    ccall((:wxXmlDocument_Save, libkwxFFI), Cint,
-        (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
-        pObject, file_name, indent_step)
-end
-function wxXmlDocument_SaveToString(pObject::Ptr{Cvoid}, indent_step::Cint)
-    ccall((:wxXmlDocument_SaveToString, libkwxFFI), Ptr{Cvoid},
-        (Ptr{Cvoid}, Cint),
-        pObject, indent_step)
-end
-function wxXmlDocument_GetRoot(pObject::Ptr{Cvoid})
-    ccall((:wxXmlDocument_GetRoot, libkwxFFI), Ptr{Cvoid},
-        (Ptr{Cvoid},),
-        pObject)
-end
-function wxXmlDocument_SetRoot(pObject::Ptr{Cvoid}, root::Ptr{Cvoid})
-    ccall((:wxXmlDocument_SetRoot, libkwxFFI), Cvoid,
-        (Ptr{Cvoid}, Ptr{Cvoid}),
-        pObject, root)
-end
-function wxXmlDocument_DetachRoot(pObject::Ptr{Cvoid})
-    ccall((:wxXmlDocument_DetachRoot, libkwxFFI), Ptr{Cvoid},
-        (Ptr{Cvoid},),
-        pObject)
-end
-function wxXmlDocument_GetVersion(pObject::Ptr{Cvoid})
-    ccall((:wxXmlDocument_GetVersion, libkwxFFI), Ptr{Cvoid},
-        (Ptr{Cvoid},),
-        pObject)
-end
-function wxXmlDocument_SetVersion(pObject::Ptr{Cvoid}, version::Ptr{Cvoid})
-    ccall((:wxXmlDocument_SetVersion, libkwxFFI), Cvoid,
-        (Ptr{Cvoid}, Ptr{Cvoid}),
-        pObject, version)
-end
-function wxXmlDocument_GetFileEncoding(pObject::Ptr{Cvoid})
-    ccall((:wxXmlDocument_GetFileEncoding, libkwxFFI), Ptr{Cvoid},
-        (Ptr{Cvoid},),
-        pObject)
-end
-function wxXmlDocument_SetFileEncoding(pObject::Ptr{Cvoid}, encoding::Ptr{Cvoid})
-    ccall((:wxXmlDocument_SetFileEncoding, libkwxFFI), Cvoid,
-        (Ptr{Cvoid}, Ptr{Cvoid}),
-        pObject, encoding)
-end
-function wxXmlDocument_GetFileType(pObject::Ptr{Cvoid})
-    ccall((:wxXmlDocument_GetFileType, libkwxFFI), Cint,
-        (Ptr{Cvoid},),
-        pObject)
-end
-function wxXmlDocument_SetFileType(pObject::Ptr{Cvoid}, file_type::Cint)
-    ccall((:wxXmlDocument_SetFileType, libkwxFFI), Cvoid,
-        (Ptr{Cvoid}, Cint),
-        pObject, file_type)
-end
-function wxXmlDocument_AppendToProlog(pObject::Ptr{Cvoid}, node::Ptr{Cvoid})
-    ccall((:wxXmlDocument_AppendToProlog, libkwxFFI), Cvoid,
-        (Ptr{Cvoid}, Ptr{Cvoid}),
-        pObject, node)
-end
-function wxXmlDocument_AppendChild(pObject::Ptr{Cvoid}, child::Ptr{Cvoid})
-    ccall((:wxXmlDocument_AppendChild, libkwxFFI), Cint,
-        (Ptr{Cvoid}, Ptr{Cvoid}),
-        pObject, child)
-end
-function wxXmlDocument_IsOk(pObject::Ptr{Cvoid})
-    ccall((:wxXmlDocument_IsOk, libkwxFFI), Cint,
-        (Ptr{Cvoid},),
-        pObject)
-end
-
 # wxURI
 wxURI_Create() = ccall((:wxURI_Create, libkwxFFI), Ptr{Cvoid}, ())
 function wxURI_CreateFromString(uri_text::Ptr{Cvoid})
@@ -27796,6 +30663,21 @@ function wxRichTextAttr_HasTextBoxAttr(self::Ptr{Cvoid})
     ccall((:wxRichTextAttr_HasTextBoxAttr, libkwxFFI), Cint,
         (Ptr{Cvoid},),
         self)
+end
+function wxRichTextAttr_SetBackgroundColour(self::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxRichTextAttr_SetBackgroundColour, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        self, colour)
+end
+function wxRichTextAttr_SetParagraphSpacingAfter(self::Ptr{Cvoid}, spacing::Cint)
+    ccall((:wxRichTextAttr_SetParagraphSpacingAfter, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        self, spacing)
+end
+function wxRichTextAttr_SetLineSpacing(self::Ptr{Cvoid}, spacing::Cint)
+    ccall((:wxRichTextAttr_SetLineSpacing, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        self, spacing)
 end
 
 # wxRichTextProperties
@@ -28656,6 +31538,26 @@ function wxRichTextCompositeObject_DeleteChildren(self::Ptr{Cvoid})
 end
 function wxRichTextCompositeObject_Delete(self::Ptr{Cvoid})
     ccall((:wxRichTextCompositeObject_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        self)
+end
+
+# wxRichTextParagraph
+wxRichTextParagraph_Create() = ccall((:wxRichTextParagraph_Create, libkwxFFI), Ptr{Cvoid}, ())
+function wxRichTextParagraph_Delete(self::Ptr{Cvoid})
+    ccall((:wxRichTextParagraph_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        self)
+end
+
+# wxRichTextPlainText
+function wxRichTextPlainText_Create(text::Ptr{Cvoid})
+    ccall((:wxRichTextPlainText_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        text)
+end
+function wxRichTextPlainText_Delete(self::Ptr{Cvoid})
+    ccall((:wxRichTextPlainText_Delete, libkwxFFI), Cvoid,
         (Ptr{Cvoid},),
         self)
 end
@@ -30164,6 +33066,16 @@ function wxRichTextCtrl_GetAdjustedCaretPosition(self::Ptr{Cvoid}, caretPosition
         (Ptr{Cvoid}, Clong),
         self, caretPosition)
 end
+function wxRichTextCtrl_GetCaretPosition(self::Ptr{Cvoid})
+    ccall((:wxRichTextCtrl_GetCaretPosition, libkwxFFI), Clong,
+        (Ptr{Cvoid},),
+        self)
+end
+function wxRichTextCtrl_SetMargins(self::Ptr{Cvoid}, left::Cint, top::Cint)
+    ccall((:wxRichTextCtrl_SetMargins, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint, Cint),
+        self, left, top)
+end
 function wxRichTextCtrl_FindNextWordPosition(self::Ptr{Cvoid}, direction::Cint)
     ccall((:wxRichTextCtrl_FindNextWordPosition, libkwxFFI), Clong,
         (Ptr{Cvoid}, Cint),
@@ -31507,6 +34419,21 @@ function kwxRichTextCtrl_SetOnCanInsertContent(pObject::Ptr{Cvoid}, pFunction::P
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
 end
+function kwxRichTextCtrl_SetOnPrepareContentWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxRichTextCtrl_SetOnPrepareContentWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxRichTextCtrl_SetOnCanDeleteRangeWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxRichTextCtrl_SetOnCanDeleteRangeWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxRichTextCtrl_SetOnCanInsertContentWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxRichTextCtrl_SetOnCanInsertContentWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
 function kwxRichTextCtrl_SetCanDeleteRangeResult(pObject::Ptr{Cvoid}, result::Cint)
     ccall((:kwxRichTextCtrl_SetCanDeleteRangeResult, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Cint),
@@ -31517,12 +34444,52 @@ function kwxRichTextCtrl_SetCanInsertContentResult(pObject::Ptr{Cvoid}, result::
         (Ptr{Cvoid}, Cint),
         pObject, result)
 end
+function kwxRichTextCtrl_SetCallbackObject(pObject::Ptr{Cvoid}, object::Ptr{Cvoid})
+    ccall((:kwxRichTextCtrl_SetCallbackObject, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, object)
+end
+function kwxRichTextCtrl_GetCallbackObject(pObject::Ptr{Cvoid})
+    ccall((:kwxRichTextCtrl_GetCallbackObject, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxRichTextCtrl_SetLockId(pObject::Ptr{Cvoid}, id::Clong)
+    ccall((:kwxRichTextCtrl_SetLockId, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Clong),
+        pObject, id)
+end
+function kwxRichTextCtrl_GetLockId(pObject::Ptr{Cvoid})
+    ccall((:kwxRichTextCtrl_GetLockId, libkwxFFI), Clong,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxRichTextCtrl_BeginLock(pObject::Ptr{Cvoid})
+    ccall((:kwxRichTextCtrl_BeginLock, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxRichTextCtrl_EndLock(pObject::Ptr{Cvoid})
+    ccall((:kwxRichTextCtrl_EndLock, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxRichTextCtrl_IsLocked(pObject::Ptr{Cvoid})
+    ccall((:kwxRichTextCtrl_IsLocked, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
 
 # kwxRichTextFieldTypeStandard
 function kwxRichTextFieldTypeStandard_Create(pObject::Ptr{Cvoid}, name::Ptr{Cvoid}, label::Ptr{Cvoid}, displayStyle::Cint)
     ccall((:kwxRichTextFieldTypeStandard_Create, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint),
         pObject, name, label, displayStyle)
+end
+function kwxRichTextFieldTypeStandard_CreateWithBitmap(pObject::Ptr{Cvoid}, name::Ptr{Cvoid}, bitmap::Ptr{Cvoid}, displayStyle::Cint)
+    ccall((:kwxRichTextFieldTypeStandard_CreateWithBitmap, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint),
+        pObject, name, bitmap, displayStyle)
 end
 function kwxRichTextFieldTypeStandard_Delete(pObject::Ptr{Cvoid})
     ccall((:kwxRichTextFieldTypeStandard_Delete, libkwxFFI), Cvoid,
@@ -31579,6 +34546,31 @@ function kwxRichTextFieldTypeStandard_SetOnIsTopLevel(pObject::Ptr{Cvoid}, pFunc
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
 end
+function kwxRichTextFieldTypeStandard_SetOnCanEditPropertiesWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxRichTextFieldTypeStandard_SetOnCanEditPropertiesWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxRichTextFieldTypeStandard_SetOnEditPropertiesWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxRichTextFieldTypeStandard_SetOnEditPropertiesWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxRichTextFieldTypeStandard_SetOnGetPropertiesMenuLabelWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxRichTextFieldTypeStandard_SetOnGetPropertiesMenuLabelWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxRichTextFieldTypeStandard_SetOnUpdateFieldWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxRichTextFieldTypeStandard_SetOnUpdateFieldWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxRichTextFieldTypeStandard_SetOnIsTopLevelWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxRichTextFieldTypeStandard_SetOnIsTopLevelWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
 
 # kwxRichTextDrawingHandler
 function kwxRichTextDrawingHandler_Create(pObject::Ptr{Cvoid}, name::Ptr{Cvoid})
@@ -31615,6 +34607,31 @@ function kwxRichTextDrawingHandler_SetOnGetVirtualText(pObject::Ptr{Cvoid}, pFun
     ccall((:kwxRichTextDrawingHandler_SetOnGetVirtualText, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
+end
+function kwxRichTextDrawingHandler_SetOnHasVirtualAttributesWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxRichTextDrawingHandler_SetOnHasVirtualAttributesWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxRichTextDrawingHandler_SetOnGetVirtualAttributesWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxRichTextDrawingHandler_SetOnGetVirtualAttributesWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxRichTextDrawingHandler_SetOnGetVirtualSubobjectAttributesCountWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxRichTextDrawingHandler_SetOnGetVirtualSubobjectAttributesCountWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxRichTextDrawingHandler_SetOnHasVirtualTextWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxRichTextDrawingHandler_SetOnHasVirtualTextWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxRichTextDrawingHandler_SetOnGetVirtualTextWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxRichTextDrawingHandler_SetOnGetVirtualTextWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
 end
 function kwxRichTextDrawingHandler_SetVirtualTextResult(pObject::Ptr{Cvoid}, text::Ptr{Cvoid})
     ccall((:kwxRichTextDrawingHandler_SetVirtualTextResult, libkwxFFI), Cvoid,
@@ -31906,6 +34923,11 @@ function wxTextUrlEvent_GetURLStart(pObject::Ptr{Cvoid})
 end
 function wxTextUrlEvent_GetURLEnd(pObject::Ptr{Cvoid})
     ccall((:wxTextUrlEvent_GetURLEnd, libkwxFFI), Clong,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxTextUrlEvent_GetString(pObject::Ptr{Cvoid})
+    ccall((:wxTextUrlEvent_GetString, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid},),
         pObject)
 end
@@ -32272,6 +35294,28 @@ function wxDCOverlay_Clear(pObject::Ptr{Cvoid})
         pObject)
 end
 
+# wxOverlayDC
+function wxOverlayDC_Create(overlay::Ptr{Cvoid}, win::Ptr{Cvoid})
+    ccall((:wxOverlayDC_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        overlay, win)
+end
+function wxOverlayDC_CreateWithRect(overlay::Ptr{Cvoid}, win::Ptr{Cvoid}, x::Cint, y::Cint, width::Cint, height::Cint)
+    ccall((:wxOverlayDC_CreateWithRect, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint, Cint, Cint, Cint),
+        overlay, win, x, y, width, height)
+end
+function wxOverlayDC_CreateGCDC(pObject::Ptr{Cvoid})
+    ccall((:wxOverlayDC_CreateGCDC, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxOverlayDC_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxOverlayDC_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
 # wxAffineMatrix2D
 wxAffineMatrix2D_Create() = ccall((:wxAffineMatrix2D_Create, libkwxFFI), Ptr{Cvoid}, ())
 function wxAffineMatrix2D_Delete(pObject::Ptr{Cvoid})
@@ -32356,6 +35400,16 @@ function wxArtProvider_GetBitmapBundle(id::Ptr{Cvoid}, client::Ptr{Cvoid}, width
     ccall((:wxArtProvider_GetBitmapBundle, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Ptr{Cvoid}, Cint, Cint),
         id, client, width, height)
+end
+function wxArtProvider_GetBitmapBundleDefault(id::Ptr{Cvoid})
+    ccall((:wxArtProvider_GetBitmapBundleDefault, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        id)
+end
+function wxArtProvider_MakeClientId(id::Cstring)
+    ccall((:wxArtProvider_MakeClientId, libkwxFFI), Ptr{Cchar},
+        (Cstring,),
+        id)
 end
 function wxArtProvider_GetIcon(id::Ptr{Cvoid}, client::Ptr{Cvoid}, width::Cint, height::Cint)
     ccall((:wxArtProvider_GetIcon, libkwxFFI), Ptr{Cvoid},
@@ -33096,6 +36150,51 @@ function wxDynamicLibrary_GetName(pObject::Ptr{Cvoid})
         pObject)
 end
 
+# wxDynamicLibraryDetails
+function wxDynamicLibraryDetails_GetName(pObject::Ptr{Cvoid})
+    ccall((:wxDynamicLibraryDetails_GetName, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDynamicLibraryDetails_GetPath(pObject::Ptr{Cvoid})
+    ccall((:wxDynamicLibraryDetails_GetPath, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDynamicLibraryDetails_GetVersion(pObject::Ptr{Cvoid})
+    ccall((:wxDynamicLibraryDetails_GetVersion, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDynamicLibraryDetails_GetAddress(pObject::Ptr{Cvoid})
+    ccall((:wxDynamicLibraryDetails_GetAddress, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDynamicLibraryDetails_GetLength(pObject::Ptr{Cvoid})
+    ccall((:wxDynamicLibraryDetails_GetLength, libkwxFFI), Csize_t,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# kwxDynamicLibraryList
+kwxDynamicLibraryList_Create() = ccall((:kwxDynamicLibraryList_Create, libkwxFFI), Ptr{Cvoid}, ())
+function kwxDynamicLibraryList_Delete(pObject::Ptr{Cvoid})
+    ccall((:kwxDynamicLibraryList_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxDynamicLibraryList_GetCount(pObject::Ptr{Cvoid})
+    ccall((:kwxDynamicLibraryList_GetCount, libkwxFFI), Csize_t,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxDynamicLibraryList_GetDetails(pObject::Ptr{Cvoid}, index::Csize_t)
+    ccall((:kwxDynamicLibraryList_GetDetails, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Csize_t),
+        pObject, index)
+end
+
 # wxMutex
 function wxMutex_IsOk(pObject::Ptr{Cvoid})
     ccall((:wxMutex_IsOk, libkwxFFI), Cint,
@@ -33194,6 +36293,87 @@ function wxCondition_WaitFor(pObject::Ptr{Cvoid}, sec::Cint, nsec::Cint)
         pObject, sec, nsec)
 end
 
+# wxItemAttr
+wxItemAttr_Create() = ccall((:wxItemAttr_Create, libkwxFFI), Ptr{Cvoid}, ())
+function wxItemAttr_Copy(pObject::Ptr{Cvoid}, other::Ptr{Cvoid})
+    ccall((:wxItemAttr_Copy, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, other)
+end
+function wxItemAttr_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxItemAttr_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxItemAttr_SetTextColour(pObject::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxItemAttr_SetTextColour, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, colour)
+end
+function wxItemAttr_SetBackgroundColour(pObject::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxItemAttr_SetBackgroundColour, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, colour)
+end
+function wxItemAttr_SetFont(pObject::Ptr{Cvoid}, font::Ptr{Cvoid})
+    ccall((:wxItemAttr_SetFont, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, font)
+end
+function wxItemAttr_HasTextColour(pObject::Ptr{Cvoid})
+    ccall((:wxItemAttr_HasTextColour, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxItemAttr_HasBackgroundColour(pObject::Ptr{Cvoid})
+    ccall((:wxItemAttr_HasBackgroundColour, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxItemAttr_HasFont(pObject::Ptr{Cvoid})
+    ccall((:wxItemAttr_HasFont, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxItemAttr_HasColours(pObject::Ptr{Cvoid})
+    ccall((:wxItemAttr_HasColours, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxItemAttr_GetTextColour(pObject::Ptr{Cvoid})
+    ccall((:wxItemAttr_GetTextColour, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxItemAttr_GetBackgroundColour(pObject::Ptr{Cvoid})
+    ccall((:wxItemAttr_GetBackgroundColour, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxItemAttr_GetFont(pObject::Ptr{Cvoid})
+    ccall((:wxItemAttr_GetFont, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxOverlay
+wxOverlay_Create() = ccall((:wxOverlay_Create, libkwxFFI), Ptr{Cvoid}, ())
+function wxOverlay_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxOverlay_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxOverlay_Reset(pObject::Ptr{Cvoid})
+    ccall((:wxOverlay_Reset, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxOverlay_SetOpacity(pObject::Ptr{Cvoid}, alpha::Cint)
+    ccall((:wxOverlay_SetOpacity, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, alpha)
+end
+
 # kwxArtProv
 function kwxArtProv_Create(pObject::Ptr{Cvoid}, callback::Ptr{Cvoid})
     ccall((:kwxArtProv_Create, libkwxFFI), Ptr{Cvoid},
@@ -33204,6 +36384,36 @@ function kwxArtProv_Release(pObject::Ptr{Cvoid})
     ccall((:kwxArtProv_Release, libkwxFFI), Cvoid,
         (Ptr{Cvoid},),
         pObject)
+end
+function kwxArtProv_Push(pObject::Ptr{Cvoid})
+    ccall((:kwxArtProv_Push, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxArtProv_PushBack(pObject::Ptr{Cvoid})
+    ccall((:kwxArtProv_PushBack, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxArtProv_SetOnCreateBitmapWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxArtProv_SetOnCreateBitmapWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxArtProv_GetRequestedWidth(pObject::Ptr{Cvoid})
+    ccall((:kwxArtProv_GetRequestedWidth, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxArtProv_GetRequestedHeight(pObject::Ptr{Cvoid})
+    ccall((:kwxArtProv_GetRequestedHeight, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxArtProv_SetCreateBitmapResult(pObject::Ptr{Cvoid}, bitmap::Ptr{Cvoid})
+    ccall((:kwxArtProv_SetCreateBitmapResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, bitmap)
 end
 
 # kwxClient
@@ -33385,6 +36595,56 @@ function kwxDropTarget_SetOnLeave(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
 end
+function kwxDropTarget_SetOnDataWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxDropTarget_SetOnDataWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxDropTarget_SetOnDropWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxDropTarget_SetOnDropWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxDropTarget_SetOnEnterWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxDropTarget_SetOnEnterWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxDropTarget_SetOnDragOverWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxDropTarget_SetOnDragOverWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxDropTarget_SetOnLeaveWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxDropTarget_SetOnLeaveWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxDropTarget_SetDataResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxDropTarget_SetDataResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxDropTarget_SetDropResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxDropTarget_SetDropResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxDropTarget_SetEnterResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxDropTarget_SetEnterResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxDropTarget_SetDragOverResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxDropTarget_SetDragOverResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxDropTarget_GetDropResult(pObject::Ptr{Cvoid})
+    ccall((:kwxDropTarget_GetDropResult, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
 
 # kwxFileDropTarget
 function kwxFileDropTarget_Create(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
@@ -33421,6 +36681,71 @@ function kwxFileDropTarget_SetOnLeave(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}
     ccall((:kwxFileDropTarget_SetOnLeave, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
+end
+function kwxFileDropTarget_SetOnDataWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxFileDropTarget_SetOnDataWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxFileDropTarget_SetOnDropWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxFileDropTarget_SetOnDropWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxFileDropTarget_SetOnEnterWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxFileDropTarget_SetOnEnterWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxFileDropTarget_SetOnDragOverWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxFileDropTarget_SetOnDragOverWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxFileDropTarget_SetOnLeaveWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxFileDropTarget_SetOnLeaveWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxFileDropTarget_SetDataResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxFileDropTarget_SetDataResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxFileDropTarget_SetDropResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxFileDropTarget_SetDropResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxFileDropTarget_SetEnterResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxFileDropTarget_SetEnterResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxFileDropTarget_SetDragOverResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxFileDropTarget_SetDragOverResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxFileDropTarget_GetDropResult(pObject::Ptr{Cvoid})
+    ccall((:kwxFileDropTarget_GetDropResult, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxFileDropTarget_SetOnDropFilesWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxFileDropTarget_SetOnDropFilesWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxFileDropTarget_SetDropFilesResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxFileDropTarget_SetDropFilesResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxFileDropTarget_GetDropFiles(pObject::Ptr{Cvoid})
+    ccall((:kwxFileDropTarget_GetDropFiles, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
 end
 
 # kwxGridTable
@@ -33797,6 +37122,71 @@ function kwxTextDropTarget_SetOnLeave(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
 end
+function kwxTextDropTarget_SetOnDataWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxTextDropTarget_SetOnDataWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxTextDropTarget_SetOnDropWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxTextDropTarget_SetOnDropWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxTextDropTarget_SetOnEnterWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxTextDropTarget_SetOnEnterWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxTextDropTarget_SetOnDragOverWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxTextDropTarget_SetOnDragOverWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxTextDropTarget_SetOnLeaveWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxTextDropTarget_SetOnLeaveWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxTextDropTarget_SetDataResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxTextDropTarget_SetDataResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxTextDropTarget_SetDropResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxTextDropTarget_SetDropResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxTextDropTarget_SetEnterResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxTextDropTarget_SetEnterResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxTextDropTarget_SetDragOverResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxTextDropTarget_SetDragOverResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxTextDropTarget_GetDropResult(pObject::Ptr{Cvoid})
+    ccall((:kwxTextDropTarget_GetDropResult, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function kwxTextDropTarget_SetOnDropTextWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:kwxTextDropTarget_SetOnDropTextWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function kwxTextDropTarget_SetDropTextResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:kwxTextDropTarget_SetDropTextResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function kwxTextDropTarget_GetDropText(pObject::Ptr{Cvoid})
+    ccall((:kwxTextDropTarget_GetDropText, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
 
 # kwxTextValidator
 function kwxTextValidator_Create(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, text::Ptr{Cvoid}, style::Cint)
@@ -34095,6 +37485,31 @@ function wxApp_SetOnCreateTraits(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
 end
+function wxApp_SetOnOnFatalException(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:wxApp_SetOnOnFatalException, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function wxApp_SetOnOnUnhandledException(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:wxApp_SetOnOnUnhandledException, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function wxApp_SetOnStoreCurrentException(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:wxApp_SetOnStoreCurrentException, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function wxApp_SetOnOnExceptionInMainLoop(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:wxApp_SetOnOnExceptionInMainLoop, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
+function wxApp_SetOnRethrowStoredException(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
+    ccall((:wxApp_SetOnRethrowStoredException, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction)
+end
 
 # wxArrayString
 wxArrayString_Create() = ccall((:wxArrayString_Create, libkwxFFI), Ptr{Cvoid}, ())
@@ -34293,6 +37708,11 @@ function wxAuiToolBarItem_Create(source::Ptr{Cvoid})
     ccall((:wxAuiToolBarItem_Create, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid},),
         source)
+end
+function wxAuiToolBarItem_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxAuiToolBarItem_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
 end
 function wxAuiToolBarItem_Copy(pObject::Ptr{Cvoid}, source::Ptr{Cvoid})
     ccall((:wxAuiToolBarItem_Copy, libkwxFFI), Ptr{Cvoid},
@@ -34837,6 +38257,26 @@ function wxAuiToolBar_DeleteByIndex(pObject::Ptr{Cvoid}, tool_id::Cint)
         (Ptr{Cvoid}, Cint),
         pObject, tool_id)
 end
+function wxAuiToolBar_DestroyTool(pObject::Ptr{Cvoid}, tool_id::Cint)
+    ccall((:wxAuiToolBar_DestroyTool, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint),
+        pObject, tool_id)
+end
+function wxAuiToolBar_DestroyToolByIndex(pObject::Ptr{Cvoid}, idx::Cint)
+    ccall((:wxAuiToolBar_DestroyToolByIndex, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint),
+        pObject, idx)
+end
+function wxAuiToolBar_GetToolClientData(pObject::Ptr{Cvoid}, tool_id::Cint)
+    ccall((:wxAuiToolBar_GetToolClientData, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        pObject, tool_id)
+end
+function wxAuiToolBar_SetToolClientData(pObject::Ptr{Cvoid}, tool_id::Cint, clientData::Ptr{Cvoid})
+    ccall((:wxAuiToolBar_SetToolClientData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}),
+        pObject, tool_id, clientData)
+end
 function wxAuiToolBar_GetToolCount(pObject::Ptr{Cvoid})
     ccall((:wxAuiToolBar_GetToolCount, libkwxFFI), Csize_t,
         (Ptr{Cvoid},),
@@ -35061,6 +38501,26 @@ function wxAuiToolBar_IsPaneValid(pObject::Ptr{Cvoid}, pane::Ptr{Cvoid})
     ccall((:wxAuiToolBar_IsPaneValid, libkwxFFI), Cint,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pane)
+end
+function wxAuiToolBar_AddToolByLabelBundle(pObject::Ptr{Cvoid}, tool_id::Cint, label::Ptr{Cvoid}, bitmap::Ptr{Cvoid}, shortHelpString::Ptr{Cvoid}, kind::Cint)
+    ccall((:wxAuiToolBar_AddToolByLabelBundle, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint),
+        pObject, tool_id, label, bitmap, shortHelpString, kind)
+end
+function wxAuiToolBar_AddToolBundle(pObject::Ptr{Cvoid}, tool_id::Cint, label::Ptr{Cvoid}, bitmap::Ptr{Cvoid}, disabledBitmap::Ptr{Cvoid}, kind::Cint, shortHelpString::Ptr{Cvoid}, longHelpString::Ptr{Cvoid}, clientData::Ptr{Cvoid})
+    ccall((:wxAuiToolBar_AddToolBundle, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, tool_id, label, bitmap, disabledBitmap, kind, shortHelpString, longHelpString, clientData)
+end
+function wxAuiToolBar_AddToolByBitmapBundle(pObject::Ptr{Cvoid}, tool_id::Cint, bitmap::Ptr{Cvoid}, disabledBitmap::Ptr{Cvoid}, toggle::Cint, clientData::Ptr{Cvoid}, shortHelpString::Ptr{Cvoid}, longHelpString::Ptr{Cvoid})
+    ccall((:wxAuiToolBar_AddToolByBitmapBundle, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, tool_id, bitmap, disabledBitmap, toggle, clientData, shortHelpString, longHelpString)
+end
+function wxAuiToolBar_SetToolBitmapBundle(pObject::Ptr{Cvoid}, tool_id::Cint, bitmap::Ptr{Cvoid})
+    ccall((:wxAuiToolBar_SetToolBitmapBundle, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}),
+        pObject, tool_id, bitmap)
 end
 
 # wxAuiNotebook
@@ -35309,6 +38769,41 @@ function wxAuiNotebook_LoadLayout(pObject::Ptr{Cvoid}, name::Ptr{Cvoid}, deseria
     ccall((:wxAuiNotebook_LoadLayout, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, name, deserializer)
+end
+function wxAuiNotebook_AddPageWithBundle(pObject::Ptr{Cvoid}, page::Ptr{Cvoid}, caption::Ptr{Cvoid}, select::Cint, bitmap::Ptr{Cvoid})
+    ccall((:wxAuiNotebook_AddPageWithBundle, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}),
+        pObject, page, caption, select, bitmap)
+end
+function wxAuiNotebook_InsertPageWithBundle(pObject::Ptr{Cvoid}, page_idx::Cint, page::Ptr{Cvoid}, caption::Ptr{Cvoid}, select::Cint, bitmap::Ptr{Cvoid})
+    ccall((:wxAuiNotebook_InsertPageWithBundle, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid}),
+        pObject, page_idx, page, caption, select, bitmap)
+end
+function wxAuiNotebook_SetPageBitmapBundle(pObject::Ptr{Cvoid}, page::Cint, bitmap::Ptr{Cvoid})
+    ccall((:wxAuiNotebook_SetPageBitmapBundle, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}),
+        pObject, page, bitmap)
+end
+function wxAuiNotebook_CalculateNewSplitSize(pObject::Ptr{Cvoid})
+    ccall((:wxAuiNotebook_CalculateNewSplitSize, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxAuiNotebook_GetTabCtrlFromPoint(pObject::Ptr{Cvoid}, x::Cint, y::Cint)
+    ccall((:wxAuiNotebook_GetTabCtrlFromPoint, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Cint),
+        pObject, x, y)
+end
+function wxAuiNotebook_FindTabCtrl(pObject::Ptr{Cvoid}, page::Ptr{Cvoid})
+    ccall((:wxAuiNotebook_FindTabCtrl, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, page)
+end
+function wxAuiNotebook_FindTabIndex(pObject::Ptr{Cvoid}, page::Ptr{Cvoid})
+    ccall((:wxAuiNotebook_FindTabIndex, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, page)
 end
 
 # wxAuiTabContainerButton
@@ -36018,6 +39513,71 @@ function wxAuiManager_GetManager(window::Ptr{Cvoid})
         (Ptr{Cvoid},),
         window)
 end
+function wxAuiManager_CanDockPanel(pObject::Ptr{Cvoid}, pane::Ptr{Cvoid})
+    ccall((:wxAuiManager_CanDockPanel, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pane)
+end
+function wxAuiManager_CalculateNewSplitSize(pObject::Ptr{Cvoid})
+    ccall((:wxAuiManager_CalculateNewSplitSize, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxAuiManager_CalculateHintRect(pObject::Ptr{Cvoid}, paneWindow::Ptr{Cvoid}, x::Cint, y::Cint, offsetX::Cint, offsetY::Cint)
+    ccall((:wxAuiManager_CalculateHintRect, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint, Cint, Cint, Cint),
+        pObject, paneWindow, x, y, offsetX, offsetY)
+end
+function wxAuiManager_ClosePane(pObject::Ptr{Cvoid}, paneInfo::Ptr{Cvoid})
+    ccall((:wxAuiManager_ClosePane, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, paneInfo)
+end
+function wxAuiManager_DrawHintRect(pObject::Ptr{Cvoid}, paneWindow::Ptr{Cvoid}, x::Cint, y::Cint, offsetX::Cint, offsetY::Cint)
+    ccall((:wxAuiManager_DrawHintRect, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint, Cint, Cint, Cint),
+        pObject, paneWindow, x, y, offsetX, offsetY)
+end
+function wxAuiManager_HasLiveResize(pObject::Ptr{Cvoid})
+    ccall((:wxAuiManager_HasLiveResize, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxAuiManager_MaximizePane(pObject::Ptr{Cvoid}, paneInfo::Ptr{Cvoid})
+    ccall((:wxAuiManager_MaximizePane, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, paneInfo)
+end
+function wxAuiManager_MinimizePane(pObject::Ptr{Cvoid}, paneInfo::Ptr{Cvoid})
+    ccall((:wxAuiManager_MinimizePane, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, paneInfo)
+end
+function wxAuiManager_RestoreMaximizedPane(pObject::Ptr{Cvoid})
+    ccall((:wxAuiManager_RestoreMaximizedPane, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxAuiManager_RestorePane(pObject::Ptr{Cvoid}, paneInfo::Ptr{Cvoid})
+    ccall((:wxAuiManager_RestorePane, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, paneInfo)
+end
+function wxAuiManager_SplitPane(pObject::Ptr{Cvoid}, window::Ptr{Cvoid}, newWindow::Ptr{Cvoid}, direction::Cint, dropX::Cint, dropY::Cint)
+    ccall((:wxAuiManager_SplitPane, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Cint, Cint, Cint),
+        pObject, window, newWindow, direction, dropX, dropY)
+end
+function wxAuiManager_StartPaneDrag(pObject::Ptr{Cvoid}, paneWindow::Ptr{Cvoid}, offsetX::Cint, offsetY::Cint)
+    ccall((:wxAuiManager_StartPaneDrag, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cint, Cint),
+        pObject, paneWindow, offsetX, offsetY)
+end
+function wxAuiManager_UpdateHint(pObject::Ptr{Cvoid}, rect::Ptr{Cvoid})
+    ccall((:wxAuiManager_UpdateHint, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, rect)
+end
 
 # wxAuiDockArt
 function wxAuiDockArt_DrawBackground(pObject::Ptr{Cvoid}, dc::Ptr{Cvoid}, window::Ptr{Cvoid}, orientation::Cint, rect::Ptr{Cvoid})
@@ -36563,6 +40123,11 @@ function wxAuiPaneInfo_MinSizeXY(pObject::Ptr{Cvoid}, x::Cint, y::Cint)
         (Ptr{Cvoid}, Cint, Cint),
         pObject, x, y)
 end
+function wxAuiPaneInfo_IconBundle(pObject::Ptr{Cvoid}, bitmap::Ptr{Cvoid})
+    ccall((:wxAuiPaneInfo_IconBundle, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, bitmap)
+end
 
 # wxAuiManagerEvent
 function wxAuiManagerEvent_Create(type_::Cint)
@@ -36970,6 +40535,11 @@ function wxBitmapButton_Create(parent::Ptr{Cvoid}, id::Cint, bitmap::Ptr{Cvoid},
         (Ptr{Cvoid}, Cint, Ptr{Cvoid}, Cint, Cint, Cint, Cint, Cint),
         parent, id, bitmap, left, top, width, height, style)
 end
+function wxBitmapButton_CreateWithBundle(parent::Ptr{Cvoid}, id::Cint, bitmap::Ptr{Cvoid}, left::Cint, top::Cint, width::Cint, height::Cint, style::Cint)
+    ccall((:wxBitmapButton_CreateWithBundle, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}, Cint, Cint, Cint, Cint, Cint),
+        parent, id, bitmap, left, top, width, height, style)
+end
 function wxBitmapButton_GetBitmapDisabled(pObject::Ptr{Cvoid}, ref::Ptr{Cvoid})
     ccall((:wxBitmapButton_GetBitmapDisabled, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}),
@@ -37017,6 +40587,26 @@ function wxBitmapButton_SetBitmapLabel(pObject::Ptr{Cvoid}, bitmap::Ptr{Cvoid})
 end
 function wxBitmapButton_SetBitmapSelected(pObject::Ptr{Cvoid}, sel::Ptr{Cvoid})
     ccall((:wxBitmapButton_SetBitmapSelected, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, sel)
+end
+function wxBitmapButton_SetBitmapDisabledBundle(pObject::Ptr{Cvoid}, disabled::Ptr{Cvoid})
+    ccall((:wxBitmapButton_SetBitmapDisabledBundle, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, disabled)
+end
+function wxBitmapButton_SetBitmapFocusBundle(pObject::Ptr{Cvoid}, focus::Ptr{Cvoid})
+    ccall((:wxBitmapButton_SetBitmapFocusBundle, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, focus)
+end
+function wxBitmapButton_SetBitmapLabelBundle(pObject::Ptr{Cvoid}, bitmap::Ptr{Cvoid})
+    ccall((:wxBitmapButton_SetBitmapLabelBundle, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, bitmap)
+end
+function wxBitmapButton_SetBitmapSelectedBundle(pObject::Ptr{Cvoid}, sel::Ptr{Cvoid})
+    ccall((:wxBitmapButton_SetBitmapSelectedBundle, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, sel)
 end
@@ -37159,6 +40749,7 @@ function wxBitmapBundle_CreateFromData(data::Ptr{Cvoid}, size::Csize_t, bitmap_t
         (Ptr{Cvoid}, Csize_t, Cint),
         data, size, bitmap_type)
 end
+wxBitmapBundle_CreateDefault() = ccall((:wxBitmapBundle_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
 function wxBitmapBundle_CreateFromBase64(base64::Ptr{Cvoid}, len::Csize_t, bitmap_type::Cint)
     ccall((:wxBitmapBundle_CreateFromBase64, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid}, Csize_t, Cint),
@@ -37840,6 +41431,11 @@ function wxCaret_Create(window::Ptr{Cvoid}, width::Cint, height::Cint)
         (Ptr{Cvoid}, Cint, Cint),
         window, width, height)
 end
+function wxCaret_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxCaret_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
 wxCaret_GetBlinkTime() = ccall((:wxCaret_GetBlinkTime, libkwxFFI), Cint, ())
 function wxCaret_GetPosition(pObject::Ptr{Cvoid})
     ccall((:wxCaret_GetPosition, libkwxFFI), Ptr{Cvoid},
@@ -38222,6 +41818,39 @@ function wxClosure_GetData(pObject::Ptr{Cvoid})
     ccall((:wxClosure_GetData, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid},),
         pObject)
+end
+
+# wxColourDatabase
+wxColourDatabase_Get() = ccall((:wxColourDatabase_Get, libkwxFFI), Ptr{Cvoid}, ())
+function wxColourDatabase_AddColour(pObject::Ptr{Cvoid}, colourName::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxColourDatabase_AddColour, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, colourName, colour)
+end
+function wxColourDatabase_Find(pObject::Ptr{Cvoid}, colourName::Ptr{Cvoid})
+    ccall((:wxColourDatabase_Find, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, colourName)
+end
+function wxColourDatabase_FindName(pObject::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxColourDatabase_FindName, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, colour)
+end
+function wxColourDatabase_GetNameCount(pObject::Ptr{Cvoid})
+    ccall((:wxColourDatabase_GetNameCount, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxColourDatabase_GetNameAt(pObject::Ptr{Cvoid}, index::Cint)
+    ccall((:wxColourDatabase_GetNameAt, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        pObject, index)
+end
+function wxColourDatabase_UseScheme(pObject::Ptr{Cvoid}, scheme::Cint)
+    ccall((:wxColourDatabase_UseScheme, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, scheme)
 end
 
 # wxColourData
@@ -38648,6 +42277,39 @@ function wxContextMenuEvent_SetPosition(pObject::Ptr{Cvoid}, x::Cint, y::Cint)
         pObject, x, y)
 end
 
+# wxCursorBundle
+function wxCursorBundle_Create(bitmaps::Ptr{Cvoid}, hotSpotX::Cint, hotSpotY::Cint)
+    ccall((:wxCursorBundle_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Cint),
+        bitmaps, hotSpotX, hotSpotY)
+end
+wxCursorBundle_CreateDefault() = ccall((:wxCursorBundle_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
+function wxCursorBundle_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxCursorBundle_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxCursorBundle_Clear(pObject::Ptr{Cvoid})
+    ccall((:wxCursorBundle_Clear, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxCursorBundle_IsOk(pObject::Ptr{Cvoid})
+    ccall((:wxCursorBundle_IsOk, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxCursorBundle_GetCursorFor(pObject::Ptr{Cvoid}, window::Ptr{Cvoid})
+    ccall((:wxCursorBundle_GetCursorFor, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, window)
+end
+function wxCursorBundle_GetCursorForMainWindow(pObject::Ptr{Cvoid})
+    ccall((:wxCursorBundle_GetCursorForMainWindow, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+
 # wxCustomDataObject
 function wxCustomDataObject_Create(format::Ptr{Cvoid})
     ccall((:wxCustomDataObject_Create, libkwxFFI), Ptr{Cvoid},
@@ -38803,6 +42465,11 @@ function wxDataObjectComposite_Add(pObject::Ptr{Cvoid}, data::Ptr{Cvoid}, prefer
         (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
         pObject, data, preferred)
 end
+function wxDataObjectComposite_GetReceivedFormat(pObject::Ptr{Cvoid})
+    ccall((:wxDataObjectComposite_GetReceivedFormat, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
 wxDataObjectComposite_Create() = ccall((:wxDataObjectComposite_Create, libkwxFFI), Ptr{Cvoid}, ())
 function wxDataObjectComposite_Delete(pObject::Ptr{Cvoid})
     ccall((:wxDataObjectComposite_Delete, libkwxFFI), Cvoid,
@@ -38845,6 +42512,29 @@ function wxDataObjectSimple_SetData(pObject::Ptr{Cvoid}, len::Csize_t, buffer::P
     ccall((:wxDataObjectSimple_SetData, libkwxFFI), Cint,
         (Ptr{Cvoid}, Csize_t, Ptr{Cvoid}),
         pObject, len, buffer)
+end
+
+# wxURLDataObject
+function wxURLDataObject_Create(url::Ptr{Cvoid})
+    ccall((:wxURLDataObject_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        url)
+end
+wxURLDataObject_CreateDefault() = ccall((:wxURLDataObject_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
+function wxURLDataObject_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxURLDataObject_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxURLDataObject_GetURL(pObject::Ptr{Cvoid})
+    ccall((:wxURLDataObject_GetURL, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxURLDataObject_SetURL(pObject::Ptr{Cvoid}, url::Ptr{Cvoid})
+    ccall((:wxURLDataObject_SetURL, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, url)
 end
 
 # wxDataOutputStream
@@ -39122,6 +42812,32 @@ function wxAuiMDIChildFrame_GetMDIParent(self::Ptr{Cvoid})
 end
 
 # wxDocManager
+function wxDocManager_Create(flags::Cint, initialize::Cint)
+    ccall((:wxDocManager_Create, libkwxFFI), Ptr{Cvoid},
+        (Cint, Cint),
+        flags, initialize)
+end
+wxDocManager_CreateDefault() = ccall((:wxDocManager_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
+function wxDocManager_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxDocManager_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocManager_AddDocument(pObject::Ptr{Cvoid}, doc::Ptr{Cvoid})
+    ccall((:wxDocManager_AddDocument, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, doc)
+end
+function wxDocManager_AssociateTemplate(pObject::Ptr{Cvoid}, docTemplate::Ptr{Cvoid})
+    ccall((:wxDocManager_AssociateTemplate, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, docTemplate)
+end
+function wxDocManager_Clear(pObject::Ptr{Cvoid}, force::Cint)
+    ccall((:wxDocManager_Clear, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint),
+        pObject, force)
+end
 function wxDocManager_CloseDocuments(pObject::Ptr{Cvoid}, force::Cint)
     ccall((:wxDocManager_CloseDocuments, libkwxFFI), Cint,
         (Ptr{Cvoid}, Cint),
@@ -39136,6 +42852,11 @@ function wxDocManager_CreateNewDocument(pObject::Ptr{Cvoid})
     ccall((:wxDocManager_CreateNewDocument, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid},),
         pObject)
+end
+function wxDocManager_DisassociateTemplate(pObject::Ptr{Cvoid}, docTemplate::Ptr{Cvoid})
+    ccall((:wxDocManager_DisassociateTemplate, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, docTemplate)
 end
 function wxDocManager_FileHistoryLoad(pObject::Ptr{Cvoid}, config::Ptr{Cvoid})
     ccall((:wxDocManager_FileHistoryLoad, libkwxFFI), Cvoid,
@@ -39152,7 +42873,47 @@ function wxDocManager_FileHistoryUseMenu(pObject::Ptr{Cvoid}, menu::Ptr{Cvoid})
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, menu)
 end
+function wxDocManager_GetCurrentDocument(pObject::Ptr{Cvoid})
+    ccall((:wxDocManager_GetCurrentDocument, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocManager_GetCurrentView(pObject::Ptr{Cvoid})
+    ccall((:wxDocManager_GetCurrentView, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocManager_GetDocumentCount(pObject::Ptr{Cvoid})
+    ccall((:wxDocManager_GetDocumentCount, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocManager_GetDocumentAt(pObject::Ptr{Cvoid}, pos::Cint)
+    ccall((:wxDocManager_GetDocumentAt, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        pObject, pos)
+end
 wxDocManager_GetDocumentManager() = ccall((:wxDocManager_GetDocumentManager, libkwxFFI), Ptr{Cvoid}, ())
+function wxDocManager_GetMaxDocsOpen(pObject::Ptr{Cvoid})
+    ccall((:wxDocManager_GetMaxDocsOpen, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocManager_GetTemplateAt(pObject::Ptr{Cvoid}, pos::Cint)
+    ccall((:wxDocManager_GetTemplateAt, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        pObject, pos)
+end
+function wxDocManager_GetTemplateCount(pObject::Ptr{Cvoid})
+    ccall((:wxDocManager_GetTemplateCount, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocManager_RemoveDocument(pObject::Ptr{Cvoid}, doc::Ptr{Cvoid})
+    ccall((:wxDocManager_RemoveDocument, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, doc)
+end
 function wxDocManager_SetMaxDocsOpen(pObject::Ptr{Cvoid}, n::Cint)
     ccall((:wxDocManager_SetMaxDocsOpen, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Cint),
@@ -39169,6 +42930,63 @@ function wxDocParentFrame_GetDocumentManager(self::Ptr{Cvoid})
     ccall((:wxDocParentFrame_GetDocumentManager, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid},),
         self)
+end
+
+# wxDocTemplate
+function wxDocTemplate_GetDescription(pObject::Ptr{Cvoid})
+    ccall((:wxDocTemplate_GetDescription, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocTemplate_GetFileFilter(pObject::Ptr{Cvoid})
+    ccall((:wxDocTemplate_GetFileFilter, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocTemplate_SetFileFilter(pObject::Ptr{Cvoid}, filter::Ptr{Cvoid})
+    ccall((:wxDocTemplate_SetFileFilter, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, filter)
+end
+function wxDocTemplate_GetDefaultExtension(pObject::Ptr{Cvoid})
+    ccall((:wxDocTemplate_GetDefaultExtension, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocTemplate_GetDirectory(pObject::Ptr{Cvoid})
+    ccall((:wxDocTemplate_GetDirectory, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocTemplate_SetDirectory(pObject::Ptr{Cvoid}, dir::Ptr{Cvoid})
+    ccall((:wxDocTemplate_SetDirectory, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, dir)
+end
+function wxDocTemplate_GetViewName(pObject::Ptr{Cvoid})
+    ccall((:wxDocTemplate_GetViewName, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocTemplate_GetDocumentName(pObject::Ptr{Cvoid})
+    ccall((:wxDocTemplate_GetDocumentName, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocTemplate_GetFlags(pObject::Ptr{Cvoid})
+    ccall((:wxDocTemplate_GetFlags, libkwxFFI), Clong,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocTemplate_GetDocumentManager(pObject::Ptr{Cvoid})
+    ccall((:wxDocTemplate_GetDocumentManager, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocTemplate_FileMatchesTemplate(pObject::Ptr{Cvoid}, path::Ptr{Cvoid})
+    ccall((:wxDocTemplate_FileMatchesTemplate, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, path)
 end
 
 # wxDocument
@@ -39192,6 +43010,11 @@ function wxDocument_GetFirstView(pObject::Ptr{Cvoid})
         (Ptr{Cvoid},),
         pObject)
 end
+function wxDocument_IsModified(pObject::Ptr{Cvoid})
+    ccall((:wxDocument_IsModified, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
 function wxDocument_SetFilename(pObject::Ptr{Cvoid}, filename::Ptr{Cvoid}, notifyViews::Cint)
     ccall((:wxDocument_SetFilename, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
@@ -39201,6 +43024,36 @@ function wxDocument_UpdateAllViews(pObject::Ptr{Cvoid}, sender::Ptr{Cvoid}, hint
     ccall((:wxDocument_UpdateAllViews, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, sender, hint)
+end
+function wxDocument_Close(pObject::Ptr{Cvoid})
+    ccall((:wxDocument_Close, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocument_Save(pObject::Ptr{Cvoid})
+    ccall((:wxDocument_Save, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocument_SaveAs(pObject::Ptr{Cvoid})
+    ccall((:wxDocument_SaveAs, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocument_Revert(pObject::Ptr{Cvoid})
+    ccall((:wxDocument_Revert, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocument_AlreadySaved(pObject::Ptr{Cvoid})
+    ccall((:wxDocument_AlreadySaved, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocument_CanClose(pObject::Ptr{Cvoid})
+    ccall((:wxDocument_CanClose, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
 end
 function wxDocument_SetOnDoOpenDocument(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
     ccall((:wxDocument_SetOnDoOpenDocument, libkwxFFI), Cvoid,
@@ -39236,6 +43089,86 @@ function wxDocument_SetOnOnOpenDocument(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoi
     ccall((:wxDocument_SetOnOnOpenDocument, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
+end
+function wxDocument_SetOnDoOpenDocumentWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDocument_SetOnDoOpenDocumentWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDocument_SetDoOpenDocumentResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDocument_SetDoOpenDocumentResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDocument_SetOnDoSaveDocumentWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDocument_SetOnDoSaveDocumentWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDocument_SetDoSaveDocumentResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDocument_SetDoSaveDocumentResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDocument_SetOnIsModifiedWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDocument_SetOnIsModifiedWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDocument_SetIsModifiedResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDocument_SetIsModifiedResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDocument_SetOnModifyWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDocument_SetOnModifyWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDocument_SetOnOnCreateWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDocument_SetOnOnCreateWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDocument_SetOnCreateResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDocument_SetOnCreateResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDocument_SetOnOnOpenDocumentWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxDocument_SetOnOnOpenDocumentWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxDocument_SetOnOpenDocumentResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxDocument_SetOnOpenDocumentResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxDocument_OnCreateBase(pObject::Ptr{Cvoid}, path::Ptr{Cvoid}, flags::Clong)
+    ccall((:wxDocument_OnCreateBase, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Clong),
+        pObject, path, flags)
+end
+function wxDocument_OnOpenDocumentBase(pObject::Ptr{Cvoid}, filename::Ptr{Cvoid})
+    ccall((:wxDocument_OnOpenDocumentBase, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, filename)
+end
+function wxDocument_IsModifiedBase(pObject::Ptr{Cvoid})
+    ccall((:wxDocument_IsModifiedBase, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDocument_ModifyBase(pObject::Ptr{Cvoid}, modified::Cint)
+    ccall((:wxDocument_ModifyBase, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, modified)
+end
+function wxDocument_CreateWithParent(pObject::Ptr{Cvoid}, parent::Ptr{Cvoid})
+    ccall((:wxDocument_CreateWithParent, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, parent)
 end
 
 # wxDrawControl
@@ -39287,6 +43220,11 @@ function DropSource_Create(data::Ptr{Cvoid}, win::Ptr{Cvoid}, copy::Ptr{Cvoid}, 
         (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
         data, win, copy, move, none)
 end
+function DropSource_CreateDefault(data::Ptr{Cvoid}, win::Ptr{Cvoid})
+    ccall((:DropSource_CreateDefault, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        data, win)
+end
 function wxDropSource_DoDragDrop(pObject::Ptr{Cvoid}, flags::Cint)
     ccall((:wxDropSource_DoDragDrop, libkwxFFI), Cint,
         (Ptr{Cvoid}, Cint),
@@ -39297,15 +43235,15 @@ function DropSource_Delete(pObject::Ptr{Cvoid})
         (Ptr{Cvoid},),
         pObject)
 end
-function DropSource_DoDragDrop(pObject::Ptr{Cvoid}, move::Cint)
-    ccall((:DropSource_DoDragDrop, libkwxFFI), Cint,
-        (Ptr{Cvoid}, Cint),
-        pObject, move)
-end
 
 # wxDropTarget
 function wxDropTarget_GetData(pObject::Ptr{Cvoid})
-    ccall((:wxDropTarget_GetData, libkwxFFI), Cvoid,
+    ccall((:wxDropTarget_GetData, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxDropTarget_GetDataObject(pObject::Ptr{Cvoid})
+    ccall((:wxDropTarget_GetDataObject, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid},),
         pObject)
 end
@@ -39392,6 +43330,69 @@ function FileDataObject_GetFilenames(pObject::Ptr{Cvoid}, list::Ptr{Cvoid}, capa
     ccall((:FileDataObject_GetFilenames, libkwxFFI), Cint,
         (Ptr{Cvoid}, Ptr{Cvoid}, Cint),
         pObject, list, capacity)
+end
+function wxFileDataObject_GetFilenamesArray(pObject::Ptr{Cvoid}, filenames::Ptr{Cvoid})
+    ccall((:wxFileDataObject_GetFilenamesArray, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, filenames)
+end
+
+# wxVirtualFileDataObject
+wxVirtualFileDataObject_Create() = ccall((:wxVirtualFileDataObject_Create, libkwxFFI), Ptr{Cvoid}, ())
+function wxVirtualFileDataObject_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxVirtualFileDataObject_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxVirtualFileDataObject_GetCount(pObject::Ptr{Cvoid})
+    ccall((:wxVirtualFileDataObject_GetCount, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxVirtualFileDataObject_GetName(pObject::Ptr{Cvoid}, index::Cint)
+    ccall((:wxVirtualFileDataObject_GetName, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        pObject, index)
+end
+function wxVirtualFileDataObject_IsDir(pObject::Ptr{Cvoid}, index::Cint)
+    ccall((:wxVirtualFileDataObject_IsDir, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint),
+        pObject, index)
+end
+function wxVirtualFileDataObject_GetSize(pObject::Ptr{Cvoid}, index::Cint)
+    ccall((:wxVirtualFileDataObject_GetSize, libkwxFFI), Clonglong,
+        (Ptr{Cvoid}, Cint),
+        pObject, index)
+end
+function wxVirtualFileDataObject_GetModificationTime(pObject::Ptr{Cvoid}, index::Cint)
+    ccall((:wxVirtualFileDataObject_GetModificationTime, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        pObject, index)
+end
+function wxVirtualFileDataObject_OpenStream(pObject::Ptr{Cvoid}, index::Cint)
+    ccall((:wxVirtualFileDataObject_OpenStream, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint),
+        pObject, index)
+end
+function wxVirtualFileDataObject_SaveTo(pObject::Ptr{Cvoid}, index::Cint, path::Ptr{Cvoid})
+    ccall((:wxVirtualFileDataObject_SaveTo, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint, Ptr{Cvoid}),
+        pObject, index, path)
+end
+function wxVirtualFileDataObject_SaveAll(pObject::Ptr{Cvoid}, dir::Ptr{Cvoid}, paths::Ptr{Cvoid})
+    ccall((:wxVirtualFileDataObject_SaveAll, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, dir, paths)
+end
+function wxVirtualFileDataObject_SaveAllToTempDir(pObject::Ptr{Cvoid}, paths::Ptr{Cvoid})
+    ccall((:wxVirtualFileDataObject_SaveAllToTempDir, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, paths)
+end
+function wxVirtualFileDataObject_DeleteAllTempFiles(pObject::Ptr{Cvoid})
+    ccall((:wxVirtualFileDataObject_DeleteAllTempFiles, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
 end
 
 # wxFileCtrl
@@ -40134,18 +44135,53 @@ function wxGenericStaticText_Wrap(pObject::Ptr{Cvoid}, width::Cint)
 end
 
 # wxGenericValidator
-function wxGenericValidator_CreateInt(value::Ptr{Cvoid})
+function wxGenericValidator_CreateInt(value::Ptr{Cint})
     ccall((:wxGenericValidator_CreateInt, libkwxFFI), Ptr{Cvoid},
-        (Ptr{Cvoid},),
+        (Ptr{Cint},),
         value)
 end
-function wxGenericValidator_CreateBool(value::Ptr{Cvoid})
+function wxGenericValidator_CreateBool(value::Ptr{Cint})
     ccall((:wxGenericValidator_CreateBool, libkwxFFI), Ptr{Cvoid},
-        (Ptr{Cvoid},),
+        (Ptr{Cint},),
         value)
 end
 function wxGenericValidator_CreateString(value::Ptr{Cvoid})
     ccall((:wxGenericValidator_CreateString, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        value)
+end
+function wxGenericValidator_CreateArrayInt(value::Ptr{Cvoid})
+    ccall((:wxGenericValidator_CreateArrayInt, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        value)
+end
+function wxGenericValidator_CreateDateTime(value::Ptr{Cvoid})
+    ccall((:wxGenericValidator_CreateDateTime, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        value)
+end
+function wxGenericValidator_CreateFileName(value::Ptr{Cvoid})
+    ccall((:wxGenericValidator_CreateFileName, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        value)
+end
+function wxGenericValidator_CreateFloat(value::Ptr{Cvoid})
+    ccall((:wxGenericValidator_CreateFloat, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        value)
+end
+function wxGenericValidator_CreateDouble(value::Ptr{Cvoid})
+    ccall((:wxGenericValidator_CreateDouble, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        value)
+end
+function wxGenericValidator_CreateColour(value::Ptr{Cvoid})
+    ccall((:wxGenericValidator_CreateColour, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        value)
+end
+function wxGenericValidator_CreateCheckBoxState(value::Ptr{Cvoid})
+    ccall((:wxGenericValidator_CreateCheckBoxState, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid},),
         value)
 end
@@ -42120,6 +46156,11 @@ function wxIcon_CreateFromXPMData(xpm::Ptr{Cvoid})
         (Ptr{Cvoid},),
         xpm)
 end
+function wxIcon_CreateFromXPMString(xpm::Cstring)
+    ccall((:wxIcon_CreateFromXPMString, libkwxFFI), Ptr{Cvoid},
+        (Cstring,),
+        xpm)
+end
 function wxIcon_GetDepth(pObject::Ptr{Cvoid})
     ccall((:wxIcon_GetDepth, libkwxFFI), Cint,
         (Ptr{Cvoid},),
@@ -43495,6 +47536,44 @@ function wxMetafile_SetClipboard(pObject::Ptr{Cvoid}, width::Cint, height::Cint)
         (Ptr{Cvoid}, Cint, Cint),
         pObject, width, height)
 end
+function wxMetafile_GetWidth(pObject::Ptr{Cvoid})
+    ccall((:wxMetafile_GetWidth, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxMetafile_GetHeight(pObject::Ptr{Cvoid})
+    ccall((:wxMetafile_GetHeight, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxMetafile_GetSize(pObject::Ptr{Cvoid})
+    ccall((:wxMetafile_GetSize, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxMetafileDataObject
+wxMetafileDataObject_CreateDefault() = ccall((:wxMetafileDataObject_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
+function wxMetafileDataObject_Create(metafile::Ptr{Cvoid})
+    ccall((:wxMetafileDataObject_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        metafile)
+end
+function wxMetafileDataObject_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxMetafileDataObject_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxMetafileDataObject_GetMetafile(pObject::Ptr{Cvoid})
+    ccall((:wxMetafileDataObject_GetMetafile, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxMetafileDataObject_SetMetafile(pObject::Ptr{Cvoid}, metafile::Ptr{Cvoid})
+    ccall((:wxMetafileDataObject_SetMetafile, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, metafile)
+end
 
 # wxMetafileDC
 function wxMetafileDC_Close(pObject::Ptr{Cvoid})
@@ -43506,6 +47585,12 @@ function wxMetafileDC_Create(filePath::Ptr{Cvoid})
     ccall((:wxMetafileDC_Create, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid},),
         filePath)
+end
+wxMetafileDC_CreateDefault() = ccall((:wxMetafileDC_CreateDefault, libkwxFFI), Ptr{Cvoid}, ())
+function wxMetafileDC_CreateWithExtent(filePath::Ptr{Cvoid}, xext::Cint, yext::Cint, xorg::Cint, yorg::Cint)
+    ccall((:wxMetafileDC_CreateWithExtent, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Cint, Cint, Cint),
+        filePath, xext, yext, xorg, yorg)
 end
 function wxMetafileDC_Delete(pObject::Ptr{Cvoid})
     ccall((:wxMetafileDC_Delete, libkwxFFI), Cvoid,
@@ -46871,16 +50956,164 @@ function wxRegionIterator_ResetToRegion(pObject::Ptr{Cvoid}, region::Ptr{Cvoid})
         pObject, region)
 end
 
+# wxSVGAttributes
+wxSVGAttributes_Create() = ccall((:wxSVGAttributes_Create, libkwxFFI), Ptr{Cvoid}, ())
+function wxSVGAttributes_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGAttributes_SetRole(pObject::Ptr{Cvoid}, role::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_SetRole, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, role)
+end
+function wxSVGAttributes_SetAriaLabel(pObject::Ptr{Cvoid}, label::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_SetAriaLabel, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, label)
+end
+function wxSVGAttributes_SetAriaLabelledBy(pObject::Ptr{Cvoid}, id::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_SetAriaLabelledBy, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, id)
+end
+function wxSVGAttributes_SetAriaDescribedBy(pObject::Ptr{Cvoid}, id::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_SetAriaDescribedBy, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, id)
+end
+function wxSVGAttributes_SetAriaHidden(pObject::Ptr{Cvoid}, hidden::Cint)
+    ccall((:wxSVGAttributes_SetAriaHidden, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, hidden)
+end
+function wxSVGAttributes_SetAriaDetails(pObject::Ptr{Cvoid}, id::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_SetAriaDetails, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, id)
+end
+function wxSVGAttributes_SetAriaRoleDescription(pObject::Ptr{Cvoid}, description::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_SetAriaRoleDescription, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, description)
+end
+function wxSVGAttributes_SetId(pObject::Ptr{Cvoid}, id::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_SetId, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, id)
+end
+function wxSVGAttributes_SetClass(pObject::Ptr{Cvoid}, className::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_SetClass, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, className)
+end
+function wxSVGAttributes_Add(pObject::Ptr{Cvoid}, name::Ptr{Cvoid}, value::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_Add, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, name, value)
+end
+function wxSVGAttributes_GetAttribute(pObject::Ptr{Cvoid}, name::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_GetAttribute, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, name)
+end
+function wxSVGAttributes_GetAsString(pObject::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_GetAsString, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGAttributes_GetRole(pObject::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_GetRole, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGAttributes_GetAriaLabel(pObject::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_GetAriaLabel, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGAttributes_GetAriaLabelledBy(pObject::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_GetAriaLabelledBy, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGAttributes_GetAriaDescribedBy(pObject::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_GetAriaDescribedBy, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGAttributes_IsAriaHidden(pObject::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_IsAriaHidden, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGAttributes_GetAriaDetails(pObject::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_GetAriaDetails, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGAttributes_GetAriaRoleDescription(pObject::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_GetAriaRoleDescription, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGAttributes_GetId(pObject::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_GetId, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGAttributes_GetClass(pObject::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_GetClass, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGAttributes_IsEmpty(pObject::Ptr{Cvoid})
+    ccall((:wxSVGAttributes_IsEmpty, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
 # wxSVGFileDC
 function wxSVGFileDC_Create(fileName::Ptr{Cvoid})
     ccall((:wxSVGFileDC_Create, libkwxFFI), Ptr{Cvoid},
         (Ptr{Cvoid},),
         fileName)
 end
+function wxSVGFileDC_BeginAccessibleGroup(pObject::Ptr{Cvoid}, attributes::Ptr{Cvoid}, title::Ptr{Cvoid}, desc::Ptr{Cvoid})
+    ccall((:wxSVGFileDC_BeginAccessibleGroup, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, attributes, title, desc)
+end
 function wxSVGFileDC_EndAccessibleGroup(pObject::Ptr{Cvoid})
     ccall((:wxSVGFileDC_EndAccessibleGroup, libkwxFFI), Cvoid,
         (Ptr{Cvoid},),
         pObject)
+end
+function wxSVGFileDC_BeginLayer(pObject::Ptr{Cvoid}, opacity::Cdouble)
+    ccall((:wxSVGFileDC_BeginLayer, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cdouble),
+        pObject, opacity)
+end
+function wxSVGFileDC_EndLayer(pObject::Ptr{Cvoid})
+    ccall((:wxSVGFileDC_EndLayer, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGFileDC_Save(pObject::Ptr{Cvoid})
+    ccall((:wxSVGFileDC_Save, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGFileDC_GetSVGDocument(pObject::Ptr{Cvoid})
+    ccall((:wxSVGFileDC_GetSVGDocument, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGFileDC_SetShapeRenderingMode(pObject::Ptr{Cvoid}, mode::Cint)
+    ccall((:wxSVGFileDC_SetShapeRenderingMode, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, mode)
 end
 function wxSVGFileDC_SetBitmapHandler(pObject::Ptr{Cvoid}, handler::Ptr{Cvoid})
     ccall((:wxSVGFileDC_SetBitmapHandler, libkwxFFI), Cvoid,
@@ -46897,10 +51130,77 @@ function wxSVGFileDC_CreateWithSizeAndResolution(fileName::Ptr{Cvoid}, width::Ci
         (Ptr{Cvoid}, Cint, Cint, Cfloat),
         fileName, width, height, a_dpi)
 end
+function wxSVGFileDC_CreateWithTitle(fileName::Ptr{Cvoid}, title::Ptr{Cvoid})
+    ccall((:wxSVGFileDC_CreateWithTitle, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        fileName, title)
+end
+function wxSVGFileDC_CreateWithSizeAndTitle(fileName::Ptr{Cvoid}, width::Cint, height::Cint, title::Ptr{Cvoid})
+    ccall((:wxSVGFileDC_CreateWithSizeAndTitle, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Cint, Ptr{Cvoid}),
+        fileName, width, height, title)
+end
+function wxSVGFileDC_CreateWithSizeResolutionAndTitle(fileName::Ptr{Cvoid}, width::Cint, height::Cint, a_dpi::Cfloat, title::Ptr{Cvoid})
+    ccall((:wxSVGFileDC_CreateWithSizeResolutionAndTitle, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Cint, Cfloat, Ptr{Cvoid}),
+        fileName, width, height, a_dpi, title)
+end
+function wxSVGFileDC_CreateFromSize(width::Cint, height::Cint)
+    ccall((:wxSVGFileDC_CreateFromSize, libkwxFFI), Ptr{Cvoid},
+        (Cint, Cint),
+        width, height)
+end
+function wxSVGFileDC_CreateFromSizeWithFileAndTitle(width::Cint, height::Cint, fileName::Ptr{Cvoid}, title::Ptr{Cvoid})
+    ccall((:wxSVGFileDC_CreateFromSizeWithFileAndTitle, libkwxFFI), Ptr{Cvoid},
+        (Cint, Cint, Ptr{Cvoid}, Ptr{Cvoid}),
+        width, height, fileName, title)
+end
+function wxSVGFileDC_CreateFromSizeWithFileTitleAndResolution(width::Cint, height::Cint, fileName::Ptr{Cvoid}, title::Ptr{Cvoid}, a_dpi::Cfloat)
+    ccall((:wxSVGFileDC_CreateFromSizeWithFileTitleAndResolution, libkwxFFI), Ptr{Cvoid},
+        (Cint, Cint, Ptr{Cvoid}, Ptr{Cvoid}, Cfloat),
+        width, height, fileName, title, a_dpi)
+end
 function wxSVGFileDC_Delete(obj::Ptr{Cvoid})
     ccall((:wxSVGFileDC_Delete, libkwxFFI), Cvoid,
         (Ptr{Cvoid},),
         obj)
+end
+
+# wxSVGGraphicsContext
+function wxSVGGraphicsContext_Create(dc::Ptr{Cvoid})
+    ccall((:wxSVGGraphicsContext_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        dc)
+end
+function wxSVGGraphicsContext_CreateFromFile(fileName::Ptr{Cvoid}, width::Cint, height::Cint, a_dpi::Cfloat, title::Ptr{Cvoid})
+    ccall((:wxSVGGraphicsContext_CreateFromFile, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Cint, Cint, Cfloat, Ptr{Cvoid}),
+        fileName, width, height, a_dpi, title)
+end
+function wxSVGGraphicsContext_CreateFromSize(width::Cint, height::Cint, fileName::Ptr{Cvoid}, title::Ptr{Cvoid})
+    ccall((:wxSVGGraphicsContext_CreateFromSize, libkwxFFI), Ptr{Cvoid},
+        (Cint, Cint, Ptr{Cvoid}, Ptr{Cvoid}),
+        width, height, fileName, title)
+end
+function wxSVGGraphicsContext_GetSVGDocument(pObject::Ptr{Cvoid})
+    ccall((:wxSVGGraphicsContext_GetSVGDocument, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGGraphicsContext_Save(pObject::Ptr{Cvoid})
+    ccall((:wxSVGGraphicsContext_Save, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSVGGraphicsContext_SetBitmapHandler(pObject::Ptr{Cvoid}, handler::Ptr{Cvoid})
+    ccall((:wxSVGGraphicsContext_SetBitmapHandler, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, handler)
+end
+function wxSVGGraphicsContext_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxSVGGraphicsContext_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
 end
 
 # wxSashEvent
@@ -47441,6 +51741,7 @@ function wxSizerFlags_GetBorderInPixels(pObject::Ptr{Cvoid})
         pObject)
 end
 wxSizerFlags_GetDefaultBorderFractional() = ccall((:wxSizerFlags_GetDefaultBorderFractional, libkwxFFI), Cdouble, ())
+wxSizerFlags_GetDefaultBorder() = ccall((:wxSizerFlags_GetDefaultBorder, libkwxFFI), Cint, ())
 wxSizerFlags_DisableConsistencyChecks() = ccall((:wxSizerFlags_DisableConsistencyChecks, libkwxFFI), Cvoid, ())
 
 # wxSizerItem
@@ -48278,6 +52579,21 @@ function wxString_Length(pObject::Ptr{Cvoid})
         (Ptr{Cvoid},),
         pObject)
 end
+function wxString_ToLong(pObject::Ptr{Cvoid}, value::Ptr{Clong})
+    ccall((:wxString_ToLong, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Clong}),
+        pObject, value)
+end
+function wxString_ToLongLong(pObject::Ptr{Cvoid}, value::Ptr{Clonglong})
+    ccall((:wxString_ToLongLong, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Clonglong}),
+        pObject, value)
+end
+function wxString_ToDouble(pObject::Ptr{Cvoid}, value::Ptr{Cdouble})
+    ccall((:wxString_ToDouble, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Ptr{Cdouble}),
+        pObject, value)
+end
 
 # wxStringClientData
 wxStringClientData_Create() = ccall((:wxStringClientData_Create, libkwxFFI), Ptr{Cvoid}, ())
@@ -48301,11 +52617,29 @@ function wxStringClientData_SetData(pObject::Ptr{Cvoid}, data::Ptr{Cvoid})
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, data)
 end
+function wxStringClientData_FromClientData(data::Ptr{Cvoid})
+    ccall((:wxStringClientData_FromClientData, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid},),
+        data)
+end
 
 # wxSysColourChangedEvent
 wxSysColourChangedEvent_Create() = ccall((:wxSysColourChangedEvent_Create, libkwxFFI), Ptr{Cvoid}, ())
 function wxSysColourChangedEvent_Delete(pObject::Ptr{Cvoid})
     ccall((:wxSysColourChangedEvent_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+
+# wxSysMetricChangedEvent
+wxSysMetricChangedEvent_Create() = ccall((:wxSysMetricChangedEvent_Create, libkwxFFI), Ptr{Cvoid}, ())
+function wxSysMetricChangedEvent_Delete(pObject::Ptr{Cvoid})
+    ccall((:wxSysMetricChangedEvent_Delete, libkwxFFI), Cvoid,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSysMetricChangedEvent_GetMetric(pObject::Ptr{Cvoid})
+    ccall((:wxSysMetricChangedEvent_GetMetric, libkwxFFI), Cint,
         (Ptr{Cvoid},),
         pObject)
 end
@@ -48337,6 +52671,16 @@ end
 # wxSystemAppearance
 function wxSystemAppearance_IsDark(pObject::Ptr{Cvoid})
     ccall((:wxSystemAppearance_IsDark, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSystemAppearance_IsSystemDark(pObject::Ptr{Cvoid})
+    ccall((:wxSystemAppearance_IsSystemDark, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxSystemAppearance_AreAppsDark(pObject::Ptr{Cvoid})
+    ccall((:wxSystemAppearance_AreAppsDark, libkwxFFI), Cint,
         (Ptr{Cvoid},),
         pObject)
 end
@@ -48436,6 +52780,13 @@ function wxTextEntryDialog_SetValue(pObject::Ptr{Cvoid}, value::Ptr{Cvoid})
     ccall((:wxTextEntryDialog_SetValue, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, value)
+end
+
+# wxPasswordEntryDialog
+function wxPasswordEntryDialog_Create(parent::Ptr{Cvoid}, message::Ptr{Cvoid}, caption::Ptr{Cvoid}, value::Ptr{Cvoid}, style::Clong, x::Cint, y::Cint)
+    ccall((:wxPasswordEntryDialog_Create, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}, Clong, Cint, Cint),
+        parent, message, caption, value, style, x, y)
 end
 
 # wxTextValidator
@@ -48952,6 +53303,26 @@ function wxView_SetOnOnUpdate(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid})
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, pFunction)
 end
+function wxView_SetOnOnCreateWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxView_SetOnOnCreateWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxView_SetOnCreateResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxView_SetOnCreateResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
+function wxView_SetOnOnCloseWithData(pObject::Ptr{Cvoid}, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    ccall((:wxView_SetOnOnCloseWithData, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, pFunction, data)
+end
+function wxView_SetOnCloseResult(pObject::Ptr{Cvoid}, result::Cint)
+    ccall((:wxView_SetOnCloseResult, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, result)
+end
 function wxView_Activate(pObject::Ptr{Cvoid}, activate::Cint)
     ccall((:wxView_Activate, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Cint),
@@ -48976,6 +53347,16 @@ function wxView_SetFrame(pObject::Ptr{Cvoid}, frame::Ptr{Cvoid})
     ccall((:wxView_SetFrame, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, frame)
+end
+function wxView_Close(pObject::Ptr{Cvoid}, deleteWindow::Cint)
+    ccall((:wxView_Close, libkwxFFI), Cint,
+        (Ptr{Cvoid}, Cint),
+        pObject, deleteWindow)
+end
+function wxView_CloseDefault(pObject::Ptr{Cvoid})
+    ccall((:wxView_CloseDefault, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
 end
 
 # wxWebViewEvent
@@ -49172,6 +53553,36 @@ function wxWizard_GetBitmapPlacement(pObject::Ptr{Cvoid})
         (Ptr{Cvoid},),
         pObject)
 end
+function wxWizard_IsRunning(pObject::Ptr{Cvoid})
+    ccall((:wxWizard_IsRunning, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxWizard_SetBitmapBackgroundColour(pObject::Ptr{Cvoid}, colour::Ptr{Cvoid})
+    ccall((:wxWizard_SetBitmapBackgroundColour, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, colour)
+end
+function wxWizard_GetBitmapBackgroundColour(pObject::Ptr{Cvoid}, ref::Ptr{Cvoid})
+    ccall((:wxWizard_GetBitmapBackgroundColour, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, ref)
+end
+function wxWizard_SetMinimumBitmapWidth(pObject::Ptr{Cvoid}, width::Cint)
+    ccall((:wxWizard_SetMinimumBitmapWidth, libkwxFFI), Cvoid,
+        (Ptr{Cvoid}, Cint),
+        pObject, width)
+end
+function wxWizard_GetMinimumBitmapWidth(pObject::Ptr{Cvoid})
+    ccall((:wxWizard_GetMinimumBitmapWidth, libkwxFFI), Cint,
+        (Ptr{Cvoid},),
+        pObject)
+end
+function wxWizard_TileBitmap(left::Cint, top::Cint, width::Cint, height::Cint, dc::Ptr{Cvoid}, bitmap::Ptr{Cvoid})
+    ccall((:wxWizard_TileBitmap, libkwxFFI), Cint,
+        (Cint, Cint, Cint, Cint, Ptr{Cvoid}, Ptr{Cvoid}),
+        left, top, width, height, dc, bitmap)
+end
 
 # wxWizardEvent
 function wxWizardEvent_GetDirection(pObject::Ptr{Cvoid})
@@ -49215,6 +53626,11 @@ function wxWizardPageSimple_SetPrev(pObject::Ptr{Cvoid}, prev::Ptr{Cvoid})
     ccall((:wxWizardPageSimple_SetPrev, libkwxFFI), Cvoid,
         (Ptr{Cvoid}, Ptr{Cvoid}),
         pObject, prev)
+end
+function wxWizardPageSimple_Chain(pObject::Ptr{Cvoid}, next::Ptr{Cvoid})
+    ccall((:wxWizardPageSimple_Chain, libkwxFFI), Ptr{Cvoid},
+        (Ptr{Cvoid}, Ptr{Cvoid}),
+        pObject, next)
 end
 function wxWizardPageSimple_CreateWithBundle(parent::Ptr{Cvoid}, prev::Ptr{Cvoid}, next::Ptr{Cvoid}, bitmap::Ptr{Cvoid})
     ccall((:wxWizardPageSimple_CreateWithBundle, libkwxFFI), Ptr{Cvoid},

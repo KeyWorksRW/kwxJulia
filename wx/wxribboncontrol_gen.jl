@@ -20,23 +20,23 @@ function get_ancestor_ribbon_bar(obj::wxRibbonControlBase)
 end
 
 function get_best_size_for_parent_size(obj::wxRibbonControlBase, width::Integer, height::Integer)
-    return _wx_wrap(wxSize, KwxFFI.wxRibbonControl_GetBestSizeForParentSize(obj.ptr, Cint(width), Cint(height)))
+    return _wx_wrap(wxSize, KwxFFI.wxRibbonControl_GetBestSizeForParentSize(obj.ptr, Cint(width), Cint(height)); owned = true)
 end
 
 function get_next_larger_size(obj::wxRibbonControlBase, direction::Integer)
-    return _wx_wrap(wxSize, KwxFFI.wxRibbonControl_GetNextLargerSize(obj.ptr, Cint(direction)))
+    return _wx_wrap(wxSize, KwxFFI.wxRibbonControl_GetNextLargerSize(obj.ptr, Cint(direction)); owned = true)
 end
 
 function get_next_larger_size_relative(obj::wxRibbonControlBase, direction::Integer, width::Integer, height::Integer)
-    return _wx_wrap(wxSize, KwxFFI.wxRibbonControl_GetNextLargerSize_Relative(obj.ptr, Cint(direction), Cint(width), Cint(height)))
+    return _wx_wrap(wxSize, KwxFFI.wxRibbonControl_GetNextLargerSize_Relative(obj.ptr, Cint(direction), Cint(width), Cint(height)); owned = true)
 end
 
 function get_next_smaller_size(obj::wxRibbonControlBase, direction::Integer)
-    return _wx_wrap(wxSize, KwxFFI.wxRibbonControl_GetNextSmallerSize(obj.ptr, Cint(direction)))
+    return _wx_wrap(wxSize, KwxFFI.wxRibbonControl_GetNextSmallerSize(obj.ptr, Cint(direction)); owned = true)
 end
 
 function get_next_smaller_size_relative(obj::wxRibbonControlBase, direction::Integer, width::Integer, height::Integer)
-    return _wx_wrap(wxSize, KwxFFI.wxRibbonControl_GetNextSmallerSize_Relative(obj.ptr, Cint(direction), Cint(width), Cint(height)))
+    return _wx_wrap(wxSize, KwxFFI.wxRibbonControl_GetNextSmallerSize_Relative(obj.ptr, Cint(direction), Cint(width), Cint(height)); owned = true)
 end
 
 function is_sizing_continuous(obj::wxRibbonControlBase)

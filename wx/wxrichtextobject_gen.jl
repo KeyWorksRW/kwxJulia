@@ -17,7 +17,7 @@ function get_next_sibling(obj::wxRichTextObjectBase)
 end
 
 function get_position!(obj::wxRichTextObjectBase, x::Ref{Int32}, y::Ref{Int32})
-    KwxFFI.wxRichTextObject_GetPosition(obj.ptr, x, y)
+    GC.@preserve x y KwxFFI.wxRichTextObject_GetPosition(obj.ptr, Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y))
     nothing
 end
 
@@ -27,7 +27,7 @@ function set_position!(obj::wxRichTextObjectBase, x::Integer, y::Integer)
 end
 
 function get_size!(obj::wxRichTextObjectBase, w::Ref{Int32}, h::Ref{Int32})
-    KwxFFI.wxRichTextObject_GetSize(obj.ptr, w, h)
+    GC.@preserve w h KwxFFI.wxRichTextObject_GetSize(obj.ptr, Base.unsafe_convert(Ptr{Int32}, w), Base.unsafe_convert(Ptr{Int32}, h))
     nothing
 end
 
@@ -37,12 +37,12 @@ function set_size!(obj::wxRichTextObjectBase, w::Integer, h::Integer)
 end
 
 function get_rect!(obj::wxRichTextObjectBase, x::Ref{Int32}, y::Ref{Int32}, w::Ref{Int32}, h::Ref{Int32})
-    KwxFFI.wxRichTextObject_GetRect(obj.ptr, x, y, w, h)
+    GC.@preserve x y w h KwxFFI.wxRichTextObject_GetRect(obj.ptr, Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y), Base.unsafe_convert(Ptr{Int32}, w), Base.unsafe_convert(Ptr{Int32}, h))
     nothing
 end
 
 function get_range!(obj::wxRichTextObjectBase, start::Ref{Clong}, end_::Ref{Clong})
-    KwxFFI.wxRichTextObject_GetRange(obj.ptr, start, end_)
+    GC.@preserve start end_ KwxFFI.wxRichTextObject_GetRange(obj.ptr, Base.unsafe_convert(Ptr{Clong}, start), Base.unsafe_convert(Ptr{Clong}, end_))
     nothing
 end
 

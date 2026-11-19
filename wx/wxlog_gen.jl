@@ -57,10 +57,10 @@ function flush_active!(obj::wxLogBase)
 end
 
 function wxLog_GetActiveTarget()
-    return KwxFFI.wxLog_GetActiveTarget()
+    return _wx_wrap(wxLog, KwxFFI.wxLog_GetActiveTarget())
 end
 
-function wxLog_SetActiveTarget(pLogger::Union{wxLog, Nothing})
+function wxLog_SetActiveTarget(pLogger::Union{wxLogBase, Nothing})
     pLogger_ptr = isnothing(pLogger) ? C_NULL : pLogger.ptr
     return _wx_wrap(wxLog, KwxFFI.wxLog_SetActiveTarget(pLogger_ptr); owned = true)
 end

@@ -180,7 +180,7 @@ function select_none!(obj::wxComboBox)
 end
 
 function get_selection!(obj::wxComboBox, from::Ref{Clong}, to::Ref{Clong})
-    KwxFFI.wxTextEntry_GetSelection(obj.ptr, from, to)
+    GC.@preserve from to KwxFFI.wxTextEntry_GetSelection(obj.ptr, Base.unsafe_convert(Ptr{Clong}, from), Base.unsafe_convert(Ptr{Clong}, to))
     nothing
 end
 
@@ -230,12 +230,17 @@ function set_margins(obj::wxComboBox, left::Integer, top::Integer)
 end
 
 function get_margins!(obj::wxComboBox, left::Ref{Int32}, top::Ref{Int32})
-    KwxFFI.wxTextEntry_GetMargins(obj.ptr, left, top)
+    GC.@preserve left top KwxFFI.wxTextEntry_GetMargins(obj.ptr, Base.unsafe_convert(Ptr{Int32}, left), Base.unsafe_convert(Ptr{Int32}, top))
     nothing
 end
 
 function auto_complete(obj::wxComboBox, count::Integer, items::Ptr{Cvoid})
     return KwxFFI.wxTextEntry_AutoComplete(obj.ptr, Cint(count), items) != 0
+end
+
+function auto_complete_strings(obj::wxComboBox, items::Union{wxArrayString, Nothing})
+    items_ptr = isnothing(items) ? C_NULL : items.ptr
+    return KwxFFI.wxTextEntry_AutoCompleteStrings(obj.ptr, items_ptr) != 0
 end
 
 function auto_complete_file_names(obj::wxComboBox)
@@ -244,6 +249,11 @@ end
 
 function auto_complete_directories(obj::wxComboBox)
     return KwxFFI.wxTextEntry_AutoCompleteDirectories(obj.ptr) != 0
+end
+
+function auto_complete_completer(obj::wxComboBox, completer::Union{wxTextCompleterSimpleBase, Nothing})
+    completer_ptr = isnothing(completer) ? C_NULL : completer.ptr
+    return KwxFFI.wxTextEntry_AutoCompleteCompleter(obj.ptr, completer_ptr) != 0
 end
 
 function append_string!(obj::wxComboBox, item::AbstractString)
@@ -256,7 +266,7 @@ function append_string!(obj::wxComboBox, item::AbstractString)
     nothing
 end
 
-function set_client_object!(obj::wxComboBox, n::Integer, clientData::Union{wxClientData, Nothing})
+function set_client_object!(obj::wxComboBox, n::Integer, clientData::Union{wxClientDataBase, Nothing})
     clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
     KwxFFI.wxItemContainer_SetClientObject(obj.ptr, Cuint(n), clientData_ptr)
     nothing
@@ -515,7 +525,7 @@ function Base.replace!(obj::wxComboBoxBase, from::Integer, toPos::Integer, value
     nothing
 end
 
-function set_client_data!(obj::wxComboBoxBase, index::Integer, clientData::Union{wxClientData, Nothing})
+function set_client_data!(obj::wxComboBoxBase, index::Integer, clientData::Union{wxClientDataBase, Nothing})
     clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
     KwxFFI.wxComboBox_SetClientData(obj.ptr, Cint(index), clientData_ptr)
     nothing

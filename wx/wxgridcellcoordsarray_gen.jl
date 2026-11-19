@@ -18,7 +18,7 @@ function get_count(obj::wxGridCellCoordsArray)
 end
 
 function item!(obj::wxGridCellCoordsArray, index::Integer, col::Ref{Int32}, row::Ref{Int32})
-    KwxFFI.wxGridCellCoordsArray_Item(obj.ptr, Cint(index), col, row)
+    GC.@preserve col row KwxFFI.wxGridCellCoordsArray_Item(obj.ptr, Cint(index), Base.unsafe_convert(Ptr{Int32}, col), Base.unsafe_convert(Ptr{Int32}, row))
     nothing
 end
 

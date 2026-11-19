@@ -23,7 +23,13 @@ function Base.delete!(obj::wxFileDataObject)
     nothing
 end
 
-function get_filenames(obj::wxFileDataObject, list::Integer, capacity::Integer)
-    return Int(KwxFFI.FileDataObject_GetFilenames(obj.ptr, Cint(list), Cint(capacity)))
+function get_filenames(obj::wxFileDataObject, list::Ptr{Cvoid}, capacity::Integer)
+    return Int(KwxFFI.FileDataObject_GetFilenames(obj.ptr, list, Cint(capacity)))
+end
+
+function get_filenames_array!(obj::wxFileDataObject, filenames::Union{wxArrayString, Nothing})
+    filenames_ptr = isnothing(filenames) ? C_NULL : filenames.ptr
+    KwxFFI.wxFileDataObject_GetFilenamesArray(obj.ptr, filenames_ptr)
+    nothing
 end
 

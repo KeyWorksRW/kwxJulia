@@ -19,7 +19,7 @@ function Base.delete!(obj::wxcPrintout)
 end
 
 function get_evt_handler(obj::wxcPrintout)
-    return KwxFFI.wxcPrintout_GetEvtHandler(obj.ptr)
+    return _wx_ref(wxEvtHandler, KwxFFI.wxcPrintout_GetEvtHandler(obj.ptr))
 end
 
 function set_page_limits!(obj::wxcPrintout, startPage::Integer, endPage::Integer, fromPage::Integer, toPage::Integer)

@@ -52,7 +52,7 @@ function get_paper_id(obj::wxPrintData)
 end
 
 function get_paper_size(obj::wxPrintData)
-    return _wx_wrap(wxSize, KwxFFI.wxPrintData_GetPaperSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxPrintData_GetPaperSize(obj.ptr); owned = true)
 end
 
 function get_preview_command(obj::wxPrintData)

@@ -81,7 +81,7 @@ function do_layout_adaptation(obj::wxDialogBase)
 end
 
 function get_content_window(obj::wxDialogBase)
-    return KwxFFI.wxDialog_GetContentWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxDialog_GetContentWindow(obj.ptr))
 end
 
 function end_modal!(obj::wxDialogBase, retCode::Integer)
@@ -125,11 +125,11 @@ function get_escape_id(obj::wxDialogBase)
 end
 
 function create_button_sizer(obj::wxDialogBase, flags::Integer)
-    return KwxFFI.wxDialog_CreateButtonSizer(obj.ptr, Clong(flags))
+    return _wx_ref(wxSizer, KwxFFI.wxDialog_CreateButtonSizer(obj.ptr, Clong(flags)))
 end
 
 function create_separated_button_sizer(obj::wxDialogBase, flags::Integer)
-    return KwxFFI.wxDialog_CreateSeparatedButtonSizer(obj.ptr, Clong(flags))
+    return _wx_ref(wxSizer, KwxFFI.wxDialog_CreateSeparatedButtonSizer(obj.ptr, Clong(flags)))
 end
 
 function create_std_dialog_button_sizer(obj::wxDialogBase, flags::Integer)

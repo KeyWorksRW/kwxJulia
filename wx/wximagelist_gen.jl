@@ -7,13 +7,13 @@ function wxImageList(width::Integer, height::Integer, mask::Bool, initialCount::
     return obj
 end
 
-function add_bitmap(obj::wxImageList, bitmap::Union{wxBitmap, Nothing}, mask::Union{wxBitmap, Nothing})
+function add_bitmap(obj::wxImageList, bitmap::Union{wxBitmapBase, Nothing}, mask::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     mask_ptr = isnothing(mask) ? C_NULL : mask.ptr
     return Int(KwxFFI.wxImageList_AddBitmap(obj.ptr, bitmap_ptr, mask_ptr))
 end
 
-function add(obj::wxImageList, bitmap::Union{wxBitmap, Nothing}, mask::Union{wxBitmap, Nothing})
+function add(obj::wxImageList, bitmap::Union{wxBitmapBase, Nothing}, mask::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     mask_ptr = isnothing(mask) ? C_NULL : mask.ptr
     return Int(KwxFFI.wxImageList_Add(obj.ptr, bitmap_ptr, mask_ptr))
@@ -24,7 +24,7 @@ function add_icon(obj::wxImageList, icon::Union{wxIcon, Nothing})
     return Int(KwxFFI.wxImageList_AddIcon(obj.ptr, icon_ptr))
 end
 
-function add_masked(obj::wxImageList, bitmap::Union{wxBitmap, Nothing}, maskColour::Union{wxColour, Nothing})
+function add_masked(obj::wxImageList, bitmap::Union{wxBitmapBase, Nothing}, maskColour::Union{wxColour, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     maskColour_ptr = isnothing(maskColour) ? C_NULL : maskColour.ptr
     return Int(KwxFFI.wxImageList_AddMasked(obj.ptr, bitmap_ptr, maskColour_ptr))
@@ -36,7 +36,7 @@ function Base.delete!(obj::wxImageList)
     nothing
 end
 
-function draw(obj::wxImageList, index::Integer, dc::Union{wxDC, Nothing}, x::Integer, y::Integer, flags::Integer, solidBackground::Bool)
+function draw(obj::wxImageList, index::Integer, dc::Union{wxDCBase, Nothing}, x::Integer, y::Integer, flags::Integer, solidBackground::Bool)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     return KwxFFI.wxImageList_Draw(obj.ptr, Cint(index), dc_ptr, Cint(x), Cint(y), Cint(flags), Cint(solidBackground)) != 0
 end
@@ -46,7 +46,7 @@ function get_image_count(obj::wxImageList)
 end
 
 function get_size!(obj::wxImageList, index::Integer, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxImageList_GetSize(obj.ptr, Cint(index), width, height)
+    GC.@preserve width height KwxFFI.wxImageList_GetSize(obj.ptr, Cint(index), Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 
@@ -58,7 +58,7 @@ function remove_all(obj::wxImageList)
     return KwxFFI.wxImageList_RemoveAll(obj.ptr) != 0
 end
 
-function Base.replace(obj::wxImageList, index::Integer, bitmap::Union{wxBitmap, Nothing}, mask::Union{wxBitmap, Nothing})
+function Base.replace(obj::wxImageList, index::Integer, bitmap::Union{wxBitmapBase, Nothing}, mask::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     mask_ptr = isnothing(mask) ? C_NULL : mask.ptr
     return KwxFFI.wxImageList_Replace(obj.ptr, Cint(index), bitmap_ptr, mask_ptr) != 0

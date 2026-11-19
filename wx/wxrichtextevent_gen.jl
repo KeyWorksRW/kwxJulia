@@ -39,7 +39,7 @@ function set_new_style_sheet!(obj::wxRichTextEvent, sheet::Union{wxRichTextStyle
 end
 
 function get_range!(obj::wxRichTextEvent, start::Ref{Clong}, end_::Ref{Clong})
-    KwxFFI.wxRichTextEvent_GetRange(obj.ptr, start, end_)
+    GC.@preserve start end_ KwxFFI.wxRichTextEvent_GetRange(obj.ptr, Base.unsafe_convert(Ptr{Clong}, start), Base.unsafe_convert(Ptr{Clong}, end_))
     nothing
 end
 
@@ -61,7 +61,7 @@ function get_container(obj::wxRichTextEvent)
     return _wx_wrap(wxRichTextParagraphLayoutBox, KwxFFI.wxRichTextEvent_GetContainer(obj.ptr))
 end
 
-function set_container!(obj::wxRichTextEvent, container::Union{wxRichTextParagraphLayoutBox, Nothing})
+function set_container!(obj::wxRichTextEvent, container::Union{wxRichTextParagraphLayoutBoxBase, Nothing})
     container_ptr = isnothing(container) ? C_NULL : container.ptr
     KwxFFI.wxRichTextEvent_SetContainer(obj.ptr, container_ptr)
     nothing
@@ -71,7 +71,7 @@ function get_old_container(obj::wxRichTextEvent)
     return _wx_wrap(wxRichTextParagraphLayoutBox, KwxFFI.wxRichTextEvent_GetOldContainer(obj.ptr))
 end
 
-function set_old_container!(obj::wxRichTextEvent, container::Union{wxRichTextParagraphLayoutBox, Nothing})
+function set_old_container!(obj::wxRichTextEvent, container::Union{wxRichTextParagraphLayoutBoxBase, Nothing})
     container_ptr = isnothing(container) ? C_NULL : container.ptr
     KwxFFI.wxRichTextEvent_SetOldContainer(obj.ptr, container_ptr)
     nothing

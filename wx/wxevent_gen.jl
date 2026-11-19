@@ -11,7 +11,7 @@ function set_callback_user_data!(obj::wxEvent, arg::Union{wxObject, Nothing})
 end
 
 function get_event_object(obj::wxEvent)
-    return KwxFFI.wxEvent_GetEventObject(obj.ptr)
+    return _wx_ref(wxObject, KwxFFI.wxEvent_GetEventObject(obj.ptr))
 end
 
 function get_event_type(obj::wxEvent)
@@ -65,6 +65,15 @@ end
 
 function skip!(obj::wxEvent, skip::Bool)
     KwxFFI.wxEvent_Skip(obj.ptr, Cint(skip))
+    nothing
+end
+
+function stop_propagation(obj::wxEvent)
+    return Int(KwxFFI.wxEvent_StopPropagation(obj.ptr))
+end
+
+function resume_propagation!(obj::wxEvent, propagationLevel::Integer)
+    KwxFFI.wxEvent_ResumePropagation(obj.ptr, Cint(propagationLevel))
     nothing
 end
 

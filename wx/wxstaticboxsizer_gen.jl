@@ -9,7 +9,7 @@ function wxStaticBoxSizer(box::Union{wxStaticBox, Nothing}, orient::Integer)
 end
 
 function calc_min(obj::wxStaticBoxSizer)
-    return _wx_wrap(wxSize, KwxFFI.wxStaticBoxSizer_CalcMin(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxStaticBoxSizer_CalcMin(obj.ptr); owned = true)
 end
 
 function Base.detach(obj::wxStaticBoxSizer, window::Ptr{Cvoid})

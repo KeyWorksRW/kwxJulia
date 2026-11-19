@@ -135,7 +135,7 @@ function kwxUtf8Buffer_Create(str::AbstractString)
 end
 
 function kwxUtf8Buffer_Data(buf::Ptr{Cvoid})
-    return _wx_take_cstring(KwxFFI.kwxUtf8Buffer_Data(buf))
+    return _wx_borrow_cstring(KwxFFI.kwxUtf8Buffer_Data(buf))
 end
 
 function kwxUtf8Buffer_Delete(buf::Ptr{Cvoid})
@@ -148,7 +148,7 @@ function wxGetOsDescription()
 end
 
 function wxGetOsVersion(major::Ref{Int32}, minor::Ref{Int32}, micro::Ref{Int32})
-    return Int(KwxFFI.wxGetOsVersion(major, minor, micro))
+    return Int(GC.@preserve major minor micro KwxFFI.wxGetOsVersion(Base.unsafe_convert(Ptr{Cint}, major), Base.unsafe_convert(Ptr{Cint}, minor), Base.unsafe_convert(Ptr{Cint}, micro)))
 end
 
 function wxCheckOsVersion(major::Integer, minor::Integer, micro::Integer)
@@ -200,7 +200,7 @@ function wxSetDetectableAutoRepeat(flag::Bool)
 end
 
 function wxGetMousePosition(x::Ref{Int32}, y::Ref{Int32})
-    KwxFFI.wxGetMousePosition(x, y)
+    GC.@preserve x y KwxFFI.wxGetMousePosition(Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y))
     nothing
 end
 
@@ -250,6 +250,16 @@ function wxGetEnv(var::AbstractString, value::AbstractString)
     finally
         Base.delete!(var_ws)
         Base.delete!(value_ws)
+    end
+    return _result
+end
+
+function wxGetEnvValue(var::AbstractString)
+    var_ws = wxString(var)
+    _result = try
+        _wx_take_wxstring(KwxFFI.wxGetEnvValue(var_ws.ptr))
+    finally
+        Base.delete!(var_ws)
     end
     return _result
 end
@@ -318,14 +328,14 @@ end
 function wxGetDiskSpace(path::AbstractString, total_bytes::Ref{Clonglong}, free_bytes::Ref{Clonglong})
     path_ws = wxString(path)
     _result = try
-        KwxFFI.wxGetDiskSpace(path_ws.ptr, total_bytes, free_bytes) != 0
+        GC.@preserve total_bytes free_bytes KwxFFI.wxGetDiskSpace(path_ws.ptr, Base.unsafe_convert(Ptr{Clonglong}, total_bytes), Base.unsafe_convert(Ptr{Clonglong}, free_bytes)) != 0
     finally
         Base.delete!(path_ws)
     end
     return _result
 end
 
-function wxExecute(command::AbstractString, flags::Integer, process::Union{wxProcess, Nothing}, execute_env::Union{wxExecuteEnv, Nothing})
+function wxExecute(command::AbstractString, flags::Integer, process::Union{wxProcessBase, Nothing}, execute_env::Union{wxExecuteEnv, Nothing})
     command_ws = wxString(command)
     process_ptr = isnothing(process) ? C_NULL : process.ptr
     execute_env_ptr = isnothing(execute_env) ? C_NULL : execute_env.ptr
@@ -362,7 +372,7 @@ function wxExecuteWithOutputAndError(command::AbstractString, output::Union{wxAr
     return _result
 end
 
-function wxExecuteArgv(n::Integer, argv::Ptr{Cvoid}, flags::Integer, process::Union{wxProcess, Nothing}, execute_env::Union{wxExecuteEnv, Nothing})
+function wxExecuteArgv(n::Integer, argv::Ptr{Cvoid}, flags::Integer, process::Union{wxProcessBase, Nothing}, execute_env::Union{wxExecuteEnv, Nothing})
     process_ptr = isnothing(process) ? C_NULL : process.ptr
     execute_env_ptr = isnothing(execute_env) ? C_NULL : execute_env.ptr
     return Int(KwxFFI.wxExecuteArgv(Cint(n), argv, Cint(flags), process_ptr, execute_env_ptr))
@@ -387,7 +397,7 @@ function wxShutdown(flags::Integer)
 end
 
 function wxKill(pid::Integer, sig::Integer, rc::Ref{Int32}, flags::Integer)
-    return Int(KwxFFI.wxKill(Clong(pid), Cint(sig), rc, Cint(flags)))
+    return Int(GC.@preserve rc KwxFFI.wxKill(Clong(pid), Cint(sig), Base.unsafe_convert(Ptr{Cint}, rc), Cint(flags)))
 end
 
 function wxShell(command::AbstractString)
@@ -460,7 +470,7 @@ function wxStripMenuCodes(text::AbstractString, flags::Integer)
     return _result
 end
 
-function wxFindMenuItemId(frame::Union{wxFrame, Nothing}, menu_string::AbstractString, item_string::AbstractString)
+function wxFindMenuItemId(frame::Union{wxFrameBase, Nothing}, menu_string::AbstractString, item_string::AbstractString)
     frame_ptr = isnothing(frame) ? C_NULL : frame.ptr
     menu_string_ws = wxString(menu_string)
     item_string_ws = wxString(item_string)
@@ -474,18 +484,18 @@ function wxFindMenuItemId(frame::Union{wxFrame, Nothing}, menu_string::AbstractS
 end
 
 function wxGenericFindWindowAtPoint(x::Integer, y::Integer)
-    return KwxFFI.wxGenericFindWindowAtPoint(Cint(x), Cint(y))
+    return _wx_ref(wxWindow, KwxFFI.wxGenericFindWindowAtPoint(Cint(x), Cint(y)))
 end
 
 function wxFindWindowAtPoint(x::Integer, y::Integer)
-    return KwxFFI.wxFindWindowAtPoint(Cint(x), Cint(y))
+    return _wx_ref(wxWindow, KwxFFI.wxFindWindowAtPoint(Cint(x), Cint(y)))
 end
 
 function wxFindWindowByLabel(title::AbstractString, parent::Union{wxWindow, Nothing})
     title_ws = wxString(title)
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     _result = try
-        KwxFFI.wxFindWindowByLabel(title_ws.ptr, parent_ptr)
+        _wx_ref(wxWindow, KwxFFI.wxFindWindowByLabel(title_ws.ptr, parent_ptr))
     finally
         Base.delete!(title_ws)
     end
@@ -496,7 +506,7 @@ function wxFindWindowByName(name::AbstractString, parent::Union{wxWindow, Nothin
     name_ws = wxString(name)
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     _result = try
-        KwxFFI.wxFindWindowByName(name_ws.ptr, parent_ptr)
+        _wx_ref(wxWindow, KwxFFI.wxFindWindowByName(name_ws.ptr, parent_ptr))
     finally
         Base.delete!(name_ws)
     end
@@ -561,7 +571,7 @@ function wxFileSelectorEx(message::AbstractString, default_path::AbstractString,
     wildcard_ws = wxString(wildcard)
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     _result = try
-        _wx_take_wxstring(KwxFFI.wxFileSelectorEx(message_ws.ptr, default_path_ws.ptr, default_filename_ws.ptr, index_default_extension, wildcard_ws.ptr, Cint(flags), parent_ptr, Cint(x), Cint(y)))
+        _wx_take_wxstring(GC.@preserve index_default_extension KwxFFI.wxFileSelectorEx(message_ws.ptr, default_path_ws.ptr, default_filename_ws.ptr, Base.unsafe_convert(Ptr{Cint}, index_default_extension), wildcard_ws.ptr, Cint(flags), parent_ptr, Cint(x), Cint(y)))
     finally
         Base.delete!(message_ws)
         Base.delete!(default_path_ws)
@@ -627,7 +637,7 @@ function wxGetStockHelpString(id::Integer, client::Integer)
     return _wx_take_wxstring(KwxFFI.wxGetStockHelpString(Cint(id), Cint(client)))
 end
 
-function wxPersistentRegisterAndRestore(frame::Union{wxFrame, Nothing}, name::AbstractString)
+function wxPersistentRegisterAndRestore(frame::Union{wxFrameBase, Nothing}, name::AbstractString)
     frame_ptr = isnothing(frame) ? C_NULL : frame.ptr
     name_ws = wxString(name)
     _result = try
@@ -638,7 +648,7 @@ function wxPersistentRegisterAndRestore(frame::Union{wxFrame, Nothing}, name::Ab
     return _result
 end
 
-function wxPersistentRegisterAndRestoreNoName(frame::Union{wxFrame, Nothing})
+function wxPersistentRegisterAndRestoreNoName(frame::Union{wxFrameBase, Nothing})
     frame_ptr = isnothing(frame) ? C_NULL : frame.ptr
     return KwxFFI.wxPersistentRegisterAndRestoreNoName(frame_ptr) != 0
 end
@@ -729,7 +739,7 @@ function LogStatus(message::AbstractString)
     nothing
 end
 
-function LogStatusWindow(frame::Union{wxFrame, Nothing}, message::AbstractString)
+function LogStatusWindow(frame::Union{wxFrameBase, Nothing}, message::AbstractString)
     frame_ptr = isnothing(frame) ? C_NULL : frame.ptr
     message_ws = wxString(message)
     try
@@ -813,6 +823,20 @@ function wxGetSingleChoiceIndex(message::AbstractString, caption::AbstractString
     return _result
 end
 
+function wxGetSingleChoiceIndexArray(message::AbstractString, caption::AbstractString, choices::Union{wxArrayString, Nothing}, parent::Union{wxWindow, Nothing})
+    message_ws = wxString(message)
+    caption_ws = wxString(caption)
+    choices_ptr = isnothing(choices) ? C_NULL : choices.ptr
+    parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
+    _result = try
+        Int(KwxFFI.wxGetSingleChoiceIndexArray(message_ws.ptr, caption_ws.ptr, choices_ptr, parent_ptr))
+    finally
+        Base.delete!(message_ws)
+        Base.delete!(caption_ws)
+    end
+    return _result
+end
+
 function wxGetSingleChoiceIndexEx(message::AbstractString, caption::AbstractString, n::Integer, choices::Union{wxArrayString, Nothing}, parent::Union{wxWindow, Nothing}, x::Integer, y::Integer, centre::Bool, width::Integer, height::Integer, initialSelection::Integer)
     message_ws = wxString(message)
     caption_ws = wxString(caption)
@@ -853,12 +877,12 @@ function wxAtoi(str::AbstractString)
 end
 
 function wxGetDisplaySize()
-    return _wx_wrap(wxSize, KwxFFI.wxGetDisplaySize())
+    return _wx_wrap(wxSize, KwxFFI.wxGetDisplaySize(); owned = true)
 end
 
 function wxGetTopLevelParent(window::Union{wxWindow, Nothing})
     window_ptr = isnothing(window) ? C_NULL : window.ptr
-    return KwxFFI.wxGetTopLevelParent(window_ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxGetTopLevelParent(window_ptr))
 end
 
 function wxIsprint(character::Integer)
@@ -883,8 +907,18 @@ function wxDegToRad(degrees::Float64)
     return Float64(KwxFFI.wxDegToRad(Cdouble(degrees)))
 end
 
-function wxFgets(buffer::AbstractString, size::Integer, stream::Ptr{Cvoid})
-    return _wx_take_cstring(GC.@preserve buffer KwxFFI.wxFgets(Base.unsafe_convert(Cstring, buffer), Cint(size), stream))
+function wxFgets(buffer::AbstractVector{UInt8}, size::Integer, stream::Ptr{Cvoid})
+    return _wx_borrow_cstring(GC.@preserve buffer KwxFFI.wxFgets(Base.unsafe_convert(Ptr{UInt8}, buffer), Cint(size), stream))
+end
+
+function wxFputs(str::AbstractString, stream::Ptr{Cvoid})
+    str_ws = wxString(str)
+    _result = try
+        Int(KwxFFI.wxFputs(str_ws.ptr, stream))
+    finally
+        Base.delete!(str_ws)
+    end
+    return _result
 end
 
 function wxGetCwd()
@@ -978,7 +1012,7 @@ end
 
 function wxFindFocusDescendant(ancestor::Union{wxWindow, Nothing})
     ancestor_ptr = isnothing(ancestor) ? C_NULL : ancestor.ptr
-    return KwxFFI.wxFindFocusDescendant(ancestor_ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxFindFocusDescendant(ancestor_ptr))
 end
 
 function wxGetBatteryState()
@@ -986,7 +1020,7 @@ function wxGetBatteryState()
 end
 
 function wxGetClientDisplayRect()
-    return _wx_wrap(wxRect, KwxFFI.wxGetClientDisplayRect())
+    return _wx_wrap(wxRect, KwxFFI.wxGetClientDisplayRect(); owned = true)
 end
 
 function wxGetLocalTime()
@@ -997,15 +1031,13 @@ function wxGetPowerType()
     return Int(KwxFFI.wxGetPowerType())
 end
 
-function wxGetSelectedChoices(selections::Ptr{Cvoid}, choices::AbstractString, count::Integer, message::AbstractString, caption::AbstractString, parent::Union{wxWindow, Nothing})
-    choices_ws = wxString(choices)
+function wxGetSelectedChoices(selections::Ptr{Cvoid}, count::Integer, choices::Ptr{Cvoid}, message::AbstractString, caption::AbstractString, parent::Union{wxWindow, Nothing})
     message_ws = wxString(message)
     caption_ws = wxString(caption)
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     _result = try
-        Int(KwxFFI.wxGetSelectedChoices(selections, choices_ws.ptr, Cint(count), message_ws.ptr, caption_ws.ptr, parent_ptr))
+        Int(KwxFFI.wxGetSelectedChoices(selections, Cint(count), choices, message_ws.ptr, caption_ws.ptr, parent_ptr))
     finally
-        Base.delete!(choices_ws)
         Base.delete!(message_ws)
         Base.delete!(caption_ws)
     end
@@ -1026,32 +1058,28 @@ function wxGetSelectedChoicesEx(selections::Ptr{Cvoid}, message::AbstractString,
     return _result
 end
 
-function wxGetSingleChoice(message::AbstractString, caption::AbstractString, choices::AbstractString, count::Integer, parent::Union{wxWindow, Nothing})
+function wxGetSingleChoice(message::AbstractString, caption::AbstractString, count::Integer, choices::Ptr{Cvoid}, parent::Union{wxWindow, Nothing})
     message_ws = wxString(message)
     caption_ws = wxString(caption)
-    choices_ws = wxString(choices)
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     _result = try
-        _wx_take_wxstring(KwxFFI.wxGetSingleChoice(message_ws.ptr, caption_ws.ptr, choices_ws.ptr, Cint(count), parent_ptr))
+        _wx_take_wxstring(KwxFFI.wxGetSingleChoice(message_ws.ptr, caption_ws.ptr, Cint(count), choices, parent_ptr))
     finally
         Base.delete!(message_ws)
         Base.delete!(caption_ws)
-        Base.delete!(choices_ws)
     end
     return _result
 end
 
-function wxGetSingleChoiceData(message::AbstractString, caption::AbstractString, choices::AbstractString, count::Integer, client_data::Ptr{Cvoid}, parent::Union{wxWindow, Nothing})
+function wxGetSingleChoiceData(message::AbstractString, caption::AbstractString, count::Integer, choices::Ptr{Cvoid}, client_data::Ptr{Cvoid}, parent::Union{wxWindow, Nothing})
     message_ws = wxString(message)
     caption_ws = wxString(caption)
-    choices_ws = wxString(choices)
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     _result = try
-        KwxFFI.wxGetSingleChoiceData(message_ws.ptr, caption_ws.ptr, choices_ws.ptr, Cint(count), client_data, parent_ptr)
+        KwxFFI.wxGetSingleChoiceData(message_ws.ptr, caption_ws.ptr, Cint(count), choices, client_data, parent_ptr)
     finally
         Base.delete!(message_ws)
         Base.delete!(caption_ws)
-        Base.delete!(choices_ws)
     end
     return _result
 end
@@ -1109,7 +1137,49 @@ function wxIslower(character::Integer)
 end
 
 function wxMakeFloatingPointValidator(value::Ref{Cdouble}, style::Integer)
-    return KwxFFI.wxMakeFloatingPointValidator(value, Cint(style))
+    return GC.@preserve value KwxFFI.wxMakeFloatingPointValidator(Base.unsafe_convert(Ptr{Cdouble}, value), Cint(style))
+end
+
+function wxMakeFloatingPointValidatorWithPrecision(precision::Integer, value::Ref{Cdouble}, style::Integer)
+    return GC.@preserve value KwxFFI.wxMakeFloatingPointValidatorWithPrecision(Cint(precision), Base.unsafe_convert(Ptr{Cdouble}, value), Cint(style))
+end
+
+function wxFloatingPointValidator_SetPrecision(validator::Ptr{Cvoid}, precision::Integer)
+    KwxFFI.wxFloatingPointValidator_SetPrecision(validator, Cint(precision))
+    nothing
+end
+
+function wxFloatingPointValidator_SetFactor(validator::Ptr{Cvoid}, factor::Float64)
+    KwxFFI.wxFloatingPointValidator_SetFactor(validator, Cdouble(factor))
+    nothing
+end
+
+function wxFloatingPointValidator_SetStyle(validator::Ptr{Cvoid}, style::Integer)
+    KwxFFI.wxFloatingPointValidator_SetStyle(validator, Cint(style))
+    nothing
+end
+
+function wxFloatingPointValidator_SetMin(validator::Ptr{Cvoid}, min::Float64)
+    KwxFFI.wxFloatingPointValidator_SetMin(validator, Cdouble(min))
+    nothing
+end
+
+function wxFloatingPointValidator_GetMin(validator::Ptr{Cvoid})
+    return Float64(KwxFFI.wxFloatingPointValidator_GetMin(validator))
+end
+
+function wxFloatingPointValidator_SetMax(validator::Ptr{Cvoid}, max::Float64)
+    KwxFFI.wxFloatingPointValidator_SetMax(validator, Cdouble(max))
+    nothing
+end
+
+function wxFloatingPointValidator_GetMax(validator::Ptr{Cvoid})
+    return Float64(KwxFFI.wxFloatingPointValidator_GetMax(validator))
+end
+
+function wxFloatingPointValidator_SetRange(validator::Ptr{Cvoid}, min::Float64, max::Float64)
+    KwxFFI.wxFloatingPointValidator_SetRange(validator, Cdouble(min), Cdouble(max))
+    nothing
 end
 
 function wxMutexGuiEnter()
@@ -1194,6 +1264,10 @@ function wxStrdup(str::AbstractString)
     return _result
 end
 
+function wxStrlen(str::AbstractString)
+    return GC.@preserve str KwxFFI.wxStrlen(Base.unsafe_convert(Cstring, str))
+end
+
 function wxStrtod(nptr::AbstractString)
     nptr_ws = wxString(nptr)
     _result = try
@@ -1224,8 +1298,8 @@ function kwxBell()
     nothing
 end
 
-function kwxBitmapFromBase64(base64::Integer, len::Integer)
-    return _wx_wrap(wxBitmap, KwxFFI.kwxBitmapFromBase64(Cint(base64), Csize_t(len)); owned = true)
+function kwxBitmapFromBase64(base64::Ptr{Cvoid}, len::Integer)
+    return _wx_wrap(wxBitmap, KwxFFI.kwxBitmapFromBase64(base64, Csize_t(len)); owned = true)
 end
 
 function kwxEndBusyCursor()
@@ -1239,7 +1313,7 @@ function kwxFree(pObject::Ptr{Cvoid})
 end
 
 function kwxGetMousePosition()
-    return _wx_wrap(wxPoint, KwxFFI.kwxGetMousePosition())
+    return _wx_wrap(wxPoint, KwxFFI.kwxGetMousePosition(); owned = true)
 end
 
 function kwxGetPixelRGB(buffer::Ptr{Cvoid}, width::Integer, x::Integer, y::Integer)
@@ -1288,8 +1362,8 @@ function kwxSetPixelRowRGBA(buffer::Ptr{Cvoid}, width::Integer, x::Integer, y::I
     nothing
 end
 
-function kwxSvgStringFromBase64(base64::Integer, len::Integer)
-    return _wx_take_cstring(KwxFFI.kwxSvgStringFromBase64(Cint(base64), Csize_t(len)))
+function kwxSvgStringFromBase64(base64::Ptr{Cvoid}, len::Integer)
+    return _wx_take_cstring(KwxFFI.kwxSvgStringFromBase64(base64, Csize_t(len)))
 end
 
 function kwxSystemSettingsGetColour(systemColour::Integer)
@@ -1313,7 +1387,13 @@ function wxDragIcon(icon::Union{wxIcon, Nothing}, x::Integer, y::Integer)
     return _wx_wrap(wxDragImage, KwxFFI.wxDragIcon(icon_ptr, Cint(x), Cint(y)))
 end
 
-function wxDragListItem(listCtrl::Union{wxListCtrl, Nothing}, id::Integer)
+function wxDragIconWithCursor(icon::Union{wxIcon, Nothing}, cursor::Union{wxCursor, Nothing})
+    icon_ptr = isnothing(icon) ? C_NULL : icon.ptr
+    cursor_ptr = isnothing(cursor) ? C_NULL : cursor.ptr
+    return _wx_wrap(wxDragImage, KwxFFI.wxDragIconWithCursor(icon_ptr, cursor_ptr))
+end
+
+function wxDragListItem(listCtrl::Union{wxListCtrlBase, Nothing}, id::Integer)
     listCtrl_ptr = isnothing(listCtrl) ? C_NULL : listCtrl.ptr
     return _wx_wrap(wxDragImage, KwxFFI.wxDragListItem(listCtrl_ptr, Clong(id)))
 end
@@ -1322,6 +1402,17 @@ function wxDragString(text::AbstractString, x::Integer, y::Integer)
     text_ws = wxString(text)
     _result = try
         _wx_wrap(wxDragImage, KwxFFI.wxDragString(text_ws.ptr, Cint(x), Cint(y)))
+    finally
+        Base.delete!(text_ws)
+    end
+    return _result
+end
+
+function wxDragStringWithCursor(text::AbstractString, cursor::Union{wxCursor, Nothing})
+    text_ws = wxString(text)
+    cursor_ptr = isnothing(cursor) ? C_NULL : cursor.ptr
+    _result = try
+        _wx_wrap(wxDragImage, KwxFFI.wxDragStringWithCursor(text_ws.ptr, cursor_ptr))
     finally
         Base.delete!(text_ws)
     end
@@ -1339,7 +1430,13 @@ function wxGenericDragIcon(icon::Union{wxIcon, Nothing})
     return _wx_wrap(wxGenericDragImage, KwxFFI.wxGenericDragIcon(icon_ptr))
 end
 
-function wxGenericDragListItem(listCtrl::Union{wxListCtrl, Nothing}, id::Integer)
+function wxGenericDragIconWithCursor(icon::Union{wxIcon, Nothing}, cursor::Union{wxCursor, Nothing})
+    icon_ptr = isnothing(icon) ? C_NULL : icon.ptr
+    cursor_ptr = isnothing(cursor) ? C_NULL : cursor.ptr
+    return _wx_wrap(wxGenericDragImage, KwxFFI.wxGenericDragIconWithCursor(icon_ptr, cursor_ptr))
+end
+
+function wxGenericDragListItem(listCtrl::Union{wxListCtrlBase, Nothing}, id::Integer)
     listCtrl_ptr = isnothing(listCtrl) ? C_NULL : listCtrl.ptr
     return _wx_wrap(wxGenericDragImage, KwxFFI.wxGenericDragListItem(listCtrl_ptr, Clong(id)))
 end
@@ -1348,6 +1445,17 @@ function wxGenericDragString(text::AbstractString)
     text_ws = wxString(text)
     _result = try
         _wx_wrap(wxGenericDragImage, KwxFFI.wxGenericDragString(text_ws.ptr))
+    finally
+        Base.delete!(text_ws)
+    end
+    return _result
+end
+
+function wxGenericDragStringWithCursor(text::AbstractString, cursor::Union{wxCursor, Nothing})
+    text_ws = wxString(text)
+    cursor_ptr = isnothing(cursor) ? C_NULL : cursor.ptr
+    _result = try
+        _wx_wrap(wxGenericDragImage, KwxFFI.wxGenericDragStringWithCursor(text_ws.ptr, cursor_ptr))
     finally
         Base.delete!(text_ws)
     end
@@ -1448,6 +1556,10 @@ function kwxConsoleInitialize(argc::Integer, argv::Ptr{Cvoid})
     return Int(KwxFFI.kwxConsoleInitialize(Cint(argc), argv))
 end
 
+function kwxConsoleInitializeFromArgs(argc::Integer, argv::Ptr{Cvoid})
+    return Int(KwxFFI.kwxConsoleInitializeFromArgs(Cint(argc), argv))
+end
+
 function kwxConsoleRun()
     return Int(KwxFFI.kwxConsoleRun())
 end
@@ -1479,6 +1591,33 @@ function kwxConsoleYield()
     return Int(KwxFFI.kwxConsoleYield())
 end
 
+function kwxConsoleOnInitCmdLineBase(parser::Union{wxCmdLineParser, Nothing})
+    parser_ptr = isnothing(parser) ? C_NULL : parser.ptr
+    KwxFFI.kwxConsoleOnInitCmdLineBase(parser_ptr)
+    nothing
+end
+
+function kwxConsoleOnCmdLineParsedBase(parser::Union{wxCmdLineParser, Nothing})
+    parser_ptr = isnothing(parser) ? C_NULL : parser.ptr
+    return KwxFFI.kwxConsoleOnCmdLineParsedBase(parser_ptr) != 0
+end
+
+function kwxStdin()
+    return KwxFFI.kwxStdin()
+end
+
+function kwxStdout()
+    return KwxFFI.kwxStdout()
+end
+
+function kwxStderr()
+    return KwxFFI.kwxStderr()
+end
+
+function kwxConsoleCheckBuildOptions(componentName::AbstractString)
+    return GC.@preserve componentName KwxFFI.kwxConsoleCheckBuildOptions(Base.unsafe_convert(Cstring, componentName)) != 0
+end
+
 function wxPrintf(text::AbstractString)
     text_ws = wxString(text)
     _result = try
@@ -1487,6 +1626,10 @@ function wxPrintf(text::AbstractString)
         Base.delete!(text_ws)
     end
     return _result
+end
+
+function wxPrintfLen(text::AbstractString, len::Integer)
+    return Int(GC.@preserve text KwxFFI.wxPrintfLen(Base.unsafe_convert(Cstring, text), Cint(len)))
 end
 
 function kwxMessageOutputUseStderr()
@@ -1504,6 +1647,11 @@ function kwxMessageOutputReset()
     nothing
 end
 
+function kwxLogUseStderr()
+    KwxFFI.kwxLogUseStderr()
+    nothing
+end
+
 function wxBase64EncodeBuffer(source::Ptr{Cvoid}, src_length::Integer)
     return _wx_take_wxstring(KwxFFI.wxBase64EncodeBuffer(source, Csize_t(src_length)))
 end
@@ -1511,7 +1659,7 @@ end
 function wxBase64DecodeBuffer(text::AbstractString, mode::Integer, decoded_length::Ref{Csize_t})
     text_ws = wxString(text)
     _result = try
-        KwxFFI.wxBase64DecodeBuffer(text_ws.ptr, Cint(mode), decoded_length)
+        GC.@preserve decoded_length KwxFFI.wxBase64DecodeBuffer(text_ws.ptr, Cint(mode), Base.unsafe_convert(Ptr{Csize_t}, decoded_length))
     finally
         Base.delete!(text_ws)
     end
@@ -1526,13 +1674,13 @@ function wxBase64DecodedSizeOf(encoded_length::Integer)
     return KwxFFI.wxBase64DecodedSizeOf(Csize_t(encoded_length))
 end
 
-function PushProvider(provider::Union{wxArtProvider, Nothing})
+function PushProvider(provider::Union{wxArtProviderBase, Nothing})
     provider_ptr = isnothing(provider) ? C_NULL : provider.ptr
     KwxFFI.PushProvider(provider_ptr)
     nothing
 end
 
-function RemoveProvider(provider::Union{wxArtProvider, Nothing})
+function RemoveProvider(provider::Union{wxArtProviderBase, Nothing})
     provider_ptr = isnothing(provider) ? C_NULL : provider.ptr
     return KwxFFI.RemoveProvider(provider_ptr) != 0
 end
@@ -1683,8 +1831,12 @@ function expPROPSHEET_SHRINKTOFIT()
     return Int(KwxFFI.expPROPSHEET_SHRINKTOFIT())
 end
 
+function wxCreateSVGBitmapEmbedHandler()
+    return KwxFFI.wxCreateSVGBitmapEmbedHandler()
+end
+
 function kwxGetMousePositionPoint()
-    return _wx_wrap(wxPoint, KwxFFI.kwxGetMousePositionPoint())
+    return _wx_wrap(wxPoint, KwxFFI.kwxGetMousePositionPoint(); owned = true)
 end
 
 function kwxSetActiveLogTarget(pLogger::Ptr{Cvoid})

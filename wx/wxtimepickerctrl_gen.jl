@@ -28,6 +28,6 @@ function set_time!(obj::wxTimePickerCtrl, hour::Integer, min::Integer, sec::Inte
 end
 
 function get_time(obj::wxTimePickerCtrl, hour::Ref{Int32}, min::Ref{Int32}, sec::Ref{Int32})
-    return KwxFFI.wxTimePickerCtrl_GetTime(obj.ptr, hour, min, sec) != 0
+    return GC.@preserve hour min sec KwxFFI.wxTimePickerCtrl_GetTime(obj.ptr, Base.unsafe_convert(Ptr{Cint}, hour), Base.unsafe_convert(Ptr{Cint}, min), Base.unsafe_convert(Ptr{Cint}, sec)) != 0
 end
 

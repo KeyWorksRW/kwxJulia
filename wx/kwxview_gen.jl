@@ -33,3 +33,27 @@ function set_on_on_update!(obj::kwxView, pFunction::Ptr{Cvoid})
     nothing
 end
 
+function set_on_on_create_with_data!(obj::kwxView, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxView_SetOnOnCreateWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_create_result!(obj::kwxView, result::Bool)
+    KwxFFI.kwxView_SetOnCreateResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_on_on_close_with_data!(obj::kwxView, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxView_SetOnOnCloseWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_close_result!(obj::kwxView, result::Bool)
+    KwxFFI.kwxView_SetOnCloseResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function on_close_base(obj::kwxView, deleteWindow::Bool)
+    return KwxFFI.kwxView_OnCloseBase(obj.ptr, Cint(deleteWindow)) != 0
+end
+

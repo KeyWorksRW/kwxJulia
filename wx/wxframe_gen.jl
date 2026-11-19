@@ -74,7 +74,7 @@ function show_full_screen(obj::wxFrameBase, show::Bool, style::Integer)
 end
 
 function get_client_area_origin_point(obj::wxFrameBase)
-    return _wx_wrap(wxPoint, KwxFFI.wxFrame_GetClientAreaOriginPoint(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxFrame_GetClientAreaOriginPoint(obj.ptr); owned = true)
 end
 
 function set_window_modality!(obj::wxFrameBase, modality::Integer)

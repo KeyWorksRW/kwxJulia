@@ -26,12 +26,19 @@ function wxIcon_CreateFromXPMData(xpm::Ptr{Cvoid})
     return obj
 end
 
+function wxIcon(xpm::AbstractString)
+    ptr = GC.@preserve xpm KwxFFI.wxIcon_CreateFromXPMString(Base.unsafe_convert(Cstring, xpm))
+    ptr == C_NULL && error("Failed to create wxIcon")
+    obj = wxIcon(ptr)
+    return obj
+end
+
 function assign!(obj::wxIcon, other::Ptr{Cvoid})
     KwxFFI.wxIcon_Assign(obj.ptr, other)
     nothing
 end
 
-function copy_from_bitmap!(obj::wxIcon, bmp::Union{wxBitmap, Nothing})
+function copy_from_bitmap!(obj::wxIcon, bmp::Union{wxBitmapBase, Nothing})
     bmp_ptr = isnothing(bmp) ? C_NULL : bmp.ptr
     KwxFFI.wxIcon_CopyFromBitmap(obj.ptr, bmp_ptr)
     nothing

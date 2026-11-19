@@ -158,7 +158,7 @@ function set_parent_window!(obj::wxRichTextPrinting, parent::Union{wxWindow, Not
 end
 
 function get_parent_window(obj::wxRichTextPrinting)
-    return KwxFFI.wxRichTextPrinting_GetParentWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxRichTextPrinting_GetParentWindow(obj.ptr))
 end
 
 function set_title!(obj::wxRichTextPrinting, title::AbstractString)
@@ -181,7 +181,7 @@ function set_preview_rect!(obj::wxRichTextPrinting, x::Integer, y::Integer, w::I
 end
 
 function get_preview_rect!(obj::wxRichTextPrinting, x::Ref{Int32}, y::Ref{Int32}, w::Ref{Int32}, h::Ref{Int32})
-    KwxFFI.wxRichTextPrinting_GetPreviewRect(obj.ptr, x, y, w, h)
+    GC.@preserve x y w h KwxFFI.wxRichTextPrinting_GetPreviewRect(obj.ptr, Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y), Base.unsafe_convert(Ptr{Int32}, w), Base.unsafe_convert(Ptr{Int32}, h))
     nothing
 end
 

@@ -19,7 +19,7 @@ end
 function update(obj::wxGenericProgressDialog, value::Integer, message::AbstractString, skip::Ref{Int32})
     message_ws = wxString(message)
     _result = try
-        KwxFFI.wxGenericProgressDialog_Update(obj.ptr, Cint(value), message_ws.ptr, skip) != 0
+        GC.@preserve skip KwxFFI.wxGenericProgressDialog_Update(obj.ptr, Cint(value), message_ws.ptr, Base.unsafe_convert(Ptr{Cint}, skip)) != 0
     finally
         Base.delete!(message_ws)
     end
@@ -29,7 +29,7 @@ end
 function pulse(obj::wxGenericProgressDialog, message::AbstractString, skip::Ref{Int32})
     message_ws = wxString(message)
     _result = try
-        KwxFFI.wxGenericProgressDialog_Pulse(obj.ptr, message_ws.ptr, skip) != 0
+        GC.@preserve skip KwxFFI.wxGenericProgressDialog_Pulse(obj.ptr, message_ws.ptr, Base.unsafe_convert(Ptr{Cint}, skip)) != 0
     finally
         Base.delete!(message_ws)
     end

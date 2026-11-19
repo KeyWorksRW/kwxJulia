@@ -8,16 +8,16 @@ function wxGenericDragImage(cursor::Union{wxCursor, Nothing})
     return obj
 end
 
-function do_draw_image(obj::wxGenericDragImage, dc::Union{wxDC, Nothing}, x::Integer, y::Integer)
+function do_draw_image(obj::wxGenericDragImage, dc::Union{wxDCBase, Nothing}, x::Integer, y::Integer)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     return KwxFFI.wxGenericDragImage_DoDrawImage(obj.ptr, dc_ptr, Cint(x), Cint(y)) != 0
 end
 
 function get_image_rect(obj::wxGenericDragImage, x_pos::Integer, y_pos::Integer)
-    return _wx_wrap(wxRect, KwxFFI.wxGenericDragImage_GetImageRect(obj.ptr, Cint(x_pos), Cint(y_pos)))
+    return _wx_wrap(wxRect, KwxFFI.wxGenericDragImage_GetImageRect(obj.ptr, Cint(x_pos), Cint(y_pos)); owned = true)
 end
 
-function update_backing_from_window(obj::wxGenericDragImage, windowDC::Union{wxDC, Nothing}, destDC::Union{wxMemoryDC, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer, xdest::Integer, ydest::Integer, destWidth::Integer, destHeight::Integer)
+function update_backing_from_window(obj::wxGenericDragImage, windowDC::Union{wxDCBase, Nothing}, destDC::Union{wxMemoryDCBase, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer, xdest::Integer, ydest::Integer, destWidth::Integer, destHeight::Integer)
     windowDC_ptr = isnothing(windowDC) ? C_NULL : windowDC.ptr
     destDC_ptr = isnothing(destDC) ? C_NULL : destDC.ptr
     return KwxFFI.wxGenericDragImage_UpdateBackingFromWindow(obj.ptr, windowDC_ptr, destDC_ptr, Cint(x), Cint(y), Cint(width), Cint(height), Cint(xdest), Cint(ydest), Cint(destWidth), Cint(destHeight)) != 0

@@ -92,13 +92,13 @@ function entering(obj::wxMouseEvent)
     return KwxFFI.wxMouseEvent_Entering(obj.ptr) != 0
 end
 
-function get_logical_position(obj::wxMouseEvent, dc::Union{wxDC, Nothing})
+function get_logical_position(obj::wxMouseEvent, dc::Union{wxDCBase, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
-    return _wx_wrap(wxPoint, KwxFFI.wxMouseEvent_GetLogicalPosition(obj.ptr, dc_ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxMouseEvent_GetLogicalPosition(obj.ptr, dc_ptr); owned = true)
 end
 
 function get_position(obj::wxMouseEvent)
-    return _wx_wrap(wxPoint, KwxFFI.wxMouseEvent_GetPosition(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxMouseEvent_GetPosition(obj.ptr); owned = true)
 end
 
 function get_x(obj::wxMouseEvent)

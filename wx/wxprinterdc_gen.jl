@@ -15,6 +15,6 @@ function Base.delete!(obj::wxPrinterDC)
 end
 
 function get_paper_rect(obj::wxPrinterDC)
-    return _wx_wrap(wxRect, KwxFFI.wxPrinterDC_GetPaperRect(obj.ptr))
+    return _wx_wrap(wxRect, KwxFFI.wxPrinterDC_GetPaperRect(obj.ptr); owned = true)
 end
 

@@ -41,7 +41,7 @@ function set_can_veto!(obj::wxAuiManagerEvent, can_veto::Bool)
     nothing
 end
 
-function set_dc!(obj::wxAuiManagerEvent, paintDC::Union{wxDC, Nothing})
+function set_dc!(obj::wxAuiManagerEvent, paintDC::Union{wxDCBase, Nothing})
     paintDC_ptr = isnothing(paintDC) ? C_NULL : paintDC.ptr
     KwxFFI.wxAuiManagerEvent_SetDC(obj.ptr, paintDC_ptr)
     nothing

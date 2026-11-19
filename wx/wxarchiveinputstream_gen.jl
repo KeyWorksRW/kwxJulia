@@ -10,7 +10,7 @@ function get_next_entry(obj::wxArchiveInputStreamBase)
     return _wx_wrap(wxArchiveEntry, KwxFFI.wxArchiveInputStream_GetNextEntry(obj.ptr); owned = true)
 end
 
-function open_entry(obj::wxArchiveInputStreamBase, entry::Union{wxArchiveEntry, Nothing})
+function open_entry(obj::wxArchiveInputStreamBase, entry::Union{wxArchiveEntryBase, Nothing})
     entry_ptr = isnothing(entry) ? C_NULL : entry.ptr
     return KwxFFI.wxArchiveInputStream_OpenEntry(obj.ptr, entry_ptr) != 0
 end

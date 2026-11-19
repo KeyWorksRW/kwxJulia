@@ -33,6 +33,20 @@ function wxArtProvider_GetBitmapBundle(id::AbstractString, client::AbstractStrin
     return _result
 end
 
+function wxArtProvider_GetBitmapBundleDefault(id::AbstractString)
+    id_ws = wxString(id)
+    _result = try
+        _wx_wrap(wxBitmapBundle, KwxFFI.wxArtProvider_GetBitmapBundleDefault(id_ws.ptr); owned = true)
+    finally
+        Base.delete!(id_ws)
+    end
+    return _result
+end
+
+function wxArtProvider_MakeClientId(id::AbstractString)
+    return _wx_take_cstring(GC.@preserve id KwxFFI.wxArtProvider_MakeClientId(Base.unsafe_convert(Cstring, id)))
+end
+
 function wxArtProvider_GetIcon(id::AbstractString, client::AbstractString, width::Integer, height::Integer)
     id_ws = wxString(id)
     client_ws = wxString(client)
@@ -83,13 +97,13 @@ function wxArtProvider_HasNativeProvider()
     return KwxFFI.wxArtProvider_HasNativeProvider() != 0
 end
 
-function wxArtProvider_PushBack(provider::Union{wxArtProvider, Nothing})
+function wxArtProvider_PushBack(provider::Union{wxArtProviderBase, Nothing})
     provider_ptr = isnothing(provider) ? C_NULL : provider.ptr
     KwxFFI.wxArtProvider_PushBack(provider_ptr)
     nothing
 end
 
-function wxArtProvider_DeleteProvider(provider::Union{wxArtProvider, Nothing})
+function wxArtProvider_DeleteProvider(provider::Union{wxArtProviderBase, Nothing})
     provider_ptr = isnothing(provider) ? C_NULL : provider.ptr
     return KwxFFI.wxArtProvider_DeleteProvider(provider_ptr) != 0
 end

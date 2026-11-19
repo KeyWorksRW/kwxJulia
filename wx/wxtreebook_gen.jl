@@ -54,7 +54,7 @@ function get_image_list(obj::wxTreebook)
 end
 
 function get_page(obj::wxTreebook, nPage::Integer)
-    return KwxFFI.wxTreebook_GetPage(obj.ptr, Cint(nPage))
+    return _wx_ref(wxWindow, KwxFFI.wxTreebook_GetPage(obj.ptr, Cint(nPage)))
 end
 
 function get_page_count(obj::wxTreebook)
@@ -82,7 +82,7 @@ function get_tree_ctrl(obj::wxTreebook)
 end
 
 function hit_test(obj::wxTreebook, x::Integer, y::Integer, flags::Ref{Clong})
-    return Int(KwxFFI.wxTreebook_HitTest(obj.ptr, Cint(x), Cint(y), flags))
+    return Int(GC.@preserve flags KwxFFI.wxTreebook_HitTest(obj.ptr, Cint(x), Cint(y), Base.unsafe_convert(Ptr{Clong}, flags)))
 end
 
 function insert_page(obj::wxTreebook, nPage::Integer, pPage::Union{wxWindow, Nothing}, strText::AbstractString, bSelect::Bool, imageId::Integer)

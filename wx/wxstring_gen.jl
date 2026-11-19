@@ -52,6 +52,13 @@ if !@isdefined(_wx_take_cstring)
     end
 end
 
+if !@isdefined(_wx_borrow_cstring)
+    function _wx_borrow_cstring(ptr::Ptr{Cchar})
+        ptr == C_NULL && return ""
+        return unsafe_string(ptr)
+    end
+end
+
 if !@isdefined(_wx_take_wxstring)
     function _wx_take_wxstring(ptr::Ptr{Cvoid})
         ptr == C_NULL && return ""

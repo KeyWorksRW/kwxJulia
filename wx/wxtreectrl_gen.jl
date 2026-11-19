@@ -29,7 +29,7 @@ function destroy_popup!(obj::wxTreeCtrl)
 end
 
 function get_control(obj::wxTreeCtrl)
-    return KwxFFI.wxComboPopup_GetControl(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxComboPopup_GetControl(obj.ptr))
 end
 
 function on_popup!(obj::wxTreeCtrl)
@@ -68,7 +68,7 @@ function find_item(obj::wxTreeCtrl, item::AbstractString, trueItem::AbstractStri
     return _result
 end
 
-function paint_combo_control!(obj::wxTreeCtrl, dc::Union{wxDC, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer)
+function paint_combo_control!(obj::wxTreeCtrl, dc::Union{wxDCBase, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxComboPopup_PaintComboControl(obj.ptr, dc_ptr, Cint(x), Cint(y), Cint(width), Cint(height))
     nothing
@@ -92,7 +92,7 @@ function on_combo_double_click!(obj::wxTreeCtrl)
 end
 
 function get_adjusted_size!(obj::wxTreeCtrl, minWidth::Integer, prefHeight::Integer, maxHeight::Integer, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxComboPopup_GetAdjustedSize(obj.ptr, Cint(minWidth), Cint(prefHeight), Cint(maxHeight), width, height)
+    GC.@preserve width height KwxFFI.wxComboPopup_GetAdjustedSize(obj.ptr, Cint(minWidth), Cint(prefHeight), Cint(maxHeight), Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 
@@ -296,7 +296,7 @@ end
 
 function get_bounding_rect(obj::wxTreeCtrl, item::Union{wxTreeItemId, Nothing}, textOnly::Bool)
     item_ptr = isnothing(item) ? C_NULL : item.ptr
-    return _wx_wrap(wxRect, KwxFFI.wxTreeCtrl_GetBoundingRect(obj.ptr, item_ptr, Cint(textOnly)))
+    return _wx_wrap(wxRect, KwxFFI.wxTreeCtrl_GetBoundingRect(obj.ptr, item_ptr, Cint(textOnly)); owned = true)
 end
 
 function get_children_count(obj::wxTreeCtrl, item::Union{wxTreeItemId, Nothing}, recursively::Bool)
@@ -312,10 +312,10 @@ function get_edit_control(obj::wxTreeCtrl)
     return _wx_wrap(wxTextCtrl, KwxFFI.wxTreeCtrl_GetEditControl(obj.ptr))
 end
 
-function get_first_child!(obj::wxTreeCtrl, inputItem::Union{wxTreeItemId, Nothing}, cookie::Integer, result::Union{wxTreeItemId, Nothing})
+function get_first_child!(obj::wxTreeCtrl, inputItem::Union{wxTreeItemId, Nothing}, cookie::Ptr{Cvoid}, result::Union{wxTreeItemId, Nothing})
     inputItem_ptr = isnothing(inputItem) ? C_NULL : inputItem.ptr
     result_ptr = isnothing(result) ? C_NULL : result.ptr
-    KwxFFI.wxTreeCtrl_GetFirstChild(obj.ptr, inputItem_ptr, Cint(cookie), result_ptr)
+    KwxFFI.wxTreeCtrl_GetFirstChild(obj.ptr, inputItem_ptr, cookie, result_ptr)
     nothing
 end
 
@@ -355,10 +355,10 @@ function get_last_child!(obj::wxTreeCtrl, inputItem::Union{wxTreeItemId, Nothing
     nothing
 end
 
-function get_next_child!(obj::wxTreeCtrl, inputItem::Union{wxTreeItemId, Nothing}, cookie::Integer, result::Union{wxTreeItemId, Nothing})
+function get_next_child!(obj::wxTreeCtrl, inputItem::Union{wxTreeItemId, Nothing}, cookie::Ptr{Cvoid}, result::Union{wxTreeItemId, Nothing})
     inputItem_ptr = isnothing(inputItem) ? C_NULL : inputItem.ptr
     result_ptr = isnothing(result) ? C_NULL : result.ptr
-    KwxFFI.wxTreeCtrl_GetNextChild(obj.ptr, inputItem_ptr, Cint(cookie), result_ptr)
+    KwxFFI.wxTreeCtrl_GetNextChild(obj.ptr, inputItem_ptr, cookie, result_ptr)
     nothing
 end
 
@@ -409,8 +409,8 @@ function get_selection!(obj::wxTreeCtrl, item::Union{wxTreeItemId, Nothing})
     nothing
 end
 
-function get_selections(obj::wxTreeCtrl, selections::Integer)
-    return Int(KwxFFI.wxTreeCtrl_GetSelections(obj.ptr, Cint(selections)))
+function get_selections(obj::wxTreeCtrl, selections::Ptr{Cvoid})
+    return Int(KwxFFI.wxTreeCtrl_GetSelections(obj.ptr, selections))
 end
 
 function get_spacing(obj::wxTreeCtrl)
@@ -423,7 +423,7 @@ end
 
 function hit_test!(obj::wxTreeCtrl, x::Integer, y::Integer, flags::Ref{Int32}, item::Union{wxTreeItemId, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
-    KwxFFI.wxTreeCtrl_HitTest(obj.ptr, Cint(x), Cint(y), flags, item_ptr)
+    GC.@preserve flags KwxFFI.wxTreeCtrl_HitTest(obj.ptr, Cint(x), Cint(y), Base.unsafe_convert(Ptr{Cint}, flags), item_ptr)
     nothing
 end
 

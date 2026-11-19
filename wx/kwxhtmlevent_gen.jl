@@ -13,7 +13,7 @@ function get_html_cell_id(obj::kwxHtmlEvent)
 end
 
 function get_logical_position(obj::kwxHtmlEvent)
-    return _wx_wrap(wxPoint, KwxFFI.kwxHtmlEvent_GetLogicalPosition(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.kwxHtmlEvent_GetLogicalPosition(obj.ptr); owned = true)
 end
 
 function get_mouse_event(obj::kwxHtmlEvent)

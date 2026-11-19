@@ -7,7 +7,7 @@ function wxMemoryDC()
     return obj
 end
 
-function wxMemoryDC(dc::Union{wxDC, Nothing})
+function wxMemoryDC(dc::Union{wxDCBase, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     ptr = KwxFFI.wxMemoryDC_CreateCompatible(dc_ptr)
     ptr == C_NULL && error("Failed to create wxMemoryDC")
@@ -22,19 +22,19 @@ function wxMemoryDC_CreateWithBitmap(bitmap::Ptr{Cvoid})
     return obj
 end
 
-function select_object_as_source!(obj::wxMemoryDC, bmp::Union{wxBitmap, Nothing})
+function select_object_as_source!(obj::wxMemoryDCBase, bmp::Union{wxBitmapBase, Nothing})
     bmp_ptr = isnothing(bmp) ? C_NULL : bmp.ptr
     KwxFFI.wxMemoryDC_SelectObjectAsSource(obj.ptr, bmp_ptr)
     nothing
 end
 
-function Base.delete!(obj::wxMemoryDC)
+function Base.delete!(obj::wxMemoryDCBase)
     KwxFFI.wxMemoryDC_Delete(obj.ptr)
     obj.ptr = C_NULL
     nothing
 end
 
-function select_object!(obj::wxMemoryDC, bitmap::Union{wxBitmap, Nothing})
+function select_object!(obj::wxMemoryDCBase, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxMemoryDC_SelectObject(obj.ptr, bitmap_ptr)
     nothing
