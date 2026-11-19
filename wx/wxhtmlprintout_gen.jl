@@ -60,11 +60,11 @@ function set_footer!(obj::wxHtmlPrintout, footer::AbstractString, pg::Integer)
     nothing
 end
 
-function set_fonts!(obj::wxHtmlPrintout, normal_face::AbstractString, fixed_face::AbstractString, sizes::Integer)
+function set_fonts!(obj::wxHtmlPrintout, normal_face::AbstractString, fixed_face::AbstractString, sizes::Ptr{Cvoid})
     normal_face_ws = wxString(normal_face)
     fixed_face_ws = wxString(fixed_face)
     try
-        KwxFFI.wxHtmlPrintout_SetFonts(obj.ptr, normal_face_ws.ptr, fixed_face_ws.ptr, Cint(sizes))
+        KwxFFI.wxHtmlPrintout_SetFonts(obj.ptr, normal_face_ws.ptr, fixed_face_ws.ptr, sizes)
     finally
         Base.delete!(normal_face_ws)
         Base.delete!(fixed_face_ws)

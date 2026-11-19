@@ -57,7 +57,7 @@ function quit(obj::wxHelpController)
 end
 
 function get_parent_window(obj::wxHelpController)
-    return KwxFFI.wxHelpController_GetParentWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxHelpController_GetParentWindow(obj.ptr))
 end
 
 function set_parent_window!(obj::wxHelpController, window::Union{wxWindow, Nothing})

@@ -7,7 +7,7 @@ function wxRichTextAttr()
     return obj
 end
 
-function wxRichTextAttr(attr::Union{wxTextAttr, Nothing})
+function wxRichTextAttr(attr::Union{wxTextAttrBase, Nothing})
     attr_ptr = isnothing(attr) ? C_NULL : attr.ptr
     ptr = KwxFFI.wxRichTextAttr_CreateFromTextAttr(attr_ptr)
     ptr == C_NULL && error("Failed to create wxRichTextAttr")
@@ -46,5 +46,21 @@ end
 
 function has_text_box_attr(obj::wxRichTextAttr)
     return KwxFFI.wxRichTextAttr_HasTextBoxAttr(obj.ptr) != 0
+end
+
+function set_background_colour!(obj::wxRichTextAttr, colour::Union{wxColour, Nothing})
+    colour_ptr = isnothing(colour) ? C_NULL : colour.ptr
+    KwxFFI.wxRichTextAttr_SetBackgroundColour(obj.ptr, colour_ptr)
+    nothing
+end
+
+function set_paragraph_spacing_after!(obj::wxRichTextAttr, spacing::Integer)
+    KwxFFI.wxRichTextAttr_SetParagraphSpacingAfter(obj.ptr, Cint(spacing))
+    nothing
+end
+
+function set_line_spacing!(obj::wxRichTextAttr, spacing::Integer)
+    KwxFFI.wxRichTextAttr_SetLineSpacing(obj.ptr, Cint(spacing))
+    nothing
 end
 

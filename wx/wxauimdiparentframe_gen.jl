@@ -14,63 +14,63 @@ function wxAuiMDIParentFrame(parent::Union{wxWindow, Nothing}, id::Integer, titl
     return obj
 end
 
-function get_active_child(obj::wxAuiMDIParentFrame)
+function get_active_child(obj::wxAuiMDIParentFrameBase)
     return _wx_wrap(wxAuiMDIChildFrame, KwxFFI.wxAuiMDIParentFrame_GetActiveChild(obj.ptr))
 end
 
-function set_active_child!(obj::wxAuiMDIParentFrame, child::Union{wxAuiMDIChildFrame, Nothing})
+function set_active_child!(obj::wxAuiMDIParentFrameBase, child::Union{wxAuiMDIChildFrameBase, Nothing})
     child_ptr = isnothing(child) ? C_NULL : child.ptr
     KwxFFI.wxAuiMDIParentFrame_SetActiveChild(obj.ptr, child_ptr)
     nothing
 end
 
-function activate_next!(obj::wxAuiMDIParentFrame)
+function activate_next!(obj::wxAuiMDIParentFrameBase)
     KwxFFI.wxAuiMDIParentFrame_ActivateNext(obj.ptr)
     nothing
 end
 
-function activate_previous!(obj::wxAuiMDIParentFrame)
+function activate_previous!(obj::wxAuiMDIParentFrameBase)
     KwxFFI.wxAuiMDIParentFrame_ActivatePrevious(obj.ptr)
     nothing
 end
 
-function cascade!(obj::wxAuiMDIParentFrame)
+function cascade!(obj::wxAuiMDIParentFrameBase)
     KwxFFI.wxAuiMDIParentFrame_Cascade(obj.ptr)
     nothing
 end
 
-function tile!(obj::wxAuiMDIParentFrame, orient::Integer)
+function tile!(obj::wxAuiMDIParentFrameBase, orient::Integer)
     KwxFFI.wxAuiMDIParentFrame_Tile(obj.ptr, Cint(orient))
     nothing
 end
 
-function get_menu_bar(obj::wxAuiMDIParentFrame)
+function get_menu_bar(obj::wxAuiMDIParentFrameBase)
     return _wx_wrap(wxMenuBar, KwxFFI.wxAuiMDIParentFrame_GetMenuBar(obj.ptr))
 end
 
-function set_menu_bar!(obj::wxAuiMDIParentFrame, menuBar::Union{wxMenuBar, Nothing})
+function set_menu_bar!(obj::wxAuiMDIParentFrameBase, menuBar::Union{wxMenuBar, Nothing})
     menuBar_ptr = isnothing(menuBar) ? C_NULL : menuBar.ptr
     KwxFFI.wxAuiMDIParentFrame_SetMenuBar(obj.ptr, menuBar_ptr)
     nothing
 end
 
-function get_status_bar(obj::wxAuiMDIParentFrame)
+function get_status_bar(obj::wxAuiMDIParentFrameBase)
     return _wx_wrap(wxStatusBar, KwxFFI.wxAuiMDIParentFrame_GetStatusBar(obj.ptr))
 end
 
-function create_status_bar(obj::wxAuiMDIParentFrame, number::Integer, style::Integer, id::Integer)
+function create_status_bar(obj::wxAuiMDIParentFrameBase, number::Integer, style::Integer, id::Integer)
     return _wx_wrap(wxStatusBar, KwxFFI.wxAuiMDIParentFrame_CreateStatusBar(obj.ptr, Cint(number), Cint(style), Cint(id)))
 end
 
-function get_tool_bar(obj::wxAuiMDIParentFrame)
+function get_tool_bar(obj::wxAuiMDIParentFrameBase)
     return _wx_wrap(wxToolBar, KwxFFI.wxAuiMDIParentFrame_GetToolBar(obj.ptr))
 end
 
-function create_tool_bar(obj::wxAuiMDIParentFrame, style::Integer, id::Integer)
+function create_tool_bar(obj::wxAuiMDIParentFrameBase, style::Integer, id::Integer)
     return _wx_wrap(wxToolBar, KwxFFI.wxAuiMDIParentFrame_CreateToolBar(obj.ptr, Cint(style), Cint(id)))
 end
 
-function get_notebook(obj::wxAuiMDIParentFrame)
+function get_notebook(obj::wxAuiMDIParentFrameBase)
     return _wx_wrap(wxAuiNotebook, KwxFFI.wxAuiMDIParentFrame_GetNotebook(obj.ptr))
 end
 

@@ -129,6 +129,10 @@ function wxSizerFlags_GetDefaultBorderFractional()
     return Float64(KwxFFI.wxSizerFlags_GetDefaultBorderFractional())
 end
 
+function wxSizerFlags_GetDefaultBorder()
+    return Int(KwxFFI.wxSizerFlags_GetDefaultBorder())
+end
+
 function wxSizerFlags_DisableConsistencyChecks()
     KwxFFI.wxSizerFlags_DisableConsistencyChecks()
     nothing

@@ -12,18 +12,18 @@ function get_child_at_position(obj::wxRichTextCompositeObjectBase, position::Int
     return _wx_wrap(wxRichTextObject, KwxFFI.wxRichTextCompositeObject_GetChildAtPosition(obj.ptr, Clong(position)))
 end
 
-function append_child(obj::wxRichTextCompositeObjectBase, child::Union{wxRichTextObject, Nothing})
+function append_child(obj::wxRichTextCompositeObjectBase, child::Union{wxRichTextObjectBase, Nothing})
     child_ptr = isnothing(child) ? C_NULL : child.ptr
     return KwxFFI.wxRichTextCompositeObject_AppendChild(obj.ptr, child_ptr)
 end
 
-function insert_child(obj::wxRichTextCompositeObjectBase, child::Union{wxRichTextObject, Nothing}, inFrontOf::Union{wxRichTextObject, Nothing})
+function insert_child(obj::wxRichTextCompositeObjectBase, child::Union{wxRichTextObjectBase, Nothing}, inFrontOf::Union{wxRichTextObjectBase, Nothing})
     child_ptr = isnothing(child) ? C_NULL : child.ptr
     inFrontOf_ptr = isnothing(inFrontOf) ? C_NULL : inFrontOf.ptr
     return KwxFFI.wxRichTextCompositeObject_InsertChild(obj.ptr, child_ptr, inFrontOf_ptr) != 0
 end
 
-function remove_child(obj::wxRichTextCompositeObjectBase, child::Union{wxRichTextObject, Nothing}, deleteChild::Bool)
+function remove_child(obj::wxRichTextCompositeObjectBase, child::Union{wxRichTextObjectBase, Nothing}, deleteChild::Bool)
     child_ptr = isnothing(child) ? C_NULL : child.ptr
     return KwxFFI.wxRichTextCompositeObject_RemoveChild(obj.ptr, child_ptr, Cint(deleteChild)) != 0
 end

@@ -28,8 +28,8 @@ function get_style(obj::wxDirDialog)
     return Int(KwxFFI.wxDirDialog_GetStyle(obj.ptr))
 end
 
-function get_paths(obj::wxDirDialog, paths::Integer, capacity::Integer)
-    return Int(KwxFFI.wxDirDialog_GetPaths(obj.ptr, Cint(paths), Cint(capacity)))
+function get_paths(obj::wxDirDialog, paths::Ptr{Cvoid}, capacity::Integer)
+    return Int(KwxFFI.wxDirDialog_GetPaths(obj.ptr, paths, Cint(capacity)))
 end
 
 function set_message!(obj::wxDirDialog, msg::AbstractString)

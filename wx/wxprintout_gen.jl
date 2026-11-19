@@ -13,7 +13,7 @@ end
 
 function get_logical_page_margins_rect(obj::wxPrintoutBase, pageSetupData::Union{wxPageSetupDialogData, Nothing})
     pageSetupData_ptr = isnothing(pageSetupData) ? C_NULL : pageSetupData.ptr
-    return _wx_wrap(wxRect, KwxFFI.wxPrintout_GetLogicalPageMarginsRect(obj.ptr, pageSetupData_ptr))
+    return _wx_wrap(wxRect, KwxFFI.wxPrintout_GetLogicalPageMarginsRect(obj.ptr, pageSetupData_ptr); owned = true)
 end
 
 function map_screen_size_to_page!(obj::wxPrintoutBase)
@@ -27,22 +27,22 @@ function offset_logical_origin!(obj::wxPrintoutBase, xoff::Integer, yoff::Intege
 end
 
 function wxPrintout_GetPageSizeMM(pObject::Ptr{Cvoid}, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxPrintout_GetPageSizeMM(pObject, width, height)
+    GC.@preserve width height KwxFFI.wxPrintout_GetPageSizeMM(pObject, Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 
 function wxPrintout_GetPageSizePixels(pObject::Ptr{Cvoid}, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxPrintout_GetPageSizePixels(pObject, width, height)
+    GC.@preserve width height KwxFFI.wxPrintout_GetPageSizePixels(pObject, Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 
 function wxPrintout_GetPPIPrinter(pObject::Ptr{Cvoid}, x::Ref{Int32}, y::Ref{Int32})
-    KwxFFI.wxPrintout_GetPPIPrinter(pObject, x, y)
+    GC.@preserve x y KwxFFI.wxPrintout_GetPPIPrinter(pObject, Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y))
     nothing
 end
 
 function wxPrintout_GetPPIScreen(pObject::Ptr{Cvoid}, x::Ref{Int32}, y::Ref{Int32})
-    KwxFFI.wxPrintout_GetPPIScreen(pObject, x, y)
+    GC.@preserve x y KwxFFI.wxPrintout_GetPPIScreen(pObject, Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y))
     nothing
 end
 

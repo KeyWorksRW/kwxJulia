@@ -28,12 +28,12 @@ function set_key_tip!(obj::wxRibbonGallery, keytip::AbstractString)
     nothing
 end
 
-function append(obj::wxRibbonGallery, bitmap::Union{wxBitmap, Nothing}, id::Integer)
+function append(obj::wxRibbonGallery, bitmap::Union{wxBitmapBase, Nothing}, id::Integer)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     return KwxFFI.wxRibbonGallery_Append(obj.ptr, bitmap_ptr, Cint(id))
 end
 
-function append_with_client_data(obj::wxRibbonGallery, bitmap::Union{wxBitmap, Nothing}, id::Integer, clientData::Ptr{Cvoid})
+function append_with_client_data(obj::wxRibbonGallery, bitmap::Union{wxBitmapBase, Nothing}, id::Integer, clientData::Ptr{Cvoid})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     return KwxFFI.wxRibbonGallery_Append_WithClientData(obj.ptr, bitmap_ptr, Cint(id), clientData)
 end

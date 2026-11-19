@@ -9,7 +9,7 @@ function wxToolBar(parent::Union{wxWindow, Nothing}, id::Integer, left::Integer,
     return obj
 end
 
-function add_tool2!(obj::wxToolBar, toolId::Integer, label::AbstractString, bmp::Union{wxBitmap, Nothing}, bmpDisabled::Union{wxBitmap, Nothing}, itemKind::Integer, shortHelp::AbstractString, longHelp::AbstractString)
+function add_tool2!(obj::wxToolBar, toolId::Integer, label::AbstractString, bmp::Union{wxBitmapBase, Nothing}, bmpDisabled::Union{wxBitmapBase, Nothing}, itemKind::Integer, shortHelp::AbstractString, longHelp::AbstractString)
     label_ws = wxString(label)
     bmp_ptr = isnothing(bmp) ? C_NULL : bmp.ptr
     bmpDisabled_ptr = isnothing(bmpDisabled) ? C_NULL : bmpDisabled.ptr
@@ -26,7 +26,7 @@ function add_tool2!(obj::wxToolBar, toolId::Integer, label::AbstractString, bmp:
 end
 
 function get_tool_margins(obj::wxToolBar)
-    return _wx_wrap(wxSize, KwxFFI.wxToolBar_GetToolMargins(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxToolBar_GetToolMargins(obj.ptr); owned = true)
 end
 
 function set_max_rows_cols!(obj::wxToolBar, rows::Integer, cols::Integer)
@@ -64,7 +64,7 @@ function add_separator(obj::wxToolBar)
     return KwxFFI.wxToolBar_AddSeparator(obj.ptr)
 end
 
-function add_tool(obj::wxToolBar, toolid::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, bmpDisabled::Union{wxBitmap, Nothing}, kind::Integer, shortHelp::AbstractString, longHelp::AbstractString, data::Union{wxObject, Nothing})
+function add_tool(obj::wxToolBar, toolid::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, bmpDisabled::Union{wxBitmapBase, Nothing}, kind::Integer, shortHelp::AbstractString, longHelp::AbstractString, data::Union{wxObject, Nothing})
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     bmpDisabled_ptr = isnothing(bmpDisabled) ? C_NULL : bmpDisabled.ptr
@@ -101,15 +101,15 @@ function enable_tool!(obj::wxToolBar, id::Integer, enable::Bool)
 end
 
 function get_margins(obj::wxToolBar)
-    return _wx_wrap(wxPoint, KwxFFI.wxToolBar_GetMargins(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxToolBar_GetMargins(obj.ptr); owned = true)
 end
 
 function get_tool_bitmap_size(obj::wxToolBar)
-    return _wx_wrap(wxSize, KwxFFI.wxToolBar_GetToolBitmapSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxToolBar_GetToolBitmapSize(obj.ptr); owned = true)
 end
 
 function get_tool_client_data(obj::wxToolBar, id::Integer)
-    return KwxFFI.wxToolBar_GetToolClientData(obj.ptr, Cint(id))
+    return _wx_ref(wxObject, KwxFFI.wxToolBar_GetToolClientData(obj.ptr, Cint(id)))
 end
 
 function get_tool_enabled(obj::wxToolBar, id::Integer)
@@ -129,7 +129,7 @@ function get_tool_short_help(obj::wxToolBar, id::Integer)
 end
 
 function get_tool_size(obj::wxToolBar)
-    return _wx_wrap(wxSize, KwxFFI.wxToolBar_GetToolSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxToolBar_GetToolSize(obj.ptr); owned = true)
 end
 
 function get_tool_state(obj::wxToolBar, id::Integer)
@@ -206,7 +206,7 @@ function toggle_tool!(obj::wxToolBar, id::Integer, toggle::Bool)
     nothing
 end
 
-function add_check_tool!(obj::wxToolBar, toolid::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, bmpDisabled::Union{wxBitmap, Nothing}, shortHelp::AbstractString, longHelp::AbstractString)
+function add_check_tool!(obj::wxToolBar, toolid::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, bmpDisabled::Union{wxBitmapBase, Nothing}, shortHelp::AbstractString, longHelp::AbstractString)
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     bmpDisabled_ptr = isnothing(bmpDisabled) ? C_NULL : bmpDisabled.ptr
@@ -222,7 +222,7 @@ function add_check_tool!(obj::wxToolBar, toolid::Integer, label::AbstractString,
     nothing
 end
 
-function add_radio_tool!(obj::wxToolBar, toolid::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, bmpDisabled::Union{wxBitmap, Nothing}, shortHelp::AbstractString, longHelp::AbstractString)
+function add_radio_tool!(obj::wxToolBar, toolid::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, bmpDisabled::Union{wxBitmapBase, Nothing}, shortHelp::AbstractString, longHelp::AbstractString)
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     bmpDisabled_ptr = isnothing(bmpDisabled) ? C_NULL : bmpDisabled.ptr
@@ -246,7 +246,7 @@ function insert_stretchable_space(obj::wxToolBar, pos::Integer)
     return KwxFFI.wxToolBar_InsertStretchableSpace(obj.ptr, Csize_t(pos))
 end
 
-function insert_tool!(obj::wxToolBar, pos::Integer, toolid::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, bmpDisabled::Union{wxBitmap, Nothing}, kind::Integer, shortHelp::AbstractString, longHelp::AbstractString)
+function insert_tool!(obj::wxToolBar, pos::Integer, toolid::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, bmpDisabled::Union{wxBitmapBase, Nothing}, kind::Integer, shortHelp::AbstractString, longHelp::AbstractString)
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     bmpDisabled_ptr = isnothing(bmpDisabled) ? C_NULL : bmpDisabled.ptr
@@ -268,7 +268,7 @@ function clear_tools!(obj::wxToolBar)
 end
 
 function find_control(obj::wxToolBar, id::Integer)
-    return KwxFFI.wxToolBar_FindControl(obj.ptr, Cint(id))
+    return _wx_ref(wxControl, KwxFFI.wxToolBar_FindControl(obj.ptr, Cint(id)))
 end
 
 function find_tool_for_position(obj::wxToolBar, x::Integer, y::Integer)
@@ -295,13 +295,13 @@ function is_vertical(obj::wxToolBar)
     return KwxFFI.wxToolBar_IsVertical(obj.ptr) != 0
 end
 
-function set_tool_normal_bitmap!(obj::wxToolBar, id::Integer, bitmap::Union{wxBitmap, Nothing})
+function set_tool_normal_bitmap!(obj::wxToolBar, id::Integer, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxToolBar_SetToolNormalBitmap(obj.ptr, Cint(id), bitmap_ptr)
     nothing
 end
 
-function set_tool_disabled_bitmap!(obj::wxToolBar, id::Integer, bitmap::Union{wxBitmap, Nothing})
+function set_tool_disabled_bitmap!(obj::wxToolBar, id::Integer, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxToolBar_SetToolDisabledBitmap(obj.ptr, Cint(id), bitmap_ptr)
     nothing

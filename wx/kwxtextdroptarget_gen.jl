@@ -38,3 +38,66 @@ function set_on_leave!(obj::kwxTextDropTarget, pFunction::Ptr{Cvoid})
     nothing
 end
 
+function set_on_data_with_data!(obj::kwxTextDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxTextDropTarget_SetOnDataWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_drop_with_data!(obj::kwxTextDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxTextDropTarget_SetOnDropWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_enter_with_data!(obj::kwxTextDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxTextDropTarget_SetOnEnterWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_drag_over_with_data!(obj::kwxTextDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxTextDropTarget_SetOnDragOverWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_leave_with_data!(obj::kwxTextDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxTextDropTarget_SetOnLeaveWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_data_result!(obj::kwxTextDropTarget, result::Integer)
+    KwxFFI.kwxTextDropTarget_SetDataResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_drop_result!(obj::kwxTextDropTarget, result::Integer)
+    KwxFFI.kwxTextDropTarget_SetDropResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_enter_result!(obj::kwxTextDropTarget, result::Integer)
+    KwxFFI.kwxTextDropTarget_SetEnterResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_drag_over_result!(obj::kwxTextDropTarget, result::Integer)
+    KwxFFI.kwxTextDropTarget_SetDragOverResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function get_drop_result(obj::kwxTextDropTarget)
+    return Int(KwxFFI.kwxTextDropTarget_GetDropResult(obj.ptr))
+end
+
+function set_on_drop_text_with_data!(obj::kwxTextDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxTextDropTarget_SetOnDropTextWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_drop_text_result!(obj::kwxTextDropTarget, result::Integer)
+    KwxFFI.kwxTextDropTarget_SetDropTextResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function get_drop_text(obj::kwxTextDropTarget)
+    return _wx_take_wxstring(KwxFFI.kwxTextDropTarget_GetDropText(obj.ptr))
+end
+

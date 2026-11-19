@@ -18,7 +18,7 @@ function Base.delete!(obj::wxPreferencesEditor)
     nothing
 end
 
-function add_page!(obj::wxPreferencesEditor, page::Union{wxPreferencesPage, Nothing})
+function add_page!(obj::wxPreferencesEditor, page::Union{wxPreferencesPageBase, Nothing})
     page_ptr = isnothing(page) ? C_NULL : page.ptr
     KwxFFI.wxPreferencesEditor_AddPage(obj.ptr, page_ptr)
     nothing

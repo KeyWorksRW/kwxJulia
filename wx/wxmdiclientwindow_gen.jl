@@ -13,7 +13,7 @@ function Base.delete!(obj::wxMDIClientWindow)
     nothing
 end
 
-function create_client(obj::wxMDIClientWindow, parent::Union{wxMDIParentFrame, Nothing}, style::Integer)
+function create_client(obj::wxMDIClientWindow, parent::Union{wxMDIParentFrameBase, Nothing}, style::Integer)
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     return KwxFFI.wxMDIClientWindow_CreateClient(obj.ptr, parent_ptr, Cint(style)) != 0
 end

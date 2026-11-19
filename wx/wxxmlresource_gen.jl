@@ -50,7 +50,7 @@ function load_object_recursively(obj::wxXmlResource, parent::Ptr{Cvoid}, name::A
     name_ws = wxString(name)
     classname_ws = wxString(classname)
     _result = try
-        KwxFFI.wxXmlResource_LoadObjectRecursively(obj.ptr, parent, name_ws.ptr, classname_ws.ptr)
+        _wx_ref(wxObject, KwxFFI.wxXmlResource_LoadObjectRecursively(obj.ptr, parent, name_ws.ptr, classname_ws.ptr))
     finally
         Base.delete!(name_ws)
         Base.delete!(classname_ws)
@@ -131,7 +131,7 @@ function load(obj::wxXmlResource, filemask::AbstractString)
     return _result
 end
 
-function load_bitmap!(obj::wxXmlResource, name::AbstractString, ref::Union{wxBitmap, Nothing})
+function load_bitmap!(obj::wxXmlResource, name::AbstractString, ref::Union{wxBitmapBase, Nothing})
     name_ws = wxString(name)
     ref_ptr = isnothing(ref) ? C_NULL : ref.ptr
     try
@@ -221,7 +221,7 @@ end
 function get_sizer(obj::wxXmlResource, str_id::AbstractString)
     str_id_ws = wxString(str_id)
     _result = try
-        KwxFFI.wxXmlResource_GetSizer(obj.ptr, str_id_ws.ptr)
+        _wx_ref(wxSizer, KwxFFI.wxXmlResource_GetSizer(obj.ptr, str_id_ws.ptr))
     finally
         Base.delete!(str_id_ws)
     end

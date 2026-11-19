@@ -40,7 +40,7 @@ function get_frame!(obj::wxAnimation, frame::Integer, image::Union{wxImage, Noth
 end
 
 function get_size!(obj::wxAnimation, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxAnimation_GetSize(obj.ptr, width, height)
+    GC.@preserve width height KwxFFI.wxAnimation_GetSize(obj.ptr, Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 
@@ -58,7 +58,7 @@ function load_file(obj::wxAnimation, filename::AbstractString, type_::Integer)
     return _result
 end
 
-function load(obj::wxAnimation, stream::Union{wxInputStream, Nothing}, type_::Integer)
+function load(obj::wxAnimation, stream::Union{wxInputStreamBase, Nothing}, type_::Integer)
     stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
     return KwxFFI.wxAnimation_Load(obj.ptr, stream_ptr, Cint(type_)) != 0
 end

@@ -9,7 +9,7 @@ end
 
 function centre_in(obj::wxRect, r::Union{wxRect, Nothing}, dir::Integer)
     r_ptr = isnothing(r) ? C_NULL : r.ptr
-    return _wx_wrap(wxRect, KwxFFI.wxRect_CentreIn(obj.ptr, r_ptr, Cint(dir)))
+    return _wx_wrap(wxRect, KwxFFI.wxRect_CentreIn(obj.ptr, r_ptr, Cint(dir)); owned = true)
 end
 
 function Base.contains(obj::wxRect, x::Integer, y::Integer)
@@ -17,7 +17,7 @@ function Base.contains(obj::wxRect, x::Integer, y::Integer)
 end
 
 function deflate(obj::wxRect, dx::Integer, dy::Integer)
-    return _wx_wrap(wxRect, KwxFFI.wxRect_Deflate(obj.ptr, Cint(dx), Cint(dy)))
+    return _wx_wrap(wxRect, KwxFFI.wxRect_Deflate(obj.ptr, Cint(dx), Cint(dy)); owned = true)
 end
 
 function get_bottom(obj::wxRect)
@@ -25,7 +25,7 @@ function get_bottom(obj::wxRect)
 end
 
 function get_bottom_left(obj::wxRect)
-    return _wx_wrap(wxPoint, KwxFFI.wxRect_GetBottomLeft(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxRect_GetBottomLeft(obj.ptr); owned = true)
 end
 
 function get_left(obj::wxRect)
@@ -33,11 +33,11 @@ function get_left(obj::wxRect)
 end
 
 function get_left_top(obj::wxRect)
-    return _wx_wrap(wxPoint, KwxFFI.wxRect_GetLeftTop(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxRect_GetLeftTop(obj.ptr); owned = true)
 end
 
 function get_position(obj::wxRect)
-    return _wx_wrap(wxPoint, KwxFFI.wxRect_GetPosition(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxRect_GetPosition(obj.ptr); owned = true)
 end
 
 function get_right(obj::wxRect)
@@ -45,7 +45,7 @@ function get_right(obj::wxRect)
 end
 
 function get_size(obj::wxRect)
-    return _wx_wrap(wxSize, KwxFFI.wxRect_GetSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxRect_GetSize(obj.ptr); owned = true)
 end
 
 function get_top(obj::wxRect)
@@ -53,15 +53,15 @@ function get_top(obj::wxRect)
 end
 
 function get_top_left(obj::wxRect)
-    return _wx_wrap(wxPoint, KwxFFI.wxRect_GetTopLeft(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxRect_GetTopLeft(obj.ptr); owned = true)
 end
 
 function get_top_right(obj::wxRect)
-    return _wx_wrap(wxPoint, KwxFFI.wxRect_GetTopRight(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxRect_GetTopRight(obj.ptr); owned = true)
 end
 
 function inflate(obj::wxRect, dx::Integer, dy::Integer)
-    return _wx_wrap(wxRect, KwxFFI.wxRect_Inflate(obj.ptr, Cint(dx), Cint(dy)))
+    return _wx_wrap(wxRect, KwxFFI.wxRect_Inflate(obj.ptr, Cint(dx), Cint(dy)); owned = true)
 end
 
 function offset!(obj::wxRect, dx::Integer, dy::Integer)

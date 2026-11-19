@@ -63,7 +63,7 @@ function begin_batch!(obj::wxGrid)
 end
 
 function block_to_device_rect(obj::wxGrid, top::Integer, left::Integer, bottom::Integer, right::Integer)
-    return _wx_wrap(wxRect, KwxFFI.wxGrid_BlockToDeviceRect(obj.ptr, Cint(top), Cint(left), Cint(bottom), Cint(right)))
+    return _wx_wrap(wxRect, KwxFFI.wxGrid_BlockToDeviceRect(obj.ptr, Cint(top), Cint(left), Cint(bottom), Cint(right)); owned = true)
 end
 
 function can_drag_col_size(obj::wxGrid, col::Integer)
@@ -83,7 +83,7 @@ function can_enable_cell_control(obj::wxGrid)
 end
 
 function cell_to_rect(obj::wxGrid, row::Integer, col::Integer)
-    return _wx_wrap(wxRect, KwxFFI.wxGrid_CellToRect(obj.ptr, Cint(row), Cint(col)))
+    return _wx_wrap(wxRect, KwxFFI.wxGrid_CellToRect(obj.ptr, Cint(row), Cint(col)); owned = true)
 end
 
 function clear_grid!(obj::wxGrid)
@@ -129,63 +129,63 @@ function disable_drag_row_size!(obj::wxGrid)
     nothing
 end
 
-function draw_all_grid_lines!(obj::wxGrid, dc::Union{wxDC, Nothing}, reg::Union{wxRegion, Nothing})
+function draw_all_grid_lines!(obj::wxGrid, dc::Union{wxDCBase, Nothing}, reg::Union{wxRegion, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     reg_ptr = isnothing(reg) ? C_NULL : reg.ptr
     KwxFFI.wxGrid_DrawAllGridLines(obj.ptr, dc_ptr, reg_ptr)
     nothing
 end
 
-function draw_cell!(obj::wxGrid, dc::Union{wxDC, Nothing}, row::Integer, col::Integer)
+function draw_cell!(obj::wxGrid, dc::Union{wxDCBase, Nothing}, row::Integer, col::Integer)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxGrid_DrawCell(obj.ptr, dc_ptr, Cint(row), Cint(col))
     nothing
 end
 
-function draw_cell_border!(obj::wxGrid, dc::Union{wxDC, Nothing}, row::Integer, col::Integer)
+function draw_cell_border!(obj::wxGrid, dc::Union{wxDCBase, Nothing}, row::Integer, col::Integer)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxGrid_DrawCellBorder(obj.ptr, dc_ptr, Cint(row), Cint(col))
     nothing
 end
 
-function draw_cell_highlight!(obj::wxGrid, dc::Union{wxDC, Nothing}, attr::Union{wxGridCellAttr, Nothing})
+function draw_cell_highlight!(obj::wxGrid, dc::Union{wxDCBase, Nothing}, attr::Union{wxGridCellAttr, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     attr_ptr = isnothing(attr) ? C_NULL : attr.ptr
     KwxFFI.wxGrid_DrawCellHighlight(obj.ptr, dc_ptr, attr_ptr)
     nothing
 end
 
-function draw_col_label!(obj::wxGrid, dc::Union{wxDC, Nothing}, col::Integer)
+function draw_col_label!(obj::wxGrid, dc::Union{wxDCBase, Nothing}, col::Integer)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxGrid_DrawColLabel(obj.ptr, dc_ptr, Cint(col))
     nothing
 end
 
-function draw_col_labels!(obj::wxGrid, dc::Union{wxDC, Nothing})
+function draw_col_labels!(obj::wxGrid, dc::Union{wxDCBase, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxGrid_DrawColLabels(obj.ptr, dc_ptr)
     nothing
 end
 
-function draw_grid_space!(obj::wxGrid, dc::Union{wxDC, Nothing})
+function draw_grid_space!(obj::wxGrid, dc::Union{wxDCBase, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxGrid_DrawGridSpace(obj.ptr, dc_ptr)
     nothing
 end
 
-function draw_row_label!(obj::wxGrid, dc::Union{wxDC, Nothing}, row::Integer)
+function draw_row_label!(obj::wxGrid, dc::Union{wxDCBase, Nothing}, row::Integer)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxGrid_DrawRowLabel(obj.ptr, dc_ptr, Cint(row))
     nothing
 end
 
-function draw_row_labels!(obj::wxGrid, dc::Union{wxDC, Nothing})
+function draw_row_labels!(obj::wxGrid, dc::Union{wxDCBase, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxGrid_DrawRowLabels(obj.ptr, dc_ptr)
     nothing
 end
 
-function draw_text_rectangle!(obj::wxGrid, dc::Union{wxDC, Nothing}, txt::AbstractString, x::Integer, y::Integer, width::Integer, height::Integer, horizontalAlignment::Integer, verticalAlignment::Integer)
+function draw_text_rectangle!(obj::wxGrid, dc::Union{wxDCBase, Nothing}, txt::AbstractString, x::Integer, y::Integer, width::Integer, height::Integer, horizontalAlignment::Integer, verticalAlignment::Integer)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     txt_ws = wxString(txt)
     try
@@ -236,7 +236,7 @@ function get_batch_count(obj::wxGrid)
 end
 
 function get_cell_alignment!(obj::wxGrid, row::Integer, col::Integer, horiz::Ref{Int32}, vert::Ref{Int32})
-    KwxFFI.wxGrid_GetCellAlignment(obj.ptr, Cint(row), Cint(col), horiz, vert)
+    GC.@preserve horiz vert KwxFFI.wxGrid_GetCellAlignment(obj.ptr, Cint(row), Cint(col), Base.unsafe_convert(Ptr{Int32}, horiz), Base.unsafe_convert(Ptr{Int32}, vert))
     nothing
 end
 
@@ -277,7 +277,7 @@ function get_cell_value(obj::wxGrid, row::Integer, col::Integer)
 end
 
 function get_col_label_alignment!(obj::wxGrid, horiz::Ref{Int32}, vert::Ref{Int32})
-    KwxFFI.wxGrid_GetColLabelAlignment(obj.ptr, horiz, vert)
+    GC.@preserve horiz vert KwxFFI.wxGrid_GetColLabelAlignment(obj.ptr, Base.unsafe_convert(Ptr{Int32}, horiz), Base.unsafe_convert(Ptr{Int32}, vert))
     nothing
 end
 
@@ -294,7 +294,7 @@ function get_col_size(obj::wxGrid, col::Integer)
 end
 
 function get_default_cell_alignment!(obj::wxGrid, horiz::Ref{Int32}, vert::Ref{Int32})
-    KwxFFI.wxGrid_GetDefaultCellAlignment(obj.ptr, horiz, vert)
+    GC.@preserve horiz vert KwxFFI.wxGrid_GetDefaultCellAlignment(obj.ptr, Base.unsafe_convert(Ptr{Int32}, horiz), Base.unsafe_convert(Ptr{Int32}, vert))
     nothing
 end
 
@@ -409,7 +409,7 @@ function get_number_rows(obj::wxGrid)
 end
 
 function get_row_label_alignment!(obj::wxGrid, horiz::Ref{Int32}, vert::Ref{Int32})
-    KwxFFI.wxGrid_GetRowLabelAlignment(obj.ptr, horiz, vert)
+    GC.@preserve horiz vert KwxFFI.wxGrid_GetRowLabelAlignment(obj.ptr, Base.unsafe_convert(Ptr{Int32}, horiz), Base.unsafe_convert(Ptr{Int32}, vert))
     nothing
 end
 
@@ -441,7 +441,7 @@ function get_table(obj::wxGrid)
     return _wx_wrap(wxGridTableBase, KwxFFI.wxGrid_GetTable(obj.ptr))
 end
 
-function get_text_box_size!(obj::wxGrid, dc::Union{wxDC, Nothing}, count::Integer, lines::Ptr{Cvoid}, arg::Integer)
+function get_text_box_size!(obj::wxGrid, dc::Union{wxDCBase, Nothing}, count::Integer, lines::Ptr{Cvoid}, arg::Integer)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxGrid_GetTextBoxSize(obj.ptr, dc_ptr, Cint(count), lines, Cint(arg))
     nothing
@@ -546,7 +546,7 @@ function process_table_message(obj::wxGrid, evt::Union{wxEvent, Nothing})
     return KwxFFI.wxGrid_ProcessTableMessage(obj.ptr, evt_ptr) != 0
 end
 
-function register_data_type!(obj::wxGrid, typeName::AbstractString, renderer::Union{wxGridCellRenderer, Nothing}, editor::Union{wxGridCellEditor, Nothing})
+function register_data_type!(obj::wxGrid, typeName::AbstractString, renderer::Union{wxGridCellRendererBase, Nothing}, editor::Union{wxGridCellEditorBase, Nothing})
     typeName_ws = wxString(typeName)
     renderer_ptr = isnothing(renderer) ? C_NULL : renderer.ptr
     editor_ptr = isnothing(editor) ? C_NULL : editor.ptr
@@ -594,7 +594,7 @@ function set_cell_background_colour!(obj::wxGrid, row::Integer, col::Integer, co
     nothing
 end
 
-function set_cell_editor!(obj::wxGrid, row::Integer, col::Integer, editor::Union{wxGridCellEditor, Nothing})
+function set_cell_editor!(obj::wxGrid, row::Integer, col::Integer, editor::Union{wxGridCellEditorBase, Nothing})
     editor_ptr = isnothing(editor) ? C_NULL : editor.ptr
     KwxFFI.wxGrid_SetCellEditor(obj.ptr, Cint(row), Cint(col), editor_ptr)
     nothing
@@ -612,7 +612,7 @@ function set_cell_highlight_colour!(obj::wxGrid, col::Union{wxColour, Nothing})
     nothing
 end
 
-function set_cell_renderer!(obj::wxGrid, row::Integer, col::Integer, renderer::Union{wxGridCellRenderer, Nothing})
+function set_cell_renderer!(obj::wxGrid, row::Integer, col::Integer, renderer::Union{wxGridCellRendererBase, Nothing})
     renderer_ptr = isnothing(renderer) ? C_NULL : renderer.ptr
     KwxFFI.wxGrid_SetCellRenderer(obj.ptr, Cint(row), Cint(col), renderer_ptr)
     nothing
@@ -723,13 +723,13 @@ function set_default_col_size!(obj::wxGrid, width::Integer, resizeExistingCols::
     nothing
 end
 
-function set_default_editor!(obj::wxGrid, editor::Union{wxGridCellEditor, Nothing})
+function set_default_editor!(obj::wxGrid, editor::Union{wxGridCellEditorBase, Nothing})
     editor_ptr = isnothing(editor) ? C_NULL : editor.ptr
     KwxFFI.wxGrid_SetDefaultEditor(obj.ptr, editor_ptr)
     nothing
 end
 
-function set_default_renderer!(obj::wxGrid, renderer::Union{wxGridCellRenderer, Nothing})
+function set_default_renderer!(obj::wxGrid, renderer::Union{wxGridCellRendererBase, Nothing})
     renderer_ptr = isnothing(renderer) ? C_NULL : renderer.ptr
     KwxFFI.wxGrid_SetDefaultRenderer(obj.ptr, renderer_ptr)
     nothing
@@ -832,7 +832,7 @@ function set_selection_mode!(obj::wxGrid, selmode::Integer)
     nothing
 end
 
-function set_table(obj::wxGrid, table::Union{wxGridTableBase, Nothing}, takeOwnership::Bool, selmode::Integer)
+function set_table(obj::wxGrid, table::Union{wxGridTableBaseBase, Nothing}, takeOwnership::Bool, selmode::Integer)
     table_ptr = isnothing(table) ? C_NULL : table.ptr
     return KwxFFI.wxGrid_SetTable(obj.ptr, table_ptr, Cint(takeOwnership), Cint(selmode)) != 0
 end
@@ -861,7 +861,7 @@ function x_to_edge_of_col(obj::wxGrid, x::Integer)
 end
 
 function xy_to_cell!(obj::wxGrid, x::Integer, y::Integer, row::Ref{Int32}, col::Ref{Int32})
-    KwxFFI.wxGrid_XYToCell(obj.ptr, Cint(x), Cint(y), row, col)
+    GC.@preserve row col KwxFFI.wxGrid_XYToCell(obj.ptr, Cint(x), Cint(y), Base.unsafe_convert(Ptr{Int32}, row), Base.unsafe_convert(Ptr{Int32}, col))
     nothing
 end
 
@@ -897,16 +897,16 @@ function get_selected_blocks!(obj::wxGrid, array::Union{wxGridBlockCoordsArray, 
     nothing
 end
 
-function get_selected_rows(obj::wxGrid, array::Integer)
-    return Int(KwxFFI.wxGrid_GetSelectedRows(obj.ptr, Cint(array)))
+function get_selected_rows(obj::wxGrid, array::Ptr{Cvoid})
+    return Int(KwxFFI.wxGrid_GetSelectedRows(obj.ptr, array))
 end
 
-function get_selected_cols(obj::wxGrid, array::Integer)
-    return Int(KwxFFI.wxGrid_GetSelectedCols(obj.ptr, Cint(array)))
+function get_selected_cols(obj::wxGrid, array::Ptr{Cvoid})
+    return Int(KwxFFI.wxGrid_GetSelectedCols(obj.ptr, array))
 end
 
 function get_cell_size!(obj::wxGrid, row::Integer, col::Integer, srow::Ref{Int32}, scol::Ref{Int32})
-    KwxFFI.wxGrid_GetCellSize(obj.ptr, Cint(row), Cint(col), srow, scol)
+    GC.@preserve srow scol KwxFFI.wxGrid_GetCellSize(obj.ptr, Cint(row), Cint(col), Base.unsafe_convert(Ptr{Int32}, srow), Base.unsafe_convert(Ptr{Int32}, scol))
     nothing
 end
 
@@ -997,7 +997,7 @@ function set_default_cell_fit_mode!(obj::wxGrid, fitMode::Union{wxGridFitMode, N
 end
 
 function get_corner_label_alignment!(obj::wxGrid, horiz::Ref{Int32}, vert::Ref{Int32})
-    KwxFFI.wxGrid_GetCornerLabelAlignment(obj.ptr, horiz, vert)
+    GC.@preserve horiz vert KwxFFI.wxGrid_GetCornerLabelAlignment(obj.ptr, Base.unsafe_convert(Ptr{Int32}, horiz), Base.unsafe_convert(Ptr{Int32}, vert))
     nothing
 end
 
@@ -1099,7 +1099,7 @@ function set_attr!(obj::wxGrid, row::Integer, col::Integer, attr::Union{wxGridCe
     nothing
 end
 
-function assign_table!(obj::wxGrid, table::Union{wxGridTableBase, Nothing}, selmode::Integer)
+function assign_table!(obj::wxGrid, table::Union{wxGridTableBaseBase, Nothing}, selmode::Integer)
     table_ptr = isnothing(table) ? C_NULL : table.ptr
     KwxFFI.wxGrid_AssignTable(obj.ptr, table_ptr, Cint(selmode))
     nothing
@@ -1152,7 +1152,7 @@ function set_sorting_column!(obj::wxGrid, col::Integer, ascending::Bool)
     nothing
 end
 
-function render!(obj::wxGrid, dc::Union{wxDC, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer, topLeftRow::Integer, topLeftCol::Integer, bottomRightRow::Integer, bottomRightCol::Integer, style::Integer)
+function render!(obj::wxGrid, dc::Union{wxDCBase, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer, topLeftRow::Integer, topLeftCol::Integer, bottomRightRow::Integer, bottomRightCol::Integer, style::Integer)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxGrid_Render(obj.ptr, dc_ptr, Cint(x), Cint(y), Cint(width), Cint(height), Cint(topLeftRow), Cint(topLeftCol), Cint(bottomRightRow), Cint(bottomRightCol), Cint(style))
     nothing

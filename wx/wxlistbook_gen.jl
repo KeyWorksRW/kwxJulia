@@ -42,7 +42,7 @@ function get_list_view(obj::wxListbook)
 end
 
 function get_page(obj::wxListbook, nPage::Integer)
-    return KwxFFI.wxListbook_GetPage(obj.ptr, Cint(nPage))
+    return _wx_ref(wxWindow, KwxFFI.wxListbook_GetPage(obj.ptr, Cint(nPage)))
 end
 
 function get_page_count(obj::wxListbook)
@@ -62,7 +62,7 @@ function get_selection(obj::wxListbook)
 end
 
 function hit_test(obj::wxListbook, x::Integer, y::Integer, flags::Ref{Clong})
-    return Int(KwxFFI.wxListbook_HitTest(obj.ptr, Cint(x), Cint(y), flags))
+    return Int(GC.@preserve flags KwxFFI.wxListbook_HitTest(obj.ptr, Cint(x), Cint(y), Base.unsafe_convert(Ptr{Clong}, flags)))
 end
 
 function insert_page(obj::wxListbook, nPage::Integer, pPage::Union{wxWindow, Nothing}, strText::AbstractString, bSelect::Bool, imageId::Integer)

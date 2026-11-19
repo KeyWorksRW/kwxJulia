@@ -45,13 +45,13 @@ function is_selection(obj::wxCommandEventBase)
     return KwxFFI.wxCommandEvent_IsSelection(obj.ptr) != 0
 end
 
-function set_client_data!(obj::wxCommandEventBase, clientData::Union{wxClientData, Nothing})
+function set_client_data!(obj::wxCommandEventBase, clientData::Union{wxClientDataBase, Nothing})
     clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
     KwxFFI.wxCommandEvent_SetClientData(obj.ptr, clientData_ptr)
     nothing
 end
 
-function set_client_object!(obj::wxCommandEventBase, clientObject::Union{wxClientData, Nothing})
+function set_client_object!(obj::wxCommandEventBase, clientObject::Union{wxClientDataBase, Nothing})
     clientObject_ptr = isnothing(clientObject) ? C_NULL : clientObject.ptr
     KwxFFI.wxCommandEvent_SetClientObject(obj.ptr, clientObject_ptr)
     nothing

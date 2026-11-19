@@ -20,6 +20,26 @@ function set_on_on_update!(obj::wxViewBase, pFunction::Ptr{Cvoid})
     nothing
 end
 
+function set_on_on_create_with_data!(obj::wxViewBase, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxView_SetOnOnCreateWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_create_result!(obj::wxViewBase, result::Bool)
+    KwxFFI.wxView_SetOnCreateResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_on_on_close_with_data!(obj::wxViewBase, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxView_SetOnOnCloseWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_close_result!(obj::wxViewBase, result::Bool)
+    KwxFFI.wxView_SetOnCloseResult(obj.ptr, Cint(result))
+    nothing
+end
+
 function activate!(obj::wxViewBase, activate::Bool)
     KwxFFI.wxView_Activate(obj.ptr, Cint(activate))
     nothing
@@ -30,16 +50,25 @@ function get_document(obj::wxViewBase)
 end
 
 function get_frame(obj::wxViewBase)
-    return KwxFFI.wxView_GetFrame(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxView_GetFrame(obj.ptr))
 end
 
-function set_document!(obj::wxViewBase, doc::Ptr{Cvoid})
-    KwxFFI.wxView_SetDocument(obj.ptr, doc)
+function set_document!(obj::wxViewBase, doc::Union{wxDocumentBase, Nothing})
+    doc_ptr = isnothing(doc) ? C_NULL : doc.ptr
+    KwxFFI.wxView_SetDocument(obj.ptr, doc_ptr)
     nothing
 end
 
 function set_frame!(obj::wxViewBase, frame::Ptr{Cvoid})
     KwxFFI.wxView_SetFrame(obj.ptr, frame)
     nothing
+end
+
+function Base.close(obj::wxViewBase, deleteWindow::Bool)
+    return KwxFFI.wxView_Close(obj.ptr, Cint(deleteWindow)) != 0
+end
+
+function close_default(obj::wxViewBase)
+    return KwxFFI.wxView_CloseDefault(obj.ptr) != 0
 end
 

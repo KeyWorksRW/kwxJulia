@@ -12,7 +12,7 @@ function get_flags(obj::wxCalculateLayoutEvent)
 end
 
 function get_rect(obj::wxCalculateLayoutEvent)
-    return _wx_wrap(wxRect, KwxFFI.wxCalculateLayoutEvent_GetRect(obj.ptr))
+    return _wx_wrap(wxRect, KwxFFI.wxCalculateLayoutEvent_GetRect(obj.ptr); owned = true)
 end
 
 function set_flags!(obj::wxCalculateLayoutEvent, flags::Integer)

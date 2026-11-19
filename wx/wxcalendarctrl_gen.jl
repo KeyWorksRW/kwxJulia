@@ -71,7 +71,7 @@ end
 
 function hit_test(obj::wxCalendarCtrl, x::Integer, y::Integer, date::Union{wxDateTime, Nothing}, weekday::Ref{Int32})
     date_ptr = isnothing(date) ? C_NULL : date.ptr
-    return Int(KwxFFI.wxCalendarCtrl_HitTest(obj.ptr, Cint(x), Cint(y), date_ptr, weekday))
+    return Int(GC.@preserve weekday KwxFFI.wxCalendarCtrl_HitTest(obj.ptr, Cint(x), Cint(y), date_ptr, Base.unsafe_convert(Ptr{Cint}, weekday)))
 end
 
 function mark!(obj::wxCalendarCtrl, day::Integer, mark::Bool)

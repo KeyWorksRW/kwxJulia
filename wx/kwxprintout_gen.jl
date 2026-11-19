@@ -18,22 +18,22 @@ function get_dc(obj::kwxPrintout)
 end
 
 function kwxPrintout_GetPageSizeMM(pObject::Ptr{Cvoid}, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.kwxPrintout_GetPageSizeMM(pObject, width, height)
+    GC.@preserve width height KwxFFI.kwxPrintout_GetPageSizeMM(pObject, Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 
 function kwxPrintout_GetPageSizePixels(pObject::Ptr{Cvoid}, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.kwxPrintout_GetPageSizePixels(pObject, width, height)
+    GC.@preserve width height KwxFFI.kwxPrintout_GetPageSizePixels(pObject, Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 
 function kwxPrintout_GetPPIPrinter(pObject::Ptr{Cvoid}, x::Ref{Int32}, y::Ref{Int32})
-    KwxFFI.kwxPrintout_GetPPIPrinter(pObject, x, y)
+    GC.@preserve x y KwxFFI.kwxPrintout_GetPPIPrinter(pObject, Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y))
     nothing
 end
 
 function kwxPrintout_GetPPIScreen(pObject::Ptr{Cvoid}, x::Ref{Int32}, y::Ref{Int32})
-    KwxFFI.kwxPrintout_GetPPIScreen(pObject, x, y)
+    GC.@preserve x y KwxFFI.kwxPrintout_GetPPIScreen(pObject, Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y))
     nothing
 end
 
@@ -45,7 +45,7 @@ function is_preview(obj::kwxPrintout)
     return KwxFFI.kwxPrintout_IsPreview(obj.ptr) != 0
 end
 
-function set_dc!(obj::kwxPrintout, dc::Union{wxDC, Nothing})
+function set_dc!(obj::kwxPrintout, dc::Union{wxDCBase, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.kwxPrintout_SetDC(obj.ptr, dc_ptr)
     nothing

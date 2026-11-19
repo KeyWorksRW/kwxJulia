@@ -43,6 +43,31 @@ function set_on_get_virtual_text!(obj::kwxRichTextDrawingHandler, pFunction::Ptr
     nothing
 end
 
+function set_on_has_virtual_attributes_with_data!(obj::kwxRichTextDrawingHandler, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxRichTextDrawingHandler_SetOnHasVirtualAttributesWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_virtual_attributes_with_data!(obj::kwxRichTextDrawingHandler, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxRichTextDrawingHandler_SetOnGetVirtualAttributesWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_virtual_subobject_attributes_count_with_data!(obj::kwxRichTextDrawingHandler, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxRichTextDrawingHandler_SetOnGetVirtualSubobjectAttributesCountWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_has_virtual_text_with_data!(obj::kwxRichTextDrawingHandler, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxRichTextDrawingHandler_SetOnHasVirtualTextWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_virtual_text_with_data!(obj::kwxRichTextDrawingHandler, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxRichTextDrawingHandler_SetOnGetVirtualTextWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
 function set_virtual_text_result!(obj::kwxRichTextDrawingHandler, text::AbstractString)
     text_ws = wxString(text)
     try

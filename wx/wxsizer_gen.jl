@@ -16,17 +16,17 @@ end
 
 function compute_fitting_client_size(obj::wxSizer, window::Union{wxWindow, Nothing})
     window_ptr = isnothing(window) ? C_NULL : window.ptr
-    return _wx_wrap(wxSize, KwxFFI.wxSizer_ComputeFittingClientSize(obj.ptr, window_ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxSizer_ComputeFittingClientSize(obj.ptr, window_ptr); owned = true)
 end
 
 function compute_fitting_window_size(obj::wxSizer, window::Union{wxWindow, Nothing})
     window_ptr = isnothing(window) ? C_NULL : window.ptr
-    return _wx_wrap(wxSize, KwxFFI.wxSizer_ComputeFittingWindowSize(obj.ptr, window_ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxSizer_ComputeFittingWindowSize(obj.ptr, window_ptr); owned = true)
 end
 
 function fit_with_size(obj::wxSizer, window::Union{wxWindow, Nothing})
     window_ptr = isnothing(window) ? C_NULL : window.ptr
-    return _wx_wrap(wxSize, KwxFFI.wxSizer_FitWithSize(obj.ptr, window_ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxSizer_FitWithSize(obj.ptr, window_ptr); owned = true)
 end
 
 function get_item_count(obj::wxSizer)
@@ -82,7 +82,7 @@ function add_window!(obj::wxSizer, window::Union{wxWindow, Nothing}, option::Int
 end
 
 function calc_min(obj::wxSizer)
-    return _wx_wrap(wxSize, KwxFFI.wxSizer_CalcMin(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxSizer_CalcMin(obj.ptr); owned = true)
 end
 
 function fit!(obj::wxSizer, window::Union{wxWindow, Nothing})
@@ -96,15 +96,15 @@ function get_children(obj::wxSizer, result::Ptr{Cvoid}, count::Integer)
 end
 
 function get_min_size(obj::wxSizer)
-    return _wx_wrap(wxSize, KwxFFI.wxSizer_GetMinSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxSizer_GetMinSize(obj.ptr); owned = true)
 end
 
 function get_position(obj::wxSizer)
-    return _wx_wrap(wxPoint, KwxFFI.wxSizer_GetPosition(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxSizer_GetPosition(obj.ptr); owned = true)
 end
 
 function get_size(obj::wxSizer)
-    return _wx_wrap(wxSize, KwxFFI.wxSizer_GetSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxSizer_GetSize(obj.ptr); owned = true)
 end
 
 function Base.insert!(obj::wxSizer, before::Integer, width::Integer, height::Integer, option::Integer, flag::Integer, border::Integer, userData::Ptr{Cvoid})
@@ -219,7 +219,7 @@ function fit_inside!(obj::wxSizer, window::Union{wxWindow, Nothing})
 end
 
 function get_containing_window(obj::wxSizer)
-    return KwxFFI.wxSizer_GetContainingWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxSizer_GetContainingWindow(obj.ptr))
 end
 
 function get_item_window(obj::wxSizer, window::Union{wxWindow, Nothing}, recursive::Bool)
@@ -320,7 +320,7 @@ function replace_sizer(obj::wxSizer, oldsz::Union{wxSizer, Nothing}, newsz::Unio
     return KwxFFI.wxSizer_ReplaceSizer(obj.ptr, oldsz_ptr, newsz_ptr, Cint(recursive)) != 0
 end
 
-function Base.replace(obj::wxSizer, oldindex::Integer, newitem::Union{wxSizerItem, Nothing})
+function Base.replace(obj::wxSizer, oldindex::Integer, newitem::Union{wxSizerItemBase, Nothing})
     newitem_ptr = isnothing(newitem) ? C_NULL : newitem.ptr
     return KwxFFI.wxSizer_Replace(obj.ptr, Cint(oldindex), newitem_ptr) != 0
 end

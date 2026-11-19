@@ -22,7 +22,7 @@ function Base.delete!(obj::wxGBSizerItem)
 end
 
 function get_pos!(obj::wxGBSizerItem, row::Ref{Int32}, col::Ref{Int32})
-    KwxFFI.wxGBSizerItem_GetPos(obj.ptr, row, col)
+    GC.@preserve row col KwxFFI.wxGBSizerItem_GetPos(obj.ptr, Base.unsafe_convert(Ptr{Int32}, row), Base.unsafe_convert(Ptr{Int32}, col))
     nothing
 end
 
@@ -32,7 +32,7 @@ function set_pos!(obj::wxGBSizerItem, row::Integer, col::Integer)
 end
 
 function get_span!(obj::wxGBSizerItem, rowspan::Ref{Int32}, colspan::Ref{Int32})
-    KwxFFI.wxGBSizerItem_GetSpan(obj.ptr, rowspan, colspan)
+    GC.@preserve rowspan colspan KwxFFI.wxGBSizerItem_GetSpan(obj.ptr, Base.unsafe_convert(Ptr{Int32}, rowspan), Base.unsafe_convert(Ptr{Int32}, colspan))
     nothing
 end
 
@@ -50,7 +50,7 @@ function intersects_pos(obj::wxGBSizerItem, row::Integer, col::Integer, rowspan:
 end
 
 function get_end_pos!(obj::wxGBSizerItem, row::Ref{Int32}, col::Ref{Int32})
-    KwxFFI.wxGBSizerItem_GetEndPos(obj.ptr, row, col)
+    GC.@preserve row col KwxFFI.wxGBSizerItem_GetEndPos(obj.ptr, Base.unsafe_convert(Ptr{Int32}, row), Base.unsafe_convert(Ptr{Int32}, col))
     nothing
 end
 

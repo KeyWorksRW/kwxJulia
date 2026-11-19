@@ -111,6 +111,36 @@ function wxVariant_CreateFromArrayString(value::Ptr{Cvoid}, name::AbstractString
     return obj
 end
 
+function wxVariant(text::AbstractString, icon::Union{wxBitmapBundle, Nothing}, name::AbstractString)
+    text_ws = wxString(text)
+    icon_ptr = isnothing(icon) ? C_NULL : icon.ptr
+    name_ws = wxString(name)
+    ptr = try
+        KwxFFI.wxVariant_CreateFromDataViewIconText(text_ws.ptr, icon_ptr, name_ws.ptr)
+    finally
+        Base.delete!(text_ws)
+        Base.delete!(name_ws)
+    end
+    ptr == C_NULL && error("Failed to create wxVariant")
+    obj = wxVariant(ptr)
+    return obj
+end
+
+function wxVariant(text::AbstractString, icon::Union{wxBitmapBundle, Nothing}, checkedState::Integer, name::AbstractString)
+    text_ws = wxString(text)
+    icon_ptr = isnothing(icon) ? C_NULL : icon.ptr
+    name_ws = wxString(name)
+    ptr = try
+        KwxFFI.wxVariant_CreateFromDataViewCheckIconText(text_ws.ptr, icon_ptr, Cint(checkedState), name_ws.ptr)
+    finally
+        Base.delete!(text_ws)
+        Base.delete!(name_ws)
+    end
+    ptr == C_NULL && error("Failed to create wxVariant")
+    obj = wxVariant(ptr)
+    return obj
+end
+
 function wxVariant()
     ptr = KwxFFI.wxVariant_Create()
     ptr == C_NULL && error("Failed to create wxVariant")
@@ -120,6 +150,16 @@ end
 
 function get_real(obj::wxVariant)
     return Float64(KwxFFI.wxVariant_GetReal(obj.ptr))
+end
+
+function get_data_view_icon_text(obj::wxVariant, result::Union{wxDataViewIconTextBase, Nothing})
+    result_ptr = isnothing(result) ? C_NULL : result.ptr
+    return KwxFFI.wxVariant_GetDataViewIconText(obj.ptr, result_ptr) != 0
+end
+
+function get_data_view_check_icon_text(obj::wxVariant, result::Union{wxDataViewCheckIconText, Nothing})
+    result_ptr = isnothing(result) ? C_NULL : result.ptr
+    return KwxFFI.wxVariant_GetDataViewCheckIconText(obj.ptr, result_ptr) != 0
 end
 
 function set_name!(obj::wxVariant, name::AbstractString)
@@ -217,7 +257,7 @@ function get_void_ptr(obj::wxVariant)
 end
 
 function get_wx_object_ptr(obj::wxVariant)
-    return KwxFFI.wxVariant_GetWxObjectPtr(obj.ptr)
+    return _wx_ref(wxObject, KwxFFI.wxVariant_GetWxObjectPtr(obj.ptr))
 end
 
 function get_array_string(obj::wxVariant)
@@ -256,15 +296,15 @@ function clear_list!(obj::wxVariant)
 end
 
 function convert_to_long(obj::wxVariant, value::Ref{Clong})
-    return KwxFFI.wxVariant_ConvertToLong(obj.ptr, value) != 0
+    return GC.@preserve value KwxFFI.wxVariant_ConvertToLong(obj.ptr, Base.unsafe_convert(Ptr{Clong}, value)) != 0
 end
 
 function convert_to_double(obj::wxVariant, value::Ref{Cdouble})
-    return KwxFFI.wxVariant_ConvertToDouble(obj.ptr, value) != 0
+    return GC.@preserve value KwxFFI.wxVariant_ConvertToDouble(obj.ptr, Base.unsafe_convert(Ptr{Cdouble}, value)) != 0
 end
 
 function convert_to_bool(obj::wxVariant, value::Ref{Int32})
-    return KwxFFI.wxVariant_ConvertToBool(obj.ptr, value) != 0
+    return GC.@preserve value KwxFFI.wxVariant_ConvertToBool(obj.ptr, Base.unsafe_convert(Ptr{Cint}, value)) != 0
 end
 
 function item(obj::wxVariant, index::Integer)

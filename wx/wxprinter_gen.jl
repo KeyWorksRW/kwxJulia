@@ -8,10 +8,10 @@ function wxPrinter(data::Union{wxPrintDialogData, Nothing})
     return obj
 end
 
-function create_abort_window(obj::wxPrinter, parent::Union{wxWindow, Nothing}, printout::Union{wxPrintout, Nothing})
+function create_abort_window(obj::wxPrinter, parent::Union{wxWindow, Nothing}, printout::Union{wxPrintoutBase, Nothing})
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     printout_ptr = isnothing(printout) ? C_NULL : printout.ptr
-    return KwxFFI.wxPrinter_CreateAbortWindow(obj.ptr, parent_ptr, printout_ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxPrinter_CreateAbortWindow(obj.ptr, parent_ptr, printout_ptr))
 end
 
 function Base.delete!(obj::wxPrinter)
@@ -34,7 +34,7 @@ function get_print_dialog_data!(obj::wxPrinter, ref::Union{wxPrintDialogData, No
     nothing
 end
 
-function Base.print(obj::wxPrinter, parent::Union{wxWindow, Nothing}, printout::Union{wxPrintout, Nothing}, prompt::Bool)
+function Base.print(obj::wxPrinter, parent::Union{wxWindow, Nothing}, printout::Union{wxPrintoutBase, Nothing}, prompt::Bool)
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     printout_ptr = isnothing(printout) ? C_NULL : printout.ptr
     return KwxFFI.wxPrinter_Print(obj.ptr, parent_ptr, printout_ptr, Cint(prompt)) != 0
@@ -45,7 +45,7 @@ function print_dialog(obj::wxPrinter, parent::Union{wxWindow, Nothing})
     return _wx_wrap(wxDC, KwxFFI.wxPrinter_PrintDialog(obj.ptr, parent_ptr))
 end
 
-function report_error!(obj::wxPrinter, parent::Union{wxWindow, Nothing}, printout::Union{wxPrintout, Nothing}, message::AbstractString)
+function report_error!(obj::wxPrinter, parent::Union{wxWindow, Nothing}, printout::Union{wxPrintoutBase, Nothing}, message::AbstractString)
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     printout_ptr = isnothing(printout) ? C_NULL : printout.ptr
     message_ws = wxString(message)

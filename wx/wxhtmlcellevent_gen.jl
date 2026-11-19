@@ -5,7 +5,7 @@ function get_cell(obj::wxHtmlCellEvent)
 end
 
 function get_point(obj::wxHtmlCellEvent)
-    return _wx_wrap(wxPoint, KwxFFI.wxHtmlCellEvent_GetPoint(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxHtmlCellEvent_GetPoint(obj.ptr); owned = true)
 end
 
 function get_mouse_event(obj::wxHtmlCellEvent)

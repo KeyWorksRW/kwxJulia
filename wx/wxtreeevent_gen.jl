@@ -34,6 +34,6 @@ function get_old_item!(obj::wxTreeEvent, ref::Union{wxTreeItemId, Nothing})
 end
 
 function get_point(obj::wxTreeEvent)
-    return _wx_wrap(wxPoint, KwxFFI.wxTreeEvent_GetPoint(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxTreeEvent_GetPoint(obj.ptr); owned = true)
 end
 

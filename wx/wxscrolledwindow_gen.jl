@@ -52,7 +52,7 @@ function get_scroll_pixels_per_unit!(obj::wxScrolledWindowBase, arg::Integer)
 end
 
 function get_target_window(obj::wxScrolledWindowBase)
-    return KwxFFI.wxScrolledWindow_GetTargetWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxScrolledWindow_GetTargetWindow(obj.ptr))
 end
 
 function get_view_start!(obj::wxScrolledWindowBase, arg::Integer)
@@ -65,13 +65,13 @@ function get_virtual_size!(obj::wxScrolledWindowBase, arg::Integer)
     nothing
 end
 
-function on_draw!(obj::wxScrolledWindowBase, dc::Union{wxDC, Nothing})
+function on_draw!(obj::wxScrolledWindowBase, dc::Union{wxDCBase, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxScrolledWindow_OnDraw(obj.ptr, dc_ptr)
     nothing
 end
 
-function prepare_dc!(obj::wxScrolledWindowBase, dc::Union{wxDC, Nothing})
+function prepare_dc!(obj::wxScrolledWindowBase, dc::Union{wxDCBase, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxScrolledWindow_PrepareDC(obj.ptr, dc_ptr)
     nothing
@@ -127,7 +127,27 @@ function disable_keyboard_scrolling!(obj::wxScrolledWindowBase)
 end
 
 function get_view_start_pixels!(obj::wxScrolledWindowBase, x::Ref{Int32}, y::Ref{Int32})
-    KwxFFI.wxScrolledWindow_GetViewStartPixels(obj.ptr, x, y)
+    GC.@preserve x y KwxFFI.wxScrolledWindow_GetViewStartPixels(obj.ptr, Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y))
+    nothing
+end
+
+function enable_auto_scroll_inside!(obj::wxScrolledWindowBase, insideWidth::Integer)
+    KwxFFI.wxScrolledWindow_EnableAutoScrollInside(obj.ptr, Cint(insideWidth))
+    nothing
+end
+
+function disable_auto_scroll_outside!(obj::wxScrolledWindowBase)
+    KwxFFI.wxScrolledWindow_DisableAutoScrollOutside(obj.ptr)
+    nothing
+end
+
+function enable_autoscroll_without_capture!(obj::wxScrolledWindowBase)
+    KwxFFI.wxScrolledWindow_EnableAutoscrollWithoutCapture(obj.ptr)
+    nothing
+end
+
+function disable_autoscroll_without_capture!(obj::wxScrolledWindowBase)
+    KwxFFI.wxScrolledWindow_DisableAutoscrollWithoutCapture(obj.ptr)
     nothing
 end
 

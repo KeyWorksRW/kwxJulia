@@ -13,7 +13,7 @@ function Base.delete!(obj::wxClipboard)
     nothing
 end
 
-function add_data(obj::wxClipboard, data::Union{wxDataObject, Nothing})
+function add_data(obj::wxClipboard, data::Union{wxDataObjectBase, Nothing})
     data_ptr = isnothing(data) ? C_NULL : data.ptr
     return KwxFFI.wxClipboard_AddData(obj.ptr, data_ptr) != 0
 end
@@ -32,7 +32,7 @@ function Base.flush(obj::wxClipboard)
     return KwxFFI.wxClipboard_Flush(obj.ptr) != 0
 end
 
-function get_data(obj::wxClipboard, data::Union{wxDataObject, Nothing})
+function get_data(obj::wxClipboard, data::Union{wxDataObjectBase, Nothing})
     data_ptr = isnothing(data) ? C_NULL : data.ptr
     return KwxFFI.wxClipboard_GetData(obj.ptr, data_ptr) != 0
 end
@@ -50,7 +50,7 @@ function Base.open(obj::wxClipboard)
     return KwxFFI.wxClipboard_Open(obj.ptr) != 0
 end
 
-function set_data(obj::wxClipboard, data::Union{wxDataObject, Nothing})
+function set_data(obj::wxClipboard, data::Union{wxDataObjectBase, Nothing})
     data_ptr = isnothing(data) ? C_NULL : data.ptr
     return KwxFFI.wxClipboard_SetData(obj.ptr, data_ptr) != 0
 end

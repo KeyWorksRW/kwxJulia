@@ -14,6 +14,19 @@ function kwxRichTextFieldTypeStandard(pObject::Ptr{Cvoid}, name::AbstractString,
     return obj
 end
 
+function kwxRichTextFieldTypeStandard(pObject::Ptr{Cvoid}, name::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, displayStyle::Integer)
+    name_ws = wxString(name)
+    bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
+    ptr = try
+        KwxFFI.kwxRichTextFieldTypeStandard_CreateWithBitmap(pObject, name_ws.ptr, bitmap_ptr, Cint(displayStyle))
+    finally
+        Base.delete!(name_ws)
+    end
+    ptr == C_NULL && error("Failed to create kwxRichTextFieldTypeStandard")
+    obj = kwxRichTextFieldTypeStandard(ptr)
+    return obj
+end
+
 function Base.delete!(obj::kwxRichTextFieldTypeStandard)
     KwxFFI.kwxRichTextFieldTypeStandard_Delete(obj.ptr)
     obj.ptr = C_NULL
@@ -72,6 +85,31 @@ end
 
 function set_on_is_top_level!(obj::kwxRichTextFieldTypeStandard, pFunction::Ptr{Cvoid})
     KwxFFI.kwxRichTextFieldTypeStandard_SetOnIsTopLevel(obj.ptr, pFunction)
+    nothing
+end
+
+function set_on_can_edit_properties_with_data!(obj::kwxRichTextFieldTypeStandard, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxRichTextFieldTypeStandard_SetOnCanEditPropertiesWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_edit_properties_with_data!(obj::kwxRichTextFieldTypeStandard, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxRichTextFieldTypeStandard_SetOnEditPropertiesWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_properties_menu_label_with_data!(obj::kwxRichTextFieldTypeStandard, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxRichTextFieldTypeStandard_SetOnGetPropertiesMenuLabelWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_update_field_with_data!(obj::kwxRichTextFieldTypeStandard, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxRichTextFieldTypeStandard_SetOnUpdateFieldWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_is_top_level_with_data!(obj::kwxRichTextFieldTypeStandard, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxRichTextFieldTypeStandard_SetOnIsTopLevelWithData(obj.ptr, pFunction, data)
     nothing
 end
 

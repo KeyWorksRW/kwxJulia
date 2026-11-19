@@ -24,8 +24,8 @@ function get_path(obj::wxGenericDirDialog)
     return _wx_take_wxstring(KwxFFI.wxGenericDirDialog_GetPath(obj.ptr))
 end
 
-function get_paths(obj::wxGenericDirDialog, paths::Integer, capacity::Integer)
-    return Int(KwxFFI.wxGenericDirDialog_GetPaths(obj.ptr, Cint(paths), Cint(capacity)))
+function get_paths(obj::wxGenericDirDialog, paths::Ptr{Cvoid}, capacity::Integer)
+    return Int(KwxFFI.wxGenericDirDialog_GetPaths(obj.ptr, paths, Cint(capacity)))
 end
 
 function set_message!(obj::wxGenericDirDialog, msg::AbstractString)

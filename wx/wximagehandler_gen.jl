@@ -51,12 +51,12 @@ function set_type!(obj::wxImageHandlerBase, type_::Integer)
     nothing
 end
 
-function get_image_count(obj::wxImageHandlerBase, stream::Union{wxInputStream, Nothing})
+function get_image_count(obj::wxImageHandlerBase, stream::Union{wxInputStreamBase, Nothing})
     stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
     return Int(KwxFFI.wxImageHandler_GetImageCount(obj.ptr, stream_ptr))
 end
 
-function can_read_stream(obj::wxImageHandlerBase, stream::Union{wxInputStream, Nothing})
+function can_read_stream(obj::wxImageHandlerBase, stream::Union{wxInputStreamBase, Nothing})
     stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
     return KwxFFI.wxImageHandler_CanReadStream(obj.ptr, stream_ptr) != 0
 end
@@ -71,13 +71,13 @@ function can_read_file(obj::wxImageHandlerBase, name::AbstractString)
     return _result
 end
 
-function load_file(obj::wxImageHandlerBase, image::Union{wxImage, Nothing}, stream::Union{wxInputStream, Nothing}, verbose::Bool, index::Integer)
+function load_file(obj::wxImageHandlerBase, image::Union{wxImage, Nothing}, stream::Union{wxInputStreamBase, Nothing}, verbose::Bool, index::Integer)
     image_ptr = isnothing(image) ? C_NULL : image.ptr
     stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
     return KwxFFI.wxImageHandler_LoadFile(obj.ptr, image_ptr, stream_ptr, Cint(verbose), Cint(index)) != 0
 end
 
-function save_file(obj::wxImageHandlerBase, image::Union{wxImage, Nothing}, stream::Union{wxOutputStream, Nothing}, verbose::Bool)
+function save_file(obj::wxImageHandlerBase, image::Union{wxImage, Nothing}, stream::Union{wxOutputStreamBase, Nothing}, verbose::Bool)
     image_ptr = isnothing(image) ? C_NULL : image.ptr
     stream_ptr = isnothing(stream) ? C_NULL : stream.ptr
     return KwxFFI.wxImageHandler_SaveFile(obj.ptr, image_ptr, stream_ptr, Cint(verbose)) != 0

@@ -12,19 +12,19 @@ function location(obj::wxAuiTabContainerButton)
     return Int(KwxFFI.wxAuiTabContainerButton_Location(obj.ptr))
 end
 
-function bitmap!(obj::wxAuiTabContainerButton, bitmap::Union{wxBitmap, Nothing})
+function bitmap!(obj::wxAuiTabContainerButton, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxAuiTabContainerButton_Bitmap(obj.ptr, bitmap_ptr)
     nothing
 end
 
-function dis_bitmap!(obj::wxAuiTabContainerButton, bitmap::Union{wxBitmap, Nothing})
+function dis_bitmap!(obj::wxAuiTabContainerButton, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxAuiTabContainerButton_DisBitmap(obj.ptr, bitmap_ptr)
     nothing
 end
 
 function rect(obj::wxAuiTabContainerButton)
-    return _wx_wrap(wxRect, KwxFFI.wxAuiTabContainerButton_Rect(obj.ptr))
+    return _wx_wrap(wxRect, KwxFFI.wxAuiTabContainerButton_Rect(obj.ptr); owned = true)
 end
 

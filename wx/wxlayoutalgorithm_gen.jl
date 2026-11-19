@@ -13,17 +13,17 @@ function Base.delete!(obj::wxLayoutAlgorithm)
     nothing
 end
 
-function layout_frame(obj::wxLayoutAlgorithm, frame::Union{wxFrame, Nothing}, mainWindow::Ptr{Cvoid})
+function layout_frame(obj::wxLayoutAlgorithm, frame::Union{wxFrameBase, Nothing}, mainWindow::Ptr{Cvoid})
     frame_ptr = isnothing(frame) ? C_NULL : frame.ptr
     return KwxFFI.wxLayoutAlgorithm_LayoutFrame(obj.ptr, frame_ptr, mainWindow) != 0
 end
 
-function layout_mdi_frame(obj::wxLayoutAlgorithm, frame::Union{wxFrame, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer, use::Integer)
+function layout_mdi_frame(obj::wxLayoutAlgorithm, frame::Union{wxFrameBase, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer, use::Integer)
     frame_ptr = isnothing(frame) ? C_NULL : frame.ptr
     return KwxFFI.wxLayoutAlgorithm_LayoutMDIFrame(obj.ptr, frame_ptr, Cint(x), Cint(y), Cint(width), Cint(height), Cint(use)) != 0
 end
 
-function layout_window(obj::wxLayoutAlgorithm, frame::Union{wxFrame, Nothing}, mainWindow::Ptr{Cvoid})
+function layout_window(obj::wxLayoutAlgorithm, frame::Union{wxFrameBase, Nothing}, mainWindow::Ptr{Cvoid})
     frame_ptr = isnothing(frame) ? C_NULL : frame.ptr
     return KwxFFI.wxLayoutAlgorithm_LayoutWindow(obj.ptr, frame_ptr, mainWindow) != 0
 end

@@ -10,7 +10,7 @@ function wxStatusBar(parent::Union{wxWindow, Nothing}, id::Integer, left::Intege
 end
 
 function get_borders(obj::wxStatusBar)
-    return _wx_wrap(wxSize, KwxFFI.wxStatusBar_GetBorders(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxStatusBar_GetBorders(obj.ptr); owned = true)
 end
 
 function add_field_control(obj::wxStatusBar, n::Integer, win::Union{wxWindow, Nothing})
@@ -60,11 +60,11 @@ function set_status_widths!(obj::wxStatusBar, count::Integer, widths::Ptr{Cvoid}
 end
 
 function get_field_rect(obj::wxStatusBar, i::Integer, x::Ref{Int32}, y::Ref{Int32}, w::Ref{Int32}, h::Ref{Int32})
-    return KwxFFI.wxStatusBar_GetFieldRect(obj.ptr, Cint(i), x, y, w, h) != 0
+    return GC.@preserve x y w h KwxFFI.wxStatusBar_GetFieldRect(obj.ptr, Cint(i), Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y), Base.unsafe_convert(Ptr{Int32}, w), Base.unsafe_convert(Ptr{Int32}, h)) != 0
 end
 
-function set_status_styles!(obj::wxStatusBar, n::Integer, styles::Integer)
-    KwxFFI.wxStatusBar_SetStatusStyles(obj.ptr, Cint(n), Cint(styles))
+function set_status_styles!(obj::wxStatusBar, n::Integer, styles::Ptr{Cvoid})
+    KwxFFI.wxStatusBar_SetStatusStyles(obj.ptr, Cint(n), styles)
     nothing
 end
 

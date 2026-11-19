@@ -10,7 +10,7 @@ function append_string!(obj::wxItemContainer, item::AbstractString)
     nothing
 end
 
-function set_client_object!(obj::wxItemContainer, n::Integer, clientData::Union{wxClientData, Nothing})
+function set_client_object!(obj::wxItemContainer, n::Integer, clientData::Union{wxClientDataBase, Nothing})
     clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
     KwxFFI.wxItemContainer_SetClientObject(obj.ptr, Cuint(n), clientData_ptr)
     nothing

@@ -26,3 +26,7 @@ function get_url_end(obj::wxTextUrlEvent)
     return Int(KwxFFI.wxTextUrlEvent_GetURLEnd(obj.ptr))
 end
 
+function get_string(obj::wxTextUrlEvent)
+    return _wx_take_wxstring(KwxFFI.wxTextUrlEvent_GetString(obj.ptr))
+end
+

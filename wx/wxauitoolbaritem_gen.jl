@@ -15,9 +15,15 @@ function wxAuiToolBarItem(source::Union{wxAuiToolBarItem, Nothing})
     return obj
 end
 
+function Base.delete!(obj::wxAuiToolBarItem)
+    KwxFFI.wxAuiToolBarItem_Delete(obj.ptr)
+    obj.ptr = C_NULL
+    nothing
+end
+
 function Base.copy(obj::wxAuiToolBarItem, source::Union{wxAuiToolBarItem, Nothing})
     source_ptr = isnothing(source) ? C_NULL : source.ptr
-    return _wx_wrap(wxAuiToolBarItem, KwxFFI.wxAuiToolBarItem_Copy(obj.ptr, source_ptr))
+    return _wx_wrap(wxAuiToolBarItem, KwxFFI.wxAuiToolBarItem_Copy(obj.ptr, source_ptr); owned = true)
 end
 
 function assign!(obj::wxAuiToolBarItem, source::Union{wxAuiToolBarItem, Nothing})
@@ -33,7 +39,7 @@ function set_window!(obj::wxAuiToolBarItem, window::Union{wxWindow, Nothing})
 end
 
 function get_window(obj::wxAuiToolBarItem)
-    return KwxFFI.wxAuiToolBarItem_GetWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxAuiToolBarItem_GetWindow(obj.ptr))
 end
 
 function set_id!(obj::wxAuiToolBarItem, new_id::Integer)
@@ -63,7 +69,7 @@ function get_state(obj::wxAuiToolBarItem)
     return Int(KwxFFI.wxAuiToolBarItem_GetState(obj.ptr))
 end
 
-function set_sizer_item!(obj::wxAuiToolBarItem, sizerItem::Union{wxSizerItem, Nothing})
+function set_sizer_item!(obj::wxAuiToolBarItem, sizerItem::Union{wxSizerItemBase, Nothing})
     sizerItem_ptr = isnothing(sizerItem) ? C_NULL : sizerItem.ptr
     KwxFFI.wxAuiToolBarItem_SetSizerItem(obj.ptr, sizerItem_ptr)
     nothing
@@ -87,37 +93,37 @@ function get_label(obj::wxAuiToolBarItem)
     return _wx_take_wxstring(KwxFFI.wxAuiToolBarItem_GetLabel(obj.ptr))
 end
 
-function set_bitmap!(obj::wxAuiToolBarItem, bitmap::Union{wxBitmap, Nothing})
+function set_bitmap!(obj::wxAuiToolBarItem, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxAuiToolBarItem_SetBitmap(obj.ptr, bitmap_ptr)
     nothing
 end
 
-function get_bitmap!(obj::wxAuiToolBarItem, ref::Union{wxBitmap, Nothing})
+function get_bitmap!(obj::wxAuiToolBarItem, ref::Union{wxBitmapBase, Nothing})
     ref_ptr = isnothing(ref) ? C_NULL : ref.ptr
     KwxFFI.wxAuiToolBarItem_GetBitmap(obj.ptr, ref_ptr)
     nothing
 end
 
-function set_disabled_bitmap!(obj::wxAuiToolBarItem, bitmap::Union{wxBitmap, Nothing})
+function set_disabled_bitmap!(obj::wxAuiToolBarItem, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxAuiToolBarItem_SetDisabledBitmap(obj.ptr, bitmap_ptr)
     nothing
 end
 
-function get_disabled_bitmap!(obj::wxAuiToolBarItem, ref::Union{wxBitmap, Nothing})
+function get_disabled_bitmap!(obj::wxAuiToolBarItem, ref::Union{wxBitmapBase, Nothing})
     ref_ptr = isnothing(ref) ? C_NULL : ref.ptr
     KwxFFI.wxAuiToolBarItem_GetDisabledBitmap(obj.ptr, ref_ptr)
     nothing
 end
 
-function set_hover_bitmap!(obj::wxAuiToolBarItem, bitmap::Union{wxBitmap, Nothing})
+function set_hover_bitmap!(obj::wxAuiToolBarItem, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxAuiToolBarItem_SetHoverBitmap(obj.ptr, bitmap_ptr)
     nothing
 end
 
-function get_hover_bitmap!(obj::wxAuiToolBarItem, ref::Union{wxBitmap, Nothing})
+function get_hover_bitmap!(obj::wxAuiToolBarItem, ref::Union{wxBitmapBase, Nothing})
     ref_ptr = isnothing(ref) ? C_NULL : ref.ptr
     KwxFFI.wxAuiToolBarItem_GetHoverBitmap(obj.ptr, ref_ptr)
     nothing
@@ -157,7 +163,7 @@ function set_min_size!(obj::wxAuiToolBarItem, width::Integer, height::Integer)
 end
 
 function get_min_size(obj::wxAuiToolBarItem)
-    return _wx_wrap(wxSize, KwxFFI.wxAuiToolBarItem_GetMinSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxAuiToolBarItem_GetMinSize(obj.ptr); owned = true)
 end
 
 function set_spacer_pixels!(obj::wxAuiToolBarItem, spacerPixels::Integer)

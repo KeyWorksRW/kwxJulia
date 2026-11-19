@@ -51,8 +51,8 @@ function get_filename(obj::wxFileDialog)
     return _wx_take_wxstring(KwxFFI.wxFileDialog_GetFilename(obj.ptr))
 end
 
-function get_filenames(obj::wxFileDialog, paths::Integer, capacity::Integer)
-    return Int(KwxFFI.wxFileDialog_GetFilenames(obj.ptr, Cint(paths), Cint(capacity)))
+function get_filenames(obj::wxFileDialog, paths::Ptr{Cvoid}, capacity::Integer)
+    return Int(KwxFFI.wxFileDialog_GetFilenames(obj.ptr, paths, Cint(capacity)))
 end
 
 function get_filter_index(obj::wxFileDialog)
@@ -67,8 +67,8 @@ function get_path(obj::wxFileDialog)
     return _wx_take_wxstring(KwxFFI.wxFileDialog_GetPath(obj.ptr))
 end
 
-function get_paths(obj::wxFileDialog, paths::Integer, capacity::Integer)
-    return Int(KwxFFI.wxFileDialog_GetPaths(obj.ptr, Cint(paths), Cint(capacity)))
+function get_paths(obj::wxFileDialog, paths::Ptr{Cvoid}, capacity::Integer)
+    return Int(KwxFFI.wxFileDialog_GetPaths(obj.ptr, paths, Cint(capacity)))
 end
 
 function get_style(obj::wxFileDialog)
@@ -144,6 +144,6 @@ function get_currently_selected_filename(obj::wxFileDialog)
 end
 
 function get_extra_control(obj::wxFileDialog)
-    return KwxFFI.wxFileDialog_GetExtraControl(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxFileDialog_GetExtraControl(obj.ptr))
 end
 

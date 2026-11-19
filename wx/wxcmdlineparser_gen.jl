@@ -126,6 +126,10 @@ function parse_string_args(obj::wxCmdLineParser, command_line::AbstractString)
     return _result
 end
 
+function parse_argv(obj::wxCmdLineParser, argc::Integer, argv::Ptr{Cvoid})
+    return Int(KwxFFI.wxCmdLineParser_ParseArgv(obj.ptr, Cint(argc), argv))
+end
+
 function found(obj::wxCmdLineParser, name::AbstractString)
     name_ws = wxString(name)
     _result = try

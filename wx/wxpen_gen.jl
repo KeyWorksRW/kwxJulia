@@ -7,7 +7,7 @@ function wxPen()
     return obj
 end
 
-function wxPen(stipple::Union{wxBitmap, Nothing}, width::Integer)
+function wxPen(stipple::Union{wxBitmapBase, Nothing}, width::Integer)
     stipple_ptr = isnothing(stipple) ? C_NULL : stipple.ptr
     ptr = KwxFFI.wxPen_CreateFromBitmap(stipple_ptr, Cint(width))
     ptr == C_NULL && error("Failed to create wxPen")
@@ -60,7 +60,7 @@ function get_join(obj::wxPen)
     return Int(KwxFFI.wxPen_GetJoin(obj.ptr))
 end
 
-function get_stipple!(obj::wxPen, ref::Union{wxBitmap, Nothing})
+function get_stipple!(obj::wxPen, ref::Union{wxBitmapBase, Nothing})
     ref_ptr = isnothing(ref) ? C_NULL : ref.ptr
     KwxFFI.wxPen_GetStipple(obj.ptr, ref_ptr)
     nothing
@@ -109,7 +109,7 @@ function set_join!(obj::wxPen, join::Integer)
     nothing
 end
 
-function set_stipple!(obj::wxPen, stipple::Union{wxBitmap, Nothing})
+function set_stipple!(obj::wxPen, stipple::Union{wxBitmapBase, Nothing})
     stipple_ptr = isnothing(stipple) ? C_NULL : stipple.ptr
     KwxFFI.wxPen_SetStipple(obj.ptr, stipple_ptr)
     nothing

@@ -38,3 +38,52 @@ function set_on_leave!(obj::kwxDropTarget, pFunction::Ptr{Cvoid})
     nothing
 end
 
+function set_on_data_with_data!(obj::kwxDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxDropTarget_SetOnDataWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_drop_with_data!(obj::kwxDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxDropTarget_SetOnDropWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_enter_with_data!(obj::kwxDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxDropTarget_SetOnEnterWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_drag_over_with_data!(obj::kwxDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxDropTarget_SetOnDragOverWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_leave_with_data!(obj::kwxDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxDropTarget_SetOnLeaveWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_data_result!(obj::kwxDropTarget, result::Integer)
+    KwxFFI.kwxDropTarget_SetDataResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_drop_result!(obj::kwxDropTarget, result::Integer)
+    KwxFFI.kwxDropTarget_SetDropResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_enter_result!(obj::kwxDropTarget, result::Integer)
+    KwxFFI.kwxDropTarget_SetEnterResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_drag_over_result!(obj::kwxDropTarget, result::Integer)
+    KwxFFI.kwxDropTarget_SetDragOverResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function get_drop_result(obj::kwxDropTarget)
+    return Int(KwxFFI.kwxDropTarget_GetDropResult(obj.ptr))
+end
+

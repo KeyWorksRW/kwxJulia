@@ -9,7 +9,7 @@ function get_next(obj::wxWizardPageBase)
 end
 
 function get_bitmap(obj::wxWizardPageBase)
-    return _wx_wrap(wxBitmap, KwxFFI.wxWizardPage_GetBitmap(obj.ptr))
+    return _wx_wrap(wxBitmap, KwxFFI.wxWizardPage_GetBitmap(obj.ptr); owned = true)
 end
 
 function set_on_get_next!(obj::wxWizardPageBase, pFunction::Ptr{Cvoid})

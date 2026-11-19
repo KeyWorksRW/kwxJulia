@@ -20,7 +20,7 @@ function set_font!(obj::wxAuiToolBarArtBase, font::Union{wxFont, Nothing})
 end
 
 function get_font(obj::wxAuiToolBarArtBase)
-    return _wx_wrap(wxFont, KwxFFI.wxAuiToolBarArt_GetFont(obj.ptr))
+    return _wx_wrap(wxFont, KwxFFI.wxAuiToolBarArt_GetFont(obj.ptr); owned = true)
 end
 
 function set_text_orientation!(obj::wxAuiToolBarArtBase, orientation::Integer)
@@ -32,7 +32,7 @@ function get_text_orientation(obj::wxAuiToolBarArtBase)
     return Int(KwxFFI.wxAuiToolBarArt_GetTextOrientation(obj.ptr))
 end
 
-function draw_background!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, rect::Union{wxRect, Nothing})
+function draw_background!(obj::wxAuiToolBarArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, rect::Union{wxRect, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     rect_ptr = isnothing(rect) ? C_NULL : rect.ptr
@@ -40,7 +40,7 @@ function draw_background!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, wi
     nothing
 end
 
-function draw_plain_background!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, rect::Union{wxRect, Nothing})
+function draw_plain_background!(obj::wxAuiToolBarArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, rect::Union{wxRect, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     rect_ptr = isnothing(rect) ? C_NULL : rect.ptr
@@ -48,7 +48,7 @@ function draw_plain_background!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothin
     nothing
 end
 
-function draw_label!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, item::Union{wxAuiToolBarItem, Nothing}, rect::Union{wxRect, Nothing})
+function draw_label!(obj::wxAuiToolBarArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, item::Union{wxAuiToolBarItem, Nothing}, rect::Union{wxRect, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     item_ptr = isnothing(item) ? C_NULL : item.ptr
@@ -57,7 +57,7 @@ function draw_label!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, window:
     nothing
 end
 
-function draw_button!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, item::Union{wxAuiToolBarItem, Nothing}, rect::Union{wxRect, Nothing})
+function draw_button!(obj::wxAuiToolBarArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, item::Union{wxAuiToolBarItem, Nothing}, rect::Union{wxRect, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     item_ptr = isnothing(item) ? C_NULL : item.ptr
@@ -66,7 +66,7 @@ function draw_button!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, window
     nothing
 end
 
-function draw_drop_down_button!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, item::Union{wxAuiToolBarItem, Nothing}, rect::Union{wxRect, Nothing})
+function draw_drop_down_button!(obj::wxAuiToolBarArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, item::Union{wxAuiToolBarItem, Nothing}, rect::Union{wxRect, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     item_ptr = isnothing(item) ? C_NULL : item.ptr
@@ -75,7 +75,7 @@ function draw_drop_down_button!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothin
     nothing
 end
 
-function draw_control_label!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, item::Union{wxAuiToolBarItem, Nothing}, rect::Union{wxRect, Nothing})
+function draw_control_label!(obj::wxAuiToolBarArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, item::Union{wxAuiToolBarItem, Nothing}, rect::Union{wxRect, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     item_ptr = isnothing(item) ? C_NULL : item.ptr
@@ -84,7 +84,7 @@ function draw_control_label!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing},
     nothing
 end
 
-function draw_separator!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, rect::Union{wxRect, Nothing})
+function draw_separator!(obj::wxAuiToolBarArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, rect::Union{wxRect, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     rect_ptr = isnothing(rect) ? C_NULL : rect.ptr
@@ -92,7 +92,7 @@ function draw_separator!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, win
     nothing
 end
 
-function draw_gripper!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, rect::Union{wxRect, Nothing})
+function draw_gripper!(obj::wxAuiToolBarArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, rect::Union{wxRect, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     rect_ptr = isnothing(rect) ? C_NULL : rect.ptr
@@ -100,7 +100,7 @@ function draw_gripper!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, windo
     nothing
 end
 
-function draw_overflow_button!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, rect::Union{wxRect, Nothing}, state::Integer)
+function draw_overflow_button!(obj::wxAuiToolBarArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, rect::Union{wxRect, Nothing}, state::Integer)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     rect_ptr = isnothing(rect) ? C_NULL : rect.ptr
@@ -108,18 +108,18 @@ function draw_overflow_button!(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing
     nothing
 end
 
-function get_label_size(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, item::Union{wxAuiToolBarItem, Nothing})
+function get_label_size(obj::wxAuiToolBarArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, item::Union{wxAuiToolBarItem, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     item_ptr = isnothing(item) ? C_NULL : item.ptr
-    return _wx_wrap(wxSize, KwxFFI.wxAuiToolBarArt_GetLabelSize(obj.ptr, dc_ptr, window_ptr, item_ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxAuiToolBarArt_GetLabelSize(obj.ptr, dc_ptr, window_ptr, item_ptr); owned = true)
 end
 
-function get_tool_size(obj::wxAuiToolBarArtBase, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing}, item::Union{wxAuiToolBarItem, Nothing})
+function get_tool_size(obj::wxAuiToolBarArtBase, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing}, item::Union{wxAuiToolBarItem, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     item_ptr = isnothing(item) ? C_NULL : item.ptr
-    return _wx_wrap(wxSize, KwxFFI.wxAuiToolBarArt_GetToolSize(obj.ptr, dc_ptr, window_ptr, item_ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxAuiToolBarArt_GetToolSize(obj.ptr, dc_ptr, window_ptr, item_ptr); owned = true)
 end
 
 function get_element_size(obj::wxAuiToolBarArtBase, element_id::Integer)

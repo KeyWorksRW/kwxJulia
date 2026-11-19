@@ -15,7 +15,7 @@ function Base.delete!(obj::wxPGMultiButton)
 end
 
 function get_button(obj::wxPGMultiButton, index::Integer)
-    return KwxFFI.wxPGMultiButton_GetButton(obj.ptr, Cuint(index))
+    return _wx_ref(wxWindow, KwxFFI.wxPGMultiButton_GetButton(obj.ptr, Cuint(index)))
 end
 
 function get_button_id(obj::wxPGMultiButton, index::Integer)
@@ -43,7 +43,7 @@ function add_bitmap!(obj::wxPGMultiButton, bitmap::Union{wxBitmapBundle, Nothing
 end
 
 function get_primary_size(obj::wxPGMultiButton)
-    return _wx_wrap(wxSize, KwxFFI.wxPGMultiButton_GetPrimarySize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxPGMultiButton_GetPrimarySize(obj.ptr); owned = true)
 end
 
 function finalize!(obj::wxPGMultiButton, propgrid::Union{wxPropertyGrid, Nothing}, x::Integer, y::Integer)

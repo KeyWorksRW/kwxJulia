@@ -7,10 +7,94 @@ if !@isdefined(wxObject)
     abstract type wxControl <: wxWindow end
     abstract type wxTopLevelWindow <: wxWindow end
     abstract type wxSizer <: wxObject end
+    abstract type wxEvent <: wxObject end
+    wxEvent(ptr::Ptr{Cvoid}) = wxEventRef(ptr)
+end
 
-    struct wxEvent
+if !@isdefined(wxObjectRef)
+    mutable struct wxObjectRef <: wxObject
         ptr::Ptr{Cvoid}
     end
+end
+
+if !@isdefined(wxEvtHandlerRef)
+    mutable struct wxEvtHandlerRef <: wxEvtHandler
+        ptr::Ptr{Cvoid}
+    end
+end
+
+if !@isdefined(wxWindowRef)
+    mutable struct wxWindowRef <: wxWindow
+        ptr::Ptr{Cvoid}
+        children::Vector{Any}
+        closures::Vector{Any}
+    end
+end
+
+if !@isdefined(wxControlRef)
+    mutable struct wxControlRef <: wxControl
+        ptr::Ptr{Cvoid}
+        children::Vector{Any}
+        closures::Vector{Any}
+    end
+end
+
+if !@isdefined(wxTopLevelWindowRef)
+    mutable struct wxTopLevelWindowRef <: wxTopLevelWindow
+        ptr::Ptr{Cvoid}
+        children::Vector{Any}
+        closures::Vector{Any}
+    end
+end
+
+if !@isdefined(wxSizerRef)
+    mutable struct wxSizerRef <: wxSizer
+        ptr::Ptr{Cvoid}
+    end
+end
+
+if !@isdefined(wxEventRef)
+    mutable struct wxEventRef <: wxEvent
+        ptr::Ptr{Cvoid}
+    end
+end
+
+if !@isdefined(_wx_ref)
+    function _wx_ref(::Type{wxObject}, ptr::Ptr{Cvoid})
+        ptr == C_NULL && return nothing
+        return wxObjectRef(ptr)
+    end
+
+    function _wx_ref(::Type{wxEvtHandler}, ptr::Ptr{Cvoid})
+        ptr == C_NULL && return nothing
+        return wxEvtHandlerRef(ptr)
+    end
+
+    function _wx_ref(::Type{wxWindow}, ptr::Ptr{Cvoid})
+        ptr == C_NULL && return nothing
+        return wxWindowRef(ptr, Any[], Any[])
+    end
+
+    function _wx_ref(::Type{wxControl}, ptr::Ptr{Cvoid})
+        ptr == C_NULL && return nothing
+        return wxControlRef(ptr, Any[], Any[])
+    end
+
+    function _wx_ref(::Type{wxTopLevelWindow}, ptr::Ptr{Cvoid})
+        ptr == C_NULL && return nothing
+        return wxTopLevelWindowRef(ptr, Any[], Any[])
+    end
+
+    function _wx_ref(::Type{wxSizer}, ptr::Ptr{Cvoid})
+        ptr == C_NULL && return nothing
+        return wxSizerRef(ptr)
+    end
+
+    function _wx_ref(::Type{wxEvent}, ptr::Ptr{Cvoid})
+        ptr == C_NULL && return nothing
+        return wxEventRef(ptr)
+    end
+
 end
 
 if !@isdefined(wxAppBase)
@@ -49,6 +133,15 @@ end
 if !@isdefined(wxArtProviderBase)
     abstract type wxArtProviderBase <: wxObject end
 end
+if !@isdefined(wxFrameBase)
+    abstract type wxFrameBase <: wxTopLevelWindow end
+end
+if !@isdefined(wxAuiMDIChildFrameBase)
+    abstract type wxAuiMDIChildFrameBase <: wxFrameBase end
+end
+if !@isdefined(wxAuiMDIParentFrameBase)
+    abstract type wxAuiMDIParentFrameBase <: wxFrameBase end
+end
 if !@isdefined(wxBookCtrlBaseBase)
     abstract type wxBookCtrlBaseBase <: wxControl end
 end
@@ -71,7 +164,7 @@ if !@isdefined(wxBitmapButtonBase)
     abstract type wxBitmapButtonBase <: wxButtonBase end
 end
 if !@isdefined(wxCommandEventBase)
-    abstract type wxCommandEventBase <: wxObject end
+    abstract type wxCommandEventBase <: wxEvent end
 end
 if !@isdefined(wxNotifyEventBase)
     abstract type wxNotifyEventBase <: wxCommandEventBase end
@@ -81,6 +174,15 @@ if !@isdefined(wxBookCtrlEventBase)
 end
 if !@isdefined(wxBoxSizerBase)
     abstract type wxBoxSizerBase <: wxSizer end
+end
+if !@isdefined(wxDCBase)
+    abstract type wxDCBase <: wxObject end
+end
+if !@isdefined(wxMemoryDCBase)
+    abstract type wxMemoryDCBase <: wxDCBase end
+end
+if !@isdefined(wxBufferedDCBase)
+    abstract type wxBufferedDCBase <: wxMemoryDCBase end
 end
 if !@isdefined(wxCalendarCtrlBaseBase)
     abstract type wxCalendarCtrlBaseBase <: wxControl end
@@ -112,17 +214,47 @@ end
 if !@isdefined(wxConnectionBaseBase)
     abstract type wxConnectionBaseBase <: wxObject end
 end
-if !@isdefined(wxDCBase)
-    abstract type wxDCBase <: wxObject end
-end
 if !@isdefined(wxDataObjectBase)
     abstract type wxDataObjectBase <: wxObject end
+end
+if !@isdefined(wxDataObjectCompositeBase)
+    abstract type wxDataObjectCompositeBase <: wxDataObjectBase end
 end
 if !@isdefined(wxDataObjectSimpleBase)
     abstract type wxDataObjectSimpleBase <: wxDataObjectBase end
 end
+if !@isdefined(wxDataViewRendererBase)
+    abstract type wxDataViewRendererBase <: wxObject end
+end
+if !@isdefined(wxDataViewCustomRendererBase)
+    abstract type wxDataViewCustomRendererBase <: wxDataViewRendererBase end
+end
+if !@isdefined(wxDataViewChoiceRendererBase)
+    abstract type wxDataViewChoiceRendererBase <: wxDataViewCustomRendererBase end
+end
+if !@isdefined(wxDataViewCtrlBase)
+    abstract type wxDataViewCtrlBase <: wxControl end
+end
+if !@isdefined(wxDataViewIconTextBase)
+    abstract type wxDataViewIconTextBase <: wxObject end
+end
+if !@isdefined(wxDataViewModelBase)
+    abstract type wxDataViewModelBase <: wxObject end
+end
+if !@isdefined(wxDebugReportBase)
+    abstract type wxDebugReportBase <: wxObject end
+end
+if !@isdefined(wxDebugReportCompressBase)
+    abstract type wxDebugReportCompressBase <: wxDebugReportBase end
+end
+if !@isdefined(wxDebugReportUploadBase)
+    abstract type wxDebugReportUploadBase <: wxDebugReportCompressBase end
+end
 if !@isdefined(wxDialogBase)
     abstract type wxDialogBase <: wxTopLevelWindow end
+end
+if !@isdefined(wxDocTemplateBase)
+    abstract type wxDocTemplateBase <: wxObject end
 end
 if !@isdefined(wxDocumentBase)
     abstract type wxDocumentBase <: wxEvtHandler end
@@ -145,11 +277,11 @@ end
 if !@isdefined(wxFilterClassFactoryBaseBase)
     abstract type wxFilterClassFactoryBaseBase <: wxObject end
 end
-if !@isdefined(wxFrameBase)
-    abstract type wxFrameBase <: wxTopLevelWindow end
-end
 if !@isdefined(wxGestureEventBase)
-    abstract type wxGestureEventBase <: wxObject end
+    abstract type wxGestureEventBase <: wxEvent end
+end
+if !@isdefined(wxGraphicsContextBase)
+    abstract type wxGraphicsContextBase <: wxObject end
 end
 if !@isdefined(wxGridCellEditorBase)
     abstract type wxGridCellEditorBase <: wxObject end
@@ -355,6 +487,9 @@ end
 if !@isdefined(wxTextCompleterSimpleBase)
     abstract type wxTextCompleterSimpleBase <: wxObject end
 end
+if !@isdefined(wxTextEntryDialogBase)
+    abstract type wxTextEntryDialogBase <: wxDialogBase end
+end
 if !@isdefined(wxValidatorBase)
     abstract type wxValidatorBase <: wxEvtHandler end
 end
@@ -387,6 +522,9 @@ if !@isdefined(wxWindowDCBase)
 end
 if !@isdefined(wxWizardPageBase)
     abstract type wxWizardPageBase <: wxPanelBase end
+end
+if !@isdefined(wxWizardPageSimpleBase)
+    abstract type wxWizardPageSimpleBase <: wxWizardPageBase end
 end
 
 if !@isdefined(_wx_wrap)

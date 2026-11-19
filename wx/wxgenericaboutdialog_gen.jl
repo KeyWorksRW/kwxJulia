@@ -16,7 +16,7 @@ function add_control(obj::wxGenericAboutDialog, win::Union{wxWindow, Nothing})
 end
 
 function get_custom_control_parent(obj::wxGenericAboutDialog)
-    return KwxFFI.wxGenericAboutDialog_GetCustomControlParent(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxGenericAboutDialog_GetCustomControlParent(obj.ptr))
 end
 
 function add_text(obj::wxGenericAboutDialog, text::AbstractString)

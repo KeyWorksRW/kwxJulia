@@ -39,7 +39,7 @@ function toggle_button!(obj::wxRibbonButtonBar, button_id::Integer, checked::Boo
     nothing
 end
 
-function add_button(obj::wxRibbonButtonBar, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString, kind::Integer, bitmap_small::Union{wxBitmap, Nothing}, bitmap_disabled::Union{wxBitmap, Nothing}, bitmap_small_disabled::Union{wxBitmap, Nothing})
+function add_button(obj::wxRibbonButtonBar, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString, kind::Integer, bitmap_small::Union{wxBitmapBase, Nothing}, bitmap_disabled::Union{wxBitmapBase, Nothing}, bitmap_small_disabled::Union{wxBitmapBase, Nothing})
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
@@ -55,7 +55,7 @@ function add_button(obj::wxRibbonButtonBar, button_id::Integer, label::AbstractS
     return _result
 end
 
-function add_dropdown_button(obj::wxRibbonButtonBar, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString)
+function add_dropdown_button(obj::wxRibbonButtonBar, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString)
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
@@ -68,7 +68,7 @@ function add_dropdown_button(obj::wxRibbonButtonBar, button_id::Integer, label::
     return _result
 end
 
-function add_hybrid_button(obj::wxRibbonButtonBar, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString)
+function add_hybrid_button(obj::wxRibbonButtonBar, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString)
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
@@ -81,7 +81,7 @@ function add_hybrid_button(obj::wxRibbonButtonBar, button_id::Integer, label::Ab
     return _result
 end
 
-function add_toggle_button(obj::wxRibbonButtonBar, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString)
+function add_toggle_button(obj::wxRibbonButtonBar, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString)
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
@@ -94,7 +94,7 @@ function add_toggle_button(obj::wxRibbonButtonBar, button_id::Integer, label::Ab
     return _result
 end
 
-function insert_button(obj::wxRibbonButtonBar, pos::Integer, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString, kind::Integer, bitmap_small::Union{wxBitmap, Nothing}, bitmap_disabled::Union{wxBitmap, Nothing}, bitmap_small_disabled::Union{wxBitmap, Nothing})
+function insert_button(obj::wxRibbonButtonBar, pos::Integer, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString, kind::Integer, bitmap_small::Union{wxBitmapBase, Nothing}, bitmap_disabled::Union{wxBitmapBase, Nothing}, bitmap_small_disabled::Union{wxBitmapBase, Nothing})
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
@@ -110,7 +110,7 @@ function insert_button(obj::wxRibbonButtonBar, pos::Integer, button_id::Integer,
     return _result
 end
 
-function insert_dropdown_button(obj::wxRibbonButtonBar, pos::Integer, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString)
+function insert_dropdown_button(obj::wxRibbonButtonBar, pos::Integer, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString)
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
@@ -123,7 +123,7 @@ function insert_dropdown_button(obj::wxRibbonButtonBar, pos::Integer, button_id:
     return _result
 end
 
-function insert_hybrid_button(obj::wxRibbonButtonBar, pos::Integer, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString)
+function insert_hybrid_button(obj::wxRibbonButtonBar, pos::Integer, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString)
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
@@ -136,7 +136,7 @@ function insert_hybrid_button(obj::wxRibbonButtonBar, pos::Integer, button_id::I
     return _result
 end
 
-function insert_toggle_button(obj::wxRibbonButtonBar, pos::Integer, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, help_string::AbstractString)
+function insert_toggle_button(obj::wxRibbonButtonBar, pos::Integer, button_id::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, help_string::AbstractString)
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     help_string_ws = wxString(help_string)
@@ -163,7 +163,7 @@ function enable_button!(obj::wxRibbonButtonBar, button_id::Integer, enable::Bool
     nothing
 end
 
-function set_button_icon!(obj::wxRibbonButtonBar, button_id::Integer, bitmap::Union{wxBitmap, Nothing}, bitmap_small::Union{wxBitmap, Nothing}, bitmap_disabled::Union{wxBitmap, Nothing}, bitmap_small_disabled::Union{wxBitmap, Nothing})
+function set_button_icon!(obj::wxRibbonButtonBar, button_id::Integer, bitmap::Union{wxBitmapBase, Nothing}, bitmap_small::Union{wxBitmapBase, Nothing}, bitmap_disabled::Union{wxBitmapBase, Nothing}, bitmap_small_disabled::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     bitmap_small_ptr = isnothing(bitmap_small) ? C_NULL : bitmap_small.ptr
     bitmap_disabled_ptr = isnothing(bitmap_disabled) ? C_NULL : bitmap_disabled.ptr
@@ -224,7 +224,7 @@ function get_item_id(obj::wxRibbonButtonBar, button::Ptr{Cvoid})
 end
 
 function get_item_rect!(obj::wxRibbonButtonBar, button_id::Integer, x::Ref{Int32}, y::Ref{Int32}, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxRibbonButtonBar_GetItemRect(obj.ptr, Cint(button_id), x, y, width, height)
+    GC.@preserve x y width height KwxFFI.wxRibbonButtonBar_GetItemRect(obj.ptr, Cint(button_id), Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y), Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 

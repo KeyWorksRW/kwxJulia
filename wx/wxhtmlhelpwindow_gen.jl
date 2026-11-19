@@ -47,7 +47,7 @@ function keyword_search(obj::wxHtmlHelpWindow, keyword::AbstractString, mode::In
     return _result
 end
 
-function read_customization!(obj::wxHtmlHelpWindow, cfg::Union{wxConfigBase, Nothing}, path::AbstractString)
+function read_customization!(obj::wxHtmlHelpWindow, cfg::Union{wxConfigBaseBase, Nothing}, path::AbstractString)
     cfg_ptr = isnothing(cfg) ? C_NULL : cfg.ptr
     path_ws = wxString(path)
     try
@@ -58,7 +58,7 @@ function read_customization!(obj::wxHtmlHelpWindow, cfg::Union{wxConfigBase, Not
     nothing
 end
 
-function write_customization!(obj::wxHtmlHelpWindow, cfg::Union{wxConfigBase, Nothing}, path::AbstractString)
+function write_customization!(obj::wxHtmlHelpWindow, cfg::Union{wxConfigBaseBase, Nothing}, path::AbstractString)
     cfg_ptr = isnothing(cfg) ? C_NULL : cfg.ptr
     path_ws = wxString(path)
     try
@@ -69,7 +69,7 @@ function write_customization!(obj::wxHtmlHelpWindow, cfg::Union{wxConfigBase, No
     nothing
 end
 
-function use_config!(obj::wxHtmlHelpWindow, config::Union{wxConfigBase, Nothing}, rootPath::AbstractString)
+function use_config!(obj::wxHtmlHelpWindow, config::Union{wxConfigBaseBase, Nothing}, rootPath::AbstractString)
     config_ptr = isnothing(config) ? C_NULL : config.ptr
     rootPath_ws = wxString(rootPath)
     try

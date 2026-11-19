@@ -5,7 +5,7 @@ function get_cursor(obj::wxSetCursorEvent)
 end
 
 function get_position(obj::wxSetCursorEvent)
-    return _wx_wrap(wxPoint, KwxFFI.wxSetCursorEvent_GetPosition(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxSetCursorEvent_GetPosition(obj.ptr); owned = true)
 end
 
 function get_x(obj::wxSetCursorEvent)

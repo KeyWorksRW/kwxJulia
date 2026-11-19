@@ -29,7 +29,7 @@ function get_column_width(obj::wxPropertyGridPageState, column::Integer)
     return Int(KwxFFI.wxPropertyGridPageState_GetColumnWidth(obj.ptr, Cuint(column)))
 end
 
-function get_column_full_width(obj::wxPropertyGridPageState, property::Union{wxPGProperty, Nothing}, column::Integer)
+function get_column_full_width(obj::wxPropertyGridPageState, property::Union{wxPGPropertyBase, Nothing}, column::Integer)
     property_ptr = isnothing(property) ? C_NULL : property.ptr
     return Int(KwxFFI.wxPropertyGridPageState_GetColumnFullWidth(obj.ptr, property_ptr, Cuint(column)))
 end

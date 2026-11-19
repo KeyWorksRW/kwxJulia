@@ -7,7 +7,7 @@ function wxAuiTabContainer()
     return obj
 end
 
-function set_art_provider!(obj::wxAuiTabContainer, artId::Union{wxAuiTabArt, Nothing})
+function set_art_provider!(obj::wxAuiTabContainer, artId::Union{wxAuiTabArtBase, Nothing})
     artId_ptr = isnothing(artId) ? C_NULL : artId.ptr
     KwxFFI.wxAuiTabContainer_SetArtProvider(obj.ptr, artId_ptr)
     nothing
@@ -67,7 +67,7 @@ function get_active_page(obj::wxAuiTabContainer)
 end
 
 function get_window_from_idx(obj::wxAuiTabContainer, idx::Integer)
-    return KwxFFI.wxAuiTabContainer_GetWindowFromIdx(obj.ptr, Csize_t(idx))
+    return _wx_ref(wxWindow, KwxFFI.wxAuiTabContainer_GetWindowFromIdx(obj.ptr, Csize_t(idx)))
 end
 
 function get_idx_from_window(obj::wxAuiTabContainer, page::Union{wxWindow, Nothing})
@@ -80,11 +80,11 @@ function get_page_count(obj::wxAuiTabContainer)
 end
 
 function get_page(obj::wxAuiTabContainer, idx::Integer)
-    return _wx_wrap(wxAuiNotebookPage, KwxFFI.wxAuiTabContainer_GetPage(obj.ptr, Csize_t(idx)))
+    return _wx_wrap(wxAuiNotebookPage, KwxFFI.wxAuiTabContainer_GetPage(obj.ptr, Csize_t(idx)); owned = true)
 end
 
 function get_pages(obj::wxAuiTabContainer)
-    return _wx_wrap(wxAuiNotebookPageArray, KwxFFI.wxAuiTabContainer_GetPages(obj.ptr))
+    return _wx_wrap(wxAuiNotebookPageArray, KwxFFI.wxAuiTabContainer_GetPages(obj.ptr); owned = true)
 end
 
 function set_normal_font!(obj::wxAuiTabContainer, normalFont::Union{wxFont, Nothing})
@@ -133,7 +133,7 @@ function remove_button!(obj::wxAuiTabContainer, id::Integer)
     nothing
 end
 
-function add_button!(obj::wxAuiTabContainer, id::Integer, location::Integer, normalBitmap::Union{wxBitmap, Nothing}, disabledBitmap::Union{wxBitmap, Nothing})
+function add_button!(obj::wxAuiTabContainer, id::Integer, location::Integer, normalBitmap::Union{wxBitmapBase, Nothing}, disabledBitmap::Union{wxBitmapBase, Nothing})
     normalBitmap_ptr = isnothing(normalBitmap) ? C_NULL : normalBitmap.ptr
     disabledBitmap_ptr = isnothing(disabledBitmap) ? C_NULL : disabledBitmap.ptr
     KwxFFI.wxAuiTabContainer_AddButton(obj.ptr, Cint(id), Cint(location), normalBitmap_ptr, disabledBitmap_ptr)
@@ -149,7 +149,7 @@ function set_tab_offset!(obj::wxAuiTabContainer, offset::Integer)
     nothing
 end
 
-function is_tab_visible(obj::wxAuiTabContainer, tabPage::Integer, tabOffset::Integer, dc::Union{wxDC, Nothing}, window::Union{wxWindow, Nothing})
+function is_tab_visible(obj::wxAuiTabContainer, tabPage::Integer, tabOffset::Integer, dc::Union{wxDCBase, Nothing}, window::Union{wxWindow, Nothing})
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     window_ptr = isnothing(window) ? C_NULL : window.ptr
     return KwxFFI.wxAuiTabContainer_IsTabVisible(obj.ptr, Cint(tabPage), Cint(tabOffset), dc_ptr, window_ptr) != 0

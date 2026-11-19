@@ -38,3 +38,66 @@ function set_on_leave!(obj::kwxFileDropTarget, pFunction::Ptr{Cvoid})
     nothing
 end
 
+function set_on_data_with_data!(obj::kwxFileDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxFileDropTarget_SetOnDataWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_drop_with_data!(obj::kwxFileDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxFileDropTarget_SetOnDropWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_enter_with_data!(obj::kwxFileDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxFileDropTarget_SetOnEnterWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_drag_over_with_data!(obj::kwxFileDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxFileDropTarget_SetOnDragOverWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_leave_with_data!(obj::kwxFileDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxFileDropTarget_SetOnLeaveWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_data_result!(obj::kwxFileDropTarget, result::Integer)
+    KwxFFI.kwxFileDropTarget_SetDataResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_drop_result!(obj::kwxFileDropTarget, result::Integer)
+    KwxFFI.kwxFileDropTarget_SetDropResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_enter_result!(obj::kwxFileDropTarget, result::Integer)
+    KwxFFI.kwxFileDropTarget_SetEnterResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_drag_over_result!(obj::kwxFileDropTarget, result::Integer)
+    KwxFFI.kwxFileDropTarget_SetDragOverResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function get_drop_result(obj::kwxFileDropTarget)
+    return Int(KwxFFI.kwxFileDropTarget_GetDropResult(obj.ptr))
+end
+
+function set_on_drop_files_with_data!(obj::kwxFileDropTarget, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxFileDropTarget_SetOnDropFilesWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_drop_files_result!(obj::kwxFileDropTarget, result::Integer)
+    KwxFFI.kwxFileDropTarget_SetDropFilesResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function get_drop_files(obj::kwxFileDropTarget)
+    return _wx_wrap(wxArrayString, KwxFFI.kwxFileDropTarget_GetDropFiles(obj.ptr))
+end
+

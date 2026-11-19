@@ -17,11 +17,11 @@ function set_page_size!(obj::wxBookCtrlBaseBase, width::Integer, height::Integer
 end
 
 function hit_test(obj::wxBookCtrlBaseBase, x::Integer, y::Integer, flags::Ref{Clong})
-    return Int(KwxFFI.wxBookCtrlBase_HitTest(obj.ptr, Cint(x), Cint(y), flags))
+    return Int(GC.@preserve flags KwxFFI.wxBookCtrlBase_HitTest(obj.ptr, Cint(x), Cint(y), Base.unsafe_convert(Ptr{Clong}, flags)))
 end
 
 function hit_test_flags(obj::wxBookCtrlBaseBase, x::Integer, y::Integer, flags::Ref{Int32})
-    return Int(KwxFFI.wxBookCtrlBase_HitTestFlags(obj.ptr, Cint(x), Cint(y), flags))
+    return Int(GC.@preserve flags KwxFFI.wxBookCtrlBase_HitTestFlags(obj.ptr, Cint(x), Cint(y), Base.unsafe_convert(Ptr{Cint}, flags)))
 end
 
 function get_page_image(obj::wxBookCtrlBaseBase, nPage::Integer)
@@ -51,7 +51,7 @@ function get_selection(obj::wxBookCtrlBaseBase)
 end
 
 function get_current_page(obj::wxBookCtrlBaseBase)
-    return KwxFFI.wxBookCtrlBase_GetCurrentPage(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxBookCtrlBase_GetCurrentPage(obj.ptr))
 end
 
 function set_selection(obj::wxBookCtrlBaseBase, page::Integer)
@@ -111,7 +111,7 @@ function get_page_count(obj::wxBookCtrlBaseBase)
 end
 
 function get_page(obj::wxBookCtrlBaseBase, page::Integer)
-    return KwxFFI.wxBookCtrlBase_GetPage(obj.ptr, Cint(page))
+    return _wx_ref(wxWindow, KwxFFI.wxBookCtrlBase_GetPage(obj.ptr, Cint(page)))
 end
 
 function assign_image_list!(obj::wxBookCtrlBaseBase, imageList::Union{wxImageList, Nothing})

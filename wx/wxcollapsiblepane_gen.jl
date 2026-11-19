@@ -33,7 +33,7 @@ function is_expanded(obj::wxCollapsiblePane)
 end
 
 function get_pane(obj::wxCollapsiblePane)
-    return KwxFFI.wxCollapsiblePane_GetPane(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxCollapsiblePane_GetPane(obj.ptr))
 end
 
 function get_label(obj::wxCollapsiblePane)

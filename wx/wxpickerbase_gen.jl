@@ -54,6 +54,6 @@ function get_text_ctrl(obj::wxPickerBaseBase)
 end
 
 function get_picker_ctrl(obj::wxPickerBaseBase)
-    return KwxFFI.wxPickerBase_GetPickerCtrl(obj.ptr)
+    return _wx_ref(wxControl, KwxFFI.wxPickerBase_GetPickerCtrl(obj.ptr))
 end
 

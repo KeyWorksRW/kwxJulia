@@ -21,7 +21,7 @@ end
 function wxNumberFormatter_FromStringLong(text::AbstractString, value::Ref{Clong})
     text_ws = wxString(text)
     _result = try
-        KwxFFI.wxNumberFormatter_FromStringLong(text_ws.ptr, value) != 0
+        GC.@preserve value KwxFFI.wxNumberFormatter_FromStringLong(text_ws.ptr, Base.unsafe_convert(Ptr{Clong}, value)) != 0
     finally
         Base.delete!(text_ws)
     end
@@ -31,7 +31,7 @@ end
 function wxNumberFormatter_FromStringDouble(text::AbstractString, value::Ref{Cdouble})
     text_ws = wxString(text)
     _result = try
-        KwxFFI.wxNumberFormatter_FromStringDouble(text_ws.ptr, value) != 0
+        GC.@preserve value KwxFFI.wxNumberFormatter_FromStringDouble(text_ws.ptr, Base.unsafe_convert(Ptr{Cdouble}, value)) != 0
     finally
         Base.delete!(text_ws)
     end

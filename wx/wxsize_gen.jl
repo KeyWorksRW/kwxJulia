@@ -23,7 +23,7 @@ function is_fully_specified(obj::wxSize)
 end
 
 function scale(obj::wxSize, xscale::Float64, yscale::Float64)
-    return _wx_wrap(wxSize, KwxFFI.wxSize_Scale(obj.ptr, Cdouble(xscale), Cdouble(yscale)))
+    return _wx_wrap(wxSize, KwxFFI.wxSize_Scale(obj.ptr, Cdouble(xscale), Cdouble(yscale)); owned = true)
 end
 
 function Base.delete!(obj::wxSize)

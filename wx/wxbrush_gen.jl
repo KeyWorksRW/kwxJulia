@@ -7,7 +7,7 @@ function wxBrush()
     return obj
 end
 
-function wxBrush(bitmap::Union{wxBitmap, Nothing})
+function wxBrush(bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     ptr = KwxFFI.wxBrush_CreateFromBitmap(bitmap_ptr)
     ptr == C_NULL && error("Failed to create wxBrush")
@@ -48,7 +48,7 @@ function get_colour!(obj::wxBrush, ref::Union{wxColour, Nothing})
     nothing
 end
 
-function get_stipple!(obj::wxBrush, ref::Union{wxBitmap, Nothing})
+function get_stipple!(obj::wxBrush, ref::Union{wxBitmapBase, Nothing})
     ref_ptr = isnothing(ref) ? C_NULL : ref.ptr
     KwxFFI.wxBrush_GetStipple(obj.ptr, ref_ptr)
     nothing
@@ -78,7 +78,7 @@ function set_colour_single!(obj::wxBrush, red::Integer, green::Integer, blue::In
     nothing
 end
 
-function set_stipple!(obj::wxBrush, stipple::Union{wxBitmap, Nothing})
+function set_stipple!(obj::wxBrush, stipple::Union{wxBitmapBase, Nothing})
     stipple_ptr = isnothing(stipple) ? C_NULL : stipple.ptr
     KwxFFI.wxBrush_SetStipple(obj.ptr, stipple_ptr)
     nothing

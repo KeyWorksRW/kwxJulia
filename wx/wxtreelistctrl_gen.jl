@@ -25,7 +25,7 @@ function get_item_data(obj::wxTreeListCtrl, item::Union{wxTreeListItem, Nothing}
     return _wx_wrap(wxClientData, KwxFFI.wxTreeListCtrl_GetItemData(obj.ptr, item_ptr))
 end
 
-function set_item_data!(obj::wxTreeListCtrl, item::Union{wxTreeListItem, Nothing}, data::Union{wxClientData, Nothing})
+function set_item_data!(obj::wxTreeListCtrl, item::Union{wxTreeListItem, Nothing}, data::Union{wxClientDataBase, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     data_ptr = isnothing(data) ? C_NULL : data.ptr
     KwxFFI.wxTreeListCtrl_SetItemData(obj.ptr, item_ptr, data_ptr)
@@ -280,11 +280,11 @@ function set_sort_column!(obj::wxTreeListCtrl, col::Integer, ascendingOrder::Boo
 end
 
 function get_sort_column(obj::wxTreeListCtrl, col::Ref{Cuint}, ascendingOrder::Ref{Int32})
-    return KwxFFI.wxTreeListCtrl_GetSortColumn(obj.ptr, col, ascendingOrder) != 0
+    return GC.@preserve col ascendingOrder KwxFFI.wxTreeListCtrl_GetSortColumn(obj.ptr, Base.unsafe_convert(Ptr{Cuint}, col), Base.unsafe_convert(Ptr{Cint}, ascendingOrder)) != 0
 end
 
 function get_view(obj::wxTreeListCtrl)
-    return KwxFFI.wxTreeListCtrl_GetView(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxTreeListCtrl_GetView(obj.ptr))
 end
 
 function get_data_view(obj::wxTreeListCtrl)

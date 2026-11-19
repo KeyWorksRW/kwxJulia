@@ -12,3 +12,32 @@ function release!(obj::kwxArtProv)
     nothing
 end
 
+function Base.push!(obj::kwxArtProv)
+    KwxFFI.kwxArtProv_Push(obj.ptr)
+    nothing
+end
+
+function push_back!(obj::kwxArtProv)
+    KwxFFI.kwxArtProv_PushBack(obj.ptr)
+    nothing
+end
+
+function set_on_create_bitmap_with_data!(obj::kwxArtProv, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxArtProv_SetOnCreateBitmapWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function get_requested_width(obj::kwxArtProv)
+    return Int(KwxFFI.kwxArtProv_GetRequestedWidth(obj.ptr))
+end
+
+function get_requested_height(obj::kwxArtProv)
+    return Int(KwxFFI.kwxArtProv_GetRequestedHeight(obj.ptr))
+end
+
+function set_create_bitmap_result!(obj::kwxArtProv, bitmap::Union{wxBitmapBase, Nothing})
+    bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
+    KwxFFI.kwxArtProv_SetCreateBitmapResult(obj.ptr, bitmap_ptr)
+    nothing
+end
+

@@ -15,7 +15,7 @@ function Base.delete!(obj::wxAccessible)
 end
 
 function get_window(obj::wxAccessible)
-    return KwxFFI.wxAccessible_GetWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxAccessible_GetWindow(obj.ptr))
 end
 
 function set_window!(obj::wxAccessible, win::Union{wxWindow, Nothing})
@@ -111,6 +111,151 @@ end
 
 function set_on_get_focus!(obj::wxAccessible, pFunction::Ptr{Cvoid})
     KwxFFI.wxAccessible_SetOnGetFocus(obj.ptr, pFunction)
+    nothing
+end
+
+function set_on_get_selections!(obj::wxAccessible, pFunction::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetSelections(obj.ptr, pFunction)
+    nothing
+end
+
+function set_on_hit_test_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnHitTestWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_location_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetLocationWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_navigate_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnNavigateWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_name_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetNameWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_child_count_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetChildCountWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_child_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetChildWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_parent_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetParentWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_do_default_action_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnDoDefaultActionWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_default_action_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetDefaultActionWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_description_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetDescriptionWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_help_text_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetHelpTextWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_keyboard_shortcut_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetKeyboardShortcutWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_role_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetRoleWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_state_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetStateWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_value_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetValueWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_select_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnSelectWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_focus_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetFocusWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_get_selections_with_data!(obj::wxAccessible, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetOnGetSelectionsWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_hook_result!(obj::wxAccessible, result::Integer)
+    KwxFFI.wxAccessible_SetHookResult(obj.ptr, Cint(result))
+    nothing
+end
+
+function set_hit_test_result!(obj::wxAccessible, childId::Integer, childObject::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetHitTestResult(obj.ptr, Cint(childId), childObject)
+    nothing
+end
+
+function set_get_location_result!(obj::wxAccessible, x::Integer, y::Integer, width::Integer, height::Integer)
+    KwxFFI.wxAccessible_SetGetLocationResult(obj.ptr, Cint(x), Cint(y), Cint(width), Cint(height))
+    nothing
+end
+
+function set_navigate_result!(obj::wxAccessible, toId::Integer, toObject::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetNavigateResult(obj.ptr, Cint(toId), toObject)
+    nothing
+end
+
+function set_get_child_count_result!(obj::wxAccessible, childCount::Integer)
+    KwxFFI.wxAccessible_SetGetChildCountResult(obj.ptr, Cint(childCount))
+    nothing
+end
+
+function set_get_child_result!(obj::wxAccessible, child::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetGetChildResult(obj.ptr, child)
+    nothing
+end
+
+function set_get_parent_result!(obj::wxAccessible, parent::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetGetParentResult(obj.ptr, parent)
+    nothing
+end
+
+function set_get_role_result!(obj::wxAccessible, role::Integer)
+    KwxFFI.wxAccessible_SetGetRoleResult(obj.ptr, Cint(role))
+    nothing
+end
+
+function set_get_state_result!(obj::wxAccessible, state::Integer)
+    KwxFFI.wxAccessible_SetGetStateResult(obj.ptr, Cint(state))
+    nothing
+end
+
+function set_get_focus_result!(obj::wxAccessible, childId::Integer, child::Ptr{Cvoid})
+    KwxFFI.wxAccessible_SetGetFocusResult(obj.ptr, Cint(childId), child)
     nothing
 end
 

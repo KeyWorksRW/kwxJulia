@@ -68,13 +68,13 @@ function set_bitmap_focus!(obj::wxAnyButton, bitmap::Union{wxBitmapBundle, Nothi
     nothing
 end
 
-function set_bitmap_selected!(obj::wxAnyButton, bitmap::Union{wxBitmap, Nothing})
+function set_bitmap_selected!(obj::wxAnyButton, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxAnyButton_SetBitmapSelected(obj.ptr, bitmap_ptr)
     nothing
 end
 
-function set_bitmap_hover!(obj::wxAnyButton, bitmap::Union{wxBitmap, Nothing})
+function set_bitmap_hover!(obj::wxAnyButton, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxAnyButton_SetBitmapHover(obj.ptr, bitmap_ptr)
     nothing
@@ -86,7 +86,7 @@ function set_bitmap_margins!(obj::wxAnyButton, x::Integer, y::Integer)
 end
 
 function get_bitmap_margins(obj::wxAnyButton)
-    return _wx_wrap(wxSize, KwxFFI.wxAnyButton_GetBitmapMargins(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxAnyButton_GetBitmapMargins(obj.ptr); owned = true)
 end
 
 function set_bitmap_position!(obj::wxAnyButton, dir::Integer)

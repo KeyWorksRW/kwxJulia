@@ -16,15 +16,15 @@ function assign_image_list!(obj::wxNotebook, imageList::Union{wxImageList, Nothi
 end
 
 function get_current_page(obj::wxNotebook)
-    return KwxFFI.wxNotebook_GetCurrentPage(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxNotebook_GetCurrentPage(obj.ptr))
 end
 
 function get_controller_size(obj::wxNotebook)
-    return _wx_wrap(wxSize, KwxFFI.wxNotebook_GetControllerSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxNotebook_GetControllerSize(obj.ptr); owned = true)
 end
 
 function calc_size_from_page(obj::wxNotebook, width::Integer, height::Integer)
-    return _wx_wrap(wxSize, KwxFFI.wxNotebook_CalcSizeFromPage(obj.ptr, Cint(width), Cint(height)))
+    return _wx_wrap(wxSize, KwxFFI.wxNotebook_CalcSizeFromPage(obj.ptr, Cint(width), Cint(height)); owned = true)
 end
 
 function get_internal_border(obj::wxNotebook)
@@ -73,7 +73,7 @@ function set_tab_size!(obj::wxNotebook, width::Integer, height::Integer)
 end
 
 function get_tab_rect(obj::wxNotebook, page::Integer)
-    return _wx_wrap(wxRect, KwxFFI.wxNotebook_GetTabRect(obj.ptr, Cint(page)))
+    return _wx_wrap(wxRect, KwxFFI.wxNotebook_GetTabRect(obj.ptr, Cint(page)); owned = true)
 end
 
 function get_tab_orientation(obj::wxNotebook)
@@ -122,7 +122,7 @@ function get_image_list(obj::wxNotebook)
 end
 
 function get_page(obj::wxNotebook, nPage::Integer)
-    return KwxFFI.wxNotebook_GetPage(obj.ptr, Cint(nPage))
+    return _wx_ref(wxWindow, KwxFFI.wxNotebook_GetPage(obj.ptr, Cint(nPage)))
 end
 
 function get_page_count(obj::wxNotebook)
@@ -146,7 +146,7 @@ function get_selection(obj::wxNotebook)
 end
 
 function hit_test(obj::wxNotebook, x::Integer, y::Integer, flags::Ref{Clong})
-    return Int(KwxFFI.wxNotebook_HitTest(obj.ptr, Cint(x), Cint(y), flags))
+    return Int(GC.@preserve flags KwxFFI.wxNotebook_HitTest(obj.ptr, Cint(x), Cint(y), Base.unsafe_convert(Ptr{Clong}, flags)))
 end
 
 function insert_page(obj::wxNotebook, nPage::Integer, pPage::Union{wxWindow, Nothing}, strText::AbstractString, bSelect::Bool, imageId::Integer)

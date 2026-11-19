@@ -15,7 +15,7 @@ function is_attached(obj::wxMenuBar)
     return KwxFFI.wxMenuBar_IsAttached(obj.ptr) != 0
 end
 
-function attach!(obj::wxMenuBar, frame::Union{wxFrame, Nothing})
+function attach!(obj::wxMenuBar, frame::Union{wxFrameBase, Nothing})
     frame_ptr = isnothing(frame) ? C_NULL : frame.ptr
     KwxFFI.wxMenuBar_Attach(obj.ptr, frame_ptr)
     nothing

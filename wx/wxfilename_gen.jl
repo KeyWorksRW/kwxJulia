@@ -70,7 +70,7 @@ end
 function wxFileName_SplitPath(fullpath::AbstractString, volume::Ptr{Cvoid}, path::Ptr{Cvoid}, name::Ptr{Cvoid}, ext::Ptr{Cvoid}, hasExt::Ref{Int32}, format::Integer)
     fullpath_ws = wxString(fullpath)
     try
-        KwxFFI.wxFileName_SplitPath(fullpath_ws.ptr, volume, path, name, ext, hasExt, Cint(format))
+        GC.@preserve hasExt KwxFFI.wxFileName_SplitPath(fullpath_ws.ptr, volume, path, name, ext, Base.unsafe_convert(Ptr{Cint}, hasExt), Cint(format))
     finally
         Base.delete!(fullpath_ws)
     end
@@ -145,8 +145,8 @@ function get_dir_count(obj::wxFileName)
     return KwxFFI.wxFileName_GetDirCount(obj.ptr)
 end
 
-function get_dirs(obj::wxFileName, dirs::Integer, capacity::Integer)
-    return Int(KwxFFI.wxFileName_GetDirs(obj.ptr, Cint(dirs), Cint(capacity)))
+function get_dirs(obj::wxFileName, dirs::Ptr{Cvoid}, capacity::Integer)
+    return Int(KwxFFI.wxFileName_GetDirs(obj.ptr, dirs, Cint(capacity)))
 end
 
 function has_name(obj::wxFileName)

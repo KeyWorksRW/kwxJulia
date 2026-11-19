@@ -25,7 +25,7 @@ function get_style_sheet(obj::wxRichTextStyleListBox)
     return _wx_wrap(wxRichTextStyleSheet, KwxFFI.wxRichTextStyleListBox_GetStyleSheet(obj.ptr))
 end
 
-function set_rich_text_ctrl!(obj::wxRichTextStyleListBox, ctrl::Union{wxRichTextCtrl, Nothing})
+function set_rich_text_ctrl!(obj::wxRichTextStyleListBox, ctrl::Union{wxRichTextCtrlBase, Nothing})
     ctrl_ptr = isnothing(ctrl) ? C_NULL : ctrl.ptr
     KwxFFI.wxRichTextStyleListBox_SetRichTextCtrl(obj.ptr, ctrl_ptr)
     nothing

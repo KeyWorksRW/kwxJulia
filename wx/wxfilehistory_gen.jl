@@ -60,7 +60,7 @@ function get_menus(obj::wxFileHistory, ref::Ptr{Cvoid})
     return Int(KwxFFI.wxFileHistory_GetMenus(obj.ptr, ref))
 end
 
-function load!(obj::wxFileHistory, config::Union{wxConfigBase, Nothing})
+function load!(obj::wxFileHistory, config::Union{wxConfigBaseBase, Nothing})
     config_ptr = isnothing(config) ? C_NULL : config.ptr
     KwxFFI.wxFileHistory_Load(obj.ptr, config_ptr)
     nothing
@@ -77,7 +77,7 @@ function remove_menu!(obj::wxFileHistory, menu::Union{wxMenu, Nothing})
     nothing
 end
 
-function save!(obj::wxFileHistory, config::Union{wxConfigBase, Nothing})
+function save!(obj::wxFileHistory, config::Union{wxConfigBaseBase, Nothing})
     config_ptr = isnothing(config) ? C_NULL : config.ptr
     KwxFFI.wxFileHistory_Save(obj.ptr, config_ptr)
     nothing

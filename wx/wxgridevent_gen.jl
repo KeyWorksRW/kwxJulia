@@ -21,7 +21,7 @@ function get_col(obj::wxGridEvent)
 end
 
 function get_position(obj::wxGridEvent)
-    return _wx_wrap(wxPoint, KwxFFI.wxGridEvent_GetPosition(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxGridEvent_GetPosition(obj.ptr); owned = true)
 end
 
 function get_row(obj::wxGridEvent)

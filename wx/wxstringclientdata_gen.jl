@@ -39,3 +39,8 @@ function set_data!(obj::wxStringClientData, data::AbstractString)
     nothing
 end
 
+function wxStringClientData_FromClientData(data::Union{wxClientDataBase, Nothing})
+    data_ptr = isnothing(data) ? C_NULL : data.ptr
+    return _wx_wrap(wxStringClientData, KwxFFI.wxStringClientData_FromClientData(data_ptr))
+end
+

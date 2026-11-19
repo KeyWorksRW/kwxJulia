@@ -30,6 +30,21 @@ function set_on_can_insert_content!(obj::kwxRichTextCtrl, pFunction::Ptr{Cvoid})
     nothing
 end
 
+function set_on_prepare_content_with_data!(obj::kwxRichTextCtrl, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxRichTextCtrl_SetOnPrepareContentWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_can_delete_range_with_data!(obj::kwxRichTextCtrl, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxRichTextCtrl_SetOnCanDeleteRangeWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
+function set_on_can_insert_content_with_data!(obj::kwxRichTextCtrl, pFunction::Ptr{Cvoid}, data::Ptr{Cvoid})
+    KwxFFI.kwxRichTextCtrl_SetOnCanInsertContentWithData(obj.ptr, pFunction, data)
+    nothing
+end
+
 function set_can_delete_range_result!(obj::kwxRichTextCtrl, result::Bool)
     KwxFFI.kwxRichTextCtrl_SetCanDeleteRangeResult(obj.ptr, Cint(result))
     nothing
@@ -38,5 +53,37 @@ end
 function set_can_insert_content_result!(obj::kwxRichTextCtrl, result::Bool)
     KwxFFI.kwxRichTextCtrl_SetCanInsertContentResult(obj.ptr, Cint(result))
     nothing
+end
+
+function set_callback_object!(obj::kwxRichTextCtrl, object::Ptr{Cvoid})
+    KwxFFI.kwxRichTextCtrl_SetCallbackObject(obj.ptr, object)
+    nothing
+end
+
+function get_callback_object(obj::kwxRichTextCtrl)
+    return KwxFFI.kwxRichTextCtrl_GetCallbackObject(obj.ptr)
+end
+
+function set_lock_id!(obj::kwxRichTextCtrl, id::Integer)
+    KwxFFI.kwxRichTextCtrl_SetLockId(obj.ptr, Clong(id))
+    nothing
+end
+
+function get_lock_id(obj::kwxRichTextCtrl)
+    return Int(KwxFFI.kwxRichTextCtrl_GetLockId(obj.ptr))
+end
+
+function begin_lock!(obj::kwxRichTextCtrl)
+    KwxFFI.kwxRichTextCtrl_BeginLock(obj.ptr)
+    nothing
+end
+
+function end_lock!(obj::kwxRichTextCtrl)
+    KwxFFI.kwxRichTextCtrl_EndLock(obj.ptr)
+    nothing
+end
+
+function is_locked(obj::kwxRichTextCtrl)
+    return KwxFFI.kwxRichTextCtrl_IsLocked(obj.ptr) != 0
 end
 

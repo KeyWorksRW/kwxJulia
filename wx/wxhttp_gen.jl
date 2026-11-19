@@ -33,7 +33,7 @@ function connect_port(obj::wxHTTP, host::AbstractString, port::Integer)
     return _result
 end
 
-function connect_addr(obj::wxHTTP, address::Union{wxSockAddress, Nothing}, wait::Bool)
+function connect_addr(obj::wxHTTP, address::Union{wxSockAddressBase, Nothing}, wait::Bool)
     address_ptr = isnothing(address) ? C_NULL : address.ptr
     return KwxFFI.wxHTTP_ConnectAddr(obj.ptr, address_ptr, Cint(wait)) != 0
 end

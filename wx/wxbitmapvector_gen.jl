@@ -17,7 +17,7 @@ function get_count(obj::wxBitmapVector)
     return Int(KwxFFI.wxBitmapVector_GetCount(obj.ptr))
 end
 
-function add!(obj::wxBitmapVector, item::Union{wxBitmap, Nothing})
+function add!(obj::wxBitmapVector, item::Union{wxBitmapBase, Nothing})
     item_ptr = isnothing(item) ? C_NULL : item.ptr
     KwxFFI.wxBitmapVector_Add(obj.ptr, item_ptr)
     nothing

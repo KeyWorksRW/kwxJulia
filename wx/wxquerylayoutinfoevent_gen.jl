@@ -24,7 +24,7 @@ function get_requested_length(obj::wxQueryLayoutInfoEvent)
 end
 
 function get_size(obj::wxQueryLayoutInfoEvent)
-    return _wx_wrap(wxSize, KwxFFI.wxQueryLayoutInfoEvent_GetSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxQueryLayoutInfoEvent_GetSize(obj.ptr); owned = true)
 end
 
 function set_alignment!(obj::wxQueryLayoutInfoEvent, align::Integer)

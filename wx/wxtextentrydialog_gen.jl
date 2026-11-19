@@ -18,7 +18,7 @@ function wxTextEntryDialog(parent::Union{wxWindow, Nothing}, message::AbstractSt
     return obj
 end
 
-function set_hint!(obj::wxTextEntryDialog, hint::AbstractString)
+function set_hint!(obj::wxTextEntryDialogBase, hint::AbstractString)
     hint_ws = wxString(hint)
     try
         KwxFFI.wxTextEntryDialog_SetHint(obj.ptr, hint_ws.ptr)
@@ -28,11 +28,11 @@ function set_hint!(obj::wxTextEntryDialog, hint::AbstractString)
     nothing
 end
 
-function get_value(obj::wxTextEntryDialog)
+function get_value(obj::wxTextEntryDialogBase)
     return _wx_take_wxstring(KwxFFI.wxTextEntryDialog_GetValue(obj.ptr))
 end
 
-function set_value!(obj::wxTextEntryDialog, value::AbstractString)
+function set_value!(obj::wxTextEntryDialogBase, value::AbstractString)
     value_ws = wxString(value)
     try
         KwxFFI.wxTextEntryDialog_SetValue(obj.ptr, value_ws.ptr)

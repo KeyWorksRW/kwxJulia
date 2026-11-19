@@ -36,7 +36,7 @@ function get_window_style_flag(obj::wxAuiToolBar)
     return Int(KwxFFI.wxAuiToolBar_GetWindowStyleFlag(obj.ptr))
 end
 
-function set_art_provider!(obj::wxAuiToolBar, artId::Union{wxAuiToolBarArt, Nothing})
+function set_art_provider!(obj::wxAuiToolBar, artId::Union{wxAuiToolBarArtBase, Nothing})
     artId_ptr = isnothing(artId) ? C_NULL : artId.ptr
     KwxFFI.wxAuiToolBar_SetArtProvider(obj.ptr, artId_ptr)
     nothing
@@ -51,7 +51,7 @@ function set_font(obj::wxAuiToolBar, font::Union{wxFont, Nothing})
     return KwxFFI.wxAuiToolBar_SetFont(obj.ptr, font_ptr) != 0
 end
 
-function add_tool_by_label(obj::wxAuiToolBar, tool_id::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, shortHelpString::AbstractString, kind::Integer)
+function add_tool_by_label(obj::wxAuiToolBar, tool_id::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, shortHelpString::AbstractString, kind::Integer)
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     shortHelpString_ws = wxString(shortHelpString)
@@ -64,7 +64,7 @@ function add_tool_by_label(obj::wxAuiToolBar, tool_id::Integer, label::AbstractS
     return _result
 end
 
-function add_tool(obj::wxAuiToolBar, tool_id::Integer, label::AbstractString, bitmap::Union{wxBitmap, Nothing}, disabledBitmap::Union{wxBitmap, Nothing}, kind::Integer, shortHelpString::AbstractString, longHelpString::AbstractString, clientData::Union{wxObject, Nothing})
+function add_tool(obj::wxAuiToolBar, tool_id::Integer, label::AbstractString, bitmap::Union{wxBitmapBase, Nothing}, disabledBitmap::Union{wxBitmapBase, Nothing}, kind::Integer, shortHelpString::AbstractString, longHelpString::AbstractString, clientData::Union{wxObject, Nothing})
     label_ws = wxString(label)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     disabledBitmap_ptr = isnothing(disabledBitmap) ? C_NULL : disabledBitmap.ptr
@@ -81,7 +81,7 @@ function add_tool(obj::wxAuiToolBar, tool_id::Integer, label::AbstractString, bi
     return _result
 end
 
-function add_tool_by_bitmap(obj::wxAuiToolBar, tool_id::Integer, bitmap::Union{wxBitmap, Nothing}, disabledBitmap::Union{wxBitmap, Nothing}, toggle::Bool, clientData::Union{wxObject, Nothing}, shortHelpString::AbstractString, longHelpString::AbstractString)
+function add_tool_by_bitmap(obj::wxAuiToolBar, tool_id::Integer, bitmap::Union{wxBitmapBase, Nothing}, disabledBitmap::Union{wxBitmapBase, Nothing}, toggle::Bool, clientData::Union{wxObject, Nothing}, shortHelpString::AbstractString, longHelpString::AbstractString)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     disabledBitmap_ptr = isnothing(disabledBitmap) ? C_NULL : disabledBitmap.ptr
     clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
@@ -134,7 +134,7 @@ function realize(obj::wxAuiToolBar)
 end
 
 function find_control(obj::wxAuiToolBar, window_id::Integer)
-    return KwxFFI.wxAuiToolBar_FindControl(obj.ptr, Cint(window_id))
+    return _wx_ref(wxControl, KwxFFI.wxAuiToolBar_FindControl(obj.ptr, Cint(window_id)))
 end
 
 function find_tool_by_position(obj::wxAuiToolBar, x::Integer, y::Integer)
@@ -167,6 +167,24 @@ function delete_by_index(obj::wxAuiToolBar, tool_id::Integer)
     return KwxFFI.wxAuiToolBar_DeleteByIndex(obj.ptr, Cint(tool_id)) != 0
 end
 
+function destroy_tool(obj::wxAuiToolBar, tool_id::Integer)
+    return KwxFFI.wxAuiToolBar_DestroyTool(obj.ptr, Cint(tool_id)) != 0
+end
+
+function destroy_tool_by_index(obj::wxAuiToolBar, idx::Integer)
+    return KwxFFI.wxAuiToolBar_DestroyToolByIndex(obj.ptr, Cint(idx)) != 0
+end
+
+function get_tool_client_data(obj::wxAuiToolBar, tool_id::Integer)
+    return _wx_ref(wxObject, KwxFFI.wxAuiToolBar_GetToolClientData(obj.ptr, Cint(tool_id)))
+end
+
+function set_tool_client_data!(obj::wxAuiToolBar, tool_id::Integer, clientData::Union{wxObject, Nothing})
+    clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
+    KwxFFI.wxAuiToolBar_SetToolClientData(obj.ptr, Cint(tool_id), clientData_ptr)
+    nothing
+end
+
 function get_tool_count(obj::wxAuiToolBar)
     return KwxFFI.wxAuiToolBar_GetToolCount(obj.ptr)
 end
@@ -184,7 +202,7 @@ function get_tool_fits(obj::wxAuiToolBar, tool_id::Integer)
 end
 
 function get_tool_rect(obj::wxAuiToolBar, tool_id::Integer)
-    return _wx_wrap(wxRect, KwxFFI.wxAuiToolBar_GetToolRect(obj.ptr, Cint(tool_id)))
+    return _wx_wrap(wxRect, KwxFFI.wxAuiToolBar_GetToolRect(obj.ptr, Cint(tool_id)); owned = true)
 end
 
 function get_tool_fits_by_index(obj::wxAuiToolBar, tool_id::Integer)
@@ -216,7 +234,7 @@ function set_tool_bitmap_size!(obj::wxAuiToolBar, width::Integer, height::Intege
 end
 
 function get_tool_bitmap_size(obj::wxAuiToolBar)
-    return _wx_wrap(wxSize, KwxFFI.wxAuiToolBar_GetToolBitmapSize(obj.ptr))
+    return _wx_wrap(wxSize, KwxFFI.wxAuiToolBar_GetToolBitmapSize(obj.ptr); owned = true)
 end
 
 function get_overflow_visible(obj::wxAuiToolBar)
@@ -332,13 +350,13 @@ function set_tool_label!(obj::wxAuiToolBar, tool_id::Integer, label::AbstractStr
     nothing
 end
 
-function get_tool_bitmap!(obj::wxAuiToolBar, tool_id::Integer, bitmap::Union{wxBitmap, Nothing})
+function get_tool_bitmap!(obj::wxAuiToolBar, tool_id::Integer, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxAuiToolBar_GetToolBitmap(obj.ptr, Cint(tool_id), bitmap_ptr)
     nothing
 end
 
-function set_tool_bitmap!(obj::wxAuiToolBar, tool_id::Integer, bitmap::Union{wxBitmap, Nothing})
+function set_tool_bitmap!(obj::wxAuiToolBar, tool_id::Integer, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxAuiToolBar_SetToolBitmap(obj.ptr, Cint(tool_id), bitmap_ptr)
     nothing
@@ -380,11 +398,62 @@ function set_custom_overflow_items!(obj::wxAuiToolBar, prepend::Union{wxAuiToolB
 end
 
 function get_hint_size(obj::wxAuiToolBar, dock_direction::Integer)
-    return _wx_wrap(wxSize, KwxFFI.wxAuiToolBar_GetHintSize(obj.ptr, Cint(dock_direction)))
+    return _wx_wrap(wxSize, KwxFFI.wxAuiToolBar_GetHintSize(obj.ptr, Cint(dock_direction)); owned = true)
 end
 
 function is_pane_valid(obj::wxAuiToolBar, pane::Union{wxAuiPaneInfo, Nothing})
     pane_ptr = isnothing(pane) ? C_NULL : pane.ptr
     return KwxFFI.wxAuiToolBar_IsPaneValid(obj.ptr, pane_ptr) != 0
+end
+
+function add_tool_by_label_bundle(obj::wxAuiToolBar, tool_id::Integer, label::AbstractString, bitmap::Union{wxBitmapBundle, Nothing}, shortHelpString::AbstractString, kind::Integer)
+    label_ws = wxString(label)
+    bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
+    shortHelpString_ws = wxString(shortHelpString)
+    _result = try
+        _wx_wrap(wxAuiToolBarItem, KwxFFI.wxAuiToolBar_AddToolByLabelBundle(obj.ptr, Cint(tool_id), label_ws.ptr, bitmap_ptr, shortHelpString_ws.ptr, Cint(kind)))
+    finally
+        Base.delete!(label_ws)
+        Base.delete!(shortHelpString_ws)
+    end
+    return _result
+end
+
+function add_tool_bundle(obj::wxAuiToolBar, tool_id::Integer, label::AbstractString, bitmap::Union{wxBitmapBundle, Nothing}, disabledBitmap::Union{wxBitmapBundle, Nothing}, kind::Integer, shortHelpString::AbstractString, longHelpString::AbstractString, clientData::Union{wxObject, Nothing})
+    label_ws = wxString(label)
+    bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
+    disabledBitmap_ptr = isnothing(disabledBitmap) ? C_NULL : disabledBitmap.ptr
+    shortHelpString_ws = wxString(shortHelpString)
+    longHelpString_ws = wxString(longHelpString)
+    clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
+    _result = try
+        _wx_wrap(wxAuiToolBarItem, KwxFFI.wxAuiToolBar_AddToolBundle(obj.ptr, Cint(tool_id), label_ws.ptr, bitmap_ptr, disabledBitmap_ptr, Cint(kind), shortHelpString_ws.ptr, longHelpString_ws.ptr, clientData_ptr))
+    finally
+        Base.delete!(label_ws)
+        Base.delete!(shortHelpString_ws)
+        Base.delete!(longHelpString_ws)
+    end
+    return _result
+end
+
+function add_tool_by_bitmap_bundle(obj::wxAuiToolBar, tool_id::Integer, bitmap::Union{wxBitmapBundle, Nothing}, disabledBitmap::Union{wxBitmapBundle, Nothing}, toggle::Bool, clientData::Union{wxObject, Nothing}, shortHelpString::AbstractString, longHelpString::AbstractString)
+    bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
+    disabledBitmap_ptr = isnothing(disabledBitmap) ? C_NULL : disabledBitmap.ptr
+    clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
+    shortHelpString_ws = wxString(shortHelpString)
+    longHelpString_ws = wxString(longHelpString)
+    _result = try
+        _wx_wrap(wxAuiToolBarItem, KwxFFI.wxAuiToolBar_AddToolByBitmapBundle(obj.ptr, Cint(tool_id), bitmap_ptr, disabledBitmap_ptr, Cint(toggle), clientData_ptr, shortHelpString_ws.ptr, longHelpString_ws.ptr))
+    finally
+        Base.delete!(shortHelpString_ws)
+        Base.delete!(longHelpString_ws)
+    end
+    return _result
+end
+
+function set_tool_bitmap_bundle!(obj::wxAuiToolBar, tool_id::Integer, bitmap::Union{wxBitmapBundle, Nothing})
+    bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
+    KwxFFI.wxAuiToolBar_SetToolBitmapBundle(obj.ptr, Cint(tool_id), bitmap_ptr)
+    nothing
 end
 

@@ -19,7 +19,7 @@ function append_string!(obj::wxListBox, item::AbstractString)
     nothing
 end
 
-function set_client_object!(obj::wxListBox, n::Integer, clientData::Union{wxClientData, Nothing})
+function set_client_object!(obj::wxListBox, n::Integer, clientData::Union{wxClientDataBase, Nothing})
     clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
     KwxFFI.wxItemContainer_SetClientObject(obj.ptr, Cuint(n), clientData_ptr)
     nothing
@@ -226,8 +226,8 @@ function get_selection(obj::wxListBoxBase)
     return Int(KwxFFI.wxListBox_GetSelection(obj.ptr))
 end
 
-function get_selections(obj::wxListBoxBase, aSelections::Integer, allocated::Integer)
-    return Int(KwxFFI.wxListBox_GetSelections(obj.ptr, Cint(aSelections), Cint(allocated)))
+function get_selections(obj::wxListBoxBase, aSelections::Ptr{Cvoid}, allocated::Integer)
+    return Int(KwxFFI.wxListBox_GetSelections(obj.ptr, aSelections, Cint(allocated)))
 end
 
 function get_string(obj::wxListBoxBase, index::Integer)
@@ -243,7 +243,7 @@ function is_selected(obj::wxListBoxBase, index::Integer)
     return KwxFFI.wxListBox_IsSelected(obj.ptr, Cint(index)) != 0
 end
 
-function set_client_data!(obj::wxListBoxBase, index::Integer, clientData::Union{wxClientData, Nothing})
+function set_client_data!(obj::wxListBoxBase, index::Integer, clientData::Union{wxClientDataBase, Nothing})
     clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
     KwxFFI.wxListBox_SetClientData(obj.ptr, Cint(index), clientData_ptr)
     nothing

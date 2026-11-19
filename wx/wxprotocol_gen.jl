@@ -20,7 +20,7 @@ function connect(obj::wxProtocolBase, host::AbstractString)
     return _result
 end
 
-function connect_addr(obj::wxProtocolBase, address::Union{wxSockAddress, Nothing}, wait::Bool)
+function connect_addr(obj::wxProtocolBase, address::Union{wxSockAddressBase, Nothing}, wait::Bool)
     address_ptr = isnothing(address) ? C_NULL : address.ptr
     return KwxFFI.wxProtocol_ConnectAddr(obj.ptr, address_ptr, Cint(wait)) != 0
 end

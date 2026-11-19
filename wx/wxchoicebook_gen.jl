@@ -42,7 +42,7 @@ function get_image_list(obj::wxChoicebook)
 end
 
 function get_page(obj::wxChoicebook, nPage::Integer)
-    return KwxFFI.wxChoicebook_GetPage(obj.ptr, Cint(nPage))
+    return _wx_ref(wxWindow, KwxFFI.wxChoicebook_GetPage(obj.ptr, Cint(nPage)))
 end
 
 function get_page_count(obj::wxChoicebook)
@@ -62,7 +62,7 @@ function get_selection(obj::wxChoicebook)
 end
 
 function hit_test(obj::wxChoicebook, x::Integer, y::Integer, flags::Ref{Clong})
-    return Int(KwxFFI.wxChoicebook_HitTest(obj.ptr, Cint(x), Cint(y), flags))
+    return Int(GC.@preserve flags KwxFFI.wxChoicebook_HitTest(obj.ptr, Cint(x), Cint(y), Base.unsafe_convert(Ptr{Clong}, flags)))
 end
 
 function insert_page(obj::wxChoicebook, nPage::Integer, pPage::Union{wxWindow, Nothing}, strText::AbstractString, bSelect::Bool, imageId::Integer)

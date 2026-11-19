@@ -131,11 +131,11 @@ function find_cell_by_pos(obj::wxHtmlCellBase, x::Integer, y::Integer, flags::In
 end
 
 function get_abs_pos(obj::wxHtmlCellBase, rootCell::Ptr{Cvoid})
-    return _wx_wrap(wxPoint, KwxFFI.wxHtmlCell_GetAbsPos(obj.ptr, rootCell))
+    return _wx_wrap(wxPoint, KwxFFI.wxHtmlCell_GetAbsPos(obj.ptr, rootCell); owned = true)
 end
 
 function get_rect(obj::wxHtmlCellBase, rootCell::Ptr{Cvoid})
-    return _wx_wrap(wxRect, KwxFFI.wxHtmlCell_GetRect(obj.ptr, rootCell))
+    return _wx_wrap(wxRect, KwxFFI.wxHtmlCell_GetRect(obj.ptr, rootCell); owned = true)
 end
 
 function get_root_cell(obj::wxHtmlCellBase)

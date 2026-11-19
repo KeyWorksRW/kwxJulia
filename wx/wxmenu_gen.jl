@@ -12,6 +12,13 @@ function wxMenu(title::AbstractString, style::Integer)
     return obj
 end
 
+function wxMenu()
+    ptr = KwxFFI.wxMenu_CreateDefault()
+    ptr == C_NULL && error("Failed to create wxMenu")
+    obj = wxMenu(ptr)
+    return obj
+end
+
 function get_menu_bar(obj::wxMenu)
     return _wx_wrap(wxMenuBar, KwxFFI.wxMenu_GetMenuBar(obj.ptr))
 end
@@ -38,7 +45,7 @@ function get_label(obj::wxMenu, id::Integer)
 end
 
 function get_window(obj::wxMenu)
-    return KwxFFI.wxMenu_GetWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxMenu_GetWindow(obj.ptr))
 end
 
 function detach!(obj::wxMenu)
@@ -161,7 +168,7 @@ function get_help_string(obj::wxMenu, id::Integer)
 end
 
 function get_invoking_window(obj::wxMenu)
-    return KwxFFI.wxMenu_GetInvokingWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxMenu_GetInvokingWindow(obj.ptr))
 end
 
 function get_label_text(obj::wxMenu, id::Integer)
@@ -273,7 +280,7 @@ function remove_by_item!(obj::wxMenu, item::Ptr{Cvoid})
     nothing
 end
 
-function set_client_data!(obj::wxMenu, clientData::Union{wxClientData, Nothing})
+function set_client_data!(obj::wxMenu, clientData::Union{wxClientDataBase, Nothing})
     clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
     KwxFFI.wxMenu_SetClientData(obj.ptr, clientData_ptr)
     nothing
@@ -419,6 +426,6 @@ function find_item_by_position(obj::wxMenu, pos::Integer)
 end
 
 function get_event_handler(obj::wxMenu)
-    return KwxFFI.wxMenu_GetEventHandler(obj.ptr)
+    return _wx_ref(wxEvtHandler, KwxFFI.wxMenu_GetEventHandler(obj.ptr))
 end
 

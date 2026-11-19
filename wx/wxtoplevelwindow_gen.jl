@@ -17,7 +17,7 @@ function get_content_protection(obj::wxTopLevelWindow)
 end
 
 function wxTopLevelWindow_GetDefaultSize()
-    return _wx_wrap(wxSize, KwxFFI.wxTopLevelWindow_GetDefaultSize())
+    return _wx_wrap(wxSize, KwxFFI.wxTopLevelWindow_GetDefaultSize(); owned = true)
 end
 
 function enable_close_button(obj::wxTopLevelWindow, enable::Bool)
@@ -34,7 +34,7 @@ function get_default_button(obj::wxTopLevelWindow)
 end
 
 function get_default_item(obj::wxTopLevelWindow)
-    return KwxFFI.wxTopLevelWindow_GetDefaultItem(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxTopLevelWindow_GetDefaultItem(obj.ptr))
 end
 
 function get_icon(obj::wxTopLevelWindow)
@@ -71,7 +71,7 @@ function request_user_attention!(obj::wxTopLevelWindow, flags::Integer)
     nothing
 end
 
-function set_default_button!(obj::wxTopLevelWindow, pBut::Union{wxButton, Nothing})
+function set_default_button!(obj::wxTopLevelWindow, pBut::Union{wxButtonBase, Nothing})
     pBut_ptr = isnothing(pBut) ? C_NULL : pBut.ptr
     KwxFFI.wxTopLevelWindow_SetDefaultButton(obj.ptr, pBut_ptr)
     nothing

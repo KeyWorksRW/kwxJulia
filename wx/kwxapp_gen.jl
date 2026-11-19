@@ -48,3 +48,28 @@ function set_on_create_traits!(obj::kwxApp, pFunction::Ptr{Cvoid})
     nothing
 end
 
+function set_on_on_fatal_exception!(obj::kwxApp, pFunction::Ptr{Cvoid})
+    KwxFFI.kwxApp_SetOnOnFatalException(obj.ptr, pFunction)
+    nothing
+end
+
+function set_on_on_unhandled_exception!(obj::kwxApp, pFunction::Ptr{Cvoid})
+    KwxFFI.kwxApp_SetOnOnUnhandledException(obj.ptr, pFunction)
+    nothing
+end
+
+function set_on_store_current_exception!(obj::kwxApp, pFunction::Ptr{Cvoid})
+    KwxFFI.kwxApp_SetOnStoreCurrentException(obj.ptr, pFunction)
+    nothing
+end
+
+function set_on_on_exception_in_main_loop!(obj::kwxApp, pFunction::Ptr{Cvoid})
+    KwxFFI.kwxApp_SetOnOnExceptionInMainLoop(obj.ptr, pFunction)
+    nothing
+end
+
+function set_on_rethrow_stored_exception!(obj::kwxApp, pFunction::Ptr{Cvoid})
+    KwxFFI.kwxApp_SetOnRethrowStoredException(obj.ptr, pFunction)
+    nothing
+end
+

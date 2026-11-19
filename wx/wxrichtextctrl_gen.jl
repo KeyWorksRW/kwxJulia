@@ -175,7 +175,7 @@ function select_none!(obj::wxRichTextCtrl)
 end
 
 function get_selection!(obj::wxRichTextCtrl, from::Ref{Clong}, to::Ref{Clong})
-    KwxFFI.wxTextEntry_GetSelection(obj.ptr, from, to)
+    GC.@preserve from to KwxFFI.wxTextEntry_GetSelection(obj.ptr, Base.unsafe_convert(Ptr{Clong}, from), Base.unsafe_convert(Ptr{Clong}, to))
     nothing
 end
 
@@ -225,12 +225,17 @@ function set_margins(obj::wxRichTextCtrl, left::Integer, top::Integer)
 end
 
 function get_margins!(obj::wxRichTextCtrl, left::Ref{Int32}, top::Ref{Int32})
-    KwxFFI.wxTextEntry_GetMargins(obj.ptr, left, top)
+    GC.@preserve left top KwxFFI.wxTextEntry_GetMargins(obj.ptr, Base.unsafe_convert(Ptr{Int32}, left), Base.unsafe_convert(Ptr{Int32}, top))
     nothing
 end
 
 function auto_complete(obj::wxRichTextCtrl, count::Integer, items::Ptr{Cvoid})
     return KwxFFI.wxTextEntry_AutoComplete(obj.ptr, Cint(count), items) != 0
+end
+
+function auto_complete_strings(obj::wxRichTextCtrl, items::Union{wxArrayString, Nothing})
+    items_ptr = isnothing(items) ? C_NULL : items.ptr
+    return KwxFFI.wxTextEntry_AutoCompleteStrings(obj.ptr, items_ptr) != 0
 end
 
 function auto_complete_file_names(obj::wxRichTextCtrl)
@@ -239,6 +244,11 @@ end
 
 function auto_complete_directories(obj::wxRichTextCtrl)
     return KwxFFI.wxTextEntry_AutoCompleteDirectories(obj.ptr) != 0
+end
+
+function auto_complete_completer(obj::wxRichTextCtrl, completer::Union{wxTextCompleterSimpleBase, Nothing})
+    completer_ptr = isnothing(completer) ? C_NULL : completer.ptr
+    return KwxFFI.wxTextEntry_AutoCompleteCompleter(obj.ptr, completer_ptr) != 0
 end
 
 function get_buffer(obj::wxRichTextCtrlBase)
@@ -254,7 +264,7 @@ function end_suppress_undo(obj::wxRichTextCtrlBase)
 end
 
 function get_command_processor(obj::wxRichTextCtrlBase)
-    return KwxFFI.wxRichTextCtrl_GetCommandProcessor(obj.ptr)
+    return _wx_wrap(wxCommandProcessor, KwxFFI.wxRichTextCtrl_GetCommandProcessor(obj.ptr))
 end
 
 function write_field(obj::wxRichTextCtrlBase, fieldType::AbstractString, properties::Union{wxRichTextProperties, Nothing}, textAttr::Union{wxRichTextAttr, Nothing})
@@ -284,7 +294,7 @@ function get_focus_object(obj::wxRichTextCtrlBase)
     return _wx_wrap(wxRichTextParagraphLayoutBox, KwxFFI.wxRichTextCtrl_GetFocusObject(obj.ptr))
 end
 
-function set_focus_object(obj::wxRichTextCtrlBase, arg::Union{wxRichTextParagraphLayoutBox, Nothing}, setCaretPosition::Bool)
+function set_focus_object(obj::wxRichTextCtrlBase, arg::Union{wxRichTextParagraphLayoutBoxBase, Nothing}, setCaretPosition::Bool)
     arg_ptr = isnothing(arg) ? C_NULL : arg.ptr
     return KwxFFI.wxRichTextCtrl_SetFocusObject(obj.ptr, arg_ptr, Cint(setCaretPosition)) != 0
 end
@@ -306,7 +316,7 @@ function has_unfocused_selection(obj::wxRichTextCtrlBase)
 end
 
 function get_selection_range!(obj::wxRichTextCtrlBase, start::Ref{Clong}, end_::Ref{Clong})
-    KwxFFI.wxRichTextCtrl_GetSelectionRange(obj.ptr, start, end_)
+    GC.@preserve start end_ KwxFFI.wxRichTextCtrl_GetSelectionRange(obj.ptr, Base.unsafe_convert(Ptr{Clong}, start), Base.unsafe_convert(Ptr{Clong}, end_))
     nothing
 end
 
@@ -316,7 +326,7 @@ function set_selection_range!(obj::wxRichTextCtrlBase, start::Integer, end_::Int
 end
 
 function get_internal_selection_range!(obj::wxRichTextCtrlBase, start::Ref{Clong}, end_::Ref{Clong})
-    KwxFFI.wxRichTextCtrl_GetInternalSelectionRange(obj.ptr, start, end_)
+    GC.@preserve start end_ KwxFFI.wxRichTextCtrl_GetInternalSelectionRange(obj.ptr, Base.unsafe_convert(Ptr{Clong}, start), Base.unsafe_convert(Ptr{Clong}, end_))
     nothing
 end
 
@@ -468,7 +478,7 @@ end
 function add_paragraph!(obj::wxRichTextCtrlBase, text::AbstractString, start::Ref{Clong}, end_::Ref{Clong})
     text_ws = wxString(text)
     try
-        KwxFFI.wxRichTextCtrl_AddParagraph(obj.ptr, text_ws.ptr, start, end_)
+        GC.@preserve start end_ KwxFFI.wxRichTextCtrl_AddParagraph(obj.ptr, text_ws.ptr, Base.unsafe_convert(Ptr{Clong}, start), Base.unsafe_convert(Ptr{Clong}, end_))
     finally
         Base.delete!(text_ws)
     end
@@ -477,11 +487,11 @@ end
 
 function add_image!(obj::wxRichTextCtrlBase, image::Union{wxImage, Nothing}, start::Ref{Clong}, end_::Ref{Clong})
     image_ptr = isnothing(image) ? C_NULL : image.ptr
-    KwxFFI.wxRichTextCtrl_AddImage(obj.ptr, image_ptr, start, end_)
+    GC.@preserve start end_ KwxFFI.wxRichTextCtrl_AddImage(obj.ptr, image_ptr, Base.unsafe_convert(Ptr{Clong}, start), Base.unsafe_convert(Ptr{Clong}, end_))
     nothing
 end
 
-function write_image_bitmap(obj::wxRichTextCtrlBase, bitmap::Union{wxBitmap, Nothing}, bitmapType::Integer, textAttr::Union{wxRichTextAttr, Nothing})
+function write_image_bitmap(obj::wxRichTextCtrlBase, bitmap::Union{wxBitmapBase, Nothing}, bitmapType::Integer, textAttr::Union{wxRichTextAttr, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     textAttr_ptr = isnothing(textAttr) ? C_NULL : textAttr.ptr
     return KwxFFI.wxRichTextCtrl_WriteImageBitmap(obj.ptr, bitmap_ptr, Cint(bitmapType), textAttr_ptr) != 0
@@ -601,7 +611,7 @@ function promote_list(obj::wxRichTextCtrlBase, promoteBy::Integer, start::Intege
     return _result
 end
 
-function apply_style(obj::wxRichTextCtrlBase, def::Union{wxRichTextStyleDefinition, Nothing})
+function apply_style(obj::wxRichTextCtrlBase, def::Union{wxRichTextStyleDefinitionBase, Nothing})
     def_ptr = isnothing(def) ? C_NULL : def.ptr
     return KwxFFI.wxRichTextCtrl_ApplyStyle(obj.ptr, def_ptr) != 0
 end
@@ -754,7 +764,7 @@ function is_frozen(obj::wxRichTextCtrlBase)
 end
 
 function hit_test(obj::wxRichTextCtrlBase, x::Integer, y::Integer, position::Ref{Clong})
-    return Int(KwxFFI.wxRichTextCtrl_HitTest(obj.ptr, Cint(x), Cint(y), position))
+    return Int(GC.@preserve position KwxFFI.wxRichTextCtrl_HitTest(obj.ptr, Cint(x), Cint(y), Base.unsafe_convert(Ptr{Clong}, position)))
 end
 
 function set_caret_position!(obj::wxRichTextCtrlBase, position::Integer, showAtLineStart::Bool)
@@ -764,6 +774,14 @@ end
 
 function get_adjusted_caret_position(obj::wxRichTextCtrlBase, caretPosition::Integer)
     return Int(KwxFFI.wxRichTextCtrl_GetAdjustedCaretPosition(obj.ptr, Clong(caretPosition)))
+end
+
+function get_caret_position(obj::wxRichTextCtrlBase)
+    return Int(KwxFFI.wxRichTextCtrl_GetCaretPosition(obj.ptr))
+end
+
+function set_margins(obj::wxRichTextCtrlBase, left::Integer, top::Integer)
+    return KwxFFI.wxRichTextCtrl_SetMargins(obj.ptr, Cint(left), Cint(top)) != 0
 end
 
 function find_next_word_position(obj::wxRichTextCtrlBase, direction::Integer)
@@ -779,7 +797,7 @@ function get_first_visible_position(obj::wxRichTextCtrlBase)
 end
 
 function get_first_visible_point!(obj::wxRichTextCtrlBase, x::Ref{Int32}, y::Ref{Int32})
-    KwxFFI.wxRichTextCtrl_GetFirstVisiblePoint(obj.ptr, x, y)
+    GC.@preserve x y KwxFFI.wxRichTextCtrl_GetFirstVisiblePoint(obj.ptr, Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y))
     nothing
 end
 
@@ -837,7 +855,7 @@ function set_editable!(obj::wxRichTextCtrlBase, editable::Bool)
 end
 
 function get_selection!(obj::wxRichTextCtrlBase, from::Ref{Clong}, to::Ref{Clong})
-    KwxFFI.wxRichTextCtrl_GetSelection(obj.ptr, from, to)
+    GC.@preserve from to KwxFFI.wxRichTextCtrl_GetSelection(obj.ptr, Base.unsafe_convert(Ptr{Clong}, from), Base.unsafe_convert(Ptr{Clong}, to))
     nothing
 end
 
@@ -1006,17 +1024,17 @@ function can_delete_selection(obj::wxRichTextCtrlBase)
     return KwxFFI.wxRichTextCtrl_CanDeleteSelection(obj.ptr) != 0
 end
 
-function set_style(obj::wxRichTextCtrlBase, start::Integer, end_::Integer, style::Union{wxTextAttr, Nothing})
+function set_style(obj::wxRichTextCtrlBase, start::Integer, end_::Integer, style::Union{wxTextAttrBase, Nothing})
     style_ptr = isnothing(style) ? C_NULL : style.ptr
     return KwxFFI.wxRichTextCtrl_SetStyle(obj.ptr, Clong(start), Clong(end_), style_ptr) != 0
 end
 
-function get_style(obj::wxRichTextCtrlBase, position::Integer, style::Union{wxTextAttr, Nothing})
+function get_style(obj::wxRichTextCtrlBase, position::Integer, style::Union{wxRichTextAttr, Nothing})
     style_ptr = isnothing(style) ? C_NULL : style.ptr
     return KwxFFI.wxRichTextCtrl_GetStyle(obj.ptr, Clong(position), style_ptr) != 0
 end
 
-function set_default_style(obj::wxRichTextCtrlBase, style::Union{wxTextAttr, Nothing})
+function set_default_style(obj::wxRichTextCtrlBase, style::Union{wxTextAttrBase, Nothing})
     style_ptr = isnothing(style) ? C_NULL : style.ptr
     return KwxFFI.wxRichTextCtrl_SetDefaultStyle(obj.ptr, style_ptr) != 0
 end
@@ -1040,7 +1058,7 @@ function xy_to_position(obj::wxRichTextCtrlBase, x::Integer, y::Integer)
 end
 
 function position_to_xy(obj::wxRichTextCtrlBase, pos::Integer, x::Ref{Clong}, y::Ref{Clong})
-    return KwxFFI.wxRichTextCtrl_PositionToXY(obj.ptr, Clong(pos), x, y) != 0
+    return GC.@preserve x y KwxFFI.wxRichTextCtrl_PositionToXY(obj.ptr, Clong(pos), Base.unsafe_convert(Ptr{Clong}, x), Base.unsafe_convert(Ptr{Clong}, y)) != 0
 end
 
 function show_position!(obj::wxRichTextCtrlBase, position::Integer)

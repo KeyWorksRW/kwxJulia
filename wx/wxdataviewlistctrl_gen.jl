@@ -4,34 +4,38 @@ function wxDataViewListCtrl(parent::Union{wxWindow, Nothing}, id::Integer, x::In
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     ptr = KwxFFI.wxDataViewListCtrl_Create(parent_ptr, Cint(id), Cint(x), Cint(y), Cint(width), Cint(height), Cint(style))
     ptr == C_NULL && error("Failed to create wxDataViewListCtrl")
-    obj = wxDataViewListCtrl(ptr)
+    obj = wxDataViewListCtrl(ptr, Any[], Any[])
+    isnothing(parent) || push!(parent.children, obj)
     return obj
 end
 
-function append_column(obj::wxDataViewListCtrl, column::Ptr{Cvoid}, variantType::AbstractString)
+function append_column(obj::wxDataViewListCtrl, column::Union{wxDataViewColumn, Nothing}, variantType::AbstractString)
+    column_ptr = isnothing(column) ? C_NULL : column.ptr
     variantType_ws = wxString(variantType)
     _result = try
-        KwxFFI.wxDataViewListCtrl_AppendColumn(obj.ptr, column, variantType_ws.ptr) != 0
+        KwxFFI.wxDataViewListCtrl_AppendColumn(obj.ptr, column_ptr, variantType_ws.ptr) != 0
     finally
         Base.delete!(variantType_ws)
     end
     return _result
 end
 
-function prepend_column(obj::wxDataViewListCtrl, column::Ptr{Cvoid}, variantType::AbstractString)
+function prepend_column(obj::wxDataViewListCtrl, column::Union{wxDataViewColumn, Nothing}, variantType::AbstractString)
+    column_ptr = isnothing(column) ? C_NULL : column.ptr
     variantType_ws = wxString(variantType)
     _result = try
-        KwxFFI.wxDataViewListCtrl_PrependColumn(obj.ptr, column, variantType_ws.ptr) != 0
+        KwxFFI.wxDataViewListCtrl_PrependColumn(obj.ptr, column_ptr, variantType_ws.ptr) != 0
     finally
         Base.delete!(variantType_ws)
     end
     return _result
 end
 
-function insert_column(obj::wxDataViewListCtrl, pos::Integer, column::Ptr{Cvoid}, variantType::AbstractString)
+function insert_column(obj::wxDataViewListCtrl, pos::Integer, column::Union{wxDataViewColumn, Nothing}, variantType::AbstractString)
+    column_ptr = isnothing(column) ? C_NULL : column.ptr
     variantType_ws = wxString(variantType)
     _result = try
-        KwxFFI.wxDataViewListCtrl_InsertColumn(obj.ptr, Cuint(pos), column, variantType_ws.ptr) != 0
+        KwxFFI.wxDataViewListCtrl_InsertColumn(obj.ptr, Cuint(pos), column_ptr, variantType_ws.ptr) != 0
     finally
         Base.delete!(variantType_ws)
     end
@@ -39,13 +43,13 @@ function insert_column(obj::wxDataViewListCtrl, pos::Integer, column::Ptr{Cvoid}
 end
 
 function get_store(obj::wxDataViewListCtrl)
-    return KwxFFI.wxDataViewListCtrl_GetStore(obj.ptr)
+    return _wx_wrap(wxDataViewListStore, KwxFFI.wxDataViewListCtrl_GetStore(obj.ptr))
 end
 
 function append_text_column(obj::wxDataViewListCtrl, label::AbstractString, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewListCtrl_AppendTextColumn(obj.ptr, label_ws.ptr, Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewListCtrl_AppendTextColumn(obj.ptr, label_ws.ptr, Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
@@ -55,7 +59,7 @@ end
 function append_toggle_column(obj::wxDataViewListCtrl, label::AbstractString, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewListCtrl_AppendToggleColumn(obj.ptr, label_ws.ptr, Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewListCtrl_AppendToggleColumn(obj.ptr, label_ws.ptr, Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
@@ -65,7 +69,7 @@ end
 function append_progress_column(obj::wxDataViewListCtrl, label::AbstractString, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewListCtrl_AppendProgressColumn(obj.ptr, label_ws.ptr, Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewListCtrl_AppendProgressColumn(obj.ptr, label_ws.ptr, Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end
@@ -75,7 +79,7 @@ end
 function append_icon_text_column(obj::wxDataViewListCtrl, label::AbstractString, mode::Integer, width::Integer, align::Integer, flags::Integer)
     label_ws = wxString(label)
     _result = try
-        KwxFFI.wxDataViewListCtrl_AppendIconTextColumn(obj.ptr, label_ws.ptr, Cint(mode), Cint(width), Cint(align), Cint(flags))
+        _wx_wrap(wxDataViewColumn, KwxFFI.wxDataViewListCtrl_AppendIconTextColumn(obj.ptr, label_ws.ptr, Cint(mode), Cint(width), Cint(align), Cint(flags)))
     finally
         Base.delete!(label_ws)
     end

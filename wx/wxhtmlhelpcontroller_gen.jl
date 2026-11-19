@@ -62,7 +62,7 @@ function get_frame(obj::wxHtmlHelpController)
 end
 
 function get_frame_parameters(obj::wxHtmlHelpController, title::Ptr{Cvoid}, width::Ref{Int32}, height::Ref{Int32}, pos_x::Ref{Int32}, pos_y::Ref{Int32}, newFrameEachTime::Ref{Int32})
-    return KwxFFI.wxHtmlHelpController_GetFrameParameters(obj.ptr, title, width, height, pos_x, pos_y, newFrameEachTime)
+    return GC.@preserve width height pos_x pos_y newFrameEachTime KwxFFI.wxHtmlHelpController_GetFrameParameters(obj.ptr, title, Base.unsafe_convert(Ptr{Cint}, width), Base.unsafe_convert(Ptr{Cint}, height), Base.unsafe_convert(Ptr{Cint}, pos_x), Base.unsafe_convert(Ptr{Cint}, pos_y), Base.unsafe_convert(Ptr{Cint}, newFrameEachTime))
 end
 
 function initialize(obj::wxHtmlHelpController, file::AbstractString)
@@ -99,7 +99,7 @@ function quit(obj::wxHtmlHelpController)
     return KwxFFI.wxHtmlHelpController_Quit(obj.ptr) != 0
 end
 
-function read_customization!(obj::wxHtmlHelpController, cfg::Union{wxConfigBase, Nothing}, path::AbstractString)
+function read_customization!(obj::wxHtmlHelpController, cfg::Union{wxConfigBaseBase, Nothing}, path::AbstractString)
     cfg_ptr = isnothing(cfg) ? C_NULL : cfg.ptr
     path_ws = wxString(path)
     try
@@ -140,7 +140,7 @@ function set_viewer!(obj::wxHtmlHelpController, viewer::AbstractString, flags::I
     nothing
 end
 
-function use_config!(obj::wxHtmlHelpController, config::Union{wxConfigBase, Nothing}, rootpath::AbstractString)
+function use_config!(obj::wxHtmlHelpController, config::Union{wxConfigBaseBase, Nothing}, rootpath::AbstractString)
     config_ptr = isnothing(config) ? C_NULL : config.ptr
     rootpath_ws = wxString(rootpath)
     try
@@ -151,7 +151,7 @@ function use_config!(obj::wxHtmlHelpController, config::Union{wxConfigBase, Noth
     nothing
 end
 
-function write_customization!(obj::wxHtmlHelpController, cfg::Union{wxConfigBase, Nothing}, path::AbstractString)
+function write_customization!(obj::wxHtmlHelpController, cfg::Union{wxConfigBaseBase, Nothing}, path::AbstractString)
     cfg_ptr = isnothing(cfg) ? C_NULL : cfg.ptr
     path_ws = wxString(path)
     try

@@ -68,12 +68,12 @@ function Base.delete!(obj::wxGraphicsPath)
 end
 
 function get_box!(obj::wxGraphicsPath, x::Ref{Cdouble}, y::Ref{Cdouble}, width::Ref{Cdouble}, height::Ref{Cdouble})
-    KwxFFI.wxGraphicsPath_GetBox(obj.ptr, x, y, width, height)
+    GC.@preserve x y width height KwxFFI.wxGraphicsPath_GetBox(obj.ptr, Base.unsafe_convert(Ptr{Cdouble}, x), Base.unsafe_convert(Ptr{Cdouble}, y), Base.unsafe_convert(Ptr{Cdouble}, width), Base.unsafe_convert(Ptr{Cdouble}, height))
     nothing
 end
 
 function get_current_point!(obj::wxGraphicsPath, x::Ref{Cdouble}, y::Ref{Cdouble})
-    KwxFFI.wxGraphicsPath_GetCurrentPoint(obj.ptr, x, y)
+    GC.@preserve x y KwxFFI.wxGraphicsPath_GetCurrentPoint(obj.ptr, Base.unsafe_convert(Ptr{Cdouble}, x), Base.unsafe_convert(Ptr{Cdouble}, y))
     nothing
 end
 

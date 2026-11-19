@@ -63,8 +63,8 @@ function get_as_string(obj::wxColour, flags::Integer)
     return _wx_take_wxstring(KwxFFI.wxColour_GetAsString(obj.ptr, Clong(flags)))
 end
 
-function wxColour_MakeDisabled(r::Integer, g::Integer, b::Integer, brightness::Integer)
-    KwxFFI.wxColour_MakeDisabled(Cint(r), Cint(g), Cint(b), Cint(brightness))
+function wxColour_MakeDisabled(r::Ptr{Cvoid}, g::Ptr{Cvoid}, b::Ptr{Cvoid}, brightness::Integer)
+    KwxFFI.wxColour_MakeDisabled(r, g, b, Cint(brightness))
     nothing
 end
 

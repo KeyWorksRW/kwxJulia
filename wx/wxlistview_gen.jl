@@ -20,7 +20,7 @@ function destroy_popup!(obj::wxListView)
 end
 
 function get_control(obj::wxListView)
-    return KwxFFI.wxComboPopup_GetControl(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxComboPopup_GetControl(obj.ptr))
 end
 
 function on_popup!(obj::wxListView)
@@ -59,7 +59,7 @@ function find_item(obj::wxListView, item::AbstractString, trueItem::AbstractStri
     return _result
 end
 
-function paint_combo_control!(obj::wxListView, dc::Union{wxDC, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer)
+function paint_combo_control!(obj::wxListView, dc::Union{wxDCBase, Nothing}, x::Integer, y::Integer, width::Integer, height::Integer)
     dc_ptr = isnothing(dc) ? C_NULL : dc.ptr
     KwxFFI.wxComboPopup_PaintComboControl(obj.ptr, dc_ptr, Cint(x), Cint(y), Cint(width), Cint(height))
     nothing
@@ -83,7 +83,7 @@ function on_combo_double_click!(obj::wxListView)
 end
 
 function get_adjusted_size!(obj::wxListView, minWidth::Integer, prefHeight::Integer, maxHeight::Integer, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxComboPopup_GetAdjustedSize(obj.ptr, Cint(minWidth), Cint(prefHeight), Cint(maxHeight), width, height)
+    GC.@preserve width height KwxFFI.wxComboPopup_GetAdjustedSize(obj.ptr, Cint(minWidth), Cint(prefHeight), Cint(maxHeight), Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 

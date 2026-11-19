@@ -19,7 +19,7 @@ function append_string!(obj::wxCheckListBox, item::AbstractString)
     nothing
 end
 
-function set_client_object!(obj::wxCheckListBox, n::Integer, clientData::Union{wxClientData, Nothing})
+function set_client_object!(obj::wxCheckListBox, n::Integer, clientData::Union{wxClientDataBase, Nothing})
     clientData_ptr = isnothing(clientData) ? C_NULL : clientData.ptr
     KwxFFI.wxItemContainer_SetClientObject(obj.ptr, Cuint(n), clientData_ptr)
     nothing
@@ -176,8 +176,8 @@ function Base.delete!(obj::wxCheckListBoxBase)
     nothing
 end
 
-function get_checked_items(obj::wxCheckListBoxBase, checkedItems::Integer, allocated::Integer)
-    return Int(KwxFFI.wxCheckListBox_GetCheckedItems(obj.ptr, Cint(checkedItems), Cint(allocated)))
+function get_checked_items(obj::wxCheckListBoxBase, checkedItems::Ptr{Cvoid}, allocated::Integer)
+    return Int(KwxFFI.wxCheckListBox_GetCheckedItems(obj.ptr, checkedItems, Cint(allocated)))
 end
 
 function is_checked(obj::wxCheckListBoxBase, item::Integer)

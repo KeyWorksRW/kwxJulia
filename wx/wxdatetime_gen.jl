@@ -38,7 +38,7 @@ function set_from_jdn!(obj::wxDateTime, julian_day::Float64)
 end
 
 function wxDateTime_GetFirstWeekDay(first_week_day::Ref{Int32})
-    return KwxFFI.wxDateTime_GetFirstWeekDay(first_week_day) != 0
+    return GC.@preserve first_week_day KwxFFI.wxDateTime_GetFirstWeekDay(Base.unsafe_convert(Ptr{Cint}, first_week_day)) != 0
 end
 
 function wxDateTime_GetEnglishMonthName(month::Integer, flags::Integer)

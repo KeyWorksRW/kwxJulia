@@ -14,7 +14,7 @@ function dec_ref!(obj::wxGridCellAttr)
 end
 
 function get_alignment!(obj::wxGridCellAttr, hAlign::Ref{Int32}, vAlign::Ref{Int32})
-    KwxFFI.wxGridCellAttr_GetAlignment(obj.ptr, hAlign, vAlign)
+    GC.@preserve hAlign vAlign KwxFFI.wxGridCellAttr_GetAlignment(obj.ptr, Base.unsafe_convert(Ptr{Int32}, hAlign), Base.unsafe_convert(Ptr{Int32}, vAlign))
     nothing
 end
 
@@ -96,7 +96,7 @@ function set_def_attr!(obj::wxGridCellAttr, defAttr::Union{wxGridCellAttr, Nothi
     nothing
 end
 
-function set_editor!(obj::wxGridCellAttr, editor::Union{wxGridCellEditor, Nothing})
+function set_editor!(obj::wxGridCellAttr, editor::Union{wxGridCellEditorBase, Nothing})
     editor_ptr = isnothing(editor) ? C_NULL : editor.ptr
     KwxFFI.wxGridCellAttr_SetEditor(obj.ptr, editor_ptr)
     nothing
@@ -113,7 +113,7 @@ function set_read_only!(obj::wxGridCellAttr, isReadOnly::Bool)
     nothing
 end
 
-function set_renderer!(obj::wxGridCellAttr, renderer::Union{wxGridCellRenderer, Nothing})
+function set_renderer!(obj::wxGridCellAttr, renderer::Union{wxGridCellRendererBase, Nothing})
     renderer_ptr = isnothing(renderer) ? C_NULL : renderer.ptr
     KwxFFI.wxGridCellAttr_SetRenderer(obj.ptr, renderer_ptr)
     nothing

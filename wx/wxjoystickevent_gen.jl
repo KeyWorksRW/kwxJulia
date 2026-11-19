@@ -25,7 +25,7 @@ function get_joystick(obj::wxJoystickEvent)
 end
 
 function get_position(obj::wxJoystickEvent)
-    return _wx_wrap(wxPoint, KwxFFI.wxJoystickEvent_GetPosition(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxJoystickEvent_GetPosition(obj.ptr); owned = true)
 end
 
 function get_z_position(obj::wxJoystickEvent)

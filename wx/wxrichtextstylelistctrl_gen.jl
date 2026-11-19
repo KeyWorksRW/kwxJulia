@@ -30,7 +30,7 @@ function get_style_sheet(obj::wxRichTextStyleListCtrl)
     return _wx_wrap(wxRichTextStyleSheet, KwxFFI.wxRichTextStyleListCtrl_GetStyleSheet(obj.ptr))
 end
 
-function set_rich_text_ctrl!(obj::wxRichTextStyleListCtrl, ctrl::Union{wxRichTextCtrl, Nothing})
+function set_rich_text_ctrl!(obj::wxRichTextStyleListCtrl, ctrl::Union{wxRichTextCtrlBase, Nothing})
     ctrl_ptr = isnothing(ctrl) ? C_NULL : ctrl.ptr
     KwxFFI.wxRichTextStyleListCtrl_SetRichTextCtrl(obj.ptr, ctrl_ptr)
     nothing

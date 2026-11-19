@@ -20,7 +20,7 @@ function Base.delete!(obj::wxRichTextFormattingDialogBase)
     nothing
 end
 
-function get_style(obj::wxRichTextFormattingDialogBase, ctrl::Union{wxRichTextCtrl, Nothing}, start::Integer, end_::Integer)
+function get_style(obj::wxRichTextFormattingDialogBase, ctrl::Union{wxRichTextCtrlBase, Nothing}, start::Integer, end_::Integer)
     ctrl_ptr = isnothing(ctrl) ? C_NULL : ctrl.ptr
     return KwxFFI.wxRichTextFormattingDialog_GetStyle(obj.ptr, ctrl_ptr, Clong(start), Clong(end_)) != 0
 end
@@ -30,7 +30,7 @@ function set_style(obj::wxRichTextFormattingDialogBase, style::Union{wxRichTextA
     return KwxFFI.wxRichTextFormattingDialog_SetStyle(obj.ptr, style_ptr, Cint(update)) != 0
 end
 
-function set_style_definition(obj::wxRichTextFormattingDialogBase, styleDef::Union{wxRichTextStyleDefinition, Nothing}, sheet::Union{wxRichTextStyleSheet, Nothing}, update::Bool)
+function set_style_definition(obj::wxRichTextFormattingDialogBase, styleDef::Union{wxRichTextStyleDefinitionBase, Nothing}, sheet::Union{wxRichTextStyleSheet, Nothing}, update::Bool)
     styleDef_ptr = isnothing(styleDef) ? C_NULL : styleDef.ptr
     sheet_ptr = isnothing(sheet) ? C_NULL : sheet.ptr
     return KwxFFI.wxRichTextFormattingDialog_SetStyleDefinition(obj.ptr, styleDef_ptr, sheet_ptr, Cint(update)) != 0
@@ -48,12 +48,12 @@ function update_display(obj::wxRichTextFormattingDialogBase)
     return KwxFFI.wxRichTextFormattingDialog_UpdateDisplay(obj.ptr) != 0
 end
 
-function apply_style(obj::wxRichTextFormattingDialogBase, ctrl::Union{wxRichTextCtrl, Nothing}, start::Integer, end_::Integer, flags::Integer)
+function apply_style(obj::wxRichTextFormattingDialogBase, ctrl::Union{wxRichTextCtrlBase, Nothing}, start::Integer, end_::Integer, flags::Integer)
     ctrl_ptr = isnothing(ctrl) ? C_NULL : ctrl.ptr
     return KwxFFI.wxRichTextFormattingDialog_ApplyStyle(obj.ptr, ctrl_ptr, Clong(start), Clong(end_), Cint(flags)) != 0
 end
 
-function apply_style_to_ctrl(obj::wxRichTextFormattingDialogBase, ctrl::Union{wxRichTextCtrl, Nothing}, flags::Integer)
+function apply_style_to_ctrl(obj::wxRichTextFormattingDialogBase, ctrl::Union{wxRichTextCtrlBase, Nothing}, flags::Integer)
     ctrl_ptr = isnothing(ctrl) ? C_NULL : ctrl.ptr
     return KwxFFI.wxRichTextFormattingDialog_ApplyStyleToCtrl(obj.ptr, ctrl_ptr, Cint(flags)) != 0
 end
@@ -87,7 +87,7 @@ function get_object(obj::wxRichTextFormattingDialogBase)
     return _wx_wrap(wxRichTextObject, KwxFFI.wxRichTextFormattingDialog_GetObject(obj.ptr))
 end
 
-function set_object!(obj::wxRichTextFormattingDialogBase, arg::Union{wxRichTextObject, Nothing})
+function set_object!(obj::wxRichTextFormattingDialogBase, arg::Union{wxRichTextObjectBase, Nothing})
     arg_ptr = isnothing(arg) ? C_NULL : arg.ptr
     KwxFFI.wxRichTextFormattingDialog_SetObject(obj.ptr, arg_ptr)
     nothing

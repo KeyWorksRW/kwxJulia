@@ -15,6 +15,6 @@ function Base.delete!(obj::wxMouseCaptureChangedEvent)
 end
 
 function get_captured_window(obj::wxMouseCaptureChangedEvent)
-    return KwxFFI.wxMouseCaptureChangedEvent_GetCapturedWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxMouseCaptureChangedEvent_GetCapturedWindow(obj.ptr))
 end
 

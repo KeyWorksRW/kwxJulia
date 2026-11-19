@@ -28,7 +28,7 @@ function get_item2!(obj::wxListCtrlBase, info::Union{wxListItem, Nothing})
 end
 
 function get_item_position2(obj::wxListCtrlBase, item::Integer)
-    return _wx_wrap(wxPoint, KwxFFI.wxListCtrl_GetItemPosition2(obj.ptr, Cint(item)))
+    return _wx_wrap(wxPoint, KwxFFI.wxListCtrl_GetItemPosition2(obj.ptr, Cint(item)); owned = true)
 end
 
 function refresh_items!(obj::wxListCtrlBase, from::Integer, toPos::Integer)
@@ -55,6 +55,10 @@ end
 
 function set_item_ptr_data(obj::wxListCtrlBase, item::Integer, data::Integer)
     return KwxFFI.wxListCtrl_SetItemPtrData(obj.ptr, Clong(item), Csize_t(data)) != 0
+end
+
+function get_item_ptr_data(obj::wxListCtrlBase, item::Integer)
+    return UInt(KwxFFI.wxListCtrl_GetItemPtrData(obj.ptr, Clong(item)))
 end
 
 function get_item_text_colour(obj::wxListCtrlBase, item::Integer)
@@ -234,15 +238,15 @@ function get_item_font(obj::wxListCtrlBase, item::Integer)
 end
 
 function get_item_position(obj::wxListCtrlBase, item::Integer)
-    return _wx_wrap(wxPoint, KwxFFI.wxListCtrl_GetItemPosition(obj.ptr, Cint(item)))
+    return _wx_wrap(wxPoint, KwxFFI.wxListCtrl_GetItemPosition(obj.ptr, Cint(item)); owned = true)
 end
 
 function get_item_rect(obj::wxListCtrlBase, item::Integer, code::Integer)
-    return _wx_wrap(wxRect, KwxFFI.wxListCtrl_GetItemRect(obj.ptr, Cint(item), Cint(code)))
+    return _wx_wrap(wxRect, KwxFFI.wxListCtrl_GetItemRect(obj.ptr, Cint(item), Cint(code)); owned = true)
 end
 
 function get_item_spacing(obj::wxListCtrlBase, isSmall::Bool)
-    return _wx_wrap(wxSize, KwxFFI.wxListCtrl_GetItemSpacing(obj.ptr, Cint(isSmall)))
+    return _wx_wrap(wxSize, KwxFFI.wxListCtrl_GetItemSpacing(obj.ptr, Cint(isSmall)); owned = true)
 end
 
 function get_item_state(obj::wxListCtrlBase, item::Integer, stateMask::Integer)
@@ -272,7 +276,7 @@ function get_top_item(obj::wxListCtrlBase)
 end
 
 function hit_test(obj::wxListCtrlBase, x::Integer, y::Integer, flags::Ptr{Cvoid}, pSubItem::Ref{Clong})
-    return Int(KwxFFI.wxListCtrl_HitTest(obj.ptr, Cint(x), Cint(y), flags, pSubItem))
+    return Int(GC.@preserve pSubItem KwxFFI.wxListCtrl_HitTest(obj.ptr, Cint(x), Cint(y), flags, Base.unsafe_convert(Ptr{Clong}, pSubItem)))
 end
 
 function insert_column(obj::wxListCtrlBase, col::Integer, heading::AbstractString, format::Integer, width::Integer)
@@ -419,11 +423,11 @@ function sort_items(obj::wxListCtrlBase, compareFunc::Ptr{Cvoid}, arg::Ptr{Cvoid
 end
 
 function get_sub_item_rect(obj::wxListCtrlBase, item::Integer, subItem::Integer, x::Ref{Int32}, y::Ref{Int32}, width::Ref{Int32}, height::Ref{Int32}, code::Integer)
-    return KwxFFI.wxListCtrl_GetSubItemRect(obj.ptr, Clong(item), Clong(subItem), x, y, width, height, Cint(code)) != 0
+    return GC.@preserve x y width height KwxFFI.wxListCtrl_GetSubItemRect(obj.ptr, Clong(item), Clong(subItem), Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y), Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height), Cint(code)) != 0
 end
 
 function get_view_rect!(obj::wxListCtrlBase, x::Ref{Int32}, y::Ref{Int32}, width::Ref{Int32}, height::Ref{Int32})
-    KwxFFI.wxListCtrl_GetViewRect(obj.ptr, x, y, width, height)
+    GC.@preserve x y width height KwxFFI.wxListCtrl_GetViewRect(obj.ptr, Base.unsafe_convert(Ptr{Int32}, x), Base.unsafe_convert(Ptr{Int32}, y), Base.unsafe_convert(Ptr{Int32}, width), Base.unsafe_convert(Ptr{Int32}, height))
     nothing
 end
 
@@ -466,7 +470,8 @@ function set_item_count!(obj::wxListCtrlBase, count::Integer)
     nothing
 end
 
-function set_header_attr(obj::wxListCtrlBase, attr::Ptr{Cvoid})
-    return KwxFFI.wxListCtrl_SetHeaderAttr(obj.ptr, attr) != 0
+function set_header_attr(obj::wxListCtrlBase, attr::Union{wxItemAttr, Nothing})
+    attr_ptr = isnothing(attr) ? C_NULL : attr.ptr
+    return KwxFFI.wxListCtrl_SetHeaderAttr(obj.ptr, attr_ptr) != 0
 end
 

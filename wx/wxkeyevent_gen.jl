@@ -33,7 +33,7 @@ function get_key_code(obj::wxKeyEvent)
 end
 
 function get_position(obj::wxKeyEvent)
-    return _wx_wrap(wxPoint, KwxFFI.wxKeyEvent_GetPosition(obj.ptr))
+    return _wx_wrap(wxPoint, KwxFFI.wxKeyEvent_GetPosition(obj.ptr); owned = true)
 end
 
 function get_x(obj::wxKeyEvent)

@@ -58,42 +58,42 @@ function get_property_by_label(obj::wxPropertyGridInterface, label::AbstractStri
     return _result
 end
 
-function get_property_name(obj::wxPropertyGridInterface, property::Union{wxPGProperty, Nothing})
+function get_property_name(obj::wxPropertyGridInterface, property::Union{wxPGPropertyBase, Nothing})
     property_ptr = isnothing(property) ? C_NULL : property.ptr
     return _wx_take_wxstring(KwxFFI.wxPropertyGridInterface_GetPropertyName(obj.ptr, property_ptr))
 end
 
-function get_property_label(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_label(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_take_wxstring(KwxFFI.wxPropertyGridInterface_GetPropertyLabel(obj.ptr, id_ptr))
 end
 
-function get_property_help_string(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_help_string(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_take_wxstring(KwxFFI.wxPropertyGridInterface_GetPropertyHelpString(obj.ptr, id_ptr))
 end
 
-function get_property_parent(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_parent(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_wrap(wxPGProperty, KwxFFI.wxPropertyGridInterface_GetPropertyParent(obj.ptr, id_ptr))
 end
 
-function get_property_category(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_category(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_wrap(wxPropertyCategory, KwxFFI.wxPropertyGridInterface_GetPropertyCategory(obj.ptr, id_ptr))
 end
 
-function get_property_editor(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_editor(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_wrap(wxPGEditor, KwxFFI.wxPropertyGridInterface_GetPropertyEditor(obj.ptr, id_ptr))
 end
 
-function get_property_image(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_image(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_wrap(wxBitmap, KwxFFI.wxPropertyGridInterface_GetPropertyImage(obj.ptr, id_ptr))
 end
 
-function get_first_child(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_first_child(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_wrap(wxPGProperty, KwxFFI.wxPropertyGridInterface_GetFirstChild(obj.ptr, id_ptr))
 end
@@ -110,41 +110,41 @@ function get_state(obj::wxPropertyGridInterface)
     return _wx_wrap(wxPropertyGridPageState, KwxFFI.wxPropertyGridInterface_GetState(obj.ptr))
 end
 
-function append(obj::wxPropertyGridInterface, property::Union{wxPGProperty, Nothing})
+function append(obj::wxPropertyGridInterface, property::Union{wxPGPropertyBase, Nothing})
     property_ptr = isnothing(property) ? C_NULL : property.ptr
     return _wx_wrap(wxPGProperty, KwxFFI.wxPropertyGridInterface_Append(obj.ptr, property_ptr))
 end
 
-function append_in(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, property::Union{wxPGProperty, Nothing})
+function append_in(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, property::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     property_ptr = isnothing(property) ? C_NULL : property.ptr
     return _wx_wrap(wxPGProperty, KwxFFI.wxPropertyGridInterface_AppendIn(obj.ptr, id_ptr, property_ptr))
 end
 
-function insert(obj::wxPropertyGridInterface, prior_this::Union{wxPGProperty, Nothing}, property::Union{wxPGProperty, Nothing})
+function insert(obj::wxPropertyGridInterface, prior_this::Union{wxPGPropertyBase, Nothing}, property::Union{wxPGPropertyBase, Nothing})
     prior_this_ptr = isnothing(prior_this) ? C_NULL : prior_this.ptr
     property_ptr = isnothing(property) ? C_NULL : property.ptr
     return _wx_wrap(wxPGProperty, KwxFFI.wxPropertyGridInterface_Insert(obj.ptr, prior_this_ptr, property_ptr))
 end
 
-function insert2(obj::wxPropertyGridInterface, parent::Union{wxPGProperty, Nothing}, index::Integer, property::Union{wxPGProperty, Nothing})
+function insert2(obj::wxPropertyGridInterface, parent::Union{wxPGPropertyBase, Nothing}, index::Integer, property::Union{wxPGPropertyBase, Nothing})
     parent_ptr = isnothing(parent) ? C_NULL : parent.ptr
     property_ptr = isnothing(property) ? C_NULL : property.ptr
     return _wx_wrap(wxPGProperty, KwxFFI.wxPropertyGridInterface_Insert2(obj.ptr, parent_ptr, Cint(index), property_ptr))
 end
 
-function replace_property(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, property::Union{wxPGProperty, Nothing})
+function replace_property(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, property::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     property_ptr = isnothing(property) ? C_NULL : property.ptr
     return _wx_wrap(wxPGProperty, KwxFFI.wxPropertyGridInterface_ReplaceProperty(obj.ptr, id_ptr, property_ptr))
 end
 
-function remove_property(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function remove_property(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_wrap(wxPGProperty, KwxFFI.wxPropertyGridInterface_RemoveProperty(obj.ptr, id_ptr))
 end
 
-function delete_property!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function delete_property!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     KwxFFI.wxPropertyGridInterface_DeleteProperty(obj.ptr, id_ptr)
     nothing
@@ -168,7 +168,7 @@ function editor_validate(obj::wxPropertyGridInterface)
     return KwxFFI.wxPropertyGridInterface_EditorValidate(obj.ptr) != 0
 end
 
-function collapse(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function collapse(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_Collapse(obj.ptr, id_ptr) != 0
 end
@@ -177,7 +177,7 @@ function collapse_all(obj::wxPropertyGridInterface)
     return KwxFFI.wxPropertyGridInterface_CollapseAll(obj.ptr) != 0
 end
 
-function expand(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function expand(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_Expand(obj.ptr, id_ptr) != 0
 end
@@ -186,22 +186,22 @@ function expand_all(obj::wxPropertyGridInterface, expand::Bool)
     return KwxFFI.wxPropertyGridInterface_ExpandAll(obj.ptr, Cint(expand)) != 0
 end
 
-function disable_property(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function disable_property(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_DisableProperty(obj.ptr, id_ptr) != 0
 end
 
-function enable_property(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, enable::Bool)
+function enable_property(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, enable::Bool)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_EnableProperty(obj.ptr, id_ptr, Cint(enable)) != 0
 end
 
-function hide_property(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, hide::Bool, flags::Integer)
+function hide_property(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, hide::Bool, flags::Integer)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_HideProperty(obj.ptr, id_ptr, Cint(hide), Cint(flags)) != 0
 end
 
-function limit_property_editing!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, limit::Bool)
+function limit_property_editing!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, limit::Bool)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     KwxFFI.wxPropertyGridInterface_LimitPropertyEditing(obj.ptr, id_ptr, Cint(limit))
     nothing
@@ -213,50 +213,50 @@ function refresh_grid!(obj::wxPropertyGridInterface, state::Union{wxPropertyGrid
     nothing
 end
 
-function refresh_property!(obj::wxPropertyGridInterface, property::Union{wxPGProperty, Nothing})
+function refresh_property!(obj::wxPropertyGridInterface, property::Union{wxPGPropertyBase, Nothing})
     property_ptr = isnothing(property) ? C_NULL : property.ptr
     KwxFFI.wxPropertyGridInterface_RefreshProperty(obj.ptr, property_ptr)
     nothing
 end
 
-function get_property_value(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_value(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_wrap(wxVariant, KwxFFI.wxPropertyGridInterface_GetPropertyValue(obj.ptr, id_ptr))
 end
 
-function get_property_value_as_string(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_value_as_string(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_take_wxstring(KwxFFI.wxPropertyGridInterface_GetPropertyValueAsString(obj.ptr, id_ptr))
 end
 
-function get_property_value_as_long(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_value_as_long(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return Int(KwxFFI.wxPropertyGridInterface_GetPropertyValueAsLong(obj.ptr, id_ptr))
 end
 
-function get_property_value_as_int(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_value_as_int(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return Int(KwxFFI.wxPropertyGridInterface_GetPropertyValueAsInt(obj.ptr, id_ptr))
 end
 
-function get_property_value_as_bool(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_value_as_bool(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_GetPropertyValueAsBool(obj.ptr, id_ptr) != 0
 end
 
-function get_property_value_as_double(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_value_as_double(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return Float64(KwxFFI.wxPropertyGridInterface_GetPropertyValueAsDouble(obj.ptr, id_ptr))
 end
 
-function set_property_value!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, value::Union{wxVariant, Nothing})
+function set_property_value!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, value::Union{wxVariant, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     value_ptr = isnothing(value) ? C_NULL : value.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyValue(obj.ptr, id_ptr, value_ptr)
     nothing
 end
 
-function set_property_value_string!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, value::AbstractString)
+function set_property_value_string!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, value::AbstractString)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     value_ws = wxString(value)
     try
@@ -267,37 +267,37 @@ function set_property_value_string!(obj::wxPropertyGridInterface, id::Union{wxPG
     nothing
 end
 
-function set_property_value_long!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, value::Integer)
+function set_property_value_long!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, value::Integer)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyValueLong(obj.ptr, id_ptr, Clong(value))
     nothing
 end
 
-function set_property_value_int!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, value::Integer)
+function set_property_value_int!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, value::Integer)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyValueInt(obj.ptr, id_ptr, Cint(value))
     nothing
 end
 
-function set_property_value_double!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, value::Float64)
+function set_property_value_double!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, value::Float64)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyValueDouble(obj.ptr, id_ptr, Cdouble(value))
     nothing
 end
 
-function set_property_value_bool!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, value::Bool)
+function set_property_value_bool!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, value::Bool)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyValueBool(obj.ptr, id_ptr, Cint(value))
     nothing
 end
 
-function set_property_value_unspecified!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function set_property_value_unspecified!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyValueUnspecified(obj.ptr, id_ptr)
     nothing
 end
 
-function set_property_label!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, label::AbstractString)
+function set_property_label!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, label::AbstractString)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     label_ws = wxString(label)
     try
@@ -308,7 +308,7 @@ function set_property_label!(obj::wxPropertyGridInterface, id::Union{wxPGPropert
     nothing
 end
 
-function set_property_name!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, name::AbstractString)
+function set_property_name!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, name::AbstractString)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     name_ws = wxString(name)
     try
@@ -319,7 +319,7 @@ function set_property_name!(obj::wxPropertyGridInterface, id::Union{wxPGProperty
     nothing
 end
 
-function set_property_help_string!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, text::AbstractString)
+function set_property_help_string!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, text::AbstractString)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     text_ws = wxString(text)
     try
@@ -330,20 +330,20 @@ function set_property_help_string!(obj::wxPropertyGridInterface, id::Union{wxPGP
     nothing
 end
 
-function set_property_read_only!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, read_only::Bool, flags::Integer)
+function set_property_read_only!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, read_only::Bool, flags::Integer)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyReadOnly(obj.ptr, id_ptr, Cint(read_only), Cint(flags))
     nothing
 end
 
-function set_property_editor!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, editor::Union{wxPGEditor, Nothing})
+function set_property_editor!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, editor::Union{wxPGEditorBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     editor_ptr = isnothing(editor) ? C_NULL : editor.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyEditor(obj.ptr, id_ptr, editor_ptr)
     nothing
 end
 
-function set_property_editor_by_name!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, name::AbstractString)
+function set_property_editor_by_name!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, name::AbstractString)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     name_ws = wxString(name)
     try
@@ -354,14 +354,14 @@ function set_property_editor_by_name!(obj::wxPropertyGridInterface, id::Union{wx
     nothing
 end
 
-function set_property_image!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, bitmap::Union{wxBitmapBundle, Nothing})
+function set_property_image!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, bitmap::Union{wxBitmapBundle, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyImage(obj.ptr, id_ptr, bitmap_ptr)
     nothing
 end
 
-function set_property_cell!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, column::Integer, text::AbstractString, bitmap::Union{wxBitmapBundle, Nothing}, fg_col::Union{wxColour, Nothing}, bg_col::Union{wxColour, Nothing})
+function set_property_cell!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, column::Integer, text::AbstractString, bitmap::Union{wxBitmapBundle, Nothing}, fg_col::Union{wxColour, Nothing}, bg_col::Union{wxColour, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     text_ws = wxString(text)
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
@@ -375,37 +375,37 @@ function set_property_cell!(obj::wxPropertyGridInterface, id::Union{wxPGProperty
     nothing
 end
 
-function is_property_category(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function is_property_category(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_IsPropertyCategory(obj.ptr, id_ptr) != 0
 end
 
-function is_property_enabled(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function is_property_enabled(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_IsPropertyEnabled(obj.ptr, id_ptr) != 0
 end
 
-function is_property_expanded(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function is_property_expanded(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_IsPropertyExpanded(obj.ptr, id_ptr) != 0
 end
 
-function is_property_modified(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function is_property_modified(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_IsPropertyModified(obj.ptr, id_ptr) != 0
 end
 
-function is_property_selected(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function is_property_selected(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_IsPropertySelected(obj.ptr, id_ptr) != 0
 end
 
-function is_property_shown(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function is_property_shown(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_IsPropertyShown(obj.ptr, id_ptr) != 0
 end
 
-function is_property_value_unspecified(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function is_property_value_unspecified(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_IsPropertyValueUnspecified(obj.ptr, id_ptr) != 0
 end
@@ -437,31 +437,31 @@ function Base.sort!(obj::wxPropertyGridInterface, flags::Integer)
     nothing
 end
 
-function sort_children!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, flags::Integer)
+function sort_children!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, flags::Integer)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     KwxFFI.wxPropertyGridInterface_SortChildren(obj.ptr, id_ptr, Cint(flags))
     nothing
 end
 
-function begin_add_children!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function begin_add_children!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     KwxFFI.wxPropertyGridInterface_BeginAddChildren(obj.ptr, id_ptr)
     nothing
 end
 
-function end_add_children!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function end_add_children!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     KwxFFI.wxPropertyGridInterface_EndAddChildren(obj.ptr, id_ptr)
     nothing
 end
 
-function change_property_value(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, value::Union{wxVariant, Nothing})
+function change_property_value(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, value::Union{wxVariant, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     value_ptr = isnothing(value) ? C_NULL : value.ptr
     return KwxFFI.wxPropertyGridInterface_ChangePropertyValue(obj.ptr, id_ptr, value_ptr) != 0
 end
 
-function get_property_attribute(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, attrName::AbstractString)
+function get_property_attribute(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, attrName::AbstractString)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     attrName_ws = wxString(attrName)
     _result = try
@@ -472,7 +472,7 @@ function get_property_attribute(obj::wxPropertyGridInterface, id::Union{wxPGProp
     return _result
 end
 
-function set_property_attribute!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, attrName::AbstractString, value::Union{wxVariant, Nothing}, flags::Integer)
+function set_property_attribute!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, attrName::AbstractString, value::Union{wxVariant, Nothing}, flags::Integer)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     attrName_ws = wxString(attrName)
     value_ptr = isnothing(value) ? C_NULL : value.ptr
@@ -484,30 +484,30 @@ function set_property_attribute!(obj::wxPropertyGridInterface, id::Union{wxPGPro
     nothing
 end
 
-function get_property_client_data(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_client_data(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_GetPropertyClientData(obj.ptr, id_ptr)
 end
 
-function set_property_client_data!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, clientData::Ptr{Cvoid})
+function set_property_client_data!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, clientData::Ptr{Cvoid})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyClientData(obj.ptr, id_ptr, clientData)
     nothing
 end
 
-function get_property_validator(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_validator(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_wrap(wxValidator, KwxFFI.wxPropertyGridInterface_GetPropertyValidator(obj.ptr, id_ptr))
 end
 
-function set_property_validator!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, validator::Union{wxValidator, Nothing})
+function set_property_validator!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, validator::Union{wxValidatorBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     validator_ptr = isnothing(validator) ? C_NULL : validator.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyValidator(obj.ptr, id_ptr, validator_ptr)
     nothing
 end
 
-function get_property_values(obj::wxPropertyGridInterface, listname::AbstractString, baseparent::Union{wxPGProperty, Nothing}, flags::Integer)
+function get_property_values(obj::wxPropertyGridInterface, listname::AbstractString, baseparent::Union{wxPGPropertyBase, Nothing}, flags::Integer)
     listname_ws = wxString(listname)
     baseparent_ptr = isnothing(baseparent) ? C_NULL : baseparent.ptr
     _result = try
@@ -518,44 +518,44 @@ function get_property_values(obj::wxPropertyGridInterface, listname::AbstractStr
     return _result
 end
 
-function set_property_values!(obj::wxPropertyGridInterface, list::Union{wxVariant, Nothing}, baseparent::Union{wxPGProperty, Nothing})
+function set_property_values!(obj::wxPropertyGridInterface, list::Union{wxVariant, Nothing}, baseparent::Union{wxPGPropertyBase, Nothing})
     list_ptr = isnothing(list) ? C_NULL : list.ptr
     baseparent_ptr = isnothing(baseparent) ? C_NULL : baseparent.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyValues(obj.ptr, list_ptr, baseparent_ptr)
     nothing
 end
 
-function set_property_background_colour!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, colour::Union{wxColour, Nothing}, flags::Integer)
+function set_property_background_colour!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, colour::Union{wxColour, Nothing}, flags::Integer)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     colour_ptr = isnothing(colour) ? C_NULL : colour.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyBackgroundColour(obj.ptr, id_ptr, colour_ptr, Cint(flags))
     nothing
 end
 
-function set_property_text_colour!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, colour::Union{wxColour, Nothing}, flags::Integer)
+function set_property_text_colour!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, colour::Union{wxColour, Nothing}, flags::Integer)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     colour_ptr = isnothing(colour) ? C_NULL : colour.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyTextColour(obj.ptr, id_ptr, colour_ptr, Cint(flags))
     nothing
 end
 
-function set_property_colours_to_default!(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, flags::Integer)
+function set_property_colours_to_default!(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, flags::Integer)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     KwxFFI.wxPropertyGridInterface_SetPropertyColoursToDefault(obj.ptr, id_ptr, Cint(flags))
     nothing
 end
 
-function get_property_background_colour(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_background_colour(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_wrap(wxColour, KwxFFI.wxPropertyGridInterface_GetPropertyBackgroundColour(obj.ptr, id_ptr))
 end
 
-function get_property_text_colour(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_text_colour(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_wrap(wxColour, KwxFFI.wxPropertyGridInterface_GetPropertyTextColour(obj.ptr, id_ptr))
 end
 
-function set_property_max_length(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing}, maxLen::Integer)
+function set_property_max_length(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing}, maxLen::Integer)
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_SetPropertyMaxLength(obj.ptr, id_ptr, Cint(maxLen)) != 0
 end
@@ -565,27 +565,27 @@ function set_validation_failure_behavior!(obj::wxPropertyGridInterface, flags::I
     nothing
 end
 
-function get_property_value_as_u_long(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_value_as_u_long(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return KwxFFI.wxPropertyGridInterface_GetPropertyValueAsULong(obj.ptr, id_ptr)
 end
 
-function get_property_value_as_long_long(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_value_as_long_long(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return Int64(KwxFFI.wxPropertyGridInterface_GetPropertyValueAsLongLong(obj.ptr, id_ptr))
 end
 
-function get_property_value_as_array_string(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_value_as_array_string(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_wrap(wxArrayString, KwxFFI.wxPropertyGridInterface_GetPropertyValueAsArrayString(obj.ptr, id_ptr))
 end
 
-function get_property_value_as_array_int(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_value_as_array_int(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_wrap(wxArrayInt, KwxFFI.wxPropertyGridInterface_GetPropertyValueAsArrayInt(obj.ptr, id_ptr))
 end
 
-function get_property_value_as_date_time(obj::wxPropertyGridInterface, id::Union{wxPGProperty, Nothing})
+function get_property_value_as_date_time(obj::wxPropertyGridInterface, id::Union{wxPGPropertyBase, Nothing})
     id_ptr = isnothing(id) ? C_NULL : id.ptr
     return _wx_wrap(wxDateTime, KwxFFI.wxPropertyGridInterface_GetPropertyValueAsDateTime(obj.ptr, id_ptr))
 end

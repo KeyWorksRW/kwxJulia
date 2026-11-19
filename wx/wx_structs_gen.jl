@@ -4,6 +4,10 @@ mutable struct wxAccessible <: wxObject
     ptr::Ptr{Cvoid}
 end
 
+mutable struct kwxAccString <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
 mutable struct wxAuiPaneLayoutInfo <: wxObject
     ptr::Ptr{Cvoid}
 end
@@ -136,6 +140,10 @@ mutable struct wxStringOutputStream <: wxOutputStreamBase
     ptr::Ptr{Cvoid}
 end
 
+mutable struct wxStringInputStream <: wxInputStreamBase
+    ptr::Ptr{Cvoid}
+end
+
 mutable struct wxFrame <: wxFrameBase
     ptr::Ptr{Cvoid}
     children::Vector{Any}
@@ -170,7 +178,7 @@ mutable struct wxGraphicsBrush <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxGraphicsContext <: wxObject
+mutable struct wxGraphicsContext <: wxGraphicsContextBase
     ptr::Ptr{Cvoid}
 end
 
@@ -191,6 +199,14 @@ mutable struct wxGraphicsPath <: wxObject
 end
 
 mutable struct wxGraphicsPen <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxGraphicsGradientStops <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxGraphicsPenInfo <: wxObject
     ptr::Ptr{Cvoid}
 end
 
@@ -292,7 +308,7 @@ mutable struct wxMenuItem <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxMouseEvent <: wxObject
+mutable struct wxMouseEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -378,7 +394,7 @@ mutable struct wxSocketClient <: wxSocketClientBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxSocketEvent <: wxObject
+mutable struct wxSocketEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -530,6 +546,10 @@ mutable struct wxXmlNode <: wxObject
     ptr::Ptr{Cvoid}
 end
 
+mutable struct wxXmlDocument <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
 mutable struct wxFSFile <: wxObject
     ptr::Ptr{Cvoid}
 end
@@ -611,6 +631,22 @@ mutable struct kwxCmdLineDesc <: wxObject
 end
 
 mutable struct wxVariant <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDebugReport <: wxDebugReportBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDebugReportCompress <: wxDebugReportCompressBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDebugReportUpload <: wxDebugReportUploadBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDebugReportPreviewStd <: wxObject
     ptr::Ptr{Cvoid}
 end
 
@@ -912,6 +948,10 @@ mutable struct kwxApp <: wxAppBase
     ptr::Ptr{Cvoid}
 end
 
+mutable struct kwxDebugReportUpload <: wxDebugReportUploadBase
+    ptr::Ptr{Cvoid}
+end
+
 mutable struct kwxObject <: wxObject
     ptr::Ptr{Cvoid}
 end
@@ -930,6 +970,12 @@ end
 
 mutable struct kwxEvtHandler <: wxEvtHandler
     ptr::Ptr{Cvoid}
+end
+
+mutable struct kwxFrame <: wxFrameBase
+    ptr::Ptr{Cvoid}
+    children::Vector{Any}
+    closures::Vector{Any}
 end
 
 mutable struct kwxVarHScrollHelper <: wxVarHScrollHelperBase
@@ -1036,6 +1082,22 @@ mutable struct kwxView <: wxViewBase
     ptr::Ptr{Cvoid}
 end
 
+mutable struct kwxDocTemplate <: wxDocTemplateBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct kwxDocAuiParentFrame <: wxAuiMDIParentFrameBase
+    ptr::Ptr{Cvoid}
+    children::Vector{Any}
+    closures::Vector{Any}
+end
+
+mutable struct kwxDocAuiChildFrame <: wxAuiMDIChildFrameBase
+    ptr::Ptr{Cvoid}
+    children::Vector{Any}
+    closures::Vector{Any}
+end
+
 mutable struct kwxFileSystemHandler <: wxFileSystemHandlerBase
     ptr::Ptr{Cvoid}
 end
@@ -1044,7 +1106,7 @@ mutable struct kwxHtmlTagHandler <: wxHtmlTagHandlerBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct kwxEvent <: wxObject
+mutable struct kwxEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -1058,10 +1120,84 @@ mutable struct kwxWizardPage <: wxWizardPageBase
     closures::Vector{Any}
 end
 
+mutable struct kwxWizardPageSimple <: wxWizardPageSimpleBase
+    ptr::Ptr{Cvoid}
+    children::Vector{Any}
+    closures::Vector{Any}
+end
+
 mutable struct kwxPopupTransientWindow <: wxPopupTransientWindowBase
     ptr::Ptr{Cvoid}
     children::Vector{Any}
     closures::Vector{Any}
+end
+
+mutable struct wxDataViewModel <: wxDataViewModelBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewVirtualListModel <: wxDataViewModelBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewIndexListModel <: wxDataViewModelBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewListStore <: wxDataViewModelBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewRenderer <: wxDataViewRendererBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewCustomRenderer <: wxDataViewCustomRendererBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewTextRenderer <: wxDataViewRendererBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewToggleRenderer <: wxDataViewRendererBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewBitmapRenderer <: wxDataViewRendererBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewProgressRenderer <: wxDataViewRendererBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewIconTextRenderer <: wxDataViewRendererBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewSpinRenderer <: wxDataViewCustomRendererBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewChoiceRenderer <: wxDataViewChoiceRendererBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewChoiceByIndexRenderer <: wxDataViewChoiceRendererBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewDateRenderer <: wxDataViewRendererBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewCheckIconTextRenderer <: wxDataViewCustomRendererBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewColumn <: wxObject
+    ptr::Ptr{Cvoid}
 end
 
 mutable struct wxHtmlCell <: wxHtmlCellBase
@@ -1176,11 +1312,57 @@ mutable struct wxAcceleratorTable <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxDataViewCtrl <: wxObject
+mutable struct wxDCPenChanger <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxDataViewListCtrl <: wxObject
+mutable struct wxDCBrushChanger <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDCFontChanger <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDCTextColourChanger <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDCTextBgColourChanger <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDCTextBgModeChanger <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewItemAttr <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewCtrl <: wxDataViewCtrlBase
+    ptr::Ptr{Cvoid}
+    children::Vector{Any}
+    closures::Vector{Any}
+end
+
+mutable struct wxDataViewListCtrl <: wxDataViewCtrlBase
+    ptr::Ptr{Cvoid}
+    children::Vector{Any}
+    closures::Vector{Any}
+end
+
+mutable struct wxDataViewTreeStore <: wxDataViewModelBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewTreeCtrl <: wxDataViewCtrlBase
+    ptr::Ptr{Cvoid}
+    children::Vector{Any}
+    closures::Vector{Any}
+end
+
+mutable struct wxDataViewEvent <: wxNotifyEventBase
     ptr::Ptr{Cvoid}
 end
 
@@ -1196,6 +1378,14 @@ mutable struct wxStatusBar <: wxWindow
     closures::Vector{Any}
 end
 
+mutable struct wxDataViewIconText <: wxDataViewIconTextBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxDataViewCheckIconText <: wxDataViewIconTextBase
+    ptr::Ptr{Cvoid}
+end
+
 mutable struct wxTextEntry <: wxObject
     ptr::Ptr{Cvoid}
 end
@@ -1208,6 +1398,10 @@ mutable struct wxDialog <: wxDialogBase
     ptr::Ptr{Cvoid}
     children::Vector{Any}
     closures::Vector{Any}
+end
+
+mutable struct kwxMSAA <: wxObject
+    ptr::Ptr{Cvoid}
 end
 
 mutable struct wxProtocol <: wxProtocolBase
@@ -1254,7 +1448,7 @@ mutable struct wxProcessEx <: wxProcessBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxProcessEvent <: wxObject
+mutable struct wxProcessEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -1430,10 +1624,6 @@ mutable struct wxRegEx <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxXmlDocument <: wxObject
-    ptr::Ptr{Cvoid}
-end
-
 mutable struct wxURI <: wxObject
     ptr::Ptr{Cvoid}
 end
@@ -1535,6 +1725,14 @@ mutable struct wxRichTextObject <: wxRichTextObjectBase
 end
 
 mutable struct wxRichTextCompositeObject <: wxRichTextCompositeObjectBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxRichTextParagraph <: wxRichTextCompositeObjectBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxRichTextPlainText <: wxRichTextObjectBase
     ptr::Ptr{Cvoid}
 end
 
@@ -1720,7 +1918,7 @@ mutable struct wxDateEvent <: wxCommandEventBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxTaskBarIconEvent <: wxObject
+mutable struct wxTaskBarIconEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -1736,7 +1934,7 @@ mutable struct wxTextUrlEvent <: wxCommandEventBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxThreadEvent <: wxObject
+mutable struct wxThreadEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -1771,6 +1969,10 @@ mutable struct wxGBSizerItem <: wxSizerItemBase
 end
 
 mutable struct wxDCOverlay <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxOverlayDC <: wxDCBase
     ptr::Ptr{Cvoid}
 end
 
@@ -1850,6 +2052,14 @@ mutable struct wxDynamicLibrary <: wxObject
     ptr::Ptr{Cvoid}
 end
 
+mutable struct wxDynamicLibraryDetails <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct kwxDynamicLibraryList <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
 mutable struct wxMutex <: wxObject
     ptr::Ptr{Cvoid}
 end
@@ -1859,6 +2069,14 @@ mutable struct wxCriticalSection <: wxObject
 end
 
 mutable struct wxCondition <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxItemAttr <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxOverlay <: wxObject
     ptr::Ptr{Cvoid}
 end
 
@@ -1946,7 +2164,7 @@ mutable struct wxAnimationCtrl <: wxControl
     closures::Vector{Any}
 end
 
-mutable struct wxActivateEvent <: wxObject
+mutable struct wxActivateEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -2124,11 +2342,11 @@ mutable struct wxBrush <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxBufferedDC <: wxDCBase
+mutable struct wxBufferedDC <: wxBufferedDCBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxBufferedPaintDC <: wxDCBase
+mutable struct wxBufferedPaintDC <: wxBufferedDCBase
     ptr::Ptr{Cvoid}
 end
 
@@ -2164,7 +2382,7 @@ mutable struct wxButton <: wxButtonBase
     closures::Vector{Any}
 end
 
-mutable struct wxCalculateLayoutEvent <: wxObject
+mutable struct wxCalculateLayoutEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -2248,11 +2466,15 @@ mutable struct wxCollapsiblePaneEvent <: wxCommandEventBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxCloseEvent <: wxObject
+mutable struct wxCloseEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
 mutable struct wxClosure <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxColourDatabase <: wxObject
     ptr::Ptr{Cvoid}
 end
 
@@ -2298,6 +2520,10 @@ mutable struct wxContextMenuEvent <: wxCommandEventBase
     ptr::Ptr{Cvoid}
 end
 
+mutable struct wxCursorBundle <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
 mutable struct wxCustomDataObject <: wxDataObjectSimpleBase
     ptr::Ptr{Cvoid}
 end
@@ -2326,11 +2552,15 @@ mutable struct wxDataInputStream <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxDataObjectComposite <: wxDataObjectBase
+mutable struct wxDataObjectComposite <: wxDataObjectCompositeBase
     ptr::Ptr{Cvoid}
 end
 
 mutable struct wxDataObjectSimple <: wxDataObjectSimpleBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxURLDataObject <: wxDataObjectCompositeBase
     ptr::Ptr{Cvoid}
 end
 
@@ -2362,13 +2592,13 @@ mutable struct wxDocMDIParentFrame <: wxMDIParentFrameBase
     closures::Vector{Any}
 end
 
-mutable struct wxAuiMDIParentFrame <: wxFrameBase
+mutable struct wxAuiMDIParentFrame <: wxAuiMDIParentFrameBase
     ptr::Ptr{Cvoid}
     children::Vector{Any}
     closures::Vector{Any}
 end
 
-mutable struct wxAuiMDIChildFrame <: wxFrameBase
+mutable struct wxAuiMDIChildFrame <: wxAuiMDIChildFrameBase
     ptr::Ptr{Cvoid}
     children::Vector{Any}
     closures::Vector{Any}
@@ -2382,6 +2612,10 @@ mutable struct wxDocParentFrame <: wxFrameBase
     ptr::Ptr{Cvoid}
     children::Vector{Any}
     closures::Vector{Any}
+end
+
+mutable struct wxDocTemplate <: wxDocTemplateBase
+    ptr::Ptr{Cvoid}
 end
 
 mutable struct wxDocument <: wxDocumentBase
@@ -2400,15 +2634,15 @@ mutable struct wxDrawWindow <: wxWindow
     closures::Vector{Any}
 end
 
-mutable struct wxDPIChangedEvent <: wxObject
+mutable struct wxDPIChangedEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxDisplayChangedEvent <: wxObject
+mutable struct wxDisplayChangedEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxDropFilesEvent <: wxObject
+mutable struct wxDropFilesEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -2424,7 +2658,7 @@ mutable struct wxEncodingConverter <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxEraseEvent <: wxObject
+mutable struct wxEraseEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -2433,6 +2667,10 @@ mutable struct wxFFile <: wxObject
 end
 
 mutable struct wxFileDataObject <: wxDataObjectSimpleBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxVirtualFileDataObject <: wxDataObjectSimpleBase
     ptr::Ptr{Cvoid}
 end
 
@@ -2468,7 +2706,7 @@ mutable struct wxFindReplaceDialog <: wxDialogBase
     closures::Vector{Any}
 end
 
-mutable struct wxFocusEvent <: wxObject
+mutable struct wxFocusEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -2638,11 +2876,11 @@ mutable struct wxIconBundle <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxIconizeEvent <: wxObject
+mutable struct wxIconizeEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxIdleEvent <: wxObject
+mutable struct wxIdleEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -2672,7 +2910,7 @@ mutable struct wxInfoBar <: wxControl
     closures::Vector{Any}
 end
 
-mutable struct wxInitDialogEvent <: wxObject
+mutable struct wxInitDialogEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -2680,11 +2918,11 @@ mutable struct wxJoystick <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxJoystickEvent <: wxObject
+mutable struct wxJoystickEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxKeyEvent <: wxObject
+mutable struct wxKeyEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -2724,11 +2962,11 @@ mutable struct wxMask <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxMaximizeEvent <: wxObject
+mutable struct wxMaximizeEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxMemoryDC <: wxDCBase
+mutable struct wxMemoryDC <: wxMemoryDCBase
     ptr::Ptr{Cvoid}
 end
 
@@ -2736,7 +2974,7 @@ mutable struct wxMemoryFSHandler <: wxFileSystemHandlerBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxMenuEvent <: wxObject
+mutable struct wxMenuEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -2747,6 +2985,10 @@ mutable struct wxMessageDialog <: wxMessageDialogBase
 end
 
 mutable struct wxMetafile <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxMetafileDataObject <: wxDataObjectSimpleBase
     ptr::Ptr{Cvoid}
 end
 
@@ -2768,15 +3010,15 @@ mutable struct wxMirrorDC <: wxDCBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxMouseCaptureChangedEvent <: wxObject
+mutable struct wxMouseCaptureChangedEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxMoveEvent <: wxObject
+mutable struct wxMoveEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxNavigationKeyEvent <: wxObject
+mutable struct wxNavigationKeyEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -2878,7 +3120,7 @@ mutable struct wxPaintDC <: wxWindowDCBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxPaintEvent <: wxObject
+mutable struct wxPaintEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -2886,7 +3128,7 @@ mutable struct wxPalette <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxPaletteChangedEvent <: wxObject
+mutable struct wxPaletteChangedEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -2958,11 +3200,11 @@ mutable struct wxQuantize <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxQueryLayoutInfoEvent <: wxObject
+mutable struct wxQueryLayoutInfoEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxQueryNewPaletteEvent <: wxObject
+mutable struct wxQueryNewPaletteEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -3038,11 +3280,19 @@ mutable struct wxRegionIterator <: wxObject
     ptr::Ptr{Cvoid}
 end
 
+mutable struct wxSVGAttributes <: wxObject
+    ptr::Ptr{Cvoid}
+end
+
 mutable struct wxSVGFileDC <: wxDCBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxSashEvent <: wxObject
+mutable struct wxSVGGraphicsContext <: wxGraphicsContextBase
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxSashEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -3068,11 +3318,11 @@ mutable struct wxScrollBar <: wxControl
     closures::Vector{Any}
 end
 
-mutable struct wxScrollEvent <: wxObject
+mutable struct wxScrollEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxScrollWinEvent <: wxObject
+mutable struct wxScrollWinEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -3082,11 +3332,11 @@ mutable struct wxSearchCtrl <: wxControl
     closures::Vector{Any}
 end
 
-mutable struct wxSetCursorEvent <: wxObject
+mutable struct wxSetCursorEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxShowEvent <: wxObject
+mutable struct wxShowEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -3102,7 +3352,7 @@ mutable struct wxSize <: wxObject
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxSizeEvent <: wxObject
+mutable struct wxSizeEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -3198,7 +3448,11 @@ mutable struct wxStringClientData <: wxClientDataBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxSysColourChangedEvent <: wxObject
+mutable struct wxSysColourChangedEvent <: wxEvent
+    ptr::Ptr{Cvoid}
+end
+
+mutable struct wxSysMetricChangedEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -3218,7 +3472,13 @@ mutable struct wxTextDataObject <: wxDataObjectSimpleBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxTextEntryDialog <: wxDialogBase
+mutable struct wxTextEntryDialog <: wxTextEntryDialogBase
+    ptr::Ptr{Cvoid}
+    children::Vector{Any}
+    closures::Vector{Any}
+end
+
+mutable struct wxPasswordEntryDialog <: wxTextEntryDialogBase
     ptr::Ptr{Cvoid}
     children::Vector{Any}
     closures::Vector{Any}
@@ -3232,7 +3492,7 @@ mutable struct wxTimer <: wxTimerBaseBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxTimerEvent <: wxObject
+mutable struct wxTimerEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -3266,7 +3526,7 @@ mutable struct wxTreeListEvent <: wxNotifyEventBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxUpdateUIEvent <: wxObject
+mutable struct wxUpdateUIEvent <: wxEvent
     ptr::Ptr{Cvoid}
 end
 
@@ -3316,7 +3576,7 @@ mutable struct wxWizardEvent <: wxNotifyEventBase
     ptr::Ptr{Cvoid}
 end
 
-mutable struct wxWizardPageSimple <: wxWizardPageBase
+mutable struct wxWizardPageSimple <: wxWizardPageSimpleBase
     ptr::Ptr{Cvoid}
     children::Vector{Any}
     closures::Vector{Any}

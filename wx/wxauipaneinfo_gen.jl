@@ -30,7 +30,7 @@ function get_caption(obj::wxAuiPaneInfo)
 end
 
 function get_window(obj::wxAuiPaneInfo)
-    return KwxFFI.wxAuiPaneInfo_GetWindow(obj.ptr)
+    return _wx_ref(wxWindow, KwxFFI.wxAuiPaneInfo_GetWindow(obj.ptr))
 end
 
 function get_dock_direction(obj::wxAuiPaneInfo)
@@ -189,7 +189,7 @@ function hide(obj::wxAuiPaneInfo)
     return _wx_wrap(wxAuiPaneInfo, KwxFFI.wxAuiPaneInfo_Hide(obj.ptr))
 end
 
-function icon(obj::wxAuiPaneInfo, bitmap::Union{wxBitmap, Nothing})
+function icon(obj::wxAuiPaneInfo, bitmap::Union{wxBitmapBase, Nothing})
     bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
     return _wx_wrap(wxAuiPaneInfo, KwxFFI.wxAuiPaneInfo_Icon(obj.ptr, bitmap_ptr))
 end
@@ -402,5 +402,10 @@ end
 
 function min_size_xy(obj::wxAuiPaneInfo, x::Integer, y::Integer)
     return _wx_wrap(wxAuiPaneInfo, KwxFFI.wxAuiPaneInfo_MinSizeXY(obj.ptr, Cint(x), Cint(y)))
+end
+
+function icon_bundle(obj::wxAuiPaneInfo, bitmap::Union{wxBitmapBundle, Nothing})
+    bitmap_ptr = isnothing(bitmap) ? C_NULL : bitmap.ptr
+    return _wx_wrap(wxAuiPaneInfo, KwxFFI.wxAuiPaneInfo_IconBundle(obj.ptr, bitmap_ptr))
 end
 
