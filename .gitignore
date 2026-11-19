@@ -5,3 +5,7 @@ build/
 .shared/
 
 *.dll
+
+tests/
+samples/
+kwxSamples/
